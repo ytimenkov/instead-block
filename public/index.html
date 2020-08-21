@@ -8,47 +8,50 @@
 
     <title>Visual instead</title>
 
-    <!-- <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css"> -->
-    <!-- <link rel="stylesheet" href="styles/index.css"> -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <nav>
+        <button id="blocklyButton">Convert</button>
+    </nav>
 
-    <div class="blockly-editor">
-        <div id="blocklyDiv" style="height: 480px; width: 400px;"></div>
-        <xml id="toolbox" style="display: none">
-            <category name="Logic" colour="%{BKY_LOGIC_HUE}">
-                <block type="controls_if"></block>
-                <block type="logic_compare"></block>
-                <block type="logic_operation"></block>
-                <block type="logic_negate"></block>
-                <block type="logic_boolean"></block>
-              </category>
-              <category name="Loops" colour="%{BKY_LOOPS_HUE}">
-                <block type="controls_repeat_ext">
-                  <value name="TIMES">
+    <div id="blocklyDiv"></div>
+
+    <xml id="toolbox" style="display: none">
+        <category name="Instead" colour="%{BKY_TEXTS_HUE}">
+            <block type="obj"></block>
+        </category>
+        <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+            <block type="controls_if"></block>
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+        </category>
+        <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+            <block type="controls_repeat_ext">
+                <value name="TIMES">
                     <block type="math_number">
-                      <field name="NUM">10</field>
+                        <field name="NUM">10</field>
                     </block>
-                  </value>
-                </block>
-                <block type="controls_whileUntil"></block>
-              </category>
-              <category name="Math" colour="%{BKY_MATH_HUE}">
-                <block type="math_number">
-                  <field name="NUM">123</field>
-                </block>
-                <block type="math_arithmetic"></block>
-                <block type="math_single"></block>
-              </category>
-              <category name="Text" colour="%{BKY_TEXTS_HUE}">
-                <block type="text"></block>
-                <block type="text_length"></block>
-                <block type="text_print"></block>
-              </category>
-            <!-- <block type="play_sound"></block> -->
-        </xml>
-    </div>
+                </value>
+            </block>
+            <block type="controls_whileUntil"></block>
+        </category>
+        <category name="Math" colour="%{BKY_MATH_HUE}">
+            <block type="math_number">
+                <field name="NUM">123</field>
+            </block>
+            <block type="math_arithmetic"></block>
+            <block type="math_single"></block>
+        </category>
+        <category name="Text" colour="%{BKY_TEXTS_HUE}">
+            <block type="text"></block>
+            <block type="text_length"></block>
+            <block type="text_print"></block>
+        </category>
+    </xml>
 
 </body>
 
