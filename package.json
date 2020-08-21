@@ -1,0 +1,23 @@
+{
+  "name": "instead-block",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "update": "npm update",
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "blockly": "^3.20200625.2"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "http-server": "^0.12.3",
+    "ts-loader": "^8.0.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
