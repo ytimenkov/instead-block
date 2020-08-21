@@ -20,7 +20,17 @@
 
     <xml id="toolbox" style="display: none">
         <category name="Instead" colour="%{BKY_TEXTS_HUE}">
-            <block type="obj"></block>
+            <block type="instead_object"></block>
+            <block type="instead_room"></block>
+            <block type="instead_disp">
+                <value name="TEXT">
+                    <block type="text">
+                        <field name="TEXT">название</field>
+                    </block>
+                </value>
+            </block>
+            <block type="instead_method0"></block>
+            <block type="instead_print"></block>
         </category>
         <category name="Logic" colour="%{BKY_LOGIC_HUE}">
             <block type="controls_if"></block>
@@ -38,6 +48,7 @@
                 </value>
             </block>
             <block type="controls_whileUntil"></block>
+            <block type="controls_for"></block>
         </category>
         <category name="Math" colour="%{BKY_MATH_HUE}">
             <block type="math_number">
@@ -50,6 +61,10 @@
             <block type="text"></block>
             <block type="text_length"></block>
             <block type="text_print"></block>
+        </category>
+        <category name="Procs" colour="%{BKY_MATH_HUE}">
+            <block type="procedures_defnoreturn"></block>
+            <block type="procedures_callnoreturn"></block>
         </category>
     </xml>
 
