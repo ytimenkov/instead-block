@@ -5,7 +5,8 @@ import "blockly/blocks";
 import * as Ru from 'blockly/msg/ru';
 Blockly.setLocale(Ru);
 
-import "./blocks";
+import "./basic_blocks";
+import "./objects";
 
 const workspace = Blockly.inject("blocklyDiv", {
     toolbox: document.getElementById("toolbox") as HTMLElement,
