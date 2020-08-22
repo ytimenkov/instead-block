@@ -14,9 +14,20 @@ const workspace = Blockly.inject("blocklyDiv", {
 });
 
 
-const button = document.getElementById('blocklyButton') as HTMLElement;
-
-button.addEventListener('click', function () {
+(document.getElementById('convertButton') as HTMLElement).addEventListener('click', function () {
     const code = Blockly.Lua.workspaceToCode(workspace);
     console.log(code);
 });
+
+const localStorageKey = "instead-data";
+
+(document.getElementById('saveButton') as HTMLElement).addEventListener('click', function () {
+    const xml = Blockly.Xml.workspaceToDom(workspace);
+    window.localStorage.setItem(localStorageKey, Blockly.Xml.domToText(xml));
+});
+
+if (window.localStorage[localStorageKey]) {
+    const xml = Blockly.Xml.textToDom(window.localStorage[localStorageKey]);
+    Blockly.Xml.domToWorkspace(xml, workspace);
+    console.log("Loaded workspace");
+}
