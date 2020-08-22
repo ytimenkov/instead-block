@@ -21,8 +21,20 @@
 
     <xml id="toolbox" style="display: none">
         <category name="Instead" colour="%{BKY_TEXTS_HUE}">
-            <block type="instead_object"></block>
-            <block type="instead_room"></block>
+            <block type="instead_object">
+                <value name="DSC">
+                    <block type="text">
+                        <field name="TEXT">Здесь лежит объект.</field>
+                    </block>
+                </value>
+            </block>
+            <block type="instead_room">
+                <value name="DSC">
+                    <block type="text">
+                        <field name="TEXT">Вы в большой комнате.</field>
+                    </block>
+                </value>
+            </block>
             <block type="instead_disp">
                 <value name="TEXT">
                     <block type="text">
@@ -30,10 +42,17 @@
                     </block>
                 </value>
             </block>
-            <block type="instead_desc">
+            <block type="instead_inv">
                 <value name="TEXT">
                     <block type="text">
-                        <field name="TEXT">Описание</field>
+                        <field name="TEXT">у меня есть объект</field>
+                    </block>
+                </value>
+            </block>
+            <block type="instead_act">
+                <value name="TEXT">
+                    <block type="text">
+                        <field name="TEXT">действие на объект</field>
                     </block>
                 </value>
             </block>

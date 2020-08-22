@@ -2,50 +2,56 @@ import "./blocks";
 
 import { Lua, Blocks, Block } from "blockly/core";
 
-function get_obj_property_definition(type: string) {
-    return {
-        "message0": type + " %1",
-        "args0": [
-            {
-                "type": "input_value",
-                "name": "TEXT",
-                "check": ["String"],
-            }],
-        "nextStatement": null,
-        "previousStatement": null,
-    };
+function defineFieldBlock(type: string, block: Block): Block {
+    block.appendValueInput("TEXT")
+        .appendField(type)
+        .setCheck(["String"]);
+    block.setNextStatement(true);
+    block.setPreviousStatement(true);
+    return block;
 }
 
-function get_obj_propery_code(type: string, block: Block) {
-    return type + " = " + Lua.valueToCode(block, "TEXT", Lua.ORDER_NONE) + ";\n";
+function generateFieldCode(type: string, block: Block, name: string = "TEXT") {
+    return type + " = " + Lua.valueToCode(block, name, Lua.ORDER_NONE) + ";\n";
 }
 
 Blocks["instead_disp"] = {
     init: function (this: Block) {
-        this.jsonInit(get_obj_property_definition("Название"));
+        defineFieldBlock("Альт. имя (disp)", this);
     }
 };
 
 Lua["instead_disp"] = function (block: Block) {
-    return get_obj_propery_code("disp", block)
+    return generateFieldCode("disp", block)
 };
 
-Blocks["instead_desc"] = {
+// TODO: Fine-tune inv that it can be added only to objects, and not to a room.
+Blocks["instead_inv"] = {
     init: function (this: Block) {
-        this.jsonInit(get_obj_property_definition("Описание"));
+        defineFieldBlock("Инвентарь(inv) \u{1F392}", this);
     }
-};
+}
 
-Lua["instead_desc"] = function (block: Block) {
-    return get_obj_propery_code("desc", block)
-};
+Lua["instead_inv"] = function (block: Block) {
+    return generateFieldCode("inv", block);
+}
+
+Blocks["instead_act"] = {
+    init: function (this: Block) {
+        defineFieldBlock("Действие(act) \u{1F50D}", this);
+    }
+}
+
+Lua["instead_act"] = function (block: Block) {
+    return generateFieldCode("act", block);
+}
 
 Blocks["instead_print"] = {
     init: function (this: Block) {
 
         this.jsonInit(
             {
-                "message0": "Вывести %1",
+                "message0": "\u{1D45D} %1",
                 "args0": [
                     {
                         "type": "field_input",
@@ -67,7 +73,7 @@ Lua["instead_print"] = function (block: Block) {
 Blocks["instead_method0"] = {
     init: function (this: Block) {
         this.jsonInit({
-            "message0": "%1",
+            "message0": "\u{1D453} %1",
             "args0": [
                 {
                     "type": "input_statement",
