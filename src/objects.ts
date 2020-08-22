@@ -1,22 +1,28 @@
 import "./blocks";
 
-import { Lua, Blocks, Block } from "blockly/core";
+import { Lua, Blocks, Block, FieldTextInput } from "blockly/core";
 
 function define_object(type: string, block: Block): string {
-    let branch = Lua.statementToCode(block, "DEFINITION");
-    return type + " {\n" + branch + "}";
+    const name = block.getFieldValue("NAME");
+    let definition = Lua.statementToCode(block, "DEFINITION");
+    return type + " {\n"
+        + "   nam = " + Lua.quote_(name) + ";\n"
+        + definition
+        + "}";
+}
+
+function addStandardFields(type: string, block: Block): Block {
+    block.appendDummyInput()
+        .appendField(type)
+        .appendField(new FieldTextInput(type), "NAME")
+
+    block.appendStatementInput("DEFINITION");
+    return block;
 }
 
 Blocks["instead_object"] = {
     init: function (this: Block) {
-        this.jsonInit({
-            "message0": "Объект %1",
-            "args0": [
-                {
-                    "type": "input_statement",
-                    "name": "DEFINITION"
-                }]
-        });
+        addStandardFields("Объект", this);
     }
 };
 
@@ -26,14 +32,7 @@ Lua["instead_object"] = function (block: Block) {
 
 Blocks["instead_room"] = {
     init: function (this: Block) {
-        this.jsonInit({
-            "message0": "Комната %1",
-            "args0": [
-                {
-                    "type": "input_statement",
-                    "name": "DEFINITION"
-                }]
-        });
+        addStandardFields("Комната", this);
     }
 };
 
