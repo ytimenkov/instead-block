@@ -12,6 +12,7 @@ declare module "blockly/core" {
 
         ORDER_HIGH: number;
         ORDER_NONE: number;
+        ORDER_ATOMIC: number;
     }
     export let Lua: InsteadGenerator;
 }

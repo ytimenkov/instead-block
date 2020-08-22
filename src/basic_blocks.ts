@@ -30,21 +30,21 @@ Blocks["instead_inv"] = {
     init: function (this: Block) {
         defineFieldBlock("Инвентарь(inv) \u{1F392}", this);
     }
-}
+};
 
 Lua["instead_inv"] = function (block: Block) {
     return generateFieldCode("inv", block);
-}
+};
 
 Blocks["instead_act"] = {
     init: function (this: Block) {
         defineFieldBlock("Действие(act) \u{1F50D}", this);
     }
-}
+};
 
 Lua["instead_act"] = function (block: Block) {
     return generateFieldCode("act", block);
-}
+};
 
 Blocks["instead_print"] = {
     init: function (this: Block) {
@@ -84,8 +84,10 @@ Blocks["instead_method0"] = {
     }
 };
 
+export const selfParameterName = "self";
+
 Lua["instead_method0"] = function (block: Block) {
     let branch = Lua.statementToCode(block, "DEFINITION");
-    let code = "function(self) {\n" + branch + "}";
+    let code = "function(" + selfParameterName + ") {\n" + branch + "}";
     return [code, Lua.ORDER_HIGH];
 };

@@ -7,6 +7,7 @@ Blockly.setLocale(Ru);
 
 import "./basic_blocks";
 import "./objects";
+import "./functions";
 
 const workspace = Blockly.inject("blocklyDiv", {
     toolbox: document.getElementById("toolbox") as HTMLElement,
