@@ -23,11 +23,18 @@ const localStorageKey = "instead-data";
 
 (document.getElementById('saveButton') as HTMLElement).addEventListener('click', function () {
     const xml = Blockly.Xml.workspaceToDom(workspace);
-    window.localStorage.setItem(localStorageKey, Blockly.Xml.domToText(xml));
+    const text = Blockly.Xml.domToText(xml);
+    console.log("Saving text: " + text)
+    window.localStorage.setItem(localStorageKey, text);
 });
 
 if (window.localStorage[localStorageKey]) {
     const xml = Blockly.Xml.textToDom(window.localStorage[localStorageKey]);
-    Blockly.Xml.domToWorkspace(xml, workspace);
-    console.log("Loaded workspace");
+    try {
+        Blockly.Xml.domToWorkspace(xml, workspace);
+        console.log("Loaded workspace");
+    } catch (error) {
+        console.log("Failed to load workspace: " + error);
+        workspace.clear();
+    }
 }
