@@ -1,6 +1,6 @@
 import "./blocks";
 
-import { Lua, Blocks, Block } from "blockly/core";
+import { Lua, Blocks, Block, FieldDropdown, FieldTextInput } from "blockly/core";
 
 function defineFieldBlock(type: string, block: Block): Block {
     block.appendValueInput("TEXT")
@@ -62,26 +62,23 @@ Lua["instead_used"] = function (block: Block) {
 
 Blocks["instead_print"] = {
     init: function (this: Block) {
-
-        this.jsonInit(
-            {
-                "message0": "\u{1D45D} %1",
-                "args0": [
-                    {
-                        "type": "field_input",
-                        "name": "TEXT",
-                        "TEXT": "",
-                    }],
-                "nextStatement": null,
-                "previousStatement": null,
-            }
-        );
+        this.appendDummyInput()
+            .appendField(new FieldDropdown(
+                [
+                    ["\u{1D45D}", "p"],
+                    ["\u{1D45D}r", "pr"],
+                    ["\u{1D45D}n", "pn"],
+                ]), "FUN")
+            .appendField(new FieldTextInput(), "TEXT");
+        this.setNextStatement(true);
+        this.setPreviousStatement(true);
     }
 };
 
 Lua["instead_print"] = function (block: Block) {
+    const fun = block.getFieldValue("FUN")
     const msg = Lua.quote_(block.getFieldValue("TEXT"));
-    return "p(" + msg + ")\n";
+    return fun + "(" + msg + ")\n";
 };
 
 Blocks["instead_method0"] = {
