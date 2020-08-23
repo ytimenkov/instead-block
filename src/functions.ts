@@ -1,5 +1,5 @@
 import "./blocks";
-import { selfParameterName } from "./basic_blocks";
+import { selfParameterName, whatParameterName } from "./basic_blocks";
 
 import { Lua, Blocks, Block } from "blockly/core";
 
@@ -13,6 +13,18 @@ Blocks["instead_self"] = {
 
 Lua["instead_self"] = function (block: Block) {
     return [selfParameterName, Lua.ORDER_ATOMIC];
+};
+
+Blocks["instead_what"] = {
+    init: function (this: Block) {
+        this.appendDummyInput()
+            .appendField("оъект");
+        this.setOutput(true, ["InsteadObject", "InsteadRoot"])
+    }
+};
+
+Lua["instead_what"] = function (block: Block) {
+    return [whatParameterName, Lua.ORDER_ATOMIC];
 };
 
 Blocks["instead_take"] = {

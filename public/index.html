@@ -56,15 +56,28 @@
                     </block>
                 </value>
             </block>
+            <block type="instead_used">
+                <value name="TEXT">
+                    <block type="instead_method1">
+                        <statement name="DEFINITION">
+                            <block type="instead_print">
+                                <field name="TEXT">вы использовали "what"</field>
+                            </block>
+                        </statement>
+                    </block>
+                </value>
+            </block>
             <block type="instead_take">
                 <value name="WHAT">
                     <block type="instead_self"></block>
                 </value>
             </block>
             <block type="instead_self"></block>
+            <block type="instead_what"></block>
             <!-- TODO: Make a dymanic category with all the objects -->
             <block type="instead_object_ref"></block>
             <block type="instead_method0"></block>
+            <block type="instead_method1"></block>
             <block type="instead_print"></block>
         </category>
         <category name="Logic" colour="%{BKY_LOGIC_HUE}">

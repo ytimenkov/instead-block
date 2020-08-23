@@ -46,6 +46,20 @@ Lua["instead_act"] = function (block: Block) {
     return generateFieldCode("act", block);
 };
 
+
+Blocks["instead_used"] = {
+    // TODO: Need to restrict that this function takes 2 arguments.
+    // TODO: There is also 'use'
+    init: function (this: Block) {
+        defineFieldBlock("Использование(used) \u{1F517}", this);
+    }
+};
+
+Lua["instead_used"] = function (block: Block) {
+    return generateFieldCode("used", block);
+};
+
+
 Blocks["instead_print"] = {
     init: function (this: Block) {
 
@@ -89,5 +103,27 @@ export const selfParameterName = "self";
 Lua["instead_method0"] = function (block: Block) {
     let branch = Lua.statementToCode(block, "DEFINITION");
     let code = "function(" + selfParameterName + ") {\n" + branch + "}";
+    return [code, Lua.ORDER_HIGH];
+};
+
+Blocks["instead_method1"] = {
+    init: function (this: Block) {
+        this.jsonInit({
+            "message0": "\u{1D453} (w) %1",
+            "args0": [
+                {
+                    "type": "input_statement",
+                    "name": "DEFINITION"
+                }],
+            "output": ["String"],
+        });
+    }
+};
+
+export const whatParameterName = "what";
+
+Lua["instead_method1"] = function (block: Block) {
+    let branch = Lua.statementToCode(block, "DEFINITION");
+    let code = "function(" + selfParameterName + ", " + whatParameterName + ") {\n" + branch + "}";
     return [code, Lua.ORDER_HIGH];
 };
