@@ -66,8 +66,8 @@ Blocks["instead_print"] = {
             .appendField(new FieldDropdown(
                 [
                     ["\u{1D45D}", "p"],
-                    ["\u{1D45D}r", "pr"],
-                    ["\u{1D45D}n", "pn"],
+                    ["\u{1D45D}\u{1D45F}", "pr"],
+                    ["\u{1D45D}\u{1D45B}", "pn"],
                 ]), "FUN")
             .appendField(new FieldTextInput(), "TEXT");
         this.setNextStatement(true);

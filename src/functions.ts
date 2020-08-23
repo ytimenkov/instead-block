@@ -1,7 +1,7 @@
 import "./blocks";
 import { selfParameterName, whatParameterName } from "./basic_blocks";
 
-import { Lua, Blocks, Block } from "blockly/core";
+import { Lua, Blocks, Block, FieldDropdown } from "blockly/core";
 
 Blocks["instead_self"] = {
     init: function (this: Block) {
@@ -45,10 +45,14 @@ Lua["instead_take"] = function (block: Block) {
 Blocks["instead_where"] = {
     init: function (this: Block) {
         this.appendValueInput("WHAT")
-            .appendField("что")
+            .appendField("(where)")
             .setCheck("InsteadObject");
+        this.appendDummyInput()
+            .appendField(new FieldDropdown([
+                ["\u{2208}", "=="],
+                ["\u{2209}", "~="]
+            ]), "COND");
         this.appendValueInput("WHERE")
-            .appendField("где")
             .setCheck(["InsteadRoom", "InsteadObject"]);
         this.setOutput(true, ["Boolean"]);
         this.setInputsInline(true);
@@ -56,8 +60,9 @@ Blocks["instead_where"] = {
 };
 
 Lua["instead_where"] = function (block: Block) {
+    const cond = block.getFieldValue("COND")
     const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
     const where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
-    return ["where(" + what + ") = " + where, Lua.ORDER_ATOMIC];
+    return ["where(" + what + ") " + cond + " " + where, Lua.ORDER_ATOMIC];
 };
 
