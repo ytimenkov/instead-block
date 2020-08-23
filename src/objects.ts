@@ -12,7 +12,7 @@ function generateObjectCode(type: string, block: Block): string {
         + Lua.INDENT + "nam = " + Lua.quote_(name) + "\n";
 
     if (dsc) {
-        code += Lua.INDENT + "dsc = " + dsc + "\n";
+        code += Lua.prefixLines("dsc = " + dsc + "\n", Lua.INDENT);
     }
 
     if (definition)
