@@ -102,7 +102,7 @@ export const selfParameterName = "self";
 
 Lua["instead_method0"] = function (block: Block) {
     let branch = Lua.statementToCode(block, "DEFINITION");
-    let code = "function(" + selfParameterName + ") {\n" + branch + "}";
+    let code = "function(" + selfParameterName + ")\n" + branch + "end";
     return [code, Lua.ORDER_HIGH];
 };
 
@@ -124,6 +124,6 @@ export const whatParameterName = "what";
 
 Lua["instead_method1"] = function (block: Block) {
     let branch = Lua.statementToCode(block, "DEFINITION");
-    let code = "function(" + selfParameterName + ", " + whatParameterName + ") {\n" + branch + "}";
+    let code = "function(" + selfParameterName + ", " + whatParameterName + ")\n" + branch + "end";
     return [code, Lua.ORDER_HIGH];
 };
