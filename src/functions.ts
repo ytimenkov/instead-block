@@ -42,3 +42,22 @@ Lua["instead_take"] = function (block: Block) {
     return "take(" + what + ");\n";
 };
 
+Blocks["instead_where"] = {
+    init: function (this: Block) {
+        this.appendValueInput("WHAT")
+            .appendField("что")
+            .setCheck("InsteadObject");
+        this.appendValueInput("WHERE")
+            .appendField("где")
+            .setCheck(["InsteadRoom", "InsteadObject"]);
+        this.setOutput(true, ["Boolean"]);
+        this.setInputsInline(true);
+    }
+};
+
+Lua["instead_where"] = function (block: Block) {
+    const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
+    const where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
+    return ["where(" + what + ") = " + where, Lua.ORDER_ATOMIC];
+};
+
