@@ -12,7 +12,7 @@ function defineFieldBlock(type: string, block: Block): Block {
 }
 
 function generateFieldCode(type: string, block: Block, name: string = "TEXT") {
-    return type + " = " + Lua.valueToCode(block, name, Lua.ORDER_NONE) + ";\n";
+    return type + " = " + Lua.valueToCode(block, name, Lua.ORDER_NONE) + "\n";
 }
 
 Blocks["instead_disp"] = {

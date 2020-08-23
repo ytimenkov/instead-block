@@ -9,12 +9,10 @@ function generateObjectCode(type: string, block: Block): string {
     const definition = Lua.statementToCode(block, "DEFINITION");
 
     let code = type + " {\n"
-        + "   nam = " + Lua.quote_(name) + ";\n";
+        + Lua.INDENT + "nam = " + Lua.quote_(name) + "\n";
 
     if (dsc) {
-        code += "   dsc = "
-        code += dsc;
-        code += ";\n"
+        code += Lua.INDENT + "dsc = " + dsc + "\n";
     }
 
     if (definition)

@@ -39,7 +39,7 @@ Blocks["instead_take"] = {
 
 Lua["instead_take"] = function (block: Block) {
     const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
-    return "take(" + what + ");\n";
+    return "take(" + what + ")\n";
 };
 
 Blocks["instead_where"] = {
