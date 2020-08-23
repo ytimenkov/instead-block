@@ -11,7 +11,8 @@ import "./functions";
 
 const workspace = Blockly.inject("blocklyDiv", {
     toolbox: document.getElementById("toolbox") as HTMLElement,
-    move: { scrollbars: false },
+    move: { scrollbars: true, wheel: true },
+    zoom: { controls: true, },
 });
 
 
