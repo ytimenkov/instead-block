@@ -7,7 +7,7 @@ Blocks["instead_self"] = {
     init: function (this: Block) {
         this.appendDummyInput()
             .appendField("себя");
-        this.setOutput(true, ["InsteadObject", "InsteadRoot"])
+        this.setOutput(true, ["InsteadObject", "InsteadRoom"])
     }
 };
 
@@ -19,7 +19,7 @@ Blocks["instead_what"] = {
     init: function (this: Block) {
         this.appendDummyInput()
             .appendField("оъект");
-        this.setOutput(true, ["InsteadObject", "InsteadRoot"])
+        this.setOutput(true, ["InsteadObject", "InsteadRoom"])
     }
 };
 

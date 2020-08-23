@@ -2,17 +2,25 @@ import "./blocks";
 
 import { Lua, Blocks, Block, FieldDropdown, FieldTextInput } from "blockly/core";
 
-function defineFieldBlock(type: string, block: Block): Block {
+function defineFieldBlock(type: string, block: Block): void {
     block.appendValueInput("TEXT")
         .appendField(type)
         .setCheck(["String"]);
     block.setNextStatement(true);
     block.setPreviousStatement(true);
-    return block;
 }
 
 function generateFieldCode(type: string, block: Block, name: string = "TEXT") {
     return type + " = " + Lua.valueToCode(block, name, Lua.ORDER_NONE) + "\n";
+}
+
+function defineListBlock(type: string, block: Block): void {
+    block.appendValueInput("ITEMS")
+        .appendField(type)
+        .setCheck(["Array"]);
+    block.setNextStatement(true);
+    block.setPreviousStatement(true);
+
 }
 
 Blocks["instead_disp"] = {
@@ -59,6 +67,15 @@ Lua["instead_used"] = function (block: Block) {
     return generateFieldCode("used", block);
 };
 
+Blocks["instead_obj"] = {
+    init: function (this: Block) {
+        defineListBlock("Объекты (obj)", this);
+    }
+}
+
+Lua["instead_obj"] = function (block: Block) {
+    return generateFieldCode("obj", block, "ITEMS");
+};
 
 Blocks["instead_print"] = {
     init: function (this: Block) {

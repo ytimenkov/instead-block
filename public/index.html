@@ -34,6 +34,9 @@
                         <field name="TEXT">Вы в большой комнате.</field>
                     </shadow>
                 </value>
+                <statement name="DEFINITION">
+                    <block type="instead_obj"></block>
+                </statement>
             </block>
             <block type="instead_disp">
                 <value name="TEXT">
@@ -77,6 +80,7 @@
                     <shadow type="instead_self"></shadow>
                 </value>
             </block>
+            <block type="instead_obj"></block>
             <block type="instead_self"></block>
             <block type="instead_what"></block>
             <!-- TODO: Make a dymanic category with all the objects -->
@@ -116,6 +120,10 @@
             <block type="text_print"></block>
             <block type="text_multiline"></block>
         </category>
+        <category name="Lists" colour="%{BKY_LISTS_HUE}">
+            <block type="lists_create_with"></block>
+        </category>
+        <!-- TODO: Those are generally unneeded.. -->
         <category name="Procs" colour="%{BKY_MATH_HUE}">
             <block type="procedures_defnoreturn"></block>
             <block type="procedures_callnoreturn"></block>
