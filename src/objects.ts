@@ -1,6 +1,6 @@
 import "./blocks";
 
-import { Lua, Blocks, Block, FieldTextInput } from "blockly/core";
+import { Lua, Blocks, Block, FieldTextInput, FieldDropdown } from "blockly/core";
 
 function generateObjectCode(type: string, block: Block): string {
     const name = block.getFieldValue("NAME");
@@ -60,3 +60,22 @@ Lua["instead_room"] = function (block: Block) {
 // TODO: Maybe have a separate object "Main room" where nam overridden into "main" and disp used instead.
 // Or maybe just provide it as a "default" workspace, since disp is useful for dynamic title.
 
+function listObjects(block: Block, type: string) {
+    const blocks = block.workspace.getBlocksByType(type, false);
+    return blocks.map((block, index, array) => {
+        // TODO: Maybe use block id and do resolution to the name later...
+        return [block.getFieldValue("NAME"), block.getFieldValue("NAME")];
+    });
+}
+
+Blocks["instead_object_ref"] = {
+    init: function (this: Block) {
+        this.appendDummyInput()
+            .appendField(new FieldDropdown(() => listObjects(this, "instead_object")), "NAME");
+        this.setOutput(true, ["InsteadObject"]);
+    }
+};
+
+Lua["instead_object_ref"] = function (block: Block) {
+    return ["_\"" + block.getFieldValue("NAME") + "\"", Lua.ORDER_ATOMIC]
+}
