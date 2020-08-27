@@ -12,11 +12,6 @@
 </head>
 
 <body>
-    <nav class="menu-buttons">
-        <button class="block-display" id="convertButton">Convert</button>
-        <button class="block-display" id="saveButton">Save</button>
-    </nav>
-
     <div id="blocklyDiv"></div>
 
     <xml id="toolbox" style="display: none">
@@ -129,6 +124,10 @@
             <block type="procedures_callnoreturn"></block>
         </category>
         <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}"></category>
+        <category name="Menu" colour="%{BKY_LOGIC_HUE}">
+            <button text="Convert" callbackKey="convertToLua"></button>
+            <button text="Save" callbackKey="save"></button>
+        </category>
     </xml>
 
 </body>

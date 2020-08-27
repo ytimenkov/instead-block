@@ -15,15 +15,15 @@ const workspace = Blockly.inject("blocklyDiv", {
     zoom: { controls: true, },
 });
 
-
-(document.getElementById('convertButton') as HTMLElement).addEventListener('click', function () {
+workspace.registerButtonCallback("convertToLua", (_button) => {
     const code = Blockly.Lua.workspaceToCode(workspace);
     console.log(code);
 });
 
 const localStorageKey = "instead-data";
 
-(document.getElementById('saveButton') as HTMLElement).addEventListener('click', function () {
+
+workspace.registerButtonCallback("save", (_button) => {
     const xml = Blockly.Xml.workspaceToDom(workspace);
     const text = Blockly.Xml.domToText(xml);
     console.log("Saving text: " + text)
