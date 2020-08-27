@@ -9,6 +9,8 @@ import "./basic_blocks";
 import "./objects";
 import "./functions";
 
+import { initInstead } from "./instead";
+
 const workspace = Blockly.inject("blocklyDiv", {
     toolbox: document.getElementById("toolbox") as HTMLElement,
     move: { scrollbars: true, wheel: true },
@@ -40,3 +42,5 @@ if (window.localStorage[localStorageKey]) {
         workspace.clear();
     }
 }
+
+initInstead();

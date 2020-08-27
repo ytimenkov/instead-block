@@ -24,7 +24,8 @@ module.exports = {
         extensions: [".ts", ".tsx", ".js"],
         alias: {
             instead: path.resolve(__dirname, "lib/instead"),
-            "lua.vm.js$": path.resolve(__dirname, "lib/weblua/lua.vm.js")
+            "lua.vm.js$": path.resolve(__dirname, "lib/weblua/lua.vm.js"),
+            "instead-js": path.resolve(__dirname, "lib/instead-js")
         }
     },
 
