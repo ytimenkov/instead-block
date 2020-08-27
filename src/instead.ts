@@ -1,8 +1,8 @@
-const Game = require("instead-js/app/game");
-const i18n = require("instead-js/app/i18n");
-const Instead = require("instead-js/app/instead");
-const Menu = require("instead-js/app/menu");
-const UI = require("instead-js/app/ui");
+import Game = require("instead-js/app/game");
+import i18n = require("instead-js/app/i18n");
+import Instead = require("instead-js/app/instead");
+import Menu = require("instead-js/app/menu");
+import UI = require("instead-js/app/ui");
 
 import $ = require("jquery");
 require("perfect-scrollbar/jquery")($);
