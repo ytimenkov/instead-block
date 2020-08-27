@@ -3,6 +3,7 @@ import i18n = require("instead-js/app/i18n");
 import Instead = require("instead-js/app/instead");
 import Menu = require("instead-js/app/menu");
 import UI = require("instead-js/app/ui");
+import vfs = require("instead-js/app/vfs");
 
 import $ = require("jquery");
 require("perfect-scrollbar/jquery")($);
@@ -50,5 +51,11 @@ export function initInstead() {
     Game.id = 'playground';
     Game.name = 'Playground';
     Game.ownTheme = false;
+    Game.stead = 3;
     // Instead.startGame();
+}
+
+export function runGame(code: string) {
+    vfs.save(Game.mainLua(), code);
+    Instead.startGame();
 }

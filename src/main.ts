@@ -9,7 +9,7 @@ import "./basic_blocks";
 import "./objects";
 import "./functions";
 
-import { initInstead } from "./instead";
+import { initInstead, runGame } from "./instead";
 
 const workspace = Blockly.inject("blocklyDiv", {
     toolbox: document.getElementById("toolbox") as HTMLElement,
@@ -20,6 +20,7 @@ const workspace = Blockly.inject("blocklyDiv", {
 workspace.registerButtonCallback("convertToLua", (_button) => {
     const code = Blockly.Lua.workspaceToCode(workspace);
     console.log(code);
+    runGame(code);
 });
 
 const localStorageKey = "instead-data";
