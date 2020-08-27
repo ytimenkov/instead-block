@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>INSTEAD.js</title>
+    <script type="text/javascript">
+        if(/MSIE \d|Trident.*rv:|Safari|iPhone|iPod|iPad/.test(navigator.userAgent))
+            document.write('<script src="encoding-indexes.js"><\/script><script src="encoding.js"><\/script>');
+    </script>
+    <script type="text/javascript">
+        var INSTEADjs = {
+            mute: true,     // Выключить все звуки
+            preload: true,  // Кэшировать все изображения в фоновом режиме
+            autosave_on_click: false, // Автосохранение после каждого клика
+            log: true,       // Включить журнал игры
+            fading: false,   // Включить эффект затухания при переходе между сценами
+            translation: {
+                loading: 'Загрузка...',
+                preload: 'Кэширование картинок',
+                empty: 'пусто',
+                menu_back: 'Вернуться в игру',
+                menu_save: 'Сохранить',
+                menu_load: 'Загрузить',
+                menu_reset: 'Начать заново',
+                menu_mute: 'Выключить звук',
+                menu_unmute: 'Включить звук',
+                menu_savegame: 'Сохранить игру',
+                menu_loadgame: 'Загрузить игру',
+                menu_import: 'Импорт',
+                menu_export: 'Экспорт сохранения',
+                menu_export_log: 'Экспорт журнала игры',
+                menu_autosave: 'Автосохранение',
+                menu_cancel: 'Отмена',
+                zip: 'Запустить игру из ZIP-файла',
+                zip_incorrect: 'Это не файл с игрой для INSTEAD, выберите другой.'
+            }
+        };
+    </script>
+    <style id="theme_css"></style>
+</head>
+<body>
+    <div id="manager">
+        <h1><img src="./instead.png"> INSTEAD.js</h1>
+        <div id="ziploader"></div>
+        <div id="manager-gamelist"></div>
+    </div>
+    <div id="instead"></div>
+
+</body>
+</html>

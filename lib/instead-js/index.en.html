@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>INSTEAD.js</title>
+    <script type="text/javascript">
+        if(/MSIE \d|Trident.*rv:|Safari|iPhone|iPod|iPad/.test(navigator.userAgent))
+            document.write('<script src="encoding-indexes.js"><\/script><script src="encoding.js"><\/script>');
+    </script>
+    <script type="text/javascript">
+        var INSTEADjs = {
+            mute: true,     // Mute all sounds
+            preload: true,  // Preload all images while game is starting
+            autosave_on_click: false, // Autosave after each click
+            log: false,      // Enable logging
+            fading: false    // Enable fade between scenes
+        };
+    </script>
+    <style id="theme_css"></style>
+</head>
+<body>
+    <div id="manager">
+        <h1><img src="./instead.png"> INSTEAD.js</h1>
+        <div id="ziploader"></div>
+        <div id="manager-gamelist"></div>
+    </div>
+    <div id="instead"></div>
+</body>
+</html>

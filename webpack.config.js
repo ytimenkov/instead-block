@@ -8,6 +8,7 @@ module.exports = {
 
     entry: {
         main: "./src/main.ts",
+        instead: "./lib/instead-js/index.js"
     },
 
     output: {
