@@ -11,7 +11,7 @@ function defineFieldBlock(type: string, block: Block): void {
 }
 
 function generateFieldCode(type: string, block: Block, name: string = "TEXT") {
-    return type + " = " + Lua.valueToCode(block, name, Lua.ORDER_NONE) + "\n";
+    return type + " = " + Lua.valueToCode(block, name, Lua.ORDER_NONE);
 }
 
 function defineListBlock(type: string, block: Block): void {

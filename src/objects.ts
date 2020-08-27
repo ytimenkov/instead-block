@@ -6,17 +6,31 @@ function generateObjectCode(type: string, block: Block): string {
     const name = block.getFieldValue("NAME");
 
     const dsc = Lua.valueToCode(block, "DSC", Lua.ORDER_NONE);
-    const definition = Lua.statementToCode(block, "DEFINITION");
 
     let code = type + " {\n"
-        + Lua.INDENT + "nam = " + Lua.quote_(name) + "\n";
+        + Lua.INDENT + "nam = " + Lua.quote_(name) + ",\n";
 
     if (dsc) {
-        code += Lua.prefixLines("dsc = " + dsc + "\n", Lua.INDENT);
+        code += Lua.prefixLines("dsc = " + dsc, Lua.INDENT);
     }
 
-    if (definition)
-        code += definition;
+    // Blocks in definition need to be comma-separated.
+    let needNL = false;
+    for (let defBlock = block.getInputTargetBlock("DEFINITION"); defBlock; defBlock = defBlock.getNextBlock()) {
+        const defCode = Lua.blockToCode(defBlock, true);
+        if (typeof defCode !== "string") {
+            throw TypeError("Expecting code from statement block: " +
+                (defBlock && defBlock.type));
+        }
+        if (defCode) {
+            needNL = true;
+            code += ",\n" + Lua.prefixLines(defCode, Lua.INDENT);
+        }
+    }
+
+    if (needNL) {
+        code += "\n";
+    }
 
     code += "}";
 
