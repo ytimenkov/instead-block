@@ -21,12 +21,18 @@ module.exports = {
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js"]
+        extensions: [".ts", ".tsx", ".js"],
+        alias: {
+            instead: path.resolve(__dirname, "lib/instead"),
+            "lua.vm.js$": path.resolve(__dirname, "lib/weblua/lua.vm.js")
+        }
     },
 
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: "ts-loader" }
+            { test: /\.tsx?$/, loader: "ts-loader" },
+            { test: /\.css$/, use: ["style-loader", "css-loader"] },
+            { test: /.html$/, loader: "html-loader" }
         ]
     },
 

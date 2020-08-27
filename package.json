@@ -8,12 +8,18 @@
     "build": "webpack"
   },
   "dependencies": {
-    "blockly": "^3.20200625.2"
+    "blockly": "^3.20200625.2",
+    "jquery": "^3.5.1",
+    "jszip": "^3.5.0",
+    "perfect-scrollbar": "^0.6.16"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.0.3",
+    "css-loader": "^4.2.2",
+    "html-loader": "^1.3.0",
     "http-server": "^0.12.3",
+    "style-loader": "^1.2.1",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
     "webpack": "^4.44.1",
