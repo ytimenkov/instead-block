@@ -1,6 +1,6 @@
 import "./blocks";
 
-import { Lua, Blocks, Block, FieldTextInput, FieldDropdown } from "blockly/core";
+import { Lua, Blocks, Block, FieldTextInput, FieldDropdown, Field } from "blockly/core";
 
 function generateObjectCode(type: string, block: Block): string {
     const name = block.getFieldValue("NAME");
@@ -52,6 +52,9 @@ function addStandardFields(type: string, block: Block): Block {
 Blocks["instead_object"] = {
     init: function (this: Block) {
         addStandardFields("Объект", this);
+        this.getField("NAME").setValidator(renameObjectReferences);
+        // TODO: Add event listener for removal of objects
+        // to clean the list.
     }
 };
 
@@ -72,21 +75,58 @@ Lua["instead_room"] = function (block: Block) {
 // TODO: Maybe have a separate object "Main room" where nam overridden into "main" and disp used instead.
 // Or maybe just provide it as a "default" workspace, since disp is useful for dynamic title.
 
-function listObjects(block: Block, type: string) {
-    const blocks = block.workspace.getBlocksByType(type, false);
-    return blocks.map((block, index, array) => {
-        // TODO: Maybe use block id and do resolution to the name later...
-        return [block.getFieldValue("NAME"), block.getFieldValue("NAME")];
+
+function renameObjectReferences(this: Field, newValue: string): string | null {
+    const oldValue = this.getValue();
+    const oldIdx = ObjectReference.objects.findIndex(
+        (arr) => { return arr[0] == oldValue || arr[0] == newValue });
+
+    if (oldIdx >= 0) {
+        // ObjectReference.objects.splice(oldIdx, 1);
+        ObjectReference.objects[oldIdx] = [newValue, newValue];
+    } else {
+        ObjectReference.objects.push([newValue, newValue]);
+    }
+
+    const blocks = this.getSourceBlock().workspace.getBlocksByType("instead_object_ref", false);
+    // console.log("Renaming " + oldValue + " to " + newValue);
+    blocks.forEach((block) => {
+        const field = block.getField("NAME");
+        if (field.getValue() == oldValue) {
+            field.setValue(newValue);
+        }
     });
+    return newValue;
 }
 
-Blocks["instead_object_ref"] = {
+class ObjectReferenceDropDown extends FieldDropdown {
+    constructor() {
+        super(ObjectReference.objects);
+    }
+    // Override deserialization to temporarily add value into the
+    // list so validation passes. Real object should come soon.
+    fromXml(fieldElement: Element): void {
+        const value = fieldElement.textContent as string;
+        const idx = ObjectReference.objects.findIndex((arr) => { return arr[0] == value });
+        if (idx < 0) {
+            // console.log("Adding " + value);
+            ObjectReference.objects.push([value, value]);
+        }
+        this.setValue(value);
+
+    }
+}
+
+const ObjectReference = {
+    objects: [] as string[][],
     init: function (this: Block) {
         this.appendDummyInput()
-            .appendField(new FieldDropdown(() => listObjects(this, "instead_object")), "NAME");
+            .appendField(new ObjectReferenceDropDown(), "NAME");
         this.setOutput(true, ["InsteadObject"]);
-    }
+    },
 };
+
+Blocks["instead_object_ref"] = ObjectReference;
 
 Lua["instead_object_ref"] = function (block: Block) {
     return ["_\"" + block.getFieldValue("NAME") + "\"", Lua.ORDER_ATOMIC]
