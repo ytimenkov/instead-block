@@ -91,8 +91,13 @@ export const InsteadObject = {
 
     addInsteadObject: function (blockId: string, name: string) {
         const idx = InsteadObject.findInsteadObject(blockId, false);
-        if (idx >= 0)
+        if (idx >= 0) {
+            // If object was added during deserialization, name is empty.
+            // Fix it after workspace is loaded
+            if (!InsteadObject.objectsList[idx][0])
+                InsteadObject.objectsList[idx][0] = name;
             return;
+        }
 
         if (InsteadObject.objectsList.length === 1 && !InsteadObject.objectsList[0][1]) {
             InsteadObject.objectsList.pop();
@@ -131,7 +136,7 @@ export const InsteadObject = {
 
     getInsteadObjectName: function (id: string): string {
         const idx = InsteadObject.findInsteadObject(id, true);
-        return InsteadObject.objectsList[idx][0] || id;
+        return InsteadObject.objectsList[idx][0];
     },
 
     refreshReferences: function (ws: Workspace, id: string) {
