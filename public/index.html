@@ -16,6 +16,8 @@
 
     <div id="blocklyDiv"></div>
 
+    <dif id="generatedCode"></dif>
+
     <xml id="toolbox" style="display: none">
         <category name="Instead" colour="%{BKY_TEXTS_HUE}">
             <block type="instead_object">
@@ -168,6 +170,7 @@
         <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}"></category>
         <category name="Menu" colour="%{BKY_LOGIC_HUE}">
             <button text="Convert" callbackKey="convertToLua"></button>
+            <button text="Run" callbackKey="run"></button>
             <button text="Save" callbackKey="save"></button>
         </category>
     </xml>

@@ -19,11 +19,19 @@ const workspace = Blockly.inject("blocklyDiv", {
     zoom: { controls: true, },
 });
 
-workspace.registerButtonCallback("convertToLua", (_button) => {
+function convertOrRun(run: boolean) {
     const code = Blockly.Lua.workspaceToCode(workspace);
-    console.log(code);
-    runGame(code);
-});
+    const codeElem = document.getElementById("generatedCode") as HTMLElement;
+    codeElem.innerText = code;
+    if (run) {
+        runGame(code);
+    } else {
+        codeElem.scrollIntoView();
+    }
+}
+
+workspace.registerButtonCallback("convertToLua", (_btn) => { convertOrRun(false); });
+workspace.registerButtonCallback("run", (_btn) => { convertOrRun(true); });
 
 workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e) });
 workspace.addChangeListener((e: any) => { InsteadRoom.objectLifecycleListener(e) });

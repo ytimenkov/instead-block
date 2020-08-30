@@ -12,3 +12,7 @@ pre {
     width: 100%;
     height: 100%;
 }
+
+#generatedCode {
+    white-space: pre;
+}
