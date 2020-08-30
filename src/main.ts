@@ -9,6 +9,8 @@ import "./basic_blocks";
 import "./objects";
 import "./functions";
 
+import { InsteadObject } from "./objects";
+
 import { initInstead, runGame } from "./instead";
 
 const workspace = Blockly.inject("blocklyDiv", {
@@ -23,8 +25,9 @@ workspace.registerButtonCallback("convertToLua", (_button) => {
     runGame(code);
 });
 
-const localStorageKey = "instead-data";
+workspace.addChangeListener(InsteadObject.objectLifecycleListener);
 
+const localStorageKey = "instead-data";
 
 workspace.registerButtonCallback("save", (_button) => {
     const xml = Blockly.Xml.workspaceToDom(workspace);
