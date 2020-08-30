@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Visual instead</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="instead"></div>
+
+    <div id="blocklyDiv"></div>
+
+    <dif id="generatedCode"></dif>
+
+    <xml id="toolbox" style="display: none">
+        <category name="Instead" colour="%{BKY_TEXTS_HUE}">
+            <block type="instead_object">
+                <value name="DSC">
+                    <shadow type="text">
+                        <field name="TEXT">Здесь лежит объект.</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="instead_room">
+                <value name="DSC">
+                    <shadow type="text">
+                        <field name="TEXT">Вы в большой комнате.</field>
+                    </shadow>
+                </value>
+                <statement name="DEFINITION">
+                    <block type="instead_obj"></block>
+                </statement>
+            </block>
+            <block type="instead_disp">
+                <value name="TEXT">
+                    <shadow type="text">
+                        <field name="TEXT">название</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="instead_inv">
+                <value name="TEXT">
+                    <shadow type="text">
+                        <field name="TEXT">у меня есть объект</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="instead_act">
+                <value name="TEXT">
+                    <shadow type="text">
+                        <field name="TEXT">действие на объект</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="instead_used">
+                <value name="TEXT">
+                    <block type="instead_method1">
+                        <statement name="DEFINITION">
+                            <shadow type="instead_print">
+                                <field name="TEXT">вы использовали "what"</field>
+                            </shadow>
+                        </statement>
+                    </block>
+                </value>
+            </block>
+            <block type="instead_decor">
+                <value name="TEXT">
+                    <shadow type="text">
+                        <field name="TEXT">Детальное описание комнаты</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="instead_onenter">
+                <value name="TEXT">
+                    <block type="instead_method1">
+                        <statement name="DEFINITION">
+                            <shadow type="instead_print">
+                                <field name="TEXT">вошли в "what"</field>
+                            </shadow>
+                        </statement>
+                    </block>
+                </value>
+            </block>
+            <block type="instead_onexit">
+                <value name="TEXT">
+                    <block type="instead_method1">
+                        <statement name="DEFINITION">
+                            <shadow type="instead_print">
+                                <field name="TEXT">выходите в "what"</field>
+                            </shadow>
+                        </statement>
+                    </block>
+                </value>
+            </block>
+            <block type="instead_take">
+                <value name="WHAT">
+                    <shadow type="instead_self"></shadow>
+                </value>
+            </block>
+            <block type="instead_drop">
+                <value name="WHAT">
+                    <shadow type="instead_self"></shadow>
+                </value>
+            </block>
+            <block type="instead_where">
+                <value name="WHAT">
+                    <shadow type="instead_self"></shadow>
+                </value>
+            </block>
+            <block type="instead_disable">
+                <value name="WHAT">
+                    <shadow type="instead_self"></shadow>
+                </value>
+            </block>
+            <block type="instead_enable">
+                <value name="WHAT">
+                    <shadow type="instead_self"></shadow>
+                </value>
+            </block>
+            <block type="instead_obj"></block>
+            <block type="instead_way"></block>
+            <block type="instead_self"></block>
+            <block type="instead_what"></block>
+            <!-- TODO: Make a dymanic category with all the objects -->
+            <block type="instead_object_ref"></block>
+            <block type="instead_room_ref"></block>
+            <block type="instead_method0"></block>
+            <block type="instead_method1"></block>
+            <block type="instead_print"></block>
+            <block type="instead_return_false"></block>
+        </category>
+        <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+            <block type="controls_if"></block>
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+        </category>
+        <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+            <block type="controls_repeat_ext">
+                <value name="TIMES">
+                    <block type="math_number">
+                        <field name="NUM">10</field>
+                    </block>
+                </value>
+            </block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for"></block>
+        </category>
+        <category name="Math" colour="%{BKY_MATH_HUE}">
+            <block type="math_number">
+                <field name="NUM">123</field>
+            </block>
+            <block type="math_arithmetic"></block>
+            <block type="math_single"></block>
+        </category>
+        <category name="Text" colour="%{BKY_TEXTS_HUE}">
+            <block type="text"></block>
+            <block type="text_length"></block>
+            <block type="text_print"></block>
+            <block type="text_multiline"></block>
+        </category>
+        <category name="Lists" colour="%{BKY_LISTS_HUE}">
+            <block type="lists_create_with"></block>
+        </category>
+        <!-- TODO: Those are generally unneeded.. -->
+        <category name="Procs" colour="%{BKY_MATH_HUE}">
+            <block type="procedures_defnoreturn"></block>
+            <block type="procedures_callnoreturn"></block>
+        </category>
+        <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}"></category>
+        <category name="Export" colour="%{BKY_LOGIC_HUE}">
+            <button text="Convert" callbackKey="convertToLua"></button>
+            <button text="Run" callbackKey="run"></button>
+            <button text="Save" callbackKey="save"></button>
+        </category>
+    </xml>
+
+</body>
+
+<script src="main.js"> </script>
+
+</html>
