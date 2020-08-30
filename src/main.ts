@@ -45,15 +45,31 @@ workspace.registerButtonCallback("save", (_button) => {
     window.localStorage.setItem(localStorageKey, text);
 });
 
-if (window.localStorage[localStorageKey]) {
-    const xml = Blockly.Xml.textToDom(window.localStorage[localStorageKey]);
+function loadWorkspace(xml: string) {
     try {
-        Blockly.Xml.domToWorkspace(xml, workspace);
+        const dom = Blockly.Xml.textToDom(xml);
+        Blockly.Xml.domToWorkspace(dom, workspace);
         console.log("Loaded workspace");
     } catch (error) {
         console.log("Failed to load workspace: " + error);
         workspace.clear();
     }
+}
+
+if (window.localStorage[localStorageKey]) {
+    console.log("Loading saved workspace");
+    loadWorkspace(window.localStorage[localStorageKey]);
+} else {
+    console.log("Loading default workspace");
+    const file = require("playground_xml").default;
+    const client = new XMLHttpRequest();
+    client.onreadystatechange = function () {
+        if (this.readyState === this.DONE && this.status === 200) {
+            loadWorkspace(this.responseText);
+        }
+    };
+    client.open("GET", file, true);
+    client.send();
 }
 
 initInstead();

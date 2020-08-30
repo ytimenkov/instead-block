@@ -25,7 +25,8 @@ module.exports = {
         alias: {
             "instead": path.resolve(__dirname, "lib/instead"),
             "lua.vm.js$": path.resolve(__dirname, "lib/weblua/lua.vm.js"),
-            "instead-js": path.resolve(__dirname, "lib/instead-js")
+            "instead-js": path.resolve(__dirname, "lib/instead-js"),
+            "playground_xml": path.resolve(__dirname, "data/playground.xml"),
         }
     },
 
@@ -33,7 +34,8 @@ module.exports = {
         rules: [
             { test: /\.tsx?$/, loader: "ts-loader" },
             { test: /\.css$/, use: ["style-loader", "css-loader"] },
-            { test: /.html$/, loader: "html-loader" }
+            { test: /.html$/, loader: "html-loader" },
+            { test: /.xml$/, loader: "file-loader" },
         ]
     },
 
@@ -51,7 +53,7 @@ module.exports = {
                     globOptions: {
                         ignore: ["*.js"]
                     }
-                }
+                },
             ]
         }),
     ]
