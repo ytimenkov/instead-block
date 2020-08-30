@@ -8,10 +8,10 @@ function generateObjectCode(type: string, block: Block): string {
     const dsc = Lua.valueToCode(block, "DSC", Lua.ORDER_NONE);
 
     let code = type + " {\n"
-        + Lua.INDENT + "nam = " + Lua.quote_(name) + ",\n";
+        + Lua.INDENT + "nam = " + Lua.quote_(name);
 
-    if (dsc) {
-        code += Lua.prefixLines("dsc = " + dsc, Lua.INDENT);
+    if (dsc && dsc !== "''") {
+        code += ",\n" + Lua.prefixLines("dsc = " + dsc, Lua.INDENT);
     }
 
     // Blocks in definition need to be comma-separated.

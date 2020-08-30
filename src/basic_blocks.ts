@@ -33,6 +33,16 @@ Lua["instead_disp"] = function (block: Block) {
     return generateFieldCode("disp", block)
 };
 
+Blocks["instead_decor"] = {
+    init: function (this: Block) {
+        defineFieldBlock("Декорации (decor)", this);
+    }
+};
+
+Lua["instead_decor"] = function (block: Block) {
+    return generateFieldCode("decor", block)
+};
+
 // TODO: Fine-tune inv that it can be added only to objects, and not to a room.
 Blocks["instead_inv"] = {
     init: function (this: Block) {
