@@ -57,7 +57,20 @@ function addReferenceFields(block: Block, objectsContainer: InsteadObjectBase, o
 }
 
 function generateReferenceCode(block: Block, objectsContainer: InsteadObjectBase) {
-    return ["_\"" + objectsContainer.getInsteadObjectName(block.getFieldValue("NAME")) + "\"", Lua.ORDER_ATOMIC]
+    let useLookup = true;
+    for (let pb = block.parentBlock_; pb; pb = pb.parentBlock_) {
+        // If object is inside list render it as a string so it will be resolved
+        // by the engine.
+        if (pb.type === "lists_create_with") {
+            useLookup = false;
+        }
+    }
+    let code = "";
+    if (useLookup) {
+        code = "_"
+    };
+    code += Lua.quote_(objectsContainer.getInsteadObjectName(block.getFieldValue("NAME")));
+    return [code, Lua.ORDER_ATOMIC]
 }
 
 class InsteadObjectBase {
