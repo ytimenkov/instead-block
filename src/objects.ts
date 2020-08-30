@@ -1,6 +1,6 @@
 import "./blocks";
 
-import { Lua, Blocks, Block, FieldTextInput, FieldDropdown, Field } from "blockly/core";
+import { Lua, Blocks, Block, FieldTextInput, FieldDropdown, Field, Workspace } from "blockly/core";
 
 function generateObjectCode(type: string, block: Block): string {
     const name = block.getFieldValue("NAME");
@@ -53,8 +53,16 @@ Blocks["instead_object"] = {
     init: function (this: Block) {
         addStandardFields("Объект", this);
         this.getField("NAME").setValidator(renameObjectReferences);
-        // TODO: Add event listener for removal of objects
-        // to clean the list.
+
+        // We can't use listener because it containts onlu block id
+        // which is already removed from the workspace, however we need names.
+        const oldDispose: Function = this.dispose;
+        this.dispose = function () {
+            const name = this.getFieldValue("NAME");
+            const workspace = this.workspace;
+            oldDispose.apply(this, arguments);
+            removeObjectReferences(name, workspace);
+        }
     }
 };
 
@@ -79,7 +87,7 @@ Lua["instead_room"] = function (block: Block) {
 function renameObjectReferences(this: Field, newValue: string): string | null {
     const oldValue = this.getValue();
     const oldIdx = ObjectReference.objects.findIndex(
-        (arr) => { return arr[0] == oldValue || arr[0] == newValue });
+        (arr) => { return arr[0] === oldValue || arr[0] === newValue });
 
     if (oldIdx >= 0) {
         // ObjectReference.objects.splice(oldIdx, 1);
@@ -92,11 +100,30 @@ function renameObjectReferences(this: Field, newValue: string): string | null {
     // console.log("Renaming " + oldValue + " to " + newValue);
     blocks.forEach((block) => {
         const field = block.getField("NAME");
-        if (field.getValue() == oldValue) {
+        if (field.getValue() === oldValue) {
             field.setValue(newValue);
         }
     });
     return newValue;
+}
+
+function removeObjectReferences(name: string, workspace: Workspace) {
+    console.log("Block deleted " + name);
+    const idx = ObjectReference.objects.findIndex(
+        (arr) => { return arr[0] === name });
+    if (idx >= 0) {
+        ObjectReference.objects.splice(idx, 1);
+    } else {
+        console.warn("Deleting unknown block " + name);
+    }
+    // Remove dangling references
+    const blocks = workspace.getBlocksByType("instead_object_ref", false);
+    blocks.forEach((block) => {
+        const field = block.getField("NAME");
+        if (field.getValue() === name) {
+            block.dispose(true);
+        }
+    });
 }
 
 class ObjectReferenceDropDown extends FieldDropdown {
@@ -107,7 +134,7 @@ class ObjectReferenceDropDown extends FieldDropdown {
     // list so validation passes. Real object should come soon.
     fromXml(fieldElement: Element): void {
         const value = fieldElement.textContent as string;
-        const idx = ObjectReference.objects.findIndex((arr) => { return arr[0] == value });
+        const idx = ObjectReference.objects.findIndex((arr) => { return arr[0] === value });
         if (idx < 0) {
             // console.log("Adding " + value);
             ObjectReference.objects.push([value, value]);
