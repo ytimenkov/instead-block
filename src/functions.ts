@@ -42,6 +42,37 @@ Lua["instead_take"] = function (block: Block) {
     return "take(" + what + ")\n";
 };
 
+Blocks["instead_disable"] = {
+    init: function (this: Block) {
+        this.appendValueInput("WHAT")
+            .appendField("выключить(disable): ")
+            .setCheck(["InsteadObject"]);
+        this.setNextStatement(true);
+        this.setPreviousStatement(true);
+    }
+};
+
+Lua["instead_disable"] = function (block: Block) {
+    const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
+    return "disable(" + what + ")\n";
+};
+
+
+Blocks["instead_enable"] = {
+    init: function (this: Block) {
+        this.appendValueInput("WHAT")
+            .appendField("включить(enable): ")
+            .setCheck(["InsteadObject"]);
+        this.setNextStatement(true);
+        this.setPreviousStatement(true);
+    }
+};
+
+Lua["instead_enable"] = function (block: Block) {
+    const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
+    return "enable(" + what + ")\n";
+};
+
 Blocks["instead_drop"] = {
     init: function (this: Block) {
         this.appendValueInput("WHAT")
