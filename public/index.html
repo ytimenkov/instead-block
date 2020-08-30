@@ -67,6 +67,28 @@
                     </block>
                 </value>
             </block>
+            <block type="instead_onenter">
+                <value name="TEXT">
+                    <block type="instead_method1">
+                        <statement name="DEFINITION">
+                            <shadow type="instead_print">
+                                <field name="TEXT">вошли в "what"</field>
+                            </shadow>
+                        </statement>
+                    </block>
+                </value>
+            </block>
+            <block type="instead_onexit">
+                <value name="TEXT">
+                    <block type="instead_method1">
+                        <statement name="DEFINITION">
+                            <shadow type="instead_print">
+                                <field name="TEXT">выходите в "what"</field>
+                            </shadow>
+                        </statement>
+                    </block>
+                </value>
+            </block>
             <block type="instead_take">
                 <value name="WHAT">
                     <shadow type="instead_self"></shadow>

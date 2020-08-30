@@ -67,6 +67,26 @@ Lua["instead_used"] = function (block: Block) {
     return generateFieldCode("used", block);
 };
 
+Blocks["instead_onenter"] = {
+    init: function (this: Block) {
+        defineFieldBlock("При входе (onenter)", this);
+    }
+};
+
+Lua["instead_onenter"] = function (block: Block) {
+    return generateFieldCode("onenter", block)
+};
+
+Blocks["instead_onexit"] = {
+    init: function (this: Block) {
+        defineFieldBlock("При выходе (onexit)", this);
+    }
+};
+
+Lua["instead_onexit"] = function (block: Block) {
+    return generateFieldCode("onexit", block)
+};
+
 Blocks["instead_obj"] = {
     init: function (this: Block) {
         defineListBlock("Объекты (obj)", this);
