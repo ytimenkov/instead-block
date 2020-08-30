@@ -97,6 +97,16 @@ Lua["instead_obj"] = function (block: Block) {
     return generateFieldCode("obj", block, "ITEMS");
 };
 
+Blocks["instead_way"] = {
+    init: function (this: Block) {
+        defineListBlock("Выходы (way)", this);
+    }
+}
+
+Lua["instead_way"] = function (block: Block) {
+    return generateFieldCode("way", block, "ITEMS");
+};
+
 Blocks["instead_print"] = {
     init: function (this: Block) {
         this.appendDummyInput()
@@ -160,4 +170,16 @@ Lua["instead_method1"] = function (block: Block) {
     let branch = Lua.statementToCode(block, "DEFINITION");
     let code = "function(" + selfParameterName + ", " + whatParameterName + ")\n" + branch + "end";
     return [code, Lua.ORDER_HIGH];
+};
+
+Blocks["instead_return_false"] = {
+    init: function (this: Block) {
+        this.appendDummyInput()
+            .appendField("отменить действие");
+        this.setPreviousStatement(true);
+    }
+};
+
+Lua["instead_return_false"] = function (block: Block) {
+    return "return false\n";
 };
