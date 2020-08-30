@@ -9,7 +9,7 @@ import "./basic_blocks";
 import "./objects";
 import "./functions";
 
-import { InsteadObject } from "./objects";
+import { InsteadObject, InsteadRoom } from "./objects";
 
 import { initInstead, runGame } from "./instead";
 
@@ -25,7 +25,8 @@ workspace.registerButtonCallback("convertToLua", (_button) => {
     runGame(code);
 });
 
-workspace.addChangeListener(InsteadObject.objectLifecycleListener);
+workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e) });
+workspace.addChangeListener((e: any) => { InsteadRoom.objectLifecycleListener(e) });
 
 const localStorageKey = "instead-data";
 
