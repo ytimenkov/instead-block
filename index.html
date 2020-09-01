@@ -16,7 +16,7 @@
 
     <div id="blocklyDiv"></div>
 
-    <dif id="generatedCode"></dif>
+    <div id="generatedCode"></div>
 
     <xml id="toolbox" style="display: none">
         <category name="Instead" colour="%{BKY_TEXTS_HUE}">
@@ -169,16 +169,15 @@
         <category name="Lists" colour="%{BKY_LISTS_HUE}">
             <block type="lists_create_with"></block>
         </category>
-        <!-- TODO: Those are generally unneeded.. -->
-        <category name="Procs" colour="%{BKY_MATH_HUE}">
-            <block type="procedures_defnoreturn"></block>
-            <block type="procedures_callnoreturn"></block>
-        </category>
         <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}"></category>
-        <category name="Export" colour="%{BKY_LOGIC_HUE}">
-            <button text="Convert" callbackKey="convertToLua"></button>
+        <sep></sep>
+        <category name="File" colour="215">
+            <button text="Show Lua code" callbackKey="convertToLua"></button>
             <button text="Run" callbackKey="run"></button>
-            <button text="Save" callbackKey="save"></button>
+            <button text="Save in browser" callbackKey="save"></button>
+            <sep></sep>
+            <button text="Save to your computer" callbackKey="download"></button>
+            <button text="Load from your computer" callbackKey="upload"></button>
         </category>
     </xml>
 
