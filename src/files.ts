@@ -1,7 +1,8 @@
-import { WorkspaceSvg, Xml, Lua, Workspace, FlyoutButton } from "blockly/core";
+import { WorkspaceSvg, Xml, Lua, Workspace, Events } from "blockly/core";
 import { runGame } from "./instead";
 import JSZip = require("jszip");
 import { saveAs } from "file-saver";
+import { InsteadObject, InsteadRoom } from "./objects";
 
 
 export function registerFileCallbacks(workspace: WorkspaceSvg) {
@@ -9,6 +10,7 @@ export function registerFileCallbacks(workspace: WorkspaceSvg) {
     workspace.registerButtonCallback("run", (btn) => { convertOrRun(true, btn.getTargetWorkspace()); });
     workspace.registerButtonCallback("save", (btn) => { saveWorkspace(btn.getTargetWorkspace()); });
     workspace.registerButtonCallback("download", (btn) => { exportProject(btn.getTargetWorkspace()); });
+    workspace.registerButtonCallback("upload", (btn) => { addFileInput(btn.getTargetWorkspace()).click(); });
     // workspace.registerToolboxCategoryCallback("INSTEAD_GAMES", inteadGamesFlyout);
 }
 
@@ -55,6 +57,22 @@ function inteadGamesFlyout(workspace: Workspace): Element[] {
     return xmlList;
 }
 */
+
+function resetWorkspace(workspace: Workspace) {
+    try {
+        // Disable events because when reloading workspace
+        // all events will be batched up objects removed
+        // during clear() call.
+        // This this cause removal of references for newly created objects.
+        Events.disable();
+        workspace.clear();
+        InsteadObject.clear();
+        InsteadRoom.clear();
+    } finally {
+        Events.enable();
+    }
+}
+
 function convertOrRun(run: boolean, workspace: Workspace) {
     const code = Lua.workspaceToCode(workspace);
     const codeElem = document.getElementById("generatedCode") as HTMLElement;
@@ -71,11 +89,14 @@ export const localStorageKey = "instead-data";
 export function loadWorkspace(xml: string, workspace: Workspace) {
     try {
         const dom = Xml.textToDom(xml);
+        resetWorkspace(workspace);
         Xml.domToWorkspace(dom, workspace);
         console.log("Loaded workspace");
     } catch (error) {
-        console.log("Failed to load workspace: " + error);
-        workspace.clear();
+        const msg = "Failed to load workspace: " + error
+        console.log(msg);
+        alert(msg);
+        resetWorkspace(workspace);
     }
 }
 
@@ -86,23 +107,65 @@ function saveWorkspace(workspace: Workspace) {
     window.localStorage.setItem(localStorageKey, text);
 }
 
+// Default file name for now...
+const mainFileName = "main3";
+const blocksFolderName = "blocks";
+
 async function exportProject(workspace: Workspace) {
     const zip = new JSZip();
-
-    // Default file name for now...
-    const fileName = "main3";
-
 
     // Add blocks.
     const xml = Xml.workspaceToDom(workspace);
     const text = Xml.domToText(xml);
-    const blocksFolder = zip.folder("blocks") as JSZip;
-    blocksFolder.file(fileName + ".xml", text);
+    const blocksFolder = zip.folder(blocksFolderName) as JSZip;
+    blocksFolder.file(mainFileName + ".xml", text);
 
     // Add files to load by Instead
     const code = Lua.workspaceToCode(workspace);
-    zip.file(fileName + ".lua", code);
+    zip.file(mainFileName + ".lua", code);
 
     const blob = await zip.generateAsync({ type: "blob" });
     saveAs(blob, "game.zip");
+}
+
+async function importProject(workspace: Workspace, input: ArrayBuffer) {
+    const zip = await JSZip.loadAsync(input);
+
+    const blocksFolder = zip.folder(blocksFolderName) as JSZip;
+    const mainFile = blocksFolder.file(mainFileName + ".xml");
+    if (!mainFile) {
+        alert("Can't find blocks definition");
+        return;
+    }
+    const text = await mainFile.async("string");
+    loadWorkspace(text, workspace);
+}
+
+function addFileInput(workspace: Workspace) {
+    const inputId = "FileUploadInput";
+    const element = document.getElementById(inputId);
+    if (element)
+        return element;
+
+    const inputElem = document.createElement("input");
+    inputElem.accept = ".zip";
+    inputElem.type = "file";
+    inputElem.style.display = "none";
+    inputElem.id = inputId;
+
+    inputElem.onchange = (e) => {
+        let input = e.target as HTMLInputElement;
+        if (!input.files)
+            return;
+
+        const reader = new FileReader();
+        reader.onload = function () {
+            input.value = "";
+            importProject(workspace, this.result as ArrayBuffer);
+        };
+        reader.readAsArrayBuffer(input.files[0]);
+    };
+
+    document.body.appendChild(inputElem);
+    return inputElem;
 }
