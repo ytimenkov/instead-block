@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "blockly": "^3.20200625.2",
+    "file-saver": "^2.0.2",
     "jquery": "^3.5.1",
     "jszip": "^3.5.0",
     "perfect-scrollbar": "^0.6.16"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.1",
     "@types/jquery": "^3.5.1",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.0.3",
