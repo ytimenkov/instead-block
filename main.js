@@ -23119,12 +23119,14 @@ const instead_1 = __webpack_require__(/*! ./instead */ "./src/instead.ts");
 const JSZip = __webpack_require__(/*! jszip */ "./node_modules/jszip/dist/jszip.min.js");
 const file_saver_1 = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
 const objects_1 = __webpack_require__(/*! ./objects */ "./src/objects.ts");
+const game_info_1 = __webpack_require__(/*! ./game_info */ "./src/game_info.ts");
 function registerFileCallbacks(workspace) {
     workspace.registerButtonCallback("convertToLua", (btn) => { convertOrRun(false, btn.getTargetWorkspace()); });
     workspace.registerButtonCallback("run", (btn) => { convertOrRun(true, btn.getTargetWorkspace()); });
-    workspace.registerButtonCallback("save", (btn) => { saveWorkspace(btn.getTargetWorkspace()); });
+    workspace.registerButtonCallback("save", (btn) => { backupWorkspace(btn.getTargetWorkspace()); });
     workspace.registerButtonCallback("download", (btn) => { exportProject(btn.getTargetWorkspace()); });
     workspace.registerButtonCallback("upload", (btn) => { addFileInput(btn.getTargetWorkspace()).click(); });
+    workspace.registerButtonCallback("editMetadata", (btn) => { editWorkspaceMetadata(btn.getTargetWorkspace()); });
     // workspace.registerToolboxCategoryCallback("INSTEAD_GAMES", inteadGamesFlyout);
 }
 exports.registerFileCallbacks = registerFileCallbacks;
@@ -23187,7 +23189,9 @@ function resetWorkspace(workspace) {
     }
 }
 function convertOrRun(run, workspace) {
-    const code = core_1.Lua.workspaceToCode(workspace);
+    const insteadMeta = workspace.insteadMeta;
+    let code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n`;
+    code += core_1.Lua.workspaceToCode(workspace);
     const codeElem = document.getElementById("generatedCode");
     codeElem.innerText = code;
     if (run) {
@@ -23199,9 +23203,24 @@ function convertOrRun(run, workspace) {
 }
 exports.localStorageKey = "instead-data";
 function loadWorkspace(xml, workspace) {
+    var _a, _b, _c;
     try {
         const dom = core_1.Xml.textToDom(xml);
         resetWorkspace(workspace);
+        // Default
+        workspace.insteadMeta = { name: "Playground", version: "0.0", author: "Unknown" };
+        for (let i = 0, xmlChild; (xmlChild = dom.childNodes[i]); i++) {
+            if (xmlChild.nodeName == "instead") {
+                const attrs = xmlChild.attributes;
+                const insteadMeta = {
+                    name: ((_a = attrs.getNamedItem("name")) === null || _a === void 0 ? void 0 : _a.textContent) || "",
+                    version: ((_b = attrs.getNamedItem("version")) === null || _b === void 0 ? void 0 : _b.textContent) || "",
+                    author: ((_c = attrs.getNamedItem("author")) === null || _c === void 0 ? void 0 : _c.textContent) || "",
+                };
+                workspace.insteadMeta = insteadMeta;
+                break;
+            }
+        }
         core_1.Xml.domToWorkspace(dom, workspace);
         console.log("Loaded workspace");
     }
@@ -23215,7 +23234,17 @@ function loadWorkspace(xml, workspace) {
 exports.loadWorkspace = loadWorkspace;
 function saveWorkspace(workspace) {
     const xml = core_1.Xml.workspaceToDom(workspace);
+    const insteadMeta = workspace.insteadMeta;
+    const insteadNode = document.createElement("instead");
+    insteadNode.setAttribute("name", insteadMeta.name);
+    insteadNode.setAttribute("version", insteadMeta.version);
+    insteadNode.setAttribute("author", insteadMeta.author);
+    xml.append(insteadNode);
     const text = core_1.Xml.domToText(xml);
+    return text;
+}
+function backupWorkspace(workspace) {
+    const text = saveWorkspace(workspace);
     console.log("Saving text: " + text);
     window.localStorage.setItem(exports.localStorageKey, text);
 }
@@ -23225,23 +23254,21 @@ const blocksFolderName = "blocks";
 function exportProject(workspace) {
     return __awaiter(this, void 0, void 0, function* () {
         const zip = new JSZip();
+        const gameName = workspace.insteadMeta.name;
         // Add blocks.
-        const xml = core_1.Xml.workspaceToDom(workspace);
-        const text = core_1.Xml.domToText(xml);
-        const blocksFolder = zip.folder(blocksFolderName);
-        blocksFolder.file(mainFileName + ".xml", text);
+        const text = saveWorkspace(workspace);
+        zip.file(`${gameName}/${blocksFolderName}/${mainFileName}.xml`, text);
         // Add files to load by Instead
         const code = core_1.Lua.workspaceToCode(workspace);
-        zip.file(mainFileName + ".lua", code);
+        zip.file(`${gameName}/${mainFileName}.lua`, code);
         const blob = yield zip.generateAsync({ type: "blob" });
-        file_saver_1.saveAs(blob, "game.zip");
+        file_saver_1.saveAs(blob, `${gameName}.zip`);
     });
 }
 function importProject(workspace, input) {
     return __awaiter(this, void 0, void 0, function* () {
         const zip = yield JSZip.loadAsync(input);
-        const blocksFolder = zip.folder(blocksFolderName);
-        const mainFile = blocksFolder.file(mainFileName + ".xml");
+        const mainFile = zip.file(new RegExp(`${blocksFolderName}/${mainFileName}.xml$`))[0];
         if (!mainFile) {
             alert("Can't find blocks definition");
             return;
@@ -23273,6 +23300,15 @@ function addFileInput(workspace) {
     };
     document.body.appendChild(inputElem);
     return inputElem;
+}
+function editWorkspaceMetadata(workspace) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const insteadMeta = workspace.insteadMeta;
+        const newData = yield game_info_1.showInfoDialog(insteadMeta);
+        if (newData) {
+            workspace.insteadMeta = newData;
+        }
+    });
 }
 
 
@@ -23394,6 +23430,91 @@ core_1.Lua["instead_where"] = function (block) {
     const where = core_1.Lua.valueToCode(block, "WHERE", core_1.Lua.ORDER_NONE);
     return ["where(" + what + ") " + cond + " " + where, core_1.Lua.ORDER_ATOMIC];
 };
+
+
+/***/ }),
+
+/***/ "./src/game_info.html":
+/*!****************************!*\
+  !*** ./src/game_info.html ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Module
+var code = "<div id=\"game_info_dialog\">\n    <header>Game metadata</header>\n    <table>\n        <tr>\n            <td>Game name</td>\n            <td><input type=\"text\" id=\"game_info_dialog_name\"></td>\n        </tr>\n        <tr>\n            <td>Autor</td>\n            <td><input type=\"text\" id=\"game_info_dialog_author\"></td>\n        </tr>\n        <tr>\n            <td>Version</td>\n            <td><input type=\"text\" id=\"game_info_dialog_version\"></td>\n        </tr>\n    </table>\n    <button id=\"game_info_dialog_ok\">OK</button>\n    <button id=\"game_info_dialog_cancel\">Cancel</button>\n</div>";
+// Exports
+module.exports = code;
+
+/***/ }),
+
+/***/ "./src/game_info.ts":
+/*!**************************!*\
+  !*** ./src/game_info.ts ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.showInfoDialog = void 0;
+;
+function showInfoDialog(data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const backdropDiv = document.createElement('div');
+        const style = backdropDiv.style;
+        style.position = "absolute";
+        style.top = "0";
+        style.left = "0";
+        style.right = "0";
+        style.bottom = "0";
+        style.backgroundColor = "rgba(0, 0, 0, .7)";
+        style.zIndex = "100";
+        style.display = "block";
+        try {
+            document.body.appendChild(backdropDiv);
+            backdropDiv.innerHTML = __webpack_require__(/*! ./game_info.html */ "./src/game_info.html");
+            // const dialog = document.getElementById("game_info_dialog") as HTMLElement;
+            // dialog.onclick = (e) => { e.stopPropagation(); };
+            const okButton = document.getElementById("game_info_dialog_ok");
+            const cancelButton = document.getElementById("game_info_dialog_cancel");
+            const nameField = document.getElementById("game_info_dialog_name");
+            const authorField = document.getElementById("game_info_dialog_author");
+            const versionField = document.getElementById("game_info_dialog_version");
+            if (data) {
+                nameField.value = data.name;
+                authorField.value = data.author;
+                versionField.value = data.version;
+            }
+            return yield new Promise((resolve, reject) => {
+                okButton.onclick = (e) => {
+                    resolve({
+                        name: nameField.value,
+                        author: authorField.value,
+                        version: versionField.value,
+                    });
+                };
+                cancelButton.onclick = (e) => {
+                    resolve();
+                };
+            });
+        }
+        finally {
+            backdropDiv.remove();
+        }
+    });
+}
+exports.showInfoDialog = showInfoDialog;
 
 
 /***/ }),
