@@ -16,3 +16,11 @@ pre {
 #generatedCode {
     white-space: pre;
 }
+
+#game_info_dialog {
+    background-color: #fff;
+    width: 400px;
+    margin: 20px auto 0;
+    padding: 10px;
+    display: block;
+}
