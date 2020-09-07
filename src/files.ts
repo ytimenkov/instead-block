@@ -1,10 +1,9 @@
 import { WorkspaceSvg, Xml, Lua, Workspace, Events } from "blockly/core";
 import { runGame } from "./instead";
-import JSZip = require("jszip");
+import * as JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { InsteadObject, InsteadRoom } from "./objects";
 import { GameMetaData, showInfoDialog } from "./game_info";
-import { version } from "jszip";
 
 
 export function registerFileCallbacks(workspace: WorkspaceSvg) {

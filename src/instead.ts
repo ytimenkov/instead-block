@@ -1,12 +1,12 @@
-import Game = require("instead-js/app/game");
-import i18n = require("instead-js/app/i18n");
-import Instead = require("instead-js/app/instead");
-import Menu = require("instead-js/app/menu");
-import UI = require("instead-js/app/ui");
-import vfs = require("instead-js/app/vfs");
-import interpreter = require("instead-js/lua/interpreter");
+import * as Game from "instead-js/app/game";
+import * as i18n from "instead-js/app/i18n";
+import * as Instead from "instead-js/app/instead";
+import * as Menu from "instead-js/app/menu";
+import * as UI from "instead-js/app/ui";
+import * as vfs from "instead-js/app/vfs";
+import * as interpreter from "instead-js/lua/interpreter";
 
-import $ = require("jquery");
+import * as $ from "jquery";
 require("perfect-scrollbar/jquery")($);
 
 

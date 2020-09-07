@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
         "target": "ES2015",
-        "module": "CommonJS",
+        "module": "ES2015",
+        "moduleResolution": "Node",
         "strict": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
@@ -14,6 +15,5 @@
             ]
         }
     },
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "display": "Recommended"
+    "$schema": "https://json.schemastore.org/tsconfig"
 }
