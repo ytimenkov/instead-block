@@ -25,7 +25,8 @@ function defineListBlock(type: string, block: Block): void {
 
 Blocks["instead_disp"] = {
     init: function (this: Block) {
-        defineFieldBlock("Альт. имя (disp)", this);
+        defineFieldBlock("Альт. имя (disp)", this)
+        this.setStyle("properties_blocks");
     }
 };
 
@@ -36,6 +37,7 @@ Lua["instead_disp"] = function (block: Block) {
 Blocks["instead_decor"] = {
     init: function (this: Block) {
         defineFieldBlock("Декорации (decor)", this);
+        this.setStyle("properties_blocks");
     }
 };
 
@@ -47,6 +49,7 @@ Lua["instead_decor"] = function (block: Block) {
 Blocks["instead_inv"] = {
     init: function (this: Block) {
         defineFieldBlock("Инвентарь(inv) \u{1F392}", this);
+        this.setStyle("properties_blocks");
     }
 };
 
@@ -57,6 +60,7 @@ Lua["instead_inv"] = function (block: Block) {
 Blocks["instead_act"] = {
     init: function (this: Block) {
         defineFieldBlock("Действие(act) \u{1F50D}", this);
+        this.setStyle("properties_blocks");
     }
 };
 
@@ -70,6 +74,7 @@ Blocks["instead_used"] = {
     // TODO: There is also 'use'
     init: function (this: Block) {
         defineFieldBlock("Использование(used) \u{1F517}", this);
+        this.setStyle("properties_blocks");
     }
 };
 
@@ -80,6 +85,7 @@ Lua["instead_used"] = function (block: Block) {
 Blocks["instead_onenter"] = {
     init: function (this: Block) {
         defineFieldBlock("При входе (onenter)", this);
+        this.setStyle("properties_blocks");
     }
 };
 
@@ -90,6 +96,7 @@ Lua["instead_onenter"] = function (block: Block) {
 Blocks["instead_onexit"] = {
     init: function (this: Block) {
         defineFieldBlock("При выходе (onexit)", this);
+        this.setStyle("properties_blocks");
     }
 };
 
@@ -100,6 +107,7 @@ Lua["instead_onexit"] = function (block: Block) {
 Blocks["instead_obj"] = {
     init: function (this: Block) {
         defineListBlock("Объекты (obj)", this);
+        this.setStyle("rooms_blocks");
     }
 }
 
@@ -110,6 +118,7 @@ Lua["instead_obj"] = function (block: Block) {
 Blocks["instead_way"] = {
     init: function (this: Block) {
         defineListBlock("Выходы (way)", this);
+        this.setStyle("rooms_blocks");
     }
 }
 
@@ -129,6 +138,7 @@ Blocks["instead_print"] = {
             .appendField(new FieldTextInput(), "TEXT");
         this.setNextStatement(true);
         this.setPreviousStatement(true);
+        this.setStyle("text_blocks");
     }
 };
 
@@ -149,6 +159,7 @@ Blocks["instead_method0"] = {
                 }],
             "output": ["String"],
         });
+        this.setStyle("procedure_blocks");
     }
 };
 
@@ -171,6 +182,7 @@ Blocks["instead_method1"] = {
                 }],
             "output": ["String"],
         });
+        this.setStyle("procedure_blocks");
     }
 };
 
@@ -187,6 +199,7 @@ Blocks["instead_return_false"] = {
         this.appendDummyInput()
             .appendField("отменить действие");
         this.setPreviousStatement(true);
+        this.setStyle("logic_blocks");
     }
 };
 

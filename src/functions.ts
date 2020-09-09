@@ -7,7 +7,8 @@ Blocks["instead_self"] = {
     init: function (this: Block) {
         this.appendDummyInput()
             .appendField("себя");
-        this.setOutput(true, ["InsteadObject", "InsteadRoom"])
+        this.setOutput(true, ["InsteadObject", "InsteadRoom"]);
+        this.setStyle("procedure_blocks");
     }
 };
 
@@ -19,7 +20,8 @@ Blocks["instead_what"] = {
     init: function (this: Block) {
         this.appendDummyInput()
             .appendField("оъект");
-        this.setOutput(true, ["InsteadObject", "InsteadRoom"])
+        this.setOutput(true, ["InsteadObject", "InsteadRoom"]);
+        this.setStyle("procedure_blocks");
     }
 };
 
@@ -34,6 +36,7 @@ Blocks["instead_take"] = {
             .setCheck("InsteadObject");
         this.setNextStatement(true);
         this.setPreviousStatement(true);
+        this.setStyle("actions_blocks");
     }
 };
 
@@ -49,6 +52,7 @@ Blocks["instead_disable"] = {
             .setCheck(["InsteadObject"]);
         this.setNextStatement(true);
         this.setPreviousStatement(true);
+        this.setStyle("actions_blocks");
     }
 };
 
@@ -65,6 +69,7 @@ Blocks["instead_enable"] = {
             .setCheck(["InsteadObject"]);
         this.setNextStatement(true);
         this.setPreviousStatement(true);
+        this.setStyle("actions_blocks");
     }
 };
 
@@ -84,6 +89,7 @@ Blocks["instead_drop"] = {
         this.setNextStatement(true);
         this.setPreviousStatement(true);
         this.setInputsInline(true);
+        this.setStyle("actions_blocks");
     }
 };
 
@@ -111,6 +117,7 @@ Blocks["instead_where"] = {
             .setCheck(["InsteadRoom", "InsteadObject"]);
         this.setOutput(true, ["Boolean"]);
         this.setInputsInline(true);
+        this.setStyle("logic_blocks");
     }
 };
 

@@ -40,20 +40,33 @@ export function createToolBox(): string {
 }
 
 export function createInsteadTheme(): Theme {
-    const categoryStyles = {
-        "rooms_category": {
-            colour: "120"
-        },
-        "objects_category": {
-            colour: "60"
-        },
-        "actions_category": {
-            colour: "210"
-        }
-    };
     return Theme.defineTheme("instead", {
         base: "classic",
-        categoryStyles: categoryStyles
+        categoryStyles: {
+            "rooms_category": {
+                colour: "120"
+            },
+            "objects_category": {
+                colour: "60"
+            },
+            "actions_category": {
+                colour: "120"
+            }
+        },
+        blockStyles: {
+            "rooms_blocks": {
+                colourPrimary: "120"
+            },
+            "objects_blocks": {
+                colourPrimary: "60"
+            },
+            "actions_blocks": {
+                colourPrimary: "120"
+            },
+            "properties_blocks": {
+                colourPrimary: "30"
+            }
+        }
     });
 }
 

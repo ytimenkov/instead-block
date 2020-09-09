@@ -187,7 +187,8 @@ export const InsteadObject = new InsteadObjectBase("instead_object");
 
 Blocks["instead_object"] = {
     init: function (this: Block) {
-        addStandardFields("Объект", this);
+        addStandardFields("Объект", this)
+            .setStyle("objects_blocks");
     }
 };
 Lua["instead_object"] = function (block: Block) {
@@ -212,7 +213,8 @@ class ObjectReferenceDropDown extends FieldDropdown {
 
 Blocks["instead_object_ref"] = {
     init: function (this: Block) {
-        addReferenceFields(this, InsteadObject, "InsteadObject");
+        addReferenceFields(this, InsteadObject, "InsteadObject")
+            .setStyle("objects_blocks");
     },
 };
 Lua["instead_object_ref"] = function (block: Block) {
@@ -223,7 +225,8 @@ export const InsteadRoom = new InsteadObjectBase("instead_room");
 
 Blocks["instead_room"] = {
     init: function (this: Block) {
-        addStandardFields("Комната", this);
+        addStandardFields("Комната", this)
+            .setStyle("rooms_blocks");
     }
 };
 Lua["instead_room"] = function (block: Block) {
@@ -232,7 +235,8 @@ Lua["instead_room"] = function (block: Block) {
 
 Blocks["instead_room_ref"] = {
     init: function (this: Block) {
-        addReferenceFields(this, InsteadRoom, "InsteadRoom");
+        addReferenceFields(this, InsteadRoom, "InsteadRoom")
+            .setStyle("rooms_blocks")
     },
 };
 Lua["instead_room_ref"] = function (block: Block) {
