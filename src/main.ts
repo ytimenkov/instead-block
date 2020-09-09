@@ -13,9 +13,11 @@ import { InsteadObject, InsteadRoom } from "./objects";
 
 import { initInstead } from "./instead";
 import { registerFileCallbacks, loadWorkspace, localStorageKey } from "./files";
+import { createToolBox, createInsteadTheme } from "./toolbox";
 
 const workspace = Blockly.inject("blocklyDiv", {
-    toolbox: document.getElementById("toolbox") as HTMLElement,
+    toolbox: createToolBox(),
+    theme: createInsteadTheme(),
     move: { scrollbars: true, wheel: true },
     zoom: { controls: true, },
 });
@@ -31,7 +33,7 @@ if (window.localStorage[localStorageKey]) {
     loadWorkspace(window.localStorage[localStorageKey], workspace);
 } else {
     console.log("Loading default workspace");
-    const file = require("playground_xml").default;
+    const file = require("data/playground.xml").default;
     const client = new XMLHttpRequest();
     client.onreadystatechange = function () {
         if (this.readyState === this.DONE && this.status === 200) {

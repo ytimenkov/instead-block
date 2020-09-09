@@ -19,6 +19,19 @@ module.exports = {
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
 
+    optimization: {
+        moduleIds: "hashed",
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: "vendors",
+                    chunks: "all",
+                },
+            },
+        },
+    },
+
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", ".tsx", ".js"],
@@ -26,7 +39,7 @@ module.exports = {
             "instead": path.resolve(__dirname, "lib/instead"),
             "lua.vm.js$": path.resolve(__dirname, "lib/weblua/lua.vm.js"),
             "instead-js": path.resolve(__dirname, "lib/instead-js"),
-            "playground_xml": path.resolve(__dirname, "data/playground.xml"),
+            "data": path.resolve(__dirname, "data"),
         }
     },
 
@@ -35,7 +48,18 @@ module.exports = {
             { test: /\.tsx?$/, loader: "ts-loader", exclude: [/node_modules/, /lib/], },
             { test: /\.css$/, use: ["style-loader", "css-loader"] },
             { test: /.html$/, loader: "html-loader" },
-            { test: /.xml$/, loader: "file-loader" },
+            {
+                test: /.xml$/,
+                oneOf: [
+                    { resource: /playground.xml$/, loader: "file-loader" },
+                    {
+                        loader: "html-loader",
+                        options: {
+                            esModule: true,
+                        },
+                    },
+                ]
+            },
         ]
     },
 

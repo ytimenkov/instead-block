@@ -1,0 +1,43 @@
+<block type="instead_object">
+    <value name="DSC">
+        <shadow type="text">
+            <field name="TEXT">Здесь лежит объект.</field>
+        </shadow>
+    </value>
+</block>
+<block type="instead_disp">
+    <value name="TEXT">
+        <shadow type="text">
+            <field name="TEXT">название</field>
+        </shadow>
+    </value>
+</block>
+<block type="instead_inv">
+    <value name="TEXT">
+        <shadow type="text">
+            <field name="TEXT">у меня есть объект</field>
+        </shadow>
+    </value>
+</block>
+<block type="instead_act">
+    <value name="TEXT">
+        <shadow type="text">
+            <field name="TEXT">действие на объект</field>
+        </shadow>
+    </value>
+</block>
+<block type="instead_used">
+    <value name="TEXT">
+        <block type="instead_method1">
+            <statement name="DEFINITION">
+                <shadow type="instead_print">
+                    <field name="TEXT">вы использовали "what"</field>
+                </shadow>
+            </statement>
+        </block>
+    </value>
+</block>
+
+<sep></sep>
+<block type="instead_method0"></block>
+<block type="instead_method1"></block>

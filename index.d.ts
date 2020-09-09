@@ -5,3 +5,8 @@ declare module "instead-js/app/instead";
 declare module "instead-js/app/menu";
 declare module "instead-js/app/vfs";
 declare module "instead-js/lua/interpreter";
+
+declare module "*.xml" {
+    const content: string;
+    export default content;
+}
