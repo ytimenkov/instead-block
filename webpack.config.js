@@ -1,5 +1,7 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 
 module.exports = {
@@ -8,12 +10,11 @@ module.exports = {
 
     entry: {
         main: "./src/main.ts",
-        instead: "./lib/instead-js/index.js"
     },
 
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: "[name].js"
+        filename: "[name].[contenthash].js",
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -28,6 +29,11 @@ module.exports = {
                     name: "vendors",
                     chunks: "all",
                 },
+                instead: {
+                    test: /[\\/]lib[\\/]/,
+                    name: "instead-js",
+                    chunks: "all",
+                }
             },
         },
     },
@@ -65,6 +71,10 @@ module.exports = {
 
     plugins: [
         // new webpack.optimize.ModuleConcatenationPlugin(),
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+
+        }),
         new CopyPlugin({
             patterns: [
                 {
@@ -80,5 +90,10 @@ module.exports = {
                 },
             ]
         }),
-    ]
+    ],
+
+    devServer: {
+        compress: true,
+    }
+
 };
