@@ -38,7 +38,9 @@ const INSTEADjs = {
     }
 };
 
-export function initInstead() {
+let insteadInitialized = false;
+
+function initInstead() {
     Game.loadConfig(INSTEADjs);
     if (INSTEADjs["translation"]) {
         i18n.load(INSTEADjs["translation"]);
@@ -56,6 +58,10 @@ export function initInstead() {
 }
 
 export function runGame(code: string) {
+    if (!insteadInitialized) {
+        initInstead();
+        insteadInitialized = true;
+    }
     vfs.save(Game.mainLua(), code);
     interpreter.clear();
     Instead.startGame();

@@ -11,7 +11,6 @@ import "./functions";
 
 import { InsteadObject, InsteadRoom } from "./objects";
 
-import { initInstead } from "./instead";
 import { registerFileCallbacks, loadWorkspace, localStorageKey } from "./files";
 import { createToolBox, createInsteadTheme } from "./toolbox";
 
@@ -43,5 +42,3 @@ if (window.localStorage[localStorageKey]) {
     client.open("GET", file, true);
     client.send();
 }
-
-initInstead();

@@ -26,10 +26,10 @@ module.exports = {
                     chunks: "all",
                 },
                 instead: {
-                    test: /[\\/]lib[\\/]/,
+                    test: /[\\/]lib[\\/]|[\\/]instead\.ts$/,
                     name: "instead-js",
                     chunks: "all",
-                }
+                },
             },
         },
     },

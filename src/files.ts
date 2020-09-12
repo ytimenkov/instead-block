@@ -1,5 +1,4 @@
 import { WorkspaceSvg, Xml, Lua, Workspace, Events } from "blockly/core";
-import { runGame } from "./instead";
 import * as JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { InsteadObject, InsteadRoom } from "./objects";
@@ -21,50 +20,6 @@ interface WorkspaceInstead extends Workspace {
     insteadMeta: GameMetaData;
 }
 
-/*
-// TODO: Here I wanted to allow saving multipel games into local storage,
-// but seems not reasonable
-function inteadGamesFlyout(workspace: Workspace): Element[] {
-    const xmlList: Element[] = [];
-
-    const createButton = (text: string, key: string, handler: { (_0: FlyoutButton): any }) => {
-        const button = document.createElement('button');
-        button.setAttribute('text', text);
-        button.setAttribute('callbackKey', key);
-
-        (workspace as WorkspaceSvg).registerButtonCallback(key, handler);
-        xmlList.push(button);
-    };
-
-    createButton("To Lua", "convertToLua", (btn) => { convertOrRun(false, btn.getTargetWorkspace()); });
-    createButton("Run", "run", (btn) => { convertOrRun(true, btn.getTargetWorkspace()); });
-    createButton("Save", "save", (btn) => { saveWorkspace(btn.getTargetWorkspace()); });
-    createButton("Save as", "save_as", (btn) => { saveWorkspaceAs(btn.getTargetWorkspace()); });
-
-    let addSep = () => {
-        xmlList.push(document.createElement("sep"));
-
-        const label = document.createElement("label");
-        label.setAttribute("text", "Load existing Game:");
-        xmlList.push(label);
-    }
-
-    const prefix = "instead-game-";
-
-    for (let i = 0, key; (key = window.localStorage.key(i)); i++) {
-        if (key.startsWith(prefix)) {
-            addSep();
-            addSep = () => { };
-            const name = key.substr(prefix.length);
-            const loadKey = key;
-            createButton(name, key, (btn) => { loadWorkspace(loadKey, btn.getTargetWorkspace()); });
-        }
-    }
-
-    return xmlList;
-}
-*/
-
 function resetWorkspace(workspace: Workspace) {
     try {
         // Disable events because when reloading workspace
@@ -80,14 +35,15 @@ function resetWorkspace(workspace: Workspace) {
     }
 }
 
-function convertOrRun(run: boolean, workspace: Workspace) {
+async function convertOrRun(run: boolean, workspace: Workspace) {
     const insteadMeta = (workspace as WorkspaceInstead).insteadMeta;
     let code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n`;
     code += Lua.workspaceToCode(workspace);
     const codeElem = document.getElementById("generatedCode") as HTMLElement;
     codeElem.innerText = code;
     if (run) {
-        runGame(code);
+        const instead = await import("./instead");
+        instead.runGame(code);
     } else {
         codeElem.scrollIntoView();
     }
