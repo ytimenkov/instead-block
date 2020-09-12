@@ -19,7 +19,7 @@ Lua["instead_self"] = function (block: Block) {
 Blocks["instead_what"] = {
     init: function (this: Block) {
         this.appendDummyInput()
-            .appendField("оъект");
+            .appendField("объект");
         this.setOutput(true, ["InsteadObject", "InsteadRoom"]);
         this.setStyle("procedure_blocks");
     }
