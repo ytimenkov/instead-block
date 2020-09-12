@@ -31,7 +31,18 @@
         <block type="instead_method1">
             <statement name="DEFINITION">
                 <shadow type="instead_print">
-                    <field name="TEXT">вы использовали "what"</field>
+                    <field name="TEXT">вы использовали "what" на объект</field>
+                </shadow>
+            </statement>
+        </block>
+    </value>
+</block>
+<block type="instead_use">
+    <value name="TEXT">
+        <block type="instead_method1">
+            <statement name="DEFINITION">
+                <shadow type="instead_print">
+                    <field name="TEXT">вы использовали себя на "what"</field>
                 </shadow>
             </statement>
         </block>

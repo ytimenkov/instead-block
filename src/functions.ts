@@ -1,32 +1,71 @@
 import "./blocks";
 import { selfParameterName, whatParameterName } from "./basic_blocks";
 
-import { Lua, Blocks, Block, FieldDropdown } from "blockly/core";
+import { Lua, Blocks, Block, FieldDropdown, FieldTextInput, } from "blockly/core";
 
-Blocks["instead_self"] = {
+Blocks["instead_method0"] = {
     init: function (this: Block) {
-        this.appendDummyInput()
-            .appendField("себя");
-        this.setOutput(true, ["InsteadObject", "InsteadRoom"]);
+        this.jsonInit({
+            "message0": "\u{1D453} %1",
+            "args0": [
+                {
+                    "type": "input_statement",
+                    "name": "DEFINITION"
+                }],
+            "output": ["String"],
+        });
         this.setStyle("procedure_blocks");
     }
 };
 
-Lua["instead_self"] = function (block: Block) {
-    return [selfParameterName, Lua.ORDER_ATOMIC];
+
+Lua["instead_method0"] = function (block: Block) {
+    let branch = Lua.statementToCode(block, "DEFINITION");
+    let code = "function(" + selfParameterName + ")\n" + branch + "end";
+    return [code, Lua.ORDER_HIGH];
 };
 
-Blocks["instead_what"] = {
+Blocks["instead_method1"] = {
     init: function (this: Block) {
-        this.appendDummyInput()
-            .appendField("объект");
-        this.setOutput(true, ["InsteadObject", "InsteadRoom"]);
+        this.jsonInit({
+            "message0": "\u{1D453} (w) %1",
+            "args0": [
+                {
+                    "type": "input_statement",
+                    "name": "DEFINITION"
+                }],
+            "output": ["String"],
+        });
         this.setStyle("procedure_blocks");
     }
 };
 
-Lua["instead_what"] = function (block: Block) {
-    return [whatParameterName, Lua.ORDER_ATOMIC];
+Lua["instead_method1"] = function (block: Block) {
+    let branch = Lua.statementToCode(block, "DEFINITION");
+    let code = "function(" + selfParameterName + ", " + whatParameterName + ")\n" + branch + "end";
+    return [code, Lua.ORDER_HIGH];
+};
+
+Blocks["instead_print"] = {
+    init: function (this: Block) {
+        this.appendDummyInput()
+            .appendField(new FieldDropdown(
+                [
+                    ["\u{1D45D}", "p"],
+                    ["\u{1D45D}\u{1D45F}", "pr"],
+                    ["\u{1D45D}\u{1D45B}", "pn"],
+                ]), "FUN")
+            .appendField(new FieldTextInput(), "TEXT");
+        this.setNextStatement(true);
+        this.setPreviousStatement(true);
+        this.setStyle("text_blocks");
+    }
+};
+
+Lua["instead_print"] = function (block: Block) {
+    const fun = block.getFieldValue("FUN")
+    const msg = Lua.quote_(block.getFieldValue("TEXT"));
+    return fun + "(" + msg + ")\n";
 };
 
 Blocks["instead_take"] = {
@@ -127,4 +166,3 @@ Lua["instead_where"] = function (block: Block) {
     const where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
     return ["where(" + what + ") " + cond + " " + where, Lua.ORDER_ATOMIC];
 };
-

@@ -1,208 +1,133 @@
-import "./blocks";
+import { defineBlock } from "./blocks";
 
-import { Lua, Blocks, Block, FieldDropdown, FieldTextInput } from "blockly/core";
+import { Lua, Block } from "blockly/core";
 
-function defineFieldBlock(type: string, block: Block): void {
+function defineFieldBlock(type: string, block: Block): Block {
     block.appendValueInput("TEXT")
         .appendField(type)
         .setCheck(["String"]);
     block.setNextStatement(true);
     block.setPreviousStatement(true);
+    return block;
 }
 
 function generateFieldCode(type: string, block: Block, name: string = "TEXT") {
-    return type + " = " + Lua.valueToCode(block, name, Lua.ORDER_NONE);
+    return `${type} = ${Lua.valueToCode(block, name, Lua.ORDER_NONE)}`;
 }
 
-function defineListBlock(type: string, block: Block): void {
+function defineListBlock(type: string, block: Block): Block {
     block.appendValueInput("ITEMS")
         .appendField(type)
         .setCheck(["Array"]);
     block.setNextStatement(true);
     block.setPreviousStatement(true);
-
+    return block;
 }
 
-Blocks["instead_disp"] = {
-    init: function (this: Block) {
-        defineFieldBlock("Альт. имя (disp)", this)
-        this.setStyle("properties_blocks");
-    }
-};
+defineBlock("instead_disp",
+    (block) => defineFieldBlock("Альт. имя (disp)", block)
+        .setStyle("properties_blocks"),
 
-Lua["instead_disp"] = function (block: Block) {
-    return generateFieldCode("disp", block)
-};
+    (block) => generateFieldCode("disp", block)
+);
 
-Blocks["instead_decor"] = {
-    init: function (this: Block) {
-        defineFieldBlock("Декорации (decor)", this);
-        this.setStyle("properties_blocks");
-    }
-};
+defineBlock("instead_decor",
+    (block) => defineFieldBlock("Декорации (decor)", block)
+        .setStyle("properties_blocks"),
 
-Lua["instead_decor"] = function (block: Block) {
-    return generateFieldCode("decor", block)
-};
+    (block) => generateFieldCode("decor", block)
+);
+
 
 // TODO: Fine-tune inv that it can be added only to objects, and not to a room.
-Blocks["instead_inv"] = {
-    init: function (this: Block) {
-        defineFieldBlock("Инвентарь(inv) \u{1F392}", this);
-        this.setStyle("properties_blocks");
-    }
-};
+defineBlock("instead_inv",
+    (block) => defineFieldBlock("Инвентарь(inv) \u{1F392}", block)
+        .setStyle("properties_blocks"),
 
-Lua["instead_inv"] = function (block: Block) {
-    return generateFieldCode("inv", block);
-};
+    (block) => generateFieldCode("inv", block)
+);
 
-Blocks["instead_act"] = {
-    init: function (this: Block) {
-        defineFieldBlock("Действие(act) \u{1F50D}", this);
-        this.setStyle("properties_blocks");
-    }
-};
+defineBlock("instead_act",
+    (block) => defineFieldBlock("Действие(act) \u{1F50D}", block)
+        .setStyle("properties_blocks"),
 
-Lua["instead_act"] = function (block: Block) {
-    return generateFieldCode("act", block);
-};
+    (block) => generateFieldCode("act", block)
+);
+
+// TODO: Need to restrict that this function takes 2 arguments.
+defineBlock("instead_used",
+    (block) => defineFieldBlock("Использование(used) \u{1F517}", block)
+        .setStyle("properties_blocks"),
+
+    (block) => generateFieldCode("used", block)
+);
+
+defineBlock("instead_use",
+    (block) => defineFieldBlock("Использование(use) \u{1F528}", block)
+        .setStyle("properties_blocks"),
+
+    (block) => generateFieldCode("use", block)
+);
+
+defineBlock("instead_onenter",
+    (block) => defineFieldBlock("При входе (onenter)", block)
+        .setStyle("properties_blocks"),
+
+    (block) => generateFieldCode("onenter", block)
+);
+
+defineBlock("instead_onexit",
+    (block) => defineFieldBlock("При выходе (onexit)", block)
+        .setStyle("properties_blocks"),
+
+    (block) => generateFieldCode("onexit", block)
+);
+
+defineBlock("instead_obj",
+    (block) => defineListBlock("Объекты (obj)", block)
+        .setStyle("rooms_blocks"),
+
+    (block) => generateFieldCode("obj", block, "ITEMS")
+);
+
+defineBlock("instead_way",
+    (block) => defineListBlock("Выходы (way)", block)
+        .setStyle("rooms_blocks"),
+
+    (block) => generateFieldCode("way", block, "ITEMS")
+);
 
 
-Blocks["instead_used"] = {
-    // TODO: Need to restrict that this function takes 2 arguments.
-    // TODO: There is also 'use'
-    init: function (this: Block) {
-        defineFieldBlock("Использование(used) \u{1F517}", this);
-        this.setStyle("properties_blocks");
-    }
-};
-
-Lua["instead_used"] = function (block: Block) {
-    return generateFieldCode("used", block);
-};
-
-Blocks["instead_onenter"] = {
-    init: function (this: Block) {
-        defineFieldBlock("При входе (onenter)", this);
-        this.setStyle("properties_blocks");
-    }
-};
-
-Lua["instead_onenter"] = function (block: Block) {
-    return generateFieldCode("onenter", block)
-};
-
-Blocks["instead_onexit"] = {
-    init: function (this: Block) {
-        defineFieldBlock("При выходе (onexit)", this);
-        this.setStyle("properties_blocks");
-    }
-};
-
-Lua["instead_onexit"] = function (block: Block) {
-    return generateFieldCode("onexit", block)
-};
-
-Blocks["instead_obj"] = {
-    init: function (this: Block) {
-        defineListBlock("Объекты (obj)", this);
-        this.setStyle("rooms_blocks");
-    }
-}
-
-Lua["instead_obj"] = function (block: Block) {
-    return generateFieldCode("obj", block, "ITEMS");
-};
-
-Blocks["instead_way"] = {
-    init: function (this: Block) {
-        defineListBlock("Выходы (way)", this);
-        this.setStyle("rooms_blocks");
-    }
-}
-
-Lua["instead_way"] = function (block: Block) {
-    return generateFieldCode("way", block, "ITEMS");
-};
-
-Blocks["instead_print"] = {
-    init: function (this: Block) {
-        this.appendDummyInput()
-            .appendField(new FieldDropdown(
-                [
-                    ["\u{1D45D}", "p"],
-                    ["\u{1D45D}\u{1D45F}", "pr"],
-                    ["\u{1D45D}\u{1D45B}", "pn"],
-                ]), "FUN")
-            .appendField(new FieldTextInput(), "TEXT");
-        this.setNextStatement(true);
-        this.setPreviousStatement(true);
-        this.setStyle("text_blocks");
-    }
-};
-
-Lua["instead_print"] = function (block: Block) {
-    const fun = block.getFieldValue("FUN")
-    const msg = Lua.quote_(block.getFieldValue("TEXT"));
-    return fun + "(" + msg + ")\n";
-};
-
-Blocks["instead_method0"] = {
-    init: function (this: Block) {
-        this.jsonInit({
-            "message0": "\u{1D453} %1",
-            "args0": [
-                {
-                    "type": "input_statement",
-                    "name": "DEFINITION"
-                }],
-            "output": ["String"],
-        });
-        this.setStyle("procedure_blocks");
-    }
-};
+defineBlock("instead_return_false",
+    (block) => {
+        block.appendDummyInput()
+            .appendField("отменить действие");
+        block.setPreviousStatement(true);
+        block.setStyle("logic_blocks");
+    },
+    (_block) => "return false\n"
+);
 
 export const selfParameterName = "self";
 
-Lua["instead_method0"] = function (block: Block) {
-    let branch = Lua.statementToCode(block, "DEFINITION");
-    let code = "function(" + selfParameterName + ")\n" + branch + "end";
-    return [code, Lua.ORDER_HIGH];
-};
-
-Blocks["instead_method1"] = {
-    init: function (this: Block) {
-        this.jsonInit({
-            "message0": "\u{1D453} (w) %1",
-            "args0": [
-                {
-                    "type": "input_statement",
-                    "name": "DEFINITION"
-                }],
-            "output": ["String"],
-        });
-        this.setStyle("procedure_blocks");
-    }
-};
+defineBlock("instead_self",
+    (block) => {
+        block.appendDummyInput()
+            .appendField("себя");
+        block.setOutput(true, ["InsteadObject", "InsteadRoom"]);
+        block.setStyle("procedure_blocks");
+    },
+    (_block) => [selfParameterName, Lua.ORDER_ATOMIC]
+);
 
 export const whatParameterName = "what";
 
-Lua["instead_method1"] = function (block: Block) {
-    let branch = Lua.statementToCode(block, "DEFINITION");
-    let code = "function(" + selfParameterName + ", " + whatParameterName + ")\n" + branch + "end";
-    return [code, Lua.ORDER_HIGH];
-};
-
-Blocks["instead_return_false"] = {
-    init: function (this: Block) {
-        this.appendDummyInput()
-            .appendField("отменить действие");
-        this.setPreviousStatement(true);
-        this.setStyle("logic_blocks");
-    }
-};
-
-Lua["instead_return_false"] = function (block: Block) {
-    return "return false\n";
-};
+defineBlock("instead_what",
+    (block) => {
+        block.appendDummyInput()
+            .appendField("объект");
+        block.setOutput(true, ["InsteadObject", "InsteadRoom"]);
+        block.setStyle("procedure_blocks");
+    },
+    (_block) => [whatParameterName, Lua.ORDER_ATOMIC]
+);
