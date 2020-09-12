@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 
 module.exports = {
-    mode: "development",
     target: "web",
 
     entry: {
@@ -16,9 +15,6 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: "[name].[contenthash].js",
     },
-
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
 
     optimization: {
         moduleIds: "hashed",
@@ -91,9 +87,4 @@ module.exports = {
             ]
         }),
     ],
-
-    devServer: {
-        compress: true,
-    }
-
 };
