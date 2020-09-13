@@ -1,7 +1,6 @@
-import "./blocks";
 import { selfParameterName, whatParameterName } from "./basic_blocks";
 
-import { Lua, Blocks, Block, FieldDropdown, FieldTextInput, } from "blockly/core";
+import { Lua, Blocks, Block, FieldDropdown, } from "blockly/core";
 import { defineBlock } from "./blocks";
 
 function defineMethod(name: string, text: string, funcArgs: string) {
@@ -23,29 +22,6 @@ function defineMethod(name: string, text: string, funcArgs: string) {
 
 defineMethod("instead_method0", "\u{1D453}", selfParameterName);
 defineMethod("instead_method1", "\u{1D453} (w)", `${selfParameterName}, ${whatParameterName}`);
-
-
-// Part of std library
-defineBlock("instead_print",
-    (block) => {
-        block.appendDummyInput()
-            .appendField(new FieldDropdown(
-                [
-                    ["\u{1D45D}", "p"],
-                    ["\u{1D45D}\u{1D45F}", "pr"],
-                    ["\u{1D45D}\u{1D45B}", "pn"],
-                ]), "FUN")
-            .appendField(new FieldTextInput(), "TEXT");
-        block.setNextStatement(true);
-        block.setPreviousStatement(true);
-        block.setStyle("text_blocks");
-    },
-    (block) => {
-        const fun = block.getFieldValue("FUN")
-        const msg = Lua.quote_(block.getFieldValue("TEXT"));
-        return `${fun}(${msg})\n`;
-    }
-);
 
 function defineObjectAction1(name: string, desc: string, functName: string) {
     defineBlock(name,

@@ -8,6 +8,7 @@ Blockly.setLocale(Ru);
 import "./basic_blocks";
 import "./objects";
 import "./functions";
+import "./stdlib";
 
 import { InsteadObject, InsteadRoom } from "./objects";
 
