@@ -14,6 +14,11 @@
         <shadow type="instead_self"></shadow>
     </value>
 </block>
+<block type="instead_remove">
+    <value name="WHAT">
+        <shadow type="instead_self"></shadow>
+    </value>
+</block>
 <block type="instead_disable">
     <value name="WHAT">
         <shadow type="instead_self"></shadow>

@@ -2,53 +2,33 @@ import "./blocks";
 import { selfParameterName, whatParameterName } from "./basic_blocks";
 
 import { Lua, Blocks, Block, FieldDropdown, FieldTextInput, } from "blockly/core";
+import { defineBlock } from "./blocks";
 
-Blocks["instead_method0"] = {
-    init: function (this: Block) {
-        this.jsonInit({
-            "message0": "\u{1D453} %1",
-            "args0": [
-                {
-                    "type": "input_statement",
-                    "name": "DEFINITION"
-                }],
-            "output": ["String"],
-        });
-        this.setStyle("procedure_blocks");
-    }
-};
+function defineMethod(name: string, text: string, funcArgs: string) {
+    defineBlock(name,
+        (block) => {
+            block.appendDummyInput()
+                .appendField(text);
+            block.appendStatementInput("DEFINITION");
+            block.setOutput(true, ["String"]);
+            block.setStyle("procedure_blocks");
+        },
+        (block) => {
+            const body = Lua.statementToCode(block, "DEFINITION");
+            const code = `function(${funcArgs})\n${body}end`;
+            return [code, Lua.ORDER_HIGH];
+        }
+    );
+}
+
+defineMethod("instead_method0", "\u{1D453}", selfParameterName);
+defineMethod("instead_method1", "\u{1D453} (w)", `${selfParameterName}, ${whatParameterName}`);
 
 
-Lua["instead_method0"] = function (block: Block) {
-    let branch = Lua.statementToCode(block, "DEFINITION");
-    let code = "function(" + selfParameterName + ")\n" + branch + "end";
-    return [code, Lua.ORDER_HIGH];
-};
-
-Blocks["instead_method1"] = {
-    init: function (this: Block) {
-        this.jsonInit({
-            "message0": "\u{1D453} (w) %1",
-            "args0": [
-                {
-                    "type": "input_statement",
-                    "name": "DEFINITION"
-                }],
-            "output": ["String"],
-        });
-        this.setStyle("procedure_blocks");
-    }
-};
-
-Lua["instead_method1"] = function (block: Block) {
-    let branch = Lua.statementToCode(block, "DEFINITION");
-    let code = "function(" + selfParameterName + ", " + whatParameterName + ")\n" + branch + "end";
-    return [code, Lua.ORDER_HIGH];
-};
-
-Blocks["instead_print"] = {
-    init: function (this: Block) {
-        this.appendDummyInput()
+// Part of std library
+defineBlock("instead_print",
+    (block) => {
+        block.appendDummyInput()
             .appendField(new FieldDropdown(
                 [
                     ["\u{1D45D}", "p"],
@@ -56,91 +36,61 @@ Blocks["instead_print"] = {
                     ["\u{1D45D}\u{1D45B}", "pn"],
                 ]), "FUN")
             .appendField(new FieldTextInput(), "TEXT");
-        this.setNextStatement(true);
-        this.setPreviousStatement(true);
-        this.setStyle("text_blocks");
+        block.setNextStatement(true);
+        block.setPreviousStatement(true);
+        block.setStyle("text_blocks");
+    },
+    (block) => {
+        const fun = block.getFieldValue("FUN")
+        const msg = Lua.quote_(block.getFieldValue("TEXT"));
+        return `${fun}(${msg})\n`;
     }
-};
+);
 
-Lua["instead_print"] = function (block: Block) {
-    const fun = block.getFieldValue("FUN")
-    const msg = Lua.quote_(block.getFieldValue("TEXT"));
-    return fun + "(" + msg + ")\n";
-};
+function defineObjectAction1(name: string, desc: string, functName: string) {
+    defineBlock(name,
+        (block) => {
+            block.appendValueInput("WHAT")
+                .appendField(desc)
+                .setCheck(["InsteadObject"]);
+            block.setNextStatement(true);
+            block.setPreviousStatement(true);
+            block.setStyle("actions_blocks");
+        },
+        (block) => `${functName}(${Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE)})\n`
+    );
+}
 
-Blocks["instead_take"] = {
-    init: function (this: Block) {
-        this.appendValueInput("WHAT")
-            .appendField("взять(take): ")
-            .setCheck("InsteadObject");
-        this.setNextStatement(true);
-        this.setPreviousStatement(true);
-        this.setStyle("actions_blocks");
-    }
-};
+defineObjectAction1("instead_take", "взять(take): ", "take");
+defineObjectAction1("instead_disable", "выключить(disable): ", "disable");
+defineObjectAction1("instead_enable", "включить(enable): ", "enable");
 
-Lua["instead_take"] = function (block: Block) {
-    const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
-    return "take(" + what + ")\n";
-};
+function defineObjectAction2(name: string, desc: string, functName: string, whereText: string) {
+    defineBlock(name,
+        (block) => {
+            block.appendValueInput("WHAT")
+                .appendField(desc)
+                .setCheck(["InsteadObject"]);
+            block.appendValueInput("WHERE")
+                .appendField(whereText)
+                .setCheck(["InsteadObject", "InsteadRoom"]);
+            block.setNextStatement(true);
+            block.setPreviousStatement(true);
+            block.setStyle("actions_blocks");
+        },
+        (block) => {
+            let where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
+            if (where)
+                where = `, ${where}`;
+            else
+                where = "";
+            return `${functName}(${Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE)}${where})\n`;
+        }
+    );
+}
 
-Blocks["instead_disable"] = {
-    init: function (this: Block) {
-        this.appendValueInput("WHAT")
-            .appendField("выключить(disable): ")
-            .setCheck(["InsteadObject"]);
-        this.setNextStatement(true);
-        this.setPreviousStatement(true);
-        this.setStyle("actions_blocks");
-    }
-};
-
-Lua["instead_disable"] = function (block: Block) {
-    const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
-    return "disable(" + what + ")\n";
-};
-
-
-Blocks["instead_enable"] = {
-    init: function (this: Block) {
-        this.appendValueInput("WHAT")
-            .appendField("включить(enable): ")
-            .setCheck(["InsteadObject"]);
-        this.setNextStatement(true);
-        this.setPreviousStatement(true);
-        this.setStyle("actions_blocks");
-    }
-};
-
-Lua["instead_enable"] = function (block: Block) {
-    const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
-    return "enable(" + what + ")\n";
-};
-
-Blocks["instead_drop"] = {
-    init: function (this: Block) {
-        this.appendValueInput("WHAT")
-            .appendField("бросить(drop): ")
-            .setCheck(["InsteadObject"]);
-        this.appendValueInput("WHERE")
-            .appendField("в")
-            .setCheck(["InsteadObject"])
-        this.setNextStatement(true);
-        this.setPreviousStatement(true);
-        this.setInputsInline(true);
-        this.setStyle("actions_blocks");
-    }
-};
-
-Lua["instead_drop"] = function (block: Block) {
-    const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
-    const where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
-    let code = "drop(" + what;
-    if (where)
-        code += ", " + where;
-    code += ")\n";
-    return code;
-};
+defineObjectAction2("instead_drop", "бросить(drop): ", "drop", "в");
+defineObjectAction2("instead_remove", "убрать(remove): ", "remove", "из");
 
 Blocks["instead_where"] = {
     init: function (this: Block) {
