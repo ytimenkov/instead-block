@@ -54,6 +54,14 @@ defineBlock("instead_act",
     (block) => generateFieldCode("act", block)
 );
 
+
+defineBlock("instead_tak",
+    (block) => defineFieldBlock("Взяли(tak) \u{1F4E6}", block)
+        .setStyle("properties_blocks"),
+
+    (block) => generateFieldCode("tak", block)
+);
+
 // TODO: Need to restrict that this function takes 2 arguments.
 defineBlock("instead_used",
     (block) => defineFieldBlock("Использование(used) \u{1F517}", block)
