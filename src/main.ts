@@ -1,3 +1,5 @@
+import "@clr/ui/clr-ui.min.css";
+import "./style.css";
 
 import * as Blockly from "blockly/core";
 import "blockly/blocks";

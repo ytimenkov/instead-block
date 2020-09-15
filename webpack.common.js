@@ -2,6 +2,7 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 module.exports = {
@@ -48,7 +49,20 @@ module.exports = {
     module: {
         rules: [
             { test: /\.tsx?$/, loader: "ts-loader", exclude: [/node_modules/, /lib/], },
-            { test: /\.css$/, use: ["style-loader", "css-loader"] },
+            {
+                test: /\.css$/,
+                oneOf: [
+                    {
+                        resource: /[\\/]node_modules[\\/]/,
+                        use: [
+                            { loader: MiniCssExtractPlugin.loader, options: { esModule: true } },
+                            "css-loader"],
+                    },
+                    {
+                        use: ["style-loader", "css-loader"],
+
+                    }]
+            },
             { test: /.html$/, loader: "html-loader" },
             {
                 test: /.xml$/,
@@ -68,15 +82,13 @@ module.exports = {
     plugins: [
         // new webpack.optimize.ModuleConcatenationPlugin(),
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-
+        new HtmlWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name].[contenthash].css",
+            chunkFilename: "[id].[contenthash].css",
         }),
         new CopyPlugin({
             patterns: [
-                {
-                    from: path.resolve(__dirname, "public"),
-                    to: path.resolve(__dirname, "build")
-                },
                 {
                     from: path.resolve(__dirname, "lib/instead"),
                     to: path.resolve(__dirname, "build"),
