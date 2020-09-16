@@ -7,6 +7,12 @@
     height: calc(100vh - 60px - 24px);
 }
 
+#codeDiv {
+    /* Header height and tab header height */
+    height: calc(100vh - 60px - 24px - 36px);
+    overflow: auto;
+}
+
 #generatedCode {
     white-space: pre;
 }

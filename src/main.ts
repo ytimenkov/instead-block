@@ -16,6 +16,7 @@ import { InsteadObject, InsteadRoom } from "./objects";
 
 import { registerFileCallbacks, loadWorkspace, localStorageKey } from "./files";
 import { createToolBox, createInsteadTheme } from "./toolbox";
+import { bindTabs } from "./ugly_js";
 
 const workspace = Blockly.inject("blocklyDiv", {
     toolbox: createToolBox(),
@@ -29,6 +30,8 @@ registerFileCallbacks(workspace);
 
 workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e) });
 workspace.addChangeListener((e: any) => { InsteadRoom.objectLifecycleListener(e) });
+
+bindTabs();
 
 if (window.localStorage[localStorageKey]) {
     console.log("Loading saved workspace");
