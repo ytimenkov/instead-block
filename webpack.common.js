@@ -49,6 +49,7 @@ module.exports = {
     module: {
         rules: [
             { test: /\.tsx?$/, loader: "ts-loader", exclude: [/node_modules/, /lib/], },
+            { test: /\.(png|svg|jpg|gif)$/, use: ['file-loader'], },
             {
                 test: /\.css$/,
                 oneOf: [

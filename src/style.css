@@ -1,6 +1,10 @@
+.instead-logo {
+    background-image: url("../public/sdl_instead.svg");
+}
+
 #blocklyDiv {
-    /* Header height and top and bottom padding */
-    height: calc(100vh - 60px - 24px - 24px);
+    /* Header height */
+    height: calc(100vh - 60px - 24px);
 }
 
 #generatedCode {
