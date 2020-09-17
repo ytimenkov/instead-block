@@ -6,15 +6,6 @@ export interface GameMetaData {
 
 export async function showInfoDialog(data?: GameMetaData): Promise<GameMetaData | undefined> {
     const backdropDiv = document.createElement('div');
-    const style = backdropDiv.style;
-    style.position = "absolute";
-    style.top = "0";
-    style.left = "0";
-    style.right = "0";
-    style.bottom = "0";
-    style.backgroundColor = "rgba(0, 0, 0, .7)";
-    style.zIndex = "100"
-    style.display = "block";
 
     try {
         document.body.appendChild(backdropDiv);
