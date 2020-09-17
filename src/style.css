@@ -16,3 +16,9 @@
 #generatedCode {
     white-space: pre;
 }
+
+/* Fix clr styles*/
+#stead-container pre {
+    border-style: none;
+    white-space: pre-line;
+}
