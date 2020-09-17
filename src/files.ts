@@ -45,6 +45,8 @@ async function convertOrRun(run: boolean, workspace: Workspace) {
         const instead = await import("./instead");
         instead.runGame(code);
     } else {
+        const codeTab = document.getElementById("codeButton") as HTMLButtonElement;
+        codeTab.click();
         codeElem.scrollIntoView();
     }
 }
