@@ -8,7 +8,9 @@
     "build": "webpack --config webpack.prod.js"
   },
   "dependencies": {
-    "@clr/ui": "^4.0.1",
+    "@clr/icons": "^4.0.2",
+    "@clr/ui": "^4.0.2",
+    "@webcomponents/custom-elements": "^1.4.2",
     "blockly": "^3.20200625.2",
     "file-saver": "^2.0.2",
     "jquery": "^3.5.1",
@@ -16,20 +18,21 @@
     "perfect-scrollbar": "^0.6.16"
   },
   "devDependencies": {
+    "@angular/cli": "^10.1.2",
     "@types/file-saver": "^2.0.1",
     "@types/jquery": "^3.5.1",
     "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.0.3",
-    "css-loader": "^4.2.2",
-    "file-loader": "^6.0.0",
+    "copy-webpack-plugin": "^6.1.1",
+    "css-loader": "^4.3.0",
+    "file-loader": "^6.1.0",
     "html-loader": "^1.3.0",
     "html-webpack-plugin": "^4.4.1",
     "http-server": "^0.12.3",
     "mini-css-extract-plugin": "^0.11.2",
     "style-loader": "^1.2.1",
-    "ts-loader": "^8.0.2",
+    "ts-loader": "^8.0.4",
     "typescript": "^3.9.7",
-    "webpack": "^4.44.1",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.1.4"
