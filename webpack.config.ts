@@ -1,5 +1,6 @@
-import * as path from "path";
 import * as CopyPlugin from "copy-webpack-plugin";
+import * as path from "path";
+import * as webpack from "webpack";
 
 
 module.exports = {
@@ -48,4 +49,4 @@ module.exports = {
             ]
         }),
     ],
-};
+} as webpack.Configuration;

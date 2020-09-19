@@ -8,9 +8,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "start-wp": "webpack-dev-server --config webpack.dev.js",
-    "build-wp": "webpack --config webpack.prod.js"
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/animations": "~10.1.2",
