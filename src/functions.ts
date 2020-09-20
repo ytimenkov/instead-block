@@ -56,10 +56,12 @@ function defineObjectAction2(name: string, desc: string, functName: string, wher
         },
         (block) => {
             let where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
-            if (where)
+            if (where) {
                 where = `, ${where}`;
-            else
+            }
+            else {
                 where = "";
+            }
             return `${functName}(${Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE)}${where})\n`;
         }
     );
@@ -68,8 +70,8 @@ function defineObjectAction2(name: string, desc: string, functName: string, wher
 defineObjectAction2("instead_drop", "бросить(drop): ", "drop", "в");
 defineObjectAction2("instead_remove", "убрать(remove): ", "remove", "из");
 
-Blocks["instead_where"] = {
-    init: function (this: Block) {
+Blocks.instead_where = {
+    init(this: Block) {
         this.appendValueInput("WHAT")
             .appendField("(where)")
             .setCheck("InsteadObject");
@@ -86,8 +88,8 @@ Blocks["instead_where"] = {
     }
 };
 
-Lua["instead_where"] = function (block: Block) {
-    const cond = block.getFieldValue("COND")
+Lua.instead_where = function(block: Block) {
+    const cond = block.getFieldValue("COND");
     const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
     const where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
     return ["where(" + what + ") " + cond + " " + where, Lua.ORDER_ATOMIC];

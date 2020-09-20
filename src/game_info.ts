@@ -2,10 +2,10 @@ export interface GameMetaData {
     name: string;
     version: string;
     author: string;
-};
+}
 
 export async function showInfoDialog(data?: GameMetaData): Promise<GameMetaData | undefined> {
-    const backdropDiv = document.createElement('div');
+    const backdropDiv = document.createElement("div");
 
     try {
         document.body.appendChild(backdropDiv);
@@ -34,7 +34,7 @@ export async function showInfoDialog(data?: GameMetaData): Promise<GameMetaData 
             };
             cancelButton.onclick = (e) => {
                 resolve();
-            }
+            };
         });
     } finally {
         backdropDiv.remove();

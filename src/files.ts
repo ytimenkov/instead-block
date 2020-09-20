@@ -74,7 +74,7 @@ export function loadWorkspace(xml: string, workspace: Workspace) {
         Xml.domToWorkspace(dom, workspace);
         console.log("Loaded workspace");
     } catch (error) {
-        const msg = "Failed to load workspace: " + error
+        const msg = "Failed to load workspace: " + error;
         console.log(msg);
         alert(msg);
         resetWorkspace(workspace);
@@ -136,8 +136,9 @@ async function importProject(workspace: Workspace, input: ArrayBuffer) {
 function addFileInput(workspace: Workspace) {
     const inputId = "FileUploadInput";
     const element = document.getElementById(inputId);
-    if (element)
+    if (element) {
         return element;
+    }
 
     const inputElem = document.createElement("input");
     inputElem.accept = ".zip";
@@ -146,12 +147,13 @@ function addFileInput(workspace: Workspace) {
     inputElem.id = inputId;
 
     inputElem.onchange = (e) => {
-        let input = e.target as HTMLInputElement;
-        if (!input.files)
+        const input = e.target as HTMLInputElement;
+        if (!input.files) {
             return;
+        }
 
         const reader = new FileReader();
-        reader.onload = function () {
+        reader.onload = function() {
             input.value = "";
             importProject(workspace, this.result as ArrayBuffer);
         };

@@ -1,7 +1,8 @@
 function switchTab(idx: number) {
     const container = document.getElementById("preview-pane");
-    if (!container)
+    if (!container) {
         return;
+    }
 
     const buttons = container.getElementsByClassName("btn");
 
@@ -25,8 +26,9 @@ function switchTab(idx: number) {
 
 export function bindTabs() {
     const container = document.getElementById("preview-pane");
-    if (!container)
+    if (!container) {
         return;
+    }
 
     const buttons = container.getElementsByClassName("btn");
     for (let i = 0, btn: HTMLButtonElement; (btn = buttons[i] as HTMLButtonElement); i++) {

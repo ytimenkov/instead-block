@@ -18,7 +18,7 @@ import "./style.css";
 import * as Blockly from "blockly/core";
 import "blockly/blocks";
 
-import * as Ru from 'blockly/msg/ru';
+import * as Ru from "blockly/msg/ru";
 Blockly.setLocale(Ru);
 
 import "./basic_blocks";

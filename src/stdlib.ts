@@ -16,7 +16,7 @@ defineBlock("instead_print",
         block.setStyle("text_blocks");
     },
     (block) => {
-        const fun = block.getFieldValue("FUN")
+        const fun = block.getFieldValue("FUN");
         const msg = Lua.quote_(block.getFieldValue("TEXT"));
         return `${fun}(${msg})\n`;
     }
@@ -36,8 +36,9 @@ defineBlock("instead_rnd",
     },
     (block) => {
         let from = Lua.valueToCode(block, "FROM", Lua.ORDER_NONE) || "";
-        if (from)
+        if (from) {
             from = `${from}, `;
+        }
 
         return [`rnd(${from}${Lua.valueToCode(block, "TO", Lua.ORDER_NONE)})`, Lua.ORDER_HIGH];
     }

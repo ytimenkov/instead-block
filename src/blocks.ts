@@ -8,21 +8,21 @@ declare module "blockly/core" {
     class InsteadGenerator extends Blockly.Generator {
         [key: string]: Object;
 
-        quote_(src: string): string;
-
         ORDER_HIGH: number;
         ORDER_NONE: number;
         ORDER_ATOMIC: number;
+
+        quote_(src: string): string;
     }
     export let Lua: InsteadGenerator;
 }
 
 export function defineBlock(name: string,
-    initFunc: (block: Blockly.Block) => void,
-    generateFunc: (block: Blockly.Block) => string | (string | number)[]) {
+                            initFunc: (block: Blockly.Block) => void,
+                            generateFunc: (block: Blockly.Block) => string | (string | number)[]) {
 
     Blockly.Blocks[name] = {
-        init: function (this: Blockly.Block) {
+        init(this: Blockly.Block) {
             initFunc(this);
         }
     };

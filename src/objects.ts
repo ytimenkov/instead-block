@@ -40,7 +40,7 @@ function generateObjectCode(type: string, block: Block): string {
 function addStandardFields(type: string, block: Block): Block {
     block.appendDummyInput()
         .appendField(type)
-        .appendField(new FieldTextInput(type), "NAME")
+        .appendField(new FieldTextInput(type), "NAME");
     block.appendValueInput("DSC")
         .appendField("Описание(dsc): ")
         .setCheck("String");
@@ -67,10 +67,10 @@ function generateReferenceCode(block: Block, objectsContainer: InsteadObjectBase
     }
     let code = "";
     if (useLookup) {
-        code = "_"
-    };
+        code = "_";
+    }
     code += Lua.quote_(objectsContainer.getInsteadObjectName(block.getFieldValue("NAME")));
-    return [code, Lua.ORDER_ATOMIC]
+    return [code, Lua.ORDER_ATOMIC];
 }
 
 class InsteadObjectBase {
@@ -100,16 +100,19 @@ class InsteadObjectBase {
 
         if (event.type === Events.BLOCK_CREATE) {
             const block = ws.getBlockById(event.blockId);
-            if (block.type !== this.type)
+            if (block.type !== this.type) {
                 return;
+            }
             this.addInsteadObject(event.blockId, block.getFieldValue("NAME"));
             this.refreshReferences(ws, block.id);
         } else if (event.type === Events.BLOCK_CHANGE) {
-            if (event.element !== "field" || event.name !== "NAME")
+            if (event.element !== "field" || event.name !== "NAME") {
                 return;
+            }
             const block = ws.getBlockById(event.blockId);
-            if (block.type !== this.type)
+            if (block.type !== this.type) {
                 return;
+            }
 
             const idx = this.findInsteadObject(event.blockId, true);
             this.objectsList[idx][0] = block.getFieldValue("NAME");
@@ -141,8 +144,9 @@ class InsteadObjectBase {
     removeInsteadObject(blockId: string, ws: Workspace): void {
         const idx = this.findInsteadObject(blockId, false);
 
-        if (idx < 0)
+        if (idx < 0) {
             return;
+        }
 
         this.objectsList.splice(idx, 1);
 
@@ -161,9 +165,10 @@ class InsteadObjectBase {
     }
 
     findInsteadObject(id: string, required: boolean): number {
-        const idx = this.objectsList.findIndex((arr) => { return arr[1] === id });
-        if (required && idx < 0)
+        const idx = this.objectsList.findIndex((arr) => arr[1] === id);
+        if (required && idx < 0) {
             throw TypeError("Object " + this.type + " with id " + id + " not found");
+        }
         return idx;
     }
 
@@ -181,17 +186,17 @@ class InsteadObjectBase {
             }
         });
     }
-};
+}
 
 export const InsteadObject = new InsteadObjectBase("instead_object");
 
-Blocks["instead_object"] = {
-    init: function (this: Block) {
+Blocks.instead_object = {
+    init(this: Block) {
         addStandardFields("Объект", this)
             .setStyle("objects_blocks");
     }
 };
-Lua["instead_object"] = function (block: Block) {
+Lua.instead_object = function(block: Block) {
     return generateObjectCode("obj", block);
 };
 
@@ -200,7 +205,7 @@ class ObjectReferenceDropDown extends FieldDropdown {
 
     constructor(objectsContainer: InsteadObjectBase) {
         super(objectsContainer.objectsList);
-        this.objectsContainer = objectsContainer
+        this.objectsContainer = objectsContainer;
     }
     // Override deserialization to temporarily add value into the
     // list so validation passes. Real object should come soon.
@@ -211,37 +216,37 @@ class ObjectReferenceDropDown extends FieldDropdown {
     }
 }
 
-Blocks["instead_object_ref"] = {
-    init: function (this: Block) {
+Blocks.instead_object_ref = {
+    init(this: Block) {
         addReferenceFields(this, InsteadObject, "InsteadObject")
             .setStyle("objects_blocks");
     },
 };
-Lua["instead_object_ref"] = function (block: Block) {
+Lua.instead_object_ref = function(block: Block) {
     return generateReferenceCode(block, InsteadObject);
-}
+};
 
 export const InsteadRoom = new InsteadObjectBase("instead_room");
 
-Blocks["instead_room"] = {
-    init: function (this: Block) {
+Blocks.instead_room = {
+    init(this: Block) {
         addStandardFields("Комната", this)
             .setStyle("rooms_blocks");
     }
 };
-Lua["instead_room"] = function (block: Block) {
+Lua.instead_room = function(block: Block) {
     return generateObjectCode("room", block);
 };
 
-Blocks["instead_room_ref"] = {
-    init: function (this: Block) {
+Blocks.instead_room_ref = {
+    init(this: Block) {
         addReferenceFields(this, InsteadRoom, "InsteadRoom")
-            .setStyle("rooms_blocks")
+            .setStyle("rooms_blocks");
     },
 };
-Lua["instead_room_ref"] = function (block: Block) {
+Lua.instead_room_ref = function(block: Block) {
     return generateReferenceCode(block, InsteadRoom);
-}
+};
 
 
 // TODO: Maybe have a separate object "Main room" where nam overridden into "main" and disp used instead.

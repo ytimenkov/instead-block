@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { BlocksComponent } from './blocks.component';
+import { BlocksComponent } from "./blocks.component";
 
-describe('BlocksComponent', () => {
+describe("BlocksComponent", () => {
   let component: BlocksComponent;
   let fixture: ComponentFixture<BlocksComponent>;
 
@@ -19,7 +19,7 @@ describe('BlocksComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
