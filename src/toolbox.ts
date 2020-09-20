@@ -4,7 +4,6 @@ import * as objects_blocks from "data/toolbox/objects.xml";
 import * as actions_blocks from "data/toolbox/actions.xml";
 import * as logic_blocks from "data/toolbox/logic.xml";
 import * as math_blocks from "data/toolbox/math.xml";
-import * as menu_catgegory from "data/toolbox/menu.xml";
 
 const end_cat = "</category>";
 
@@ -35,9 +34,6 @@ export function createToolBox(): string {
         category("Математика", "math_category"),
         math_blocks.default,
         end_cat,
-
-        "<sep></sep>",
-        menu_catgegory.default,
     ];
 
     toolbox.push("</xml>");

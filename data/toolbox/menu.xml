@@ -1,9 +1,0 @@
-<category name="File" colour="215">
-    <button text="Edit game metadata" callbackKey="editMetadata"></button>
-    <button text="Show Lua code" callbackKey="convertToLua"></button>
-    <button text="Run" callbackKey="run"></button>
-    <button text="Save in browser" callbackKey="save"></button>
-    <sep></sep>
-    <button text="Save to your computer" callbackKey="download"></button>
-    <button text="Load from your computer" callbackKey="upload"></button>
-</category>

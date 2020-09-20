@@ -5,17 +5,6 @@ import { InsteadObject, InsteadRoom } from "./objects";
 import { GameMetaData, showInfoDialog } from "./game_info";
 
 
-export function registerFileCallbacks(workspace: WorkspaceSvg) {
-    workspace.registerButtonCallback("convertToLua", (btn) => { convertOrRun(false, btn.getTargetWorkspace()); });
-    workspace.registerButtonCallback("run", (btn) => { convertOrRun(true, btn.getTargetWorkspace()); });
-    workspace.registerButtonCallback("save", (btn) => { backupWorkspace(btn.getTargetWorkspace()); });
-    workspace.registerButtonCallback("download", (btn) => { exportProject(btn.getTargetWorkspace()); });
-    workspace.registerButtonCallback("upload", (btn) => { addFileInput(btn.getTargetWorkspace()).click(); });
-    workspace.registerButtonCallback("editMetadata", (btn) => { editWorkspaceMetadata(btn.getTargetWorkspace()); });
-
-    // workspace.registerToolboxCategoryCallback("INSTEAD_GAMES", inteadGamesFlyout);
-}
-
 interface WorkspaceInstead extends Workspace {
     insteadMeta: GameMetaData;
 }
@@ -40,20 +29,6 @@ export function generateCode(workspace: Workspace) {
     let code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n
 ${Lua.workspaceToCode(workspace)}`;
     return code;
-}
-
-export async function convertOrRun(run: boolean, workspace: Workspace) {
-    const codeElem = document.getElementById("generatedCode") as HTMLElement;
-    const code = generateCode(workspace);
-    codeElem.innerText = code;
-    if (run) {
-        const instead = await import("./instead");
-        instead.runGame(code);
-    } else {
-        const codeTab = document.getElementById("codeButton") as HTMLButtonElement;
-        codeTab.click();
-        codeElem.scrollIntoView();
-    }
 }
 
 export const localStorageKey = "instead-data";
@@ -108,7 +83,7 @@ export function backupWorkspace(workspace: Workspace) {
 const mainFileName = "main3";
 const blocksFolderName = "blocks";
 
-async function exportProject(workspace: Workspace) {
+export async function downloadProject(workspace: Workspace) {
     const zip = new JSZip();
 
     const gameName = (workspace as WorkspaceInstead).insteadMeta.name;
@@ -123,6 +98,10 @@ async function exportProject(workspace: Workspace) {
 
     const blob = await zip.generateAsync({ type: "blob" });
     saveAs(blob, `${gameName}.zip`);
+}
+
+export async function uploadProject(workspace: Workspace) {
+    addFileInput(workspace).click();
 }
 
 async function importProject(workspace: Workspace, input: ArrayBuffer) {
@@ -169,7 +148,7 @@ function addFileInput(workspace: Workspace) {
     return inputElem;
 }
 
-async function editWorkspaceMetadata(workspace: Workspace) {
+export async function editWorkspaceMetadata(workspace: Workspace) {
     const insteadMeta = (workspace as WorkspaceInstead).insteadMeta;
     const newData = await showInfoDialog(insteadMeta);
     if (newData) {

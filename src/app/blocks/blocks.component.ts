@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output } from "@angular/core";
 import * as Blockly from "blockly";
 import * as Ru from "blockly/msg/ru";
-import { loadWorkspace, localStorageKey, registerFileCallbacks } from "src/files";
+import { loadWorkspace, localStorageKey } from "src/files";
 import { AppModuel } from 'src/model';
 import { InsteadObject, InsteadRoom } from "src/objects";
 import { createInsteadTheme, createToolBox } from "src/toolbox";
@@ -31,8 +31,6 @@ export class BlocksComponent implements OnInit {
       move: { scrollbars: true, wheel: true },
       zoom: { controls: true, },
     });
-
-    registerFileCallbacks(this.model!.workspace);
 
     this.model!.workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e); });
     this.model!.workspace.addChangeListener((e: any) => { InsteadRoom.objectLifecycleListener(e); });

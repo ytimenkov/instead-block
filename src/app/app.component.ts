@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { backupWorkspace, convertOrRun, generateCode } from 'src/files';
+import { backupWorkspace, downloadProject, editWorkspaceMetadata, generateCode, uploadProject } from 'src/files';
 import { AppModuel } from 'src/model';
 
 @Component({
@@ -18,8 +18,10 @@ export class AppComponent {
     this.model.generatedCode = generateCode(this.model.workspace!);
   }
 
-  run() {
-    convertOrRun(true, this.model.workspace!);
+  async run() {
+    this.model.generatedCode = generateCode(this.model.workspace!);
+    const instead = await import("../instead");
+    instead.runGame(this.model.generatedCode);
   }
 
   save() {
@@ -27,8 +29,14 @@ export class AppComponent {
   }
 
   download() {
+    downloadProject(this.model.workspace!);
   }
 
   upload() {
+    uploadProject(this.model.workspace!);
+  }
+
+  editGameMetadata() {
+    editWorkspaceMetadata(this.model.workspace!);
   }
 }
