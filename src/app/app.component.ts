@@ -7,4 +7,6 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   title = "Instead Blocks";
+  gameActive = true;
+  codeActive = false;
 }

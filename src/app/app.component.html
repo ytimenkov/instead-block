@@ -14,26 +14,24 @@
           <app-blocks></app-blocks>
         </div>
         <div class="clr-col-lg-6">
-          <div id="preview-pane">
-            <ul class="nav" role="tablist">
-              <li role="presentation" class="nav-item">
-                <button class="btn btn-link nav-link active" aria-controls="game" aria-selected="true"
-                  type="button">Game</button>
-              </li>
-              <li role="presentation" class="nav-item">
-                <button id="codeButton" class="btn btn-link nav-link" aria-controls="code" aria-selected="false"
-                  type="button">Code</button>
-              </li>
-            </ul>
-            <section role="tabpanel" aria-labelledby="Game">
-              <div id="instead"></div>
-            </section>
-            <section role="tabpanel" aria-labelledby="Code" aria-hidden="true">
-              <div id="codeDiv">
-                <code id="generatedCode"></code>
-              </div>
-            </section>
-          </div>
+          <clr-tabs>
+            <clr-tab>
+              <button clrTabLink>Game</button>
+              <ng-template [(clrIfActive)]="gameActive">
+                <clr-tab-content>
+                  <div id="instead"></div>
+                </clr-tab-content>
+              </ng-template>
+            </clr-tab>
+            <clr-tab>
+              <button clrTabLink>Code</button>
+              <ng-template [(clrIfActive)]="codeActive">
+                <clr-tab-content>
+                  <code id="generatedCode"></code>
+                </clr-tab-content>
+              </ng-template>
+            </clr-tab>
+          </clr-tabs>
         </div>
       </div>
     </div>
