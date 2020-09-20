@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output } from "@angular/core";
 import * as Blockly from "blockly";
 import * as Ru from "blockly/msg/ru";
 import { loadWorkspace, localStorageKey, registerFileCallbacks } from "src/files";
+import { AppModuel } from 'src/model';
 import { InsteadObject, InsteadRoom } from "src/objects";
 import { createInsteadTheme, createToolBox } from "src/toolbox";
 import "../../basic_blocks";
@@ -16,34 +17,34 @@ import "../../stdlib";
   styleUrls: ["./blocks.component.css"]
 })
 export class BlocksComponent implements OnInit {
-
-  workspace?: Blockly.WorkspaceSvg;
+  @Input()
+  model?: AppModuel;
 
   constructor() { }
 
   ngOnInit(): void {
     Blockly.setLocale(Ru);
 
-    this.workspace = Blockly.inject("blocklyDiv", {
+    this.model!.workspace = Blockly.inject("blocklyDiv", {
       toolbox: createToolBox(),
       theme: createInsteadTheme(),
       move: { scrollbars: true, wheel: true },
       zoom: { controls: true, },
     });
 
-    registerFileCallbacks(this.workspace);
+    registerFileCallbacks(this.model!.workspace);
 
-    this.workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e); });
-    this.workspace.addChangeListener((e: any) => { InsteadRoom.objectLifecycleListener(e); });
+    this.model!.workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e); });
+    this.model!.workspace.addChangeListener((e: any) => { InsteadRoom.objectLifecycleListener(e); });
 
     if (window.localStorage[localStorageKey]) {
       console.log("Loading saved workspace");
-      loadWorkspace(window.localStorage[localStorageKey], this.workspace);
+      loadWorkspace(window.localStorage[localStorageKey], this.model!.workspace);
     } else {
       console.log("Loading default workspace");
       const file = require("data/playground.xml").default;
       const client = new XMLHttpRequest();
-      const workspace = this.workspace;
+      const workspace = this.model!.workspace;
       client.onreadystatechange = function () {
         if (this.readyState === this.DONE && this.status === 200) {
           loadWorkspace(this.responseText, workspace);

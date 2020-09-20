@@ -35,11 +35,16 @@ function resetWorkspace(workspace: Workspace) {
     }
 }
 
-async function convertOrRun(run: boolean, workspace: Workspace) {
+export function generateCode(workspace: Workspace) {
     const insteadMeta = (workspace as WorkspaceInstead).insteadMeta;
-    let code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n`;
-    code += Lua.workspaceToCode(workspace);
+    let code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n
+${Lua.workspaceToCode(workspace)}`;
+    return code;
+}
+
+export async function convertOrRun(run: boolean, workspace: Workspace) {
     const codeElem = document.getElementById("generatedCode") as HTMLElement;
+    const code = generateCode(workspace);
     codeElem.innerText = code;
     if (run) {
         const instead = await import("./instead");
@@ -93,7 +98,7 @@ function saveWorkspace(workspace: Workspace): string {
     return text;
 }
 
-function backupWorkspace(workspace: Workspace) {
+export function backupWorkspace(workspace: Workspace) {
     const text = saveWorkspace(workspace);
     console.log("Saving text: " + text);
     window.localStorage.setItem(localStorageKey, text);
@@ -153,7 +158,7 @@ function addFileInput(workspace: Workspace) {
         }
 
         const reader = new FileReader();
-        reader.onload = function() {
+        reader.onload = function () {
             input.value = "";
             importProject(workspace, this.result as ArrayBuffer);
         };
