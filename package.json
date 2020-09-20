@@ -16,9 +16,10 @@
     "@angular/compiler": "~10.1.2",
     "@angular/core": "~10.1.2",
     "@angular/forms": "~10.1.2",
-    "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/platform-browser": "~10.1.2",
+    "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
+    "@clr/angular": "^4.0.2",
     "@clr/icons": "^4.0.2",
     "@clr/ui": "^4.0.2",
     "@webcomponents/custom-elements": "^1.4.2",
@@ -29,7 +30,8 @@
     "perfect-scrollbar": "^0.6.16",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@webcomponents/webcomponentsjs": "^2.0.0"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^10.0.1",

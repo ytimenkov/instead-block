@@ -3,6 +3,8 @@ import { NgModule } from "@angular/core";
 
 import { AppComponent } from "./app.component";
 import { BlocksComponent } from "./blocks/blocks.component";
+import { ClarityModule } from "@clr/angular";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -10,7 +12,9 @@ import { BlocksComponent } from "./blocks/blocks.component";
     BlocksComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ClarityModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
