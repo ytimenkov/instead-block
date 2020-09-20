@@ -27,7 +27,12 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/blockly/media",
+                "output": "./media/"
+              }
             ],
             "styles": [
               "src/style.css"
