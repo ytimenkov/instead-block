@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { backupWorkspace, downloadProject, editWorkspaceMetadata, generateCode, uploadProject } from 'src/files';
+import { backupWorkspace, downloadProject, generateCode, uploadProject } from 'src/files';
 import { AppModuel } from 'src/model';
 
 @Component({
@@ -34,9 +34,5 @@ export class AppComponent {
 
   upload() {
     uploadProject(this.model.workspace!);
-  }
-
-  editGameMetadata() {
-    editWorkspaceMetadata(this.model.workspace!);
   }
 }

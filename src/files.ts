@@ -1,13 +1,8 @@
-import { WorkspaceSvg, Xml, Lua, Workspace, Events } from "blockly/core";
-import * as JSZip from "jszip";
+import { Events, Lua, Workspace, Xml } from "blockly/core";
 import { saveAs } from "file-saver";
+import * as JSZip from "jszip";
+import { GameMetaData, WorkspaceInstead } from './model';
 import { InsteadObject, InsteadRoom } from "./objects";
-import { GameMetaData, showInfoDialog } from "./game_info";
-
-
-interface WorkspaceInstead extends Workspace {
-    insteadMeta: GameMetaData;
-}
 
 function resetWorkspace(workspace: Workspace) {
     try {
@@ -146,12 +141,4 @@ function addFileInput(workspace: Workspace) {
 
     document.body.appendChild(inputElem);
     return inputElem;
-}
-
-export async function editWorkspaceMetadata(workspace: Workspace) {
-    const insteadMeta = (workspace as WorkspaceInstead).insteadMeta;
-    const newData = await showInfoDialog(insteadMeta);
-    if (newData) {
-        (workspace as WorkspaceInstead).insteadMeta = newData;
-    }
 }
