@@ -13,4 +13,5 @@ export interface WorkspaceInstead extends WorkspaceSvg {
 export interface AppModuel {
     workspace?: WorkspaceInstead;
     generatedCode: string;
+    run: boolean;
 };

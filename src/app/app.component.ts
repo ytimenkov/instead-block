@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { backupWorkspace, downloadProject, generateCode, uploadProject } from 'src/files';
-import { AppModuel } from 'src/model';
+import { AppModuel as AppModel } from 'src/model';
 
 @Component({
   selector: "app-root",
@@ -12,16 +12,10 @@ export class AppComponent {
   gameActive = true;
   codeActive = false;
 
-  model: AppModuel = { generatedCode: "" };
+  model: AppModel = { generatedCode: "", run: false, };
 
   convertToLua() {
     this.model.generatedCode = generateCode(this.model.workspace!);
-  }
-
-  async run() {
-    this.model.generatedCode = generateCode(this.model.workspace!);
-    const instead = await import("../instead");
-    instead.runGame(this.model.generatedCode);
   }
 
   save() {
