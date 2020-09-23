@@ -40,15 +40,13 @@ const INSTEADjs = {
 
 let insteadInitialized = false;
 
-function initInstead() {
+function initInstead(): void {
     Game.loadConfig(INSTEADjs);
     if (INSTEADjs.translation) {
         i18n.load(INSTEADjs.translation);
     }
 
     Instead.init();
-    UI.init("#instead", Instead.handlers);
-    Menu.init(UI.element, Instead.handlers);
 
     Game.path = "/";
     Game.id = "playground";
@@ -57,7 +55,16 @@ function initInstead() {
     Game.stead = 3;
 }
 
-export function runGame(code: string) {
+export function bindUI(selector: string): void {
+    if (!insteadInitialized) {
+        initInstead();
+        insteadInitialized = true;
+    }
+    UI.init(selector, Instead.handlers);
+    Menu.init(UI.element, Instead.handlers);
+}
+
+export function runGame(code: string): void {
     if (!insteadInitialized) {
         initInstead();
         insteadInitialized = true;
