@@ -10,17 +10,18 @@ module.exports = {
 
     resolve: {
         alias: {
-            "instead": path.resolve(__dirname, "lib/instead"),
+            instead: path.resolve(__dirname, "lib/instead"),
             "lua.vm.js$": path.resolve(__dirname, "lib/weblua/lua.vm.js"),
             "instead-js": path.resolve(__dirname, "lib/instead-js"),
-            "data": path.resolve(__dirname, "data"),
+            data: path.resolve(__dirname, "data"),
         }
     },
 
     module: {
         rules: [
-            { test: /\.(png|svg|jpg|gif)$/, use: ['file-loader'], },
+            { test: /\.(png|svg|jpg|gif)$/, use: ["file-loader"], },
             { test: /.html$/, loader: "html-loader" },
+            { test: /.lua$/, loader: "raw-loader" },
             {
                 test: /.xml$/,
                 oneOf: [

@@ -4,6 +4,7 @@
         "target": "ES2015",
         "module": "ESNext",
         "moduleResolution": "Node",
+        "resolveJsonModule": true,
         "importHelpers": true,
         "strict": true,
         "sourceMap": true,

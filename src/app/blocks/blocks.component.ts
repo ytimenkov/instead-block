@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output } from "@angular/core";
 import * as Blockly from "blockly";
 import * as Ru from "blockly/msg/ru";
 import { loadWorkspace, localStorageKey } from "src/files";
-import { AppModuel, WorkspaceInstead } from 'src/model';
+import { AppModuel, WorkspaceInstead } from "src/model";
 import { InsteadObject, InsteadRoom } from "src/objects";
 import { createInsteadTheme, createToolBox } from "src/toolbox";
 import "../../basic_blocks";
@@ -43,7 +43,7 @@ export class BlocksComponent implements OnInit {
       const file = require("data/playground.xml").default;
       const client = new XMLHttpRequest();
       const workspace = this.model!.workspace;
-      client.onreadystatechange = function () {
+      client.onreadystatechange = function() {
         if (this.readyState === this.DONE && this.status === 200) {
           loadWorkspace(this.responseText, workspace);
         }

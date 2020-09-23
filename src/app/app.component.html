@@ -16,7 +16,7 @@
           <a (click)="infoEditor.visible = true" clrDropdownItem>Edit game metadata</a>
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
           <a (click)="convertToLua()" clrDropdownItem>Show Lua code</a>
-          <a (click)="convertToLua(); model.run = true" clrDropdownItem>Run</a>
+          <a (click)="convertToLua(); model.run = !model.run" clrDropdownItem>Run</a>
           <a (click)="save()" clrDropdownItem>Save in browser</a>
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
           <a (click)="download()" clrDropdownItem>Save to your computer</a>

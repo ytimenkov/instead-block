@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { InsteadService } from "../instead.service";
 
 @Component({
   selector: "app-instead",
@@ -18,27 +20,19 @@ export class InsteadComponent implements OnInit {
   public set run(v: boolean) {
     this.runGame = v;
     if (this.runGame) {
-      this._loadInstead();
+      this.insteadService.run(this.code);
     }
   }
 
 
-  constructor() { }
+  constructor(private insteadService: InsteadService) { }
 
   ngOnInit(): void {
-    if (this.runGame) {
-      this.bindUI();
-    }
   }
 
-  private async _loadInstead(): Promise<void> {
-    await this.bindUI();
-    const instead = await import("../../instead");
-    instead.runGame(this.code);
+
+  public get ui(): Observable<string> {
+    return this.insteadService.ui;
   }
 
-  private async bindUI(): Promise<void> {
-    const instead = await import("../../instead");
-    instead.bindUI("#instead");
-  }
 }

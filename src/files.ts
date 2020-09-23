@@ -1,10 +1,10 @@
 import { Events, Lua, Workspace, Xml } from "blockly/core";
 import { saveAs } from "file-saver";
 import * as JSZip from "jszip";
-import { GameMetaData, WorkspaceInstead } from './model';
+import { GameMetaData, WorkspaceInstead } from "./model";
 import { InsteadObject, InsteadRoom } from "./objects";
 
-function resetWorkspace(workspace: Workspace) {
+function resetWorkspace(workspace: Workspace): void {
     try {
         // Disable events because when reloading workspace
         // all events will be batched up objects removed
@@ -19,23 +19,23 @@ function resetWorkspace(workspace: Workspace) {
     }
 }
 
-export function generateCode(workspace: Workspace) {
+export function generateCode(workspace: Workspace): string {
     const insteadMeta = (workspace as WorkspaceInstead).insteadMeta;
-    let code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n
+    const code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n
 ${Lua.workspaceToCode(workspace)}`;
     return code;
 }
 
 export const localStorageKey = "instead-data";
 
-export function loadWorkspace(xml: string, workspace: Workspace) {
+export function loadWorkspace(xml: string, workspace: Workspace): void {
     try {
         const dom = Xml.textToDom(xml);
         resetWorkspace(workspace);
         // Default
         (workspace as WorkspaceInstead).insteadMeta = { name: "Playground", version: "0.0", author: "Unknown" };
         for (let i = 0, xmlChild; (xmlChild = dom.childNodes[i]); i++) {
-            if (xmlChild.nodeName == "instead") {
+            if (xmlChild.nodeName === "instead") {
                 const attrs = (xmlChild as Element).attributes;
                 const insteadMeta: GameMetaData = {
                     name: attrs.getNamedItem("name")?.textContent || "",
@@ -68,7 +68,7 @@ function saveWorkspace(workspace: Workspace): string {
     return text;
 }
 
-export function backupWorkspace(workspace: Workspace) {
+export function backupWorkspace(workspace: Workspace): void {
     const text = saveWorkspace(workspace);
     console.log("Saving text: " + text);
     window.localStorage.setItem(localStorageKey, text);
@@ -78,7 +78,7 @@ export function backupWorkspace(workspace: Workspace) {
 const mainFileName = "main3";
 const blocksFolderName = "blocks";
 
-export async function downloadProject(workspace: Workspace) {
+export async function downloadProject(workspace: Workspace): Promise<void> {
     const zip = new JSZip();
 
     const gameName = (workspace as WorkspaceInstead).insteadMeta.name;
@@ -95,11 +95,11 @@ export async function downloadProject(workspace: Workspace) {
     saveAs(blob, `${gameName}.zip`);
 }
 
-export async function uploadProject(workspace: Workspace) {
+export async function uploadProject(workspace: Workspace): Promise<void> {
     addFileInput(workspace).click();
 }
 
-async function importProject(workspace: Workspace, input: ArrayBuffer) {
+async function importProject(workspace: Workspace, input: ArrayBuffer): Promise<void> {
     const zip = await JSZip.loadAsync(input);
 
     const mainFile = zip.file(new RegExp(`${blocksFolderName}/${mainFileName}.xml$`))[0];
@@ -112,7 +112,7 @@ async function importProject(workspace: Workspace, input: ArrayBuffer) {
     loadWorkspace(text, workspace);
 }
 
-function addFileInput(workspace: Workspace) {
+function addFileInput(workspace: Workspace): HTMLElement {
     const inputId = "FileUploadInput";
     const element = document.getElementById(inputId);
     if (element) {
@@ -132,7 +132,7 @@ function addFileInput(workspace: Workspace) {
         }
 
         const reader = new FileReader();
-        reader.onload = function () {
+        reader.onload = function(): void {
             input.value = "";
             importProject(workspace, this.result as ArrayBuffer);
         };
