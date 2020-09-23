@@ -45,7 +45,9 @@
               <button clrTabLink>Code</button>
               <ng-template [(clrIfActive)]="codeActive">
                 <clr-tab-content>
-                  <code id="generatedCode">{{model.generatedCode}}</code>
+                  <div id="codeDiv">
+                    <code id="generatedCode">{{model.generatedCode}}</code>
+                  </div>
                 </clr-tab-content>
               </ng-template>
             </clr-tab>
