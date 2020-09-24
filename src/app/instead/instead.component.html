@@ -1,5 +1,23 @@
 <h2>{{title | async}}</h2>
 <h3>{{ways | async}}</h3>
-<p class="text" [innerHTML]="text | async"></p>
+<p class="text">
+    <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: text | async }"></ng-container>
+</p>
 <!-- TODO: Maybe use vertical nav -->
 <p>{{inventory | async}}</p>
+
+<ng-template #recursiveText let-elements>
+    <ng-container *ngFor="let elem of elements">
+        <ng-container [ngSwitch]="elem.type">
+            <ng-container *ngSwitchCase="'text'">{{elem.text}}</ng-container>
+            <ng-container *ngSwitchCase="'a'">
+                <a (click)="act(elem.target)">
+                    <ng-container *ngIf="elem.children">
+                        <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: elem.children }">
+                        </ng-container>
+                    </ng-container>
+                </a>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</ng-template>

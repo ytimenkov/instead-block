@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { Elements } from "src/instead";
 import { InsteadService } from "../instead.service";
 
 @Component({
@@ -15,7 +16,11 @@ export class InsteadComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get text(): Observable<SafeHtml> {
+  act(target: string): void {
+    this.insteadService.cmd(target);
+  }
+
+  get text(): Observable<Elements[]> {
     return this.insteadService.text; // .pipe(map(t => this.sanitizer.sanitize(t)));
   }
 

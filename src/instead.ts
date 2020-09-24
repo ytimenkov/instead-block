@@ -80,7 +80,26 @@ const Lua = (window as any).Lua;
 //     InsteadJS.startGame();
 // }
 
+export interface Container {
+    type: string;
+    children?: Elements[];
+}
 
+export interface Action extends Container {
+    type: "a";
+    target: string;
+}
+
+export interface Bold extends Container {
+    type: "b";
+}
+
+export interface Text {
+    type: "text";
+    text: string;
+}
+
+export type Elements = Action | Bold | Text;
 
 export class Instead {
 
@@ -90,7 +109,7 @@ export class Instead {
         "instead_fs.lua": require("instead-js/lua/instead_fs.lua").default,
     };
 
-    text = new Subject<string>();
+    text = new Subject<Elements[]>();
     title = new Subject<string>();
     ways = new Subject<string>();
     inventory = new Subject<string>();
@@ -129,8 +148,26 @@ export class Instead {
         Lua.exec(code, "main3.lua");
         Lua.eval("game:ini()");
 
-        this.ifaceCmd("look", false);
-        this.ifaceCmd("obj/act 4", true);
+        this.ifaceCmd("look");
+        // this.ifaceCmd("obj/act 4", true);
+        // В полу <a:obj/act 1>дыра</a>. Недалеко от нее в пол вделано металлическое <a:obj/act 2>кольцо</a>.
+        // this.text.next();
+        this.text.next(
+            [
+                { type: "text", text: "В полу " },
+                {
+                    type: "a", target: "obj/act 1", children: [
+                        { type: "text", text: "дыра" },
+                    ]
+                },
+                { type: "text", text: ". Недалеко от нее в пол вделано металлическое " },
+                {
+                    type: "a", target: "obj/act 2", children: [
+                        { type: "text", text: "кольцо" },
+                    ]
+                },
+                { type: "text", text: "." },
+            ]);
     }
 
     private runLuaFromPath(path: string): [] | null {
@@ -158,7 +195,7 @@ export class Instead {
         return code;
     }
 
-    private ifaceCmd(ifacecmd: string, refreshUI: boolean): void {
+    public ifaceCmd(ifacecmd: string, refreshUI: boolean = true): void {
         // remove part of command before slash
         let command = ifacecmd;
         if (command[0] !== "#") {
@@ -176,7 +213,7 @@ export class Instead {
     }
 
     private updateUI(text: string): void {
-        this.text.next(text);
+        this.text.next([{ type: "text", text }]);
         const title = Lua.eval(`instead.get_title()`);
         if (title) {
             this.title.next(title[0]);
