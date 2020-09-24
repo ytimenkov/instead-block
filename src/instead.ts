@@ -202,25 +202,31 @@ export class Instead {
         }
         const result = Lua.eval(`iface:cmd("${command}")`);
         console.log(`Returned: ${result}`);
-        if (refreshUI && result && command.indexOf("save") !== 0) {
+        if (refreshUI && result && result[0]) {
             this.updateUI(result[0]);
         }
     }
 
     private updateUI(text: string): void {
         this.text.next(this.parser.parse(text));
-        // TODO: If unparsed, throw as text
+        // TODO: If unparsed, send as text
         // this.text.next([{ type: "text", text }]);
+
+        // TODO: add pipe here with distinct to do string comparison
+        // and then transform with parsing. If needed...
         const title = Lua.eval(`instead.get_title()`);
         if (title && title[0]) {
+            console.log(`Title: ${title[0]}`);
             this.title.next(this.parser.parse(title[0]));
         }
         const ways = Lua.eval(`instead.get_ways()`);
         if (ways && ways[0]) {
+            console.log(`Ways: ${ways[0]}`);
             this.ways.next(this.parser.parse(ways[0]));
         }
         const inventory = Lua.eval(`instead.get_inv(false)`);
         if (inventory && inventory[0]) {
+            console.log(`Inventory: ${inventory[0]}`);
             this.inventory.next(this.parser.parse(inventory[0]));
         }
         // TODO: picture

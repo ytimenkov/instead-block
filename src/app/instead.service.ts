@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { distinctUntilChanged } from "rxjs/operators";
 import type { Elements, Instead } from "../instead";
 
 
@@ -23,9 +22,9 @@ export class InsteadService {
       const instead = await import("../instead");
       this.instead = new instead.Instead();
       this.instead.text.subscribe(this.text);
-      this.instead.title.pipe(distinctUntilChanged()).subscribe(this.title);
-      this.instead.ways.pipe(distinctUntilChanged()).subscribe(this.ways);
-      this.instead.inventory.pipe(distinctUntilChanged()).subscribe(this.inventory);
+      this.instead.title.subscribe(this.title);
+      this.instead.ways.subscribe(this.ways);
+      this.instead.inventory.subscribe(this.inventory);
     }
     this.instead.runCode(code);
   }
