@@ -3,3 +3,15 @@
     white-space: pre-line;
     text-align: justify;
 }
+
+* {
+    cursor: inherit;
+}
+
+:host {
+    cursor: default;
+}
+
+.object-using {
+    cursor: pointer;
+}

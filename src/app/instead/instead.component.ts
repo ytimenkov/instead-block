@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
 import { Elements } from "src/instead";
 import { InsteadService } from "../instead.service";
 
@@ -11,13 +9,32 @@ import { InsteadService } from "../instead.service";
   styleUrls: ["./instead.component.css"]
 })
 export class InsteadComponent implements OnInit {
+  useTarget?: string;
+
   constructor(private insteadService: InsteadService, /*private sanitizer: DomSanitizer*/) { }
 
   ngOnInit(): void {
   }
 
   act(target: string): void {
-    this.insteadService.cmd(target);
+    if (this.useTarget) {
+      const [what, id] = target.split(" ", 2);
+      // Other objects are unactionable
+      if (what === "obj/act") {
+        this.insteadService.cmd(`${this.useTarget},${id}`);
+      }
+      this.useTarget = undefined;
+    } else {
+      this.insteadService.cmd(target);
+    }
+  }
+
+  use(target?: string): void {
+    if (this.useTarget && this.useTarget === target) {
+      this.insteadService.cmd(target);
+    } else {
+      this.useTarget = target;
+    }
   }
 
   get text(): Observable<Elements[]> {
