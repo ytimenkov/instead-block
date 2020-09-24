@@ -1,6 +1,9 @@
 import { Component } from "@angular/core";
-import { backupWorkspace, downloadProject, generateCode, uploadProject } from 'src/files';
-import { AppModuel as AppModel } from 'src/model';
+import { backupWorkspace, downloadProject, generateCode, uploadProject } from "src/files";
+import { AppModuel as AppModel } from "src/model";
+import { InsteadService } from "./instead.service";
+
+// tslint:disable:no-non-null-assertion
 
 @Component({
   selector: "app-root",
@@ -14,19 +17,26 @@ export class AppComponent {
 
   model: AppModel = { generatedCode: "", run: false, };
 
-  convertToLua() {
+  constructor(private insteadService: InsteadService) { }
+
+  convertToLua(): void {
     this.model.generatedCode = generateCode(this.model.workspace!);
   }
 
-  save() {
+  run(): void {
+    this.model.generatedCode = generateCode(this.model.workspace!);
+    this.insteadService.run(this.model.generatedCode);
+  }
+
+  save(): void {
     backupWorkspace(this.model.workspace!);
   }
 
-  download() {
+  download(): void {
     downloadProject(this.model.workspace!);
   }
 
-  upload() {
+  upload(): void {
     uploadProject(this.model.workspace!);
   }
 }

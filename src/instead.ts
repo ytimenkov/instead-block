@@ -90,7 +90,8 @@ export class Instead {
         "instead_fs.lua": require("instead-js/lua/instead_fs.lua").default,
     };
 
-    ui = new Subject<string>();
+    text = new Subject<string>();
+    title = new Subject<string>();
 
     constructor() {
         Lua.initialize();
@@ -126,7 +127,7 @@ export class Instead {
         Lua.exec(code, "main3.lua");
         Lua.eval("game:ini()");
 
-        this.ifaceCmd("look", true, true);
+        this.ifaceCmd("look", true);
     }
 
     private runLuaFromPath(path: string): [] | null {
@@ -154,7 +155,7 @@ export class Instead {
         return code;
     }
 
-    private ifaceCmd(ifacecmd: string, refreshUI: boolean, isStart: boolean): void {
+    private ifaceCmd(ifacecmd: string, refreshUI: boolean): void {
         // remove part of command before slash
         let command = ifacecmd;
         if (command[0] !== "#") {
@@ -165,9 +166,17 @@ export class Instead {
         }
         const result = Lua.eval(`iface:cmd("${command}")`);
         console.log(`Returned: ${result}`);
-        this.ui.next(result[0]);
         if (refreshUI && result && command.indexOf("save") !== 0) {
             // this.refreshInterface(ifaceOutput, isStart);
+            this.updateUI(result[0]);
+        }
+    }
+
+    private updateUI(text: string): void {
+        this.text.next(text);
+        const title = Lua.eval(`instead.get_title()`);
+        if (title) {
+            this.title.next(title[0]);
         }
     }
 }

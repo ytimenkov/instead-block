@@ -8,31 +8,16 @@ import { InsteadService } from "../instead.service";
   styleUrls: ["./instead.component.css"]
 })
 export class InsteadComponent implements OnInit {
-  @Input()
-  code = "";
-
-  private runGame = false;
-
-  @Input()
-  public get run(): boolean {
-    return this.runGame;
-  }
-  public set run(v: boolean) {
-    this.runGame = v;
-    if (this.runGame) {
-      this.insteadService.run(this.code);
-    }
-  }
-
-
   constructor(private insteadService: InsteadService) { }
 
   ngOnInit(): void {
   }
 
-
-  public get ui(): Observable<string> {
-    return this.insteadService.ui;
+  get text(): Observable<string> {
+    return this.insteadService.text;
   }
 
+  get title(): Observable<string> {
+    return this.insteadService.title;
+  }
 }

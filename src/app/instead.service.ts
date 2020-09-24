@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { distinctUntilChanged } from "rxjs/operators";
 
 import type { Instead } from "../instead";
 
@@ -10,7 +11,8 @@ export class InsteadService {
 
   private instead?: Instead;
 
-  ui = new BehaviorSubject<string>("");
+  text = new BehaviorSubject<string>("");
+  title = new BehaviorSubject<string>("");
 
   constructor() { }
 
@@ -18,7 +20,8 @@ export class InsteadService {
     if (!this.instead) {
       const instead = await import("../instead");
       this.instead = new instead.Instead();
-      this.instead.ui.subscribe(this.ui);
+      this.instead.text.subscribe(this.text);
+      this.instead.title.pipe(distinctUntilChanged()).subscribe(this.title);
     }
     this.instead.runCode(code);
   }
