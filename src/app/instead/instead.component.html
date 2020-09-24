@@ -1,2 +1,5 @@
 <h2>{{title | async}}</h2>
-<p class="text">{{text | async}}</p>
+<h3>{{ways | async}}</h3>
+<p class="text" [innerHTML]="text | async"></p>
+<!-- TODO: Maybe use vertical nav -->
+<p>{{inventory | async}}</p>

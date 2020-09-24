@@ -13,6 +13,8 @@ export class InsteadService {
 
   text = new BehaviorSubject<string>("");
   title = new BehaviorSubject<string>("");
+  ways = new BehaviorSubject<string>("");
+  inventory = new BehaviorSubject<string>("");
 
   constructor() { }
 
@@ -22,6 +24,8 @@ export class InsteadService {
       this.instead = new instead.Instead();
       this.instead.text.subscribe(this.text);
       this.instead.title.pipe(distinctUntilChanged()).subscribe(this.title);
+      this.instead.ways.pipe(distinctUntilChanged()).subscribe(this.ways);
+      this.instead.inventory.pipe(distinctUntilChanged()).subscribe(this.inventory);
     }
     this.instead.runCode(code);
   }

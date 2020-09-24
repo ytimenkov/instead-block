@@ -92,6 +92,8 @@ export class Instead {
 
     text = new Subject<string>();
     title = new Subject<string>();
+    ways = new Subject<string>();
+    inventory = new Subject<string>();
 
     constructor() {
         Lua.initialize();
@@ -127,7 +129,8 @@ export class Instead {
         Lua.exec(code, "main3.lua");
         Lua.eval("game:ini()");
 
-        this.ifaceCmd("look", true);
+        this.ifaceCmd("look", false);
+        this.ifaceCmd("obj/act 4", true);
     }
 
     private runLuaFromPath(path: string): [] | null {
@@ -178,5 +181,14 @@ export class Instead {
         if (title) {
             this.title.next(title[0]);
         }
+        const ways = Lua.eval(`instead.get_ways()`);
+        if (ways) {
+            this.ways.next(ways[0]);
+        }
+        const inventory = Lua.eval(`instead.get_inv(false)`);
+        if (inventory) {
+            this.inventory.next(inventory[0]);
+        }
+        // TODO: picture
     }
 }
