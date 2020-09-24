@@ -1,9 +1,3 @@
 .instead-logo {
     background-image: url("./assets/sdl_instead.svg");
 }
-
-/* Fix clr styles*/
-#stead-container pre {
-    border-style: none;
-    white-space: pre-line;
-}

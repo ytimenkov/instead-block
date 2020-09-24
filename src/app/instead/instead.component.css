@@ -1,4 +1,5 @@
 .text {
     word-wrap: normal;
     white-space: pre-line;
+    text-align: justify;
 }

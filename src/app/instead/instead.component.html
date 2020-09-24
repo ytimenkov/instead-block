@@ -1,14 +1,14 @@
-<h2>
+<h4 class="text-center">
     <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: title | async }"></ng-container>
-</h2>
-<h3>
+</h4>
+<h5>
     <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: ways | async }"></ng-container>
-</h3>
+</h5>
 <p class="text">
     <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: text | async }"></ng-container>
 </p>
 <!-- TODO: Maybe use vertical nav -->
-<p>
+<p class="text-center">
     <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: inventory | async }"></ng-container>
 </p>
 
@@ -17,7 +17,7 @@
         <ng-container [ngSwitch]="elem.type">
             <ng-container *ngSwitchCase="'text'">{{elem.text}}</ng-container>
             <ng-container *ngSwitchCase="'a'">
-                <a (click)="act(elem.target)">
+                <a (click)="act(elem.target)" href="javascript:void(0)">
                     <ng-container *ngIf="elem.children">
                         <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: elem.children }">
                         </ng-container>
@@ -41,7 +41,7 @@
                 </b>
             </ng-container>
             <ng-container *ngSwitchCase="'c'">
-                <p style="text-align: center">
+                <p class="text-center">
                     <ng-container *ngIf="elem.children">
                         <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: elem.children }">
                         </ng-container>
