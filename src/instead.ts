@@ -10,8 +10,8 @@
 // require("perfect-scrollbar/jquery")($);
 
 import "lua.vm.js";
-import { generate, Parser } from "pegjs";
 import { Subject } from "rxjs";
+import * as pegjs from "./instead.pegjs";
 
 // tslint:disable-next-line:no-any
 const Lua = (window as any).Lua;
@@ -120,7 +120,7 @@ export class Instead {
         "instead_fs.lua": require("instead-js/lua/instead_fs.lua").default,
     };
 
-    private parser: Parser;
+    private parser: pegjs.Parser;
 
     text = new Subject<Elements[]>();
     title = new Subject<Elements[]>();
@@ -140,46 +140,13 @@ export class Instead {
         Lua.set_error_callback((message: string) => console.error(message));
 
         this.loadStead();
-        this.parser = this.generateParser();
+        // this.parser = this.generateParser();
+        this.parser = pegjs.default;
     }
 
     private loadStead(): void {
         const steadJson = require("instead/stead3.json");
         Object.keys(steadJson).forEach((path: string) => this.files[path] = steadJson[path]);
-    }
-
-    private generateParser(): Parser {
-        return generate(`{
-function makeConainer(type, children) {
-    return {
-        type,
-        children
-    };
-}
-}
-Elements = (Action / Italics / Bold / Center / Text)*
-
-Text = chars:[^<]+  {
-    return {
-        type: "text",
-        text: chars.join("")
-    }
-    }
-
-Action = "<a:" target:[^>]+ ">" children:Elements "</a>" {
-    return {
-        type: "a",
-        target: target.join(""),
-        children: children
-    }
-}
-
-Italics = "<i>" children:Elements "</i>" { return makeConainer("i", children) }
-
-Bold = "<b>" children:Elements "</b>"  { return makeConainer("b", children) }
-
-Center = "<c>" children:Elements "</c>"  { return makeConainer("c", children) }
-`);
     }
 
     runCode(code: string): void {
