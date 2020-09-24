@@ -1,10 +1,16 @@
-<h2>{{title | async}}</h2>
-<h3>{{ways | async}}</h3>
+<h2>
+    <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: title | async }"></ng-container>
+</h2>
+<h3>
+    <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: ways | async }"></ng-container>
+</h3>
 <p class="text">
     <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: text | async }"></ng-container>
 </p>
 <!-- TODO: Maybe use vertical nav -->
-<p>{{inventory | async}}</p>
+<p>
+    <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: inventory | async }"></ng-container>
+</p>
 
 <ng-template #recursiveText let-elements>
     <ng-container *ngFor="let elem of elements">
@@ -17,6 +23,30 @@
                         </ng-container>
                     </ng-container>
                 </a>
+            </ng-container>
+            <ng-container *ngSwitchCase="'i'">
+                <i>
+                    <ng-container *ngIf="elem.children">
+                        <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: elem.children }">
+                        </ng-container>
+                    </ng-container>
+                </i>
+            </ng-container>
+            <ng-container *ngSwitchCase="'b'">
+                <b>
+                    <ng-container *ngIf="elem.children">
+                        <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: elem.children }">
+                        </ng-container>
+                    </ng-container>
+                </b>
+            </ng-container>
+            <ng-container *ngSwitchCase="'c'">
+                <p style="text-align: center">
+                    <ng-container *ngIf="elem.children">
+                        <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: elem.children }">
+                        </ng-container>
+                    </ng-container>
+                </p>
             </ng-container>
         </ng-container>
     </ng-container>

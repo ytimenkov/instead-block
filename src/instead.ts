@@ -10,9 +10,12 @@
 // require("perfect-scrollbar/jquery")($);
 
 import "lua.vm.js";
-import { Observable, Subject } from "rxjs";
+import { generate, Parser } from "pegjs";
+import { Subject } from "rxjs";
+
 // tslint:disable-next-line:no-any
 const Lua = (window as any).Lua;
+
 
 // tslint:disable:no-console
 
@@ -94,12 +97,20 @@ export interface Bold extends Container {
     type: "b";
 }
 
+export interface Italics extends Container {
+    type: "i";
+}
+
+export interface Center extends Container {
+    type: "c";
+}
+
 export interface Text {
     type: "text";
     text: string;
 }
 
-export type Elements = Action | Bold | Text;
+export type Elements = Action | Bold | Italics | Center | Text;
 
 export class Instead {
 
@@ -109,10 +120,12 @@ export class Instead {
         "instead_fs.lua": require("instead-js/lua/instead_fs.lua").default,
     };
 
+    private parser: Parser;
+
     text = new Subject<Elements[]>();
-    title = new Subject<string>();
-    ways = new Subject<string>();
-    inventory = new Subject<string>();
+    title = new Subject<Elements[]>();
+    ways = new Subject<Elements[]>();
+    inventory = new Subject<Elements[]>();
 
     constructor() {
         Lua.initialize();
@@ -127,11 +140,46 @@ export class Instead {
         Lua.set_error_callback((message: string) => console.error(message));
 
         this.loadStead();
+        this.parser = this.generateParser();
     }
 
     private loadStead(): void {
         const steadJson = require("instead/stead3.json");
         Object.keys(steadJson).forEach((path: string) => this.files[path] = steadJson[path]);
+    }
+
+    private generateParser(): Parser {
+        return generate(`{
+function makeConainer(type, children) {
+    return {
+        type,
+        children
+    };
+}
+}
+Elements = (Action / Italics / Bold / Center / Text)*
+
+Text = chars:[^<]+  {
+    return {
+        type: "text",
+        text: chars.join("")
+    }
+    }
+
+Action = "<a:" target:[^>]+ ">" children:Elements "</a>" {
+    return {
+        type: "a",
+        target: target.join(""),
+        children: children
+    }
+}
+
+Italics = "<i>" children:Elements "</i>" { return makeConainer("i", children) }
+
+Bold = "<b>" children:Elements "</b>"  { return makeConainer("b", children) }
+
+Center = "<c>" children:Elements "</c>"  { return makeConainer("c", children) }
+`);
     }
 
     runCode(code: string): void {
@@ -149,25 +197,6 @@ export class Instead {
         Lua.eval("game:ini()");
 
         this.ifaceCmd("look");
-        // this.ifaceCmd("obj/act 4", true);
-        // В полу <a:obj/act 1>дыра</a>. Недалеко от нее в пол вделано металлическое <a:obj/act 2>кольцо</a>.
-        // this.text.next();
-        this.text.next(
-            [
-                { type: "text", text: "В полу " },
-                {
-                    type: "a", target: "obj/act 1", children: [
-                        { type: "text", text: "дыра" },
-                    ]
-                },
-                { type: "text", text: ". Недалеко от нее в пол вделано металлическое " },
-                {
-                    type: "a", target: "obj/act 2", children: [
-                        { type: "text", text: "кольцо" },
-                    ]
-                },
-                { type: "text", text: "." },
-            ]);
     }
 
     private runLuaFromPath(path: string): [] | null {
@@ -207,24 +236,25 @@ export class Instead {
         const result = Lua.eval(`iface:cmd("${command}")`);
         console.log(`Returned: ${result}`);
         if (refreshUI && result && command.indexOf("save") !== 0) {
-            // this.refreshInterface(ifaceOutput, isStart);
             this.updateUI(result[0]);
         }
     }
 
     private updateUI(text: string): void {
-        this.text.next([{ type: "text", text }]);
+        this.text.next(this.parser.parse(text));
+        // TODO: If unparsed, throw as text
+        // this.text.next([{ type: "text", text }]);
         const title = Lua.eval(`instead.get_title()`);
-        if (title) {
-            this.title.next(title[0]);
+        if (title && title[0]) {
+            this.title.next(this.parser.parse(title[0]));
         }
         const ways = Lua.eval(`instead.get_ways()`);
-        if (ways) {
-            this.ways.next(ways[0]);
+        if (ways && ways[0]) {
+            this.ways.next(this.parser.parse(ways[0]));
         }
         const inventory = Lua.eval(`instead.get_inv(false)`);
-        if (inventory) {
-            this.inventory.next(inventory[0]);
+        if (inventory && inventory[0]) {
+            this.inventory.next(this.parser.parse(inventory[0]));
         }
         // TODO: picture
     }

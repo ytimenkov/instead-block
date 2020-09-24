@@ -12,9 +12,9 @@ export class InsteadService {
   private instead?: Instead;
 
   text = new BehaviorSubject<Elements[]>([]);
-  title = new BehaviorSubject<string>("");
-  ways = new BehaviorSubject<string>("");
-  inventory = new BehaviorSubject<string>("");
+  title = new BehaviorSubject<Elements[]>([]);
+  ways = new BehaviorSubject<Elements[]>([]);
+  inventory = new BehaviorSubject<Elements[]>([]);
 
   constructor() { }
 

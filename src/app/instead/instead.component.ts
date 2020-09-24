@@ -24,15 +24,15 @@ export class InsteadComponent implements OnInit {
     return this.insteadService.text; // .pipe(map(t => this.sanitizer.sanitize(t)));
   }
 
-  get title(): Observable<string> {
+  get title(): Observable<Elements[]> {
     return this.insteadService.title;
   }
 
-  get ways(): Observable<string> {
+  get ways(): Observable<Elements[]> {
     return this.insteadService.ways;
   }
 
-  get inventory(): Observable<string> {
+  get inventory(): Observable<Elements[]> {
     return this.insteadService.inventory;
   }
 }
