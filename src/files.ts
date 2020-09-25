@@ -1,26 +1,10 @@
-import { WorkspaceSvg, Xml, Lua, Workspace, Events } from "blockly/core";
-import * as JSZip from "jszip";
+import { Events, Lua, Workspace, Xml } from "blockly/core";
 import { saveAs } from "file-saver";
+import * as JSZip from "jszip";
+import { GameMetaData, WorkspaceInstead } from "./model";
 import { InsteadObject, InsteadRoom } from "./objects";
-import { GameMetaData, showInfoDialog } from "./game_info";
 
-
-export function registerFileCallbacks(workspace: WorkspaceSvg) {
-    workspace.registerButtonCallback("convertToLua", (btn) => { convertOrRun(false, btn.getTargetWorkspace()); });
-    workspace.registerButtonCallback("run", (btn) => { convertOrRun(true, btn.getTargetWorkspace()); });
-    workspace.registerButtonCallback("save", (btn) => { backupWorkspace(btn.getTargetWorkspace()); });
-    workspace.registerButtonCallback("download", (btn) => { exportProject(btn.getTargetWorkspace()); });
-    workspace.registerButtonCallback("upload", (btn) => { addFileInput(btn.getTargetWorkspace()).click(); });
-    workspace.registerButtonCallback("editMetadata", (btn) => { editWorkspaceMetadata(btn.getTargetWorkspace()); });
-
-    // workspace.registerToolboxCategoryCallback("INSTEAD_GAMES", inteadGamesFlyout);
-}
-
-interface WorkspaceInstead extends Workspace {
-    insteadMeta: GameMetaData;
-}
-
-function resetWorkspace(workspace: Workspace) {
+function resetWorkspace(workspace: Workspace): void {
     try {
         // Disable events because when reloading workspace
         // all events will be batched up objects removed
@@ -35,32 +19,23 @@ function resetWorkspace(workspace: Workspace) {
     }
 }
 
-async function convertOrRun(run: boolean, workspace: Workspace) {
+export function generateCode(workspace: Workspace): string {
     const insteadMeta = (workspace as WorkspaceInstead).insteadMeta;
-    let code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n`;
-    code += Lua.workspaceToCode(workspace);
-    const codeElem = document.getElementById("generatedCode") as HTMLElement;
-    codeElem.innerText = code;
-    if (run) {
-        const instead = await import("./instead");
-        instead.runGame(code);
-    } else {
-        const codeTab = document.getElementById("codeButton") as HTMLButtonElement;
-        codeTab.click();
-        codeElem.scrollIntoView();
-    }
+    const code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n
+${Lua.workspaceToCode(workspace)}`;
+    return code;
 }
 
 export const localStorageKey = "instead-data";
 
-export function loadWorkspace(xml: string, workspace: Workspace) {
+export function loadWorkspace(xml: string, workspace: Workspace): void {
     try {
         const dom = Xml.textToDom(xml);
         resetWorkspace(workspace);
         // Default
         (workspace as WorkspaceInstead).insteadMeta = { name: "Playground", version: "0.0", author: "Unknown" };
         for (let i = 0, xmlChild; (xmlChild = dom.childNodes[i]); i++) {
-            if (xmlChild.nodeName == "instead") {
+            if (xmlChild.nodeName === "instead") {
                 const attrs = (xmlChild as Element).attributes;
                 const insteadMeta: GameMetaData = {
                     name: attrs.getNamedItem("name")?.textContent || "",
@@ -74,7 +49,7 @@ export function loadWorkspace(xml: string, workspace: Workspace) {
         Xml.domToWorkspace(dom, workspace);
         console.log("Loaded workspace");
     } catch (error) {
-        const msg = "Failed to load workspace: " + error
+        const msg = "Failed to load workspace: " + error;
         console.log(msg);
         alert(msg);
         resetWorkspace(workspace);
@@ -93,7 +68,7 @@ function saveWorkspace(workspace: Workspace): string {
     return text;
 }
 
-function backupWorkspace(workspace: Workspace) {
+export function backupWorkspace(workspace: Workspace): void {
     const text = saveWorkspace(workspace);
     console.log("Saving text: " + text);
     window.localStorage.setItem(localStorageKey, text);
@@ -103,7 +78,7 @@ function backupWorkspace(workspace: Workspace) {
 const mainFileName = "main3";
 const blocksFolderName = "blocks";
 
-async function exportProject(workspace: Workspace) {
+export async function downloadProject(workspace: Workspace): Promise<void> {
     const zip = new JSZip();
 
     const gameName = (workspace as WorkspaceInstead).insteadMeta.name;
@@ -120,7 +95,11 @@ async function exportProject(workspace: Workspace) {
     saveAs(blob, `${gameName}.zip`);
 }
 
-async function importProject(workspace: Workspace, input: ArrayBuffer) {
+export async function uploadProject(workspace: Workspace): Promise<void> {
+    addFileInput(workspace).click();
+}
+
+async function importProject(workspace: Workspace, input: ArrayBuffer): Promise<void> {
     const zip = await JSZip.loadAsync(input);
 
     const mainFile = zip.file(new RegExp(`${blocksFolderName}/${mainFileName}.xml$`))[0];
@@ -133,11 +112,12 @@ async function importProject(workspace: Workspace, input: ArrayBuffer) {
     loadWorkspace(text, workspace);
 }
 
-function addFileInput(workspace: Workspace) {
+function addFileInput(workspace: Workspace): HTMLElement {
     const inputId = "FileUploadInput";
     const element = document.getElementById(inputId);
-    if (element)
+    if (element) {
         return element;
+    }
 
     const inputElem = document.createElement("input");
     inputElem.accept = ".zip";
@@ -146,12 +126,13 @@ function addFileInput(workspace: Workspace) {
     inputElem.id = inputId;
 
     inputElem.onchange = (e) => {
-        let input = e.target as HTMLInputElement;
-        if (!input.files)
+        const input = e.target as HTMLInputElement;
+        if (!input.files) {
             return;
+        }
 
         const reader = new FileReader();
-        reader.onload = function () {
+        reader.onload = function(): void {
             input.value = "";
             importProject(workspace, this.result as ArrayBuffer);
         };
@@ -160,12 +141,4 @@ function addFileInput(workspace: Workspace) {
 
     document.body.appendChild(inputElem);
     return inputElem;
-}
-
-async function editWorkspaceMetadata(workspace: Workspace) {
-    const insteadMeta = (workspace as WorkspaceInstead).insteadMeta;
-    const newData = await showInfoDialog(insteadMeta);
-    if (newData) {
-        (workspace as WorkspaceInstead).insteadMeta = newData;
-    }
 }

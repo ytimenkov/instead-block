@@ -10,6 +10,27 @@ Build
 .. code-block:: bash
 
     npm install
-    npm run start
+    npx ng build
+
+Development server
+==================
+
+.. code-block:: bash
+
+    npx ng serve
 
 Then open web browser.
+
+Unit tests
+==========
+
+.. code-block:: bash
+
+    npx ng test
+
+End to End tests
+================
+
+.. code-block:: bash
+
+    npx ng e2e

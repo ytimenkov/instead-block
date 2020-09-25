@@ -1,0 +1,17 @@
+.text {
+    word-wrap: normal;
+    white-space: pre-line;
+    text-align: justify;
+}
+
+* {
+    cursor: inherit;
+}
+
+:host {
+    cursor: default;
+}
+
+:host.object-using {
+    cursor: pointer;
+}

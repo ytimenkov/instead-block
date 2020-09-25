@@ -1,24 +1,3 @@
 .instead-logo {
-    background-image: url("../public/sdl_instead.svg");
-}
-
-#blocklyDiv {
-    /* Header height */
-    height: calc(100vh - 60px - 24px);
-}
-
-#codeDiv {
-    /* Header height and tab header height */
-    height: calc(100vh - 60px - 24px - 36px);
-    overflow: auto;
-}
-
-#generatedCode {
-    white-space: pre;
-}
-
-/* Fix clr styles*/
-#stead-container pre {
-    border-style: none;
-    white-space: pre-line;
+    background-image: url("./assets/sdl_instead.svg");
 }

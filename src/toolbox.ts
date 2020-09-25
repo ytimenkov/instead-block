@@ -1,10 +1,9 @@
 import { Theme } from "blockly/core";
-import * as rooms_blocks from "data/toolbox/rooms.xml"
-import * as objects_blocks from "data/toolbox/objects.xml"
-import * as actions_blocks from "data/toolbox/actions.xml"
-import * as logic_blocks from "data/toolbox/logic.xml"
-import * as math_blocks from "data/toolbox/math.xml"
-import * as menu_catgegory from "data/toolbox/menu.xml"
+import * as rooms_blocks from "data/toolbox/rooms.xml";
+import * as objects_blocks from "data/toolbox/objects.xml";
+import * as actions_blocks from "data/toolbox/actions.xml";
+import * as logic_blocks from "data/toolbox/logic.xml";
+import * as math_blocks from "data/toolbox/math.xml";
 
 const end_cat = "</category>";
 
@@ -35,9 +34,6 @@ export function createToolBox(): string {
         category("Математика", "math_category"),
         math_blocks.default,
         end_cat,
-
-        "<sep></sep>",
-        menu_catgegory.default,
     ];
 
     toolbox.push("</xml>");
@@ -48,27 +44,27 @@ export function createInsteadTheme(): Theme {
     return Theme.defineTheme("instead", {
         base: "classic",
         categoryStyles: {
-            "rooms_category": {
+            rooms_category: {
                 colour: "120"
             },
-            "objects_category": {
+            objects_category: {
                 colour: "60"
             },
-            "actions_category": {
+            actions_category: {
                 colour: "120"
             }
         },
         blockStyles: {
-            "rooms_blocks": {
+            rooms_blocks: {
                 colourPrimary: "120"
             },
-            "objects_blocks": {
+            objects_blocks: {
                 colourPrimary: "60"
             },
-            "actions_blocks": {
+            actions_blocks: {
                 colourPrimary: "120"
             },
-            "properties_blocks": {
+            properties_blocks: {
                 colourPrimary: "30"
             }
         }

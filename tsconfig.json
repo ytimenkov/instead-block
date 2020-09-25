@@ -1,19 +1,34 @@
 {
+    "compileOnSave": false,
     "compilerOptions": {
         "target": "ES2015",
         "module": "ESNext",
         "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "importHelpers": true,
         "strict": true,
+        "sourceMap": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "noEmitOnError": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "baseUrl": ".",
-        "paths": {
-            "instead-js/*": [
-                "lib/instead-js/*"
-            ]
-        }
+        "outDir": "./dist/out-tsc",
+        "paths": {},
+        "lib": [
+            "es2018",
+            "dom"
+        ]
+    },
+    "angularCompilerOptions": {
+        "strictInjectionParameters": true,
+        "strictInputAccessModifiers": true,
+        "strictTemplates": true
     },
     "$schema": "https://json.schemastore.org/tsconfig"
 }

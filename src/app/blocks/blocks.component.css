@@ -1,0 +1,4 @@
+#blocklyDiv {
+    /* Header height */
+    height: calc(100vh - 60px - 24px);
+}
