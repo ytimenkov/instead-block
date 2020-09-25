@@ -12,6 +12,6 @@
     cursor: default;
 }
 
-.object-using {
+:host.object-using {
     cursor: pointer;
 }
