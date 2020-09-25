@@ -29,6 +29,7 @@ export class InsteadComponent implements OnInit {
     }
   }
 
+  // TODO: @HostListener('click') instead of div
   use(target?: string): void {
     if (this.useTarget && this.useTarget === target) {
       this.insteadService.cmd(target);

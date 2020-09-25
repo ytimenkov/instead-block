@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { ClrLoadingState } from "@clr/angular";
 import { backupWorkspace, downloadProject, generateCode, uploadProject } from "src/files";
 import { AppModuel as AppModel } from "src/model";
 import { InsteadService } from "./instead.service";
@@ -11,21 +12,28 @@ import { InsteadService } from "./instead.service";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = "Instead Blocks";
-  gameActive = true;
-  codeActive = false;
+  reloadingState = ClrLoadingState.DEFAULT;
 
-  model: AppModel = { generatedCode: "", run: false, };
+  model: AppModel = {};
+  code = "";
 
   constructor(private insteadService: InsteadService) { }
 
-  convertToLua(): void {
-    this.model.generatedCode = generateCode(this.model.workspace!);
+  refreshCode(): void {
+    this.code = generateCode(this.model.workspace!);
   }
 
-  run(): void {
-    this.model.generatedCode = generateCode(this.model.workspace!);
-    this.insteadService.run(this.model.generatedCode);
+  async run(): Promise<void> {
+    try {
+      this.reloadingState = ClrLoadingState.LOADING;
+
+      this.refreshCode();
+      await this.insteadService.run(this.code);
+
+      this.reloadingState = ClrLoadingState.SUCCESS;
+    } catch {
+      this.reloadingState = ClrLoadingState.ERROR;
+    }
   }
 
   save(): void {

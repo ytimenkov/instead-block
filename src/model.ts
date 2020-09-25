@@ -1,4 +1,4 @@
-import { WorkspaceSvg } from 'blockly';
+import { WorkspaceSvg } from "blockly";
 
 export interface GameMetaData {
     name: string;
@@ -12,6 +12,4 @@ export interface WorkspaceInstead extends WorkspaceSvg {
 
 export interface AppModuel {
     workspace?: WorkspaceInstead;
-    generatedCode: string;
-    run: boolean;
-};
+}

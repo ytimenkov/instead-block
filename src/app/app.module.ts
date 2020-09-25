@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ClarityModule } from "@clr/angular";
 import { AppComponent } from "./app.component";
 import { BlocksComponent } from "./blocks/blocks.component";
+import { CodePreviewComponent } from "./code-preview/code-preview.component";
 import { GameInfoComponent } from "./game-info/game-info.component";
 import { InsteadComponent } from "./instead/instead.component";
 
@@ -15,6 +16,7 @@ import { InsteadComponent } from "./instead/instead.component";
     BlocksComponent,
     GameInfoComponent,
     InsteadComponent,
+    CodePreviewComponent,
   ],
   imports: [
     BrowserModule,
