@@ -162,7 +162,7 @@ js_instead_sprite_load = function(filename, id)
     sprite_descriptors[filename] = id
 end
 instead_sprite_free = function(descriptor)
-    js.run('Sprite.free("' .. tostring(descriptor) .. '")')
+    -- js.run('Sprite.free("' .. tostring(descriptor) .. '")')
 end
 instead_sprite_size = function()
     INSTEAD_NOTIMPLEMENTED('sprite.size')

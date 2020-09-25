@@ -130,32 +130,16 @@ export class Instead {
         private waysObserver: Observer<string>,
         private inventoryObserver: Observer<string>) {
 
-        Lua.initialize();
-        Lua.requires = {};
-        Lua.inject((path: string) => this.runLuaFromPath(path), "dofile");
-        Lua.requireContent = (path: string) => this.requireContent(path);
-        Lua.logWarning = (msg: string) => console.warn(msg);
-        Lua.set_error_callback((message: string) => console.error(message));
-
-        this.loadStead();
-    }
-
-    private loadStead(): void {
         const steadJson = require("instead/stead3.json");
         Object.keys(steadJson).forEach((path: string) => this.files[path] = steadJson[path]);
     }
 
+    private loadStead(): void {
+    }
+
     runCode(code: string): void {
-        // TODO: clear= destroy + init
+        this.resetLua();
 
-        // initialize INSTEAD
-        this.runLuaFromPath("instead_init.lua");
-        // TODO: setTimer(0);            // reset game timers
-        // UI.loadTheme();         // load theme
-        // this.clickSound(true);  // preload click sound
-
-        // init game
-        // Lua.eval(`js_instead_gamepath("/")`);
         Lua.exec(code, "main3.lua");
         Lua.eval("game:ini()");
 
@@ -219,5 +203,21 @@ export class Instead {
             this.inventoryObserver.next(inventory[0]);
         }
         // TODO: picture
+    }
+
+    private resetLua(): void {
+        if (Lua.isInitialized) {
+            // Reset scene in the UI.
+            this.waysObserver.next("");
+            this.inventoryObserver.next("");
+            Lua.destroy();
+        }
+        Lua.initialize();
+        Lua.inject((path: string) => this.runLuaFromPath(path), "dofile");
+        Lua.requireContent = (path: string) => this.requireContent(path);
+        Lua.logWarning = (msg: string) => console.warn(msg);
+        Lua.set_error_callback((message: string) => console.error(message));
+
+        this.runLuaFromPath("instead_init.lua");
     }
 }

@@ -31,7 +31,8 @@ export class AppComponent {
       await this.insteadService.run(this.code);
 
       this.reloadingState = ClrLoadingState.SUCCESS;
-    } catch {
+    } catch (e) {
+      console.error(e);
       this.reloadingState = ClrLoadingState.ERROR;
     }
   }

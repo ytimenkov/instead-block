@@ -34,7 +34,8 @@
             <li>
               <button class="btn btn-link btn-icon" type="button" aria-label="refresh" title="Reload game"
                 (click)="run()" [clrLoading]="reloadingState">
-                <clr-icon shape="refresh"></clr-icon>
+                <clr-icon *ngIf="code" shape="refresh"></clr-icon>
+                <clr-icon *ngIf="!code" shape="play"></clr-icon>
               </button>
             </li>
             <li>
