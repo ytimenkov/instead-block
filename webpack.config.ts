@@ -1,4 +1,3 @@
-import * as CopyPlugin from "copy-webpack-plugin";
 import * as path from "path";
 import * as webpack from "webpack";
 
@@ -12,7 +11,6 @@ module.exports = {
         alias: {
             instead: path.resolve(__dirname, "lib/instead"),
             "lua.vm.js$": path.resolve(__dirname, "lib/weblua/lua.vm.js"),
-            "instead-js": path.resolve(__dirname, "lib/instead-js"),
             data: path.resolve(__dirname, "data"),
         }
     },
@@ -39,16 +37,5 @@ module.exports = {
     },
 
     plugins: [
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: path.resolve(__dirname, "lib/instead"),
-                    to: path.resolve(__dirname, "build"),
-                    globOptions: {
-                        ignore: ["*.js"]
-                    }
-                },
-            ]
-        }),
     ],
 } as webpack.Configuration;
