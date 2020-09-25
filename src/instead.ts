@@ -9,12 +9,13 @@
 // import * as $ from "jquery";
 // require("perfect-scrollbar/jquery")($);
 
-import "lua.vm.js";
+// import "lua.vm.js";
 import { Observer } from "rxjs";
 import * as pegjs from "./instead.pegjs";
+import { lauxlib, lua, lualib, LUA_TBOOLEAN, LUA_TNUMBER, LUA_TSTRING, to_luastring } from "fengari";
 
 // tslint:disable-next-line:no-any
-const Lua = (window as any).Lua;
+// const Lua = (window as any).Lua;
 
 
 // tslint:disable:no-console
@@ -112,6 +113,8 @@ export interface Text {
 
 export type Elements = Action | Bold | Italics | Center | Text;
 
+type LuaTypes = boolean | number | string;
+
 export class Instead {
 
     private files: { [key: string]: string; } = {
@@ -119,6 +122,8 @@ export class Instead {
         "instead_js.lua": require("instead-js/lua/instead_js.lua").default,
         "instead_fs.lua": require("instead-js/lua/instead_fs.lua").default,
     };
+
+    private luaState: lua.lua_State;
 
     get parser(): pegjs.Parser {
         return pegjs.default;
@@ -130,14 +135,21 @@ export class Instead {
         private waysObserver: Observer<string>,
         private inventoryObserver: Observer<string>) {
 
-        Lua.initialize();
-        Lua.requires = {};
-        Lua.inject((path: string) => this.runLuaFromPath(path), "dofile");
-        Lua.requireContent = (path: string) => this.requireContent(path);
-        Lua.logWarning = (msg: string) => console.warn(msg);
-        Lua.set_error_callback((message: string) => console.error(message));
-
         this.loadStead();
+        this.luaState = this.initLua();
+
+        // Lua.initialize();
+        // TODO: Lua.requires = {};
+        // TODO: Lua.inject((path: string) => this.runLuaFromPath(path), "dofile");
+        // TODO: Lua.requireContent = (path: string) => this.requireContent(path);
+        // TODO: Lua.logWarning = (msg: string) => console.warn(msg);
+        // TODO: THis is stderr Lua.set_error_callback((message: string) => console.error(message));
+    }
+
+    private initLua(): lua.lua_State {
+        const state = lauxlib.luaL_newstate();
+        lualib.luaL_openlibs(state);
+        return state;
     }
 
     private loadStead(): void {
@@ -156,20 +168,19 @@ export class Instead {
 
         // init game
         // Lua.eval(`js_instead_gamepath("/")`);
-        Lua.exec(code, "main3.lua");
-        Lua.eval("game:ini()");
+        // Lua.exec(code, "main3.lua");
+        this.lua_exec(code);
+        this.lua_eval("game:ini()");
 
         this.ifaceCmd("look");
     }
 
-    private runLuaFromPath(path: string): [] | null {
+    private runLuaFromPath(path: string): void {
         try {
             const code = this.requireContent(path);
-            Lua.cache.items = {}; // Clear cache
-            return Lua.exec(code, path);
+            this.lua_exec(code, path);
         } catch (e) {
             console.error(`Error: file ${path} : ${e}`, e);
-            return null;
         }
     }
 
@@ -196,28 +207,72 @@ export class Instead {
         if (command !== "user_timer") {
             console.log(`Running: ${command}`);
         }
-        const result = Lua.eval(`iface:cmd("${command}")`);
+        const result = this.lua_eval(`iface:cmd("${command}")`);
         console.log(`Returned: ${result}`);
         if (refreshUI && result && result[0]) {
-            this.updateUI(result[0]);
+            this.updateUI(result[0] as string);
         }
     }
 
     private updateUI(text: string): void {
         this.textObserver.next(text);
 
-        const title = Lua.eval(`instead.get_title()`);
+        const title = this.lua_eval(`instead.get_title()`);
         if (title && title[0]) {
-            this.titleObserver.next(title[0]);
+            this.titleObserver.next(title[0] as string);
         }
-        const ways = Lua.eval(`instead.get_ways()`);
+        const ways = this.lua_eval(`instead.get_ways()`);
         if (ways && ways[0]) {
-            this.waysObserver.next(ways[0]);
+            this.waysObserver.next(ways[0] as string);
         }
-        const inventory = Lua.eval(`instead.get_inv(false)`);
+        const inventory = this.lua_eval(`instead.get_inv(false)`);
         if (inventory && inventory[0]) {
-            this.inventoryObserver.next(inventory[0]);
+            this.inventoryObserver.next(inventory[0] as string);
         }
         // TODO: picture
+    }
+
+    private lua_exec(code: string, name?: string): LuaTypes[] {
+        // 1. parse
+        const source = to_luastring(code);
+        if (lauxlib.luaL_loadbuffer(this.luaState, source, source.length, name || "<stdin>") === lua.LUA_ERRSYNTAX) {
+            const msg = lua.lua_tojsstring(this.luaState, -1);
+            lua.lua_pop(this.luaState, 1);
+            throw new SyntaxError(msg);
+        }
+
+        // 2. exec
+        if (lua.lua_pcall(this.luaState, 0, lua.LUA_MULTRET, 0) !== lua.LUA_OK) {
+            const msg = lua.lua_tojsstring(this.luaState, -1);
+            lua.lua_pop(this.luaState, 1);
+            throw new Error(msg);
+        }
+        // Pop stack
+        const result: LuaTypes[] = [];
+        const nargs = lua.lua_gettop(this.luaState);
+        for (let i = 0; i !== nargs; ++i) {
+            const type = lua.lua_type(this.luaState, -1);
+            switch (type) {
+                case LUA_TBOOLEAN:
+                    result.push(lua.lua_toboolean(this.luaState, -1));
+                    break;
+                case LUA_TSTRING:
+                    result.push(lua.lua_tojsstring(this.luaState, -1));
+                    break;
+                case LUA_TNUMBER:
+                    result.push(lua.lua_tonumber(this.luaState, -1));
+                    break;
+                default:
+                    console.warn(`Need to convert ${type}`);
+                    break;
+            }
+            lua.lua_pop(this.luaState, 1);
+        }
+        console.log(`Returned from lua: `, result);
+        return result;
+    }
+
+    private lua_eval(code: string): LuaTypes[] {
+        return this.lua_exec(`return ${code}`);
     }
 }

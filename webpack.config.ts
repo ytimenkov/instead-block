@@ -50,5 +50,11 @@ module.exports = {
                 },
             ]
         }),
+        new webpack.DefinePlugin({
+            // Prevent Fengari from loading Node-only libraries
+            // See: https://github.com/fengari-lua/fengari/blob/master/src/loslib.js#L480-L489
+            "process.env.FENGARICONF": "void 0",
+            "typeof process": JSON.stringify("undefined"),
+        }),
     ],
 } as webpack.Configuration;

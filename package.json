@@ -25,6 +25,7 @@
     "@webcomponents/custom-elements": "^1.4.2",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "blockly": "^3.20200625.2",
+    "fengari": "^0.1.4",
     "file-saver": "^2.0.2",
     "jquery": "^3.5.1",
     "jszip": "^3.5.0",
