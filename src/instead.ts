@@ -10,7 +10,7 @@
 // require("perfect-scrollbar/jquery")($);
 
 import "lua.vm.js";
-import { Subject } from "rxjs";
+import { Observer } from "rxjs";
 import * as pegjs from "./instead.pegjs";
 
 // tslint:disable-next-line:no-any
@@ -120,28 +120,24 @@ export class Instead {
         "instead_fs.lua": require("instead-js/lua/instead_fs.lua").default,
     };
 
-    private parser: pegjs.Parser;
+    get parser(): pegjs.Parser {
+        return pegjs.default;
+    }
 
-    text = new Subject<Elements[]>();
-    title = new Subject<Elements[]>();
-    ways = new Subject<Elements[]>();
-    inventory = new Subject<Elements[]>();
+    constructor(
+        private textObserver: Observer<string>,
+        private titleObserver: Observer<string>,
+        private waysObserver: Observer<string>,
+        private inventoryObserver: Observer<string>) {
 
-    constructor() {
         Lua.initialize();
         Lua.requires = {};
         Lua.inject((path: string) => this.runLuaFromPath(path), "dofile");
         Lua.requireContent = (path: string) => this.requireContent(path);
-        // Lua.saveFile = saveFile;
-        // Lua.loadFile = loadFile;
-        // Lua.openFile = openFile;
-        // Lua.gameinfo = gameInfo; // to be used by external handlers
         Lua.logWarning = (msg: string) => console.warn(msg);
         Lua.set_error_callback((message: string) => console.error(message));
 
         this.loadStead();
-        // this.parser = this.generateParser();
-        this.parser = pegjs.default;
     }
 
     private loadStead(): void {
@@ -208,26 +204,19 @@ export class Instead {
     }
 
     private updateUI(text: string): void {
-        this.text.next(this.parser.parse(text));
-        // TODO: If unparsed, send as text
-        // this.text.next([{ type: "text", text }]);
+        this.textObserver.next(text);
 
-        // TODO: add pipe here with distinct to do string comparison
-        // and then transform with parsing. If needed...
         const title = Lua.eval(`instead.get_title()`);
         if (title && title[0]) {
-            console.log(`Title: ${title[0]}`);
-            this.title.next(this.parser.parse(title[0]));
+            this.titleObserver.next(title[0]);
         }
         const ways = Lua.eval(`instead.get_ways()`);
         if (ways && ways[0]) {
-            console.log(`Ways: ${ways[0]}`);
-            this.ways.next(this.parser.parse(ways[0]));
+            this.waysObserver.next(ways[0]);
         }
         const inventory = Lua.eval(`instead.get_inv(false)`);
         if (inventory && inventory[0]) {
-            console.log(`Inventory: ${inventory[0]}`);
-            this.inventory.next(this.parser.parse(inventory[0]));
+            this.inventoryObserver.next(inventory[0]);
         }
         // TODO: picture
     }

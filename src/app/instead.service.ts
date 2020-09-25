@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable, Observer, Subject } from "rxjs";
+import { distinctUntilChanged, map, tap } from "rxjs/operators";
 import type { Elements, Instead } from "../instead";
 
 
@@ -8,31 +9,55 @@ import type { Elements, Instead } from "../instead";
 })
 export class InsteadService {
 
-  private instead?: Instead;
+  // Lazy-loaded Lua code.
+  private insteadEngine?: Instead;
 
+  private textObserver = new Subject<string>();
   text = new BehaviorSubject<Elements[]>([]);
+
+  private titleObserver = new Subject<string>();
   title = new BehaviorSubject<Elements[]>([]);
+
+  private waysObserver = new Subject<string>();
   ways = new BehaviorSubject<Elements[]>([]);
+
+  private inventoryObserver = new Subject<string>();
   inventory = new BehaviorSubject<Elements[]>([]);
 
   constructor() { }
 
   async run(code: string): Promise<void> {
-    if (!this.instead) {
+    if (!this.insteadEngine) {
       const instead = await import("../instead");
-      this.instead = new instead.Instead();
-      this.instead.text.subscribe(this.text);
-      this.instead.title.subscribe(this.title);
-      this.instead.ways.subscribe(this.ways);
-      this.instead.inventory.subscribe(this.inventory);
+      this.insteadEngine = new instead.Instead(this.textObserver, this.titleObserver,
+        this.waysObserver, this.inventoryObserver);
+      this.wireUpPipes(this.textObserver, this.text);
+      this.wireUpPipes(this.titleObserver, this.title);
+      this.wireUpPipes(this.waysObserver, this.ways);
+      this.wireUpPipes(this.inventoryObserver, this.inventory);
     }
-    this.instead.runCode(code);
+    this.insteadEngine.runCode(code);
   }
 
   cmd(command: string): void {
-    if (!this.instead) {
+    this.instead.ifaceCmd(command);
+  }
+
+  private get instead(): Instead {
+    if (!this.insteadEngine) {
       throw new Error("Attempt to interact before initializing..");
     }
-    this.instead.ifaceCmd(command);
+    return this.insteadEngine;
+  }
+
+  private wireUpPipes(src: Observable<string>, dst: Observer<Elements[]>): void {
+    const parser = this.instead.parser;
+    // TODO: If unparsed, send as text, for example: ([{ type: "text", _ }]);
+
+    src.pipe(
+      distinctUntilChanged(),
+      tap(_ => console.log(`Got update from Instead: ${_}`)),
+      map(_ => parser.parse(_))
+    ).subscribe(dst);
   }
 }
