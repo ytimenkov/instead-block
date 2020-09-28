@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, Output } from "@angular/core";
+import { Component, Inject, Input, LOCALE_ID, OnInit } from "@angular/core";
 import * as Blockly from "blockly";
-import * as Ru from "blockly/msg/ru";
 import { loadWorkspace, localStorageKey } from "src/files";
 import { AppModuel, WorkspaceInstead } from "src/model";
 import { InsteadObject, InsteadRoom } from "src/objects";
 import { createInsteadTheme, createToolBox } from "src/toolbox";
+import { messages } from "./init-locale";
 import "../../basic_blocks";
 import "../../functions";
 import "../../objects";
@@ -23,7 +23,7 @@ export class BlocksComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    Blockly.setLocale(Ru);
+    Blockly.setLocale(messages);
 
     this.model!.workspace = Blockly.inject("blocklyDiv", {
       toolbox: createToolBox(),

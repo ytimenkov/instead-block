@@ -5,10 +5,12 @@
   "scripts": {
     "update": "npm update",
     "start": "ng serve",
+    "start:ru": "ng serve --configuration=ru",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "int:extract": "ng xi18n --output-path=locale"
   },
   "dependencies": {
     "@angular/animations": "~10.1.2",
@@ -35,6 +37,7 @@
     "@angular-builders/custom-webpack": "^10.0.1",
     "@angular/cli": "^10.1.2",
     "@angular/compiler-cli": "^10.1.2",
+    "@angular/localize": "^10.1.2",
     "@types/file-saver": "^2.0.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",

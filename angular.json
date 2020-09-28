@@ -13,6 +13,12 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "ru": "locale/messages.ru.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
@@ -25,6 +31,9 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "localize": [
+              "en-US"
+            ],
             "aot": true,
             "assets": [
               "src/assets",
@@ -53,11 +62,12 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "localize": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -73,6 +83,17 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "ru": {
+              "localize": [
+                "ru"
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/app/blocks/init-locale.ts",
+                  "with": "src/app/blocks/init-locale.ru.ts"
+                }
+              ]
             }
           }
         },
@@ -84,6 +105,9 @@
           "configurations": {
             "production": {
               "browserTarget": "instead-blocks:build:production"
+            },
+            "ru": {
+              "browserTarget": "instead-blocks:build:ru"
             }
           }
         },

@@ -13,12 +13,12 @@
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a (click)="infoEditor.visible = true" clrDropdownItem>Edit game metadata</a>
+          <a (click)="infoEditor.visible = true" clrDropdownItem i18n>Edit game metadata</a>
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
-          <a (click)="save()" clrDropdownItem>Save in browser</a>
+          <a (click)="save()" clrDropdownItem i18n>Save in browser</a>
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
-          <a (click)="download()" clrDropdownItem>Save to your computer</a>
-          <a (click)="upload()" clrDropdownItem>Load from your computer</a>
+          <a (click)="download()" clrDropdownItem i18n>Save to your computer</a>
+          <a (click)="upload()" clrDropdownItem i18n>Load from your computer</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
@@ -32,14 +32,14 @@
         <div class="clr-col-lg-6">
           <ul class="nav">
             <li>
-              <button class="btn btn-link btn-icon" type="button" aria-label="refresh" title="Reload game"
-                (click)="run()" [clrLoading]="reloadingState">
+              <button class="btn btn-link btn-icon" type="button" i18n-title title="Reload game" (click)="run()"
+                [clrLoading]="reloadingState">
                 <clr-icon *ngIf="code" shape="refresh"></clr-icon>
                 <clr-icon *ngIf="!code" shape="play"></clr-icon>
               </button>
             </li>
             <li>
-              <button class="btn btn-link btn-icon" type="button" aria-label="show code" title="Show code"
+              <button class="btn btn-link btn-icon" type="button" i18n-title title="Show code"
                 (click)="refreshCode(); codePreview.visible = true">
                 <clr-icon shape="details"></clr-icon>
               </button>

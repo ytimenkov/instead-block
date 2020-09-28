@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="6821eb26238163741b2fd108110829be12911689" datatype="html">
+        <source>Edit game metadata</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cab6d226c210b0b40b6e8425b7bb4306401552fe" datatype="html">
+        <source>Save in browser</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="302872df727a9885e5fd76eacaa839c884eac794" datatype="html">
+        <source>Save to your computer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="83a87874b5ae2acc577bbbaf7ed76ca8cc7e9c7f" datatype="html">
+        <source>Load from your computer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="881e2e38e83b4c805905cbab3d12c7369a420174" datatype="html">
+        <source>Reload game</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0acfb4220d49bde8c7643803180e7b06b8017bc" datatype="html">
+        <source>Show code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fdf7cbdc140d0aab0f0b6c06065a0fd448ed6a2e" datatype="html">
+        <source>Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0dca0e2ff74966dfbfa27aa43b6c40a0e2268278" datatype="html">
+        <source>Game title as seen in the Instead</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7293b61e9088c66421df2e367e0ccc00346cf9f" datatype="html">
+        <source>Author</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bdae81e87124ae5b3a58e71feddbf59a9474dee6" datatype="html">
+        <source>Who contributed to the game</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8fe73a4787b8068b2ba61f54ab7e0f9af2ea1fc9" datatype="html">
+        <source>Version</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="452843595ad5391dc68a87fce5af90da025a67f0" datatype="html">
+        <source>Game version</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be5c752b58791dd799bc5d5482d4351e06f18673" datatype="html">
+        <source>Ok</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/code-preview/code-preview.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ffdc6cdbe60d1978dfcdb6d701dd22ad6d54213f" datatype="html">
+        <source>Code preview</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/code-preview/code-preview.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
