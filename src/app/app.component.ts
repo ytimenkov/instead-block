@@ -1,10 +1,9 @@
 import { Component } from "@angular/core";
 import { ClrLoadingState } from "@clr/angular";
+import { Workspace } from "blockly/core";
 import { backupWorkspace, downloadProject, generateCode, uploadProject } from "src/files";
-import { AppModuel as AppModel } from "src/model";
+import { AppModuel as AppModel, GameMetaData } from "src/model";
 import { InsteadService } from "./instead.service";
-
-// tslint:disable:no-non-null-assertion
 
 @Component({
   selector: "app-root",
@@ -14,13 +13,16 @@ import { InsteadService } from "./instead.service";
 export class AppComponent {
   reloadingState = ClrLoadingState.DEFAULT;
 
-  model: AppModel = {};
+  model: AppModel = {
+    workspace: (undefined as unknown) as Workspace,
+    insteadMeta: new GameMetaData()
+  };
   code = "";
 
   constructor(private insteadService: InsteadService) { }
 
   refreshCode(): void {
-    this.code = generateCode(this.model.workspace!);
+    this.code = generateCode(this.model);
   }
 
   async run(): Promise<void> {
@@ -38,14 +40,14 @@ export class AppComponent {
   }
 
   save(): void {
-    backupWorkspace(this.model.workspace!);
+    backupWorkspace(this.model);
   }
 
   download(): void {
-    downloadProject(this.model.workspace!);
+    downloadProject(this.model);
   }
 
   upload(): void {
-    uploadProject(this.model.workspace!);
+    uploadProject(this.model);
   }
 }

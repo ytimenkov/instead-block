@@ -1,7 +1,7 @@
 import { Events, Lua, Workspace, Xml } from "blockly/core";
 import { saveAs } from "file-saver";
 import * as JSZip from "jszip";
-import { GameMetaData, WorkspaceInstead } from "./model";
+import { GameMetaData, AppModuel } from "./model";
 import { InsteadObject, InsteadRoom } from "./objects";
 
 function resetWorkspace(workspace: Workspace): void {
@@ -19,21 +19,22 @@ function resetWorkspace(workspace: Workspace): void {
     }
 }
 
-export function generateCode(workspace: Workspace): string {
-    const insteadMeta = (workspace as WorkspaceInstead).insteadMeta;
+export function generateCode(model: AppModuel): string {
+    const insteadMeta = model.insteadMeta;
     const code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n
-${Lua.workspaceToCode(workspace)}`;
+${Lua.workspaceToCode(model.workspace)}`;
     return code;
 }
 
 export const localStorageKey = "instead-data";
 
-export function loadWorkspace(xml: string, workspace: Workspace): void {
+export function loadWorkspace(xml: string, model: AppModuel): void {
     try {
         const dom = Xml.textToDom(xml);
-        resetWorkspace(workspace);
+        resetWorkspace(model.workspace);
         // Default
-        (workspace as WorkspaceInstead).insteadMeta = { name: "Playground", version: "0.0", author: "Unknown" };
+        model.insteadMeta = { name: "Playground", version: "0.0", author: "Unknown" };
+        // tslint:disable-next-line: no-conditional-assignment
         for (let i = 0, xmlChild; (xmlChild = dom.childNodes[i]); i++) {
             if (xmlChild.nodeName === "instead") {
                 const attrs = (xmlChild as Element).attributes;
@@ -42,23 +43,23 @@ export function loadWorkspace(xml: string, workspace: Workspace): void {
                     version: attrs.getNamedItem("version")?.textContent || "",
                     author: attrs.getNamedItem("author")?.textContent || "",
                 };
-                (workspace as WorkspaceInstead).insteadMeta = insteadMeta;
+                model.insteadMeta = insteadMeta;
                 break;
             }
         }
-        Xml.domToWorkspace(dom, workspace);
+        Xml.domToWorkspace(dom, model.workspace);
         console.log("Loaded workspace");
     } catch (error) {
         const msg = "Failed to load workspace: " + error;
         console.log(msg);
         alert(msg);
-        resetWorkspace(workspace);
+        resetWorkspace(model.workspace);
     }
 }
 
-function saveWorkspace(workspace: Workspace): string {
-    const xml = Xml.workspaceToDom(workspace);
-    const insteadMeta = (workspace as WorkspaceInstead).insteadMeta;
+function saveWorkspace(model: AppModuel): string {
+    const xml = Xml.workspaceToDom(model.workspace);
+    const insteadMeta = model.insteadMeta;
     const insteadNode = document.createElement("instead");
     insteadNode.setAttribute("name", insteadMeta.name);
     insteadNode.setAttribute("version", insteadMeta.version);
@@ -68,8 +69,8 @@ function saveWorkspace(workspace: Workspace): string {
     return text;
 }
 
-export function backupWorkspace(workspace: Workspace): void {
-    const text = saveWorkspace(workspace);
+export function backupWorkspace(model: AppModuel): void {
+    const text = saveWorkspace(model);
     console.log("Saving text: " + text);
     window.localStorage.setItem(localStorageKey, text);
 }
@@ -78,28 +79,28 @@ export function backupWorkspace(workspace: Workspace): void {
 const mainFileName = "main3";
 const blocksFolderName = "blocks";
 
-export async function downloadProject(workspace: Workspace): Promise<void> {
+export async function downloadProject(model: AppModuel): Promise<void> {
     const zip = new JSZip();
 
-    const gameName = (workspace as WorkspaceInstead).insteadMeta.name;
+    const gameName = model.insteadMeta.name;
 
     // Add blocks.
-    const text = saveWorkspace(workspace);
+    const text = saveWorkspace(model);
     zip.file(`${gameName}/${blocksFolderName}/${mainFileName}.xml`, text);
 
     // Add files to load by Instead
-    const code = Lua.workspaceToCode(workspace);
+    const code = generateCode(model);
     zip.file(`${gameName}/${mainFileName}.lua`, code);
 
     const blob = await zip.generateAsync({ type: "blob" });
     saveAs(blob, `${gameName}.zip`);
 }
 
-export async function uploadProject(workspace: Workspace): Promise<void> {
-    addFileInput(workspace).click();
+export async function uploadProject(model: AppModuel): Promise<void> {
+    addFileInput(model).click();
 }
 
-async function importProject(workspace: Workspace, input: ArrayBuffer): Promise<void> {
+async function importProject(model: AppModuel, input: ArrayBuffer): Promise<void> {
     const zip = await JSZip.loadAsync(input);
 
     const mainFile = zip.file(new RegExp(`${blocksFolderName}/${mainFileName}.xml$`))[0];
@@ -109,10 +110,10 @@ async function importProject(workspace: Workspace, input: ArrayBuffer): Promise<
     }
 
     const text = await mainFile.async("string");
-    loadWorkspace(text, workspace);
+    loadWorkspace(text, model);
 }
 
-function addFileInput(workspace: Workspace): HTMLElement {
+function addFileInput(model: AppModuel): HTMLElement {
     const inputId = "FileUploadInput";
     const element = document.getElementById(inputId);
     if (element) {
@@ -134,7 +135,7 @@ function addFileInput(workspace: Workspace): HTMLElement {
         const reader = new FileReader();
         reader.onload = function(): void {
             input.value = "";
-            importProject(workspace, this.result as ArrayBuffer);
+            importProject(model, this.result as ArrayBuffer);
         };
         reader.readAsArrayBuffer(input.files[0]);
     };

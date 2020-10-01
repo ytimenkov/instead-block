@@ -87,12 +87,6 @@
             "ru": {
               "localize": [
                 "ru"
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/app/blocks/init-locale.ts",
-                  "with": "src/app/blocks/init-locale.ru.ts"
-                }
               ]
             }
           }
