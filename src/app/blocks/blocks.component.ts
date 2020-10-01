@@ -32,7 +32,7 @@ export class BlocksComponent implements OnInit {
 
     let messages: { [key: string]: string; };
     switch (this.locale) {
-      case "en-US":
+      case "en":
         messages = await import("blockly/msg/en");
         break;
       case "ru":

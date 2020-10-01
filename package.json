@@ -7,6 +7,7 @@
     "start": "ng serve",
     "start:ru": "ng serve --configuration=ru",
     "build": "ng build --prod",
+    "postbuild": "cp build/en/index.html build/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
