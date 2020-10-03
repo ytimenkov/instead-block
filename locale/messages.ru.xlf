@@ -107,6 +107,232 @@
           <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3314187497610890696" datatype="html">
+        <source>Decoration</source>
+        <target state="translated">Декорации (decor)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3383577196598359997" datatype="html">
+        <source>Inventory 🎒</source>
+        <target state="translated">Инвентарь(inv) 🎒</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4575132119894838026" datatype="html">
+        <source>On Action 🔍</source>
+        <target state="translated">Действие(act) 🔍</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1204381031700834258" datatype="html">
+        <source>On Pick up 📦</source>
+        <target state="translated">Взяли(tak) 📦</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5812502575937382679" datatype="html">
+        <source>Used with 🔗</source>
+        <target state="translated">Использование(used) 🔗</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3798954516442427004" datatype="html">
+        <source>Use self on 🔨</source>
+        <target state="translated">Использование(use) 🔨</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1975851772794940315" datatype="html">
+        <source>On Enter</source>
+        <target state="translated">При входе (onenter)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="101081755807290004" datatype="html">
+        <source>On Exit</source>
+        <target state="translated">При выходе (onexit)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7531602241051125940" datatype="html">
+        <source>Objects</source>
+        <target state="translated">Предметы (obj)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4193807660062831912" datatype="html">
+        <source>Exits</source>
+        <target state="translated">Выходы (way)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8714759723330245846" datatype="html">
+        <source>Cancel action</source>
+        <target state="translated">отменить действие</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6033869360950460242" datatype="html">
+        <source>self</source>
+        <target state="translated">себя</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2746753616787332799" datatype="html">
+        <source>what</source>
+        <target state="translated">объект</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2066149374674544488" datatype="html">
+        <source>𝑓</source>
+        <target state="translated">𝑓</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2928233532968928094" datatype="html">
+        <source>𝑓 (w)</source>
+        <target state="translated">𝑓 (w)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4565882844883341437" datatype="html">
+        <source>take: </source>
+        <target state="translated">взять(take): </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5643551190748177196" datatype="html">
+        <source>disable: </source>
+        <target state="translated">выключить(disable): </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5818587302001824834" datatype="html">
+        <source>enable: </source>
+        <target state="translated">включить(enable): </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8356557443219167199" datatype="html">
+        <source>drop: </source>
+        <target state="translated">бросить(drop): </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1872730510033736839" datatype="html">
+        <source>into</source>
+        <target state="translated">в</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8474728531519342367" datatype="html">
+        <source>"remove: </source>
+        <target state="translated">убрать(remove): </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="23518581647153834" datatype="html">
+        <source>from</source>
+        <target state="translated">из</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2396578225538912090" datatype="html">
+        <source>(where)</source>
+        <target state="translated">(where)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <note priority="1" from="meaning">where function</note>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source>
+        <target state="translated">Описание(dsc):</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/objects.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3381412717703555378" datatype="html">
+        <source>Object</source>
+        <target state="translated">Предмет</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/objects.ts</context>
+          <context context-type="linenumber">196</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="518297907399160251" datatype="html">
+        <source>Room</source>
+        <target state="translated">Комната</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/objects.ts</context>
+          <context context-type="linenumber">230</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4851954922618976087" datatype="html">
+        <source>Random number from</source>
+        <target state="translated">случайное число от</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/stdlib.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3508478842941324159" datatype="html">
+        <source>to</source>
+        <target state="translated">до</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/stdlib.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <note priority="1" from="meaning">random number to</note>
+      </trans-unit>
       <trans-unit id="be5c752b58791dd799bc5d5482d4351e06f18673" datatype="html">
         <source>Ok</source>
         <target>Ок</target>

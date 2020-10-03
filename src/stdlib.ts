@@ -25,10 +25,10 @@ defineBlock("instead_print",
 defineBlock("instead_rnd",
     (block) => {
         block.appendValueInput("FROM")
-            .appendField("случайное число от")
+            .appendField($localize`Random number from`)
             .setCheck("Number");
         block.appendValueInput("TO")
-            .appendField("до")
+            .appendField($localize`:random number to|:to`)
             .setCheck("Number");
         block.setStyle("math_blocks");
         block.setInputsInline(true);

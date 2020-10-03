@@ -12,6 +12,7 @@ function resetWorkspace(workspace: Workspace): void {
         // This this cause removal of references for newly created objects.
         Events.disable();
         workspace.clear();
+        workspace.clearUndo();
         InsteadObject.clear();
         InsteadRoom.clear();
     } finally {

@@ -3,7 +3,7 @@ import { selfParameterName, whatParameterName } from "./basic_blocks";
 import { Lua, Blocks, Block, FieldDropdown, } from "blockly/core";
 import { defineBlock } from "./blocks";
 
-function defineMethod(name: string, text: string, funcArgs: string) {
+function defineMethod(name: string, text: string, funcArgs: string): void {
     defineBlock(name,
         (block) => {
             block.appendDummyInput()
@@ -20,10 +20,10 @@ function defineMethod(name: string, text: string, funcArgs: string) {
     );
 }
 
-defineMethod("instead_method0", "\u{1D453}", selfParameterName);
-defineMethod("instead_method1", "\u{1D453} (w)", `${selfParameterName}, ${whatParameterName}`);
+defineMethod("instead_method0", $localize`\u{1D453}`, selfParameterName);
+defineMethod("instead_method1", $localize`\u{1D453} (w)`, `${selfParameterName}, ${whatParameterName}`);
 
-function defineObjectAction1(name: string, desc: string, functName: string) {
+function defineObjectAction1(name: string, desc: string, functName: string): void {
     defineBlock(name,
         (block) => {
             block.appendValueInput("WHAT")
@@ -37,11 +37,11 @@ function defineObjectAction1(name: string, desc: string, functName: string) {
     );
 }
 
-defineObjectAction1("instead_take", "взять(take): ", "take");
-defineObjectAction1("instead_disable", "выключить(disable): ", "disable");
-defineObjectAction1("instead_enable", "включить(enable): ", "enable");
+defineObjectAction1("instead_take", $localize`take: `, "take");
+defineObjectAction1("instead_disable", $localize`disable: `, "disable");
+defineObjectAction1("instead_enable", $localize`enable: `, "enable");
 
-function defineObjectAction2(name: string, desc: string, functName: string, whereText: string) {
+function defineObjectAction2(name: string, desc: string, functName: string, whereText: string): void {
     defineBlock(name,
         (block) => {
             block.appendValueInput("WHAT")
@@ -67,13 +67,13 @@ function defineObjectAction2(name: string, desc: string, functName: string, wher
     );
 }
 
-defineObjectAction2("instead_drop", "бросить(drop): ", "drop", "в");
-defineObjectAction2("instead_remove", "убрать(remove): ", "remove", "из");
+defineObjectAction2("instead_drop", $localize`drop: `, "drop", $localize`into`);
+defineObjectAction2("instead_remove", $localize`"remove: `, "remove", $localize`from`);
 
 Blocks.instead_where = {
-    init(this: Block) {
+    init(this: Block): void {
         this.appendValueInput("WHAT")
-            .appendField("(where)")
+            .appendField($localize`:where function|:(where)`)
             .setCheck("InsteadObject");
         this.appendDummyInput()
             .appendField(new FieldDropdown([
@@ -88,7 +88,7 @@ Blocks.instead_where = {
     }
 };
 
-Lua.instead_where = function(block: Block) {
+Lua.instead_where = (block: Block) => {
     const cond = block.getFieldValue("COND");
     const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
     const where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
