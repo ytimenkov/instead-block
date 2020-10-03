@@ -11,7 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "int:extract": "ng xi18n --output-path=locale"
+    "int:extract": "ng xi18n --output-path=locale --ivy && ng run instead-blocks:xliffmerge"
   },
   "dependencies": {
     "@angular/animations": "~10.1.2",
@@ -35,10 +35,12 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^10.0.1",
+    "@angular-builders/custom-webpack": "^10.1.0-beta.0",
     "@angular/cli": "^10.1.2",
     "@angular/compiler-cli": "^10.1.2",
     "@angular/localize": "^10.1.2",
+    "@ngx-i18nsupport/ngx-i18nsupport": "^1.1.6",
+    "@ngx-i18nsupport/tooling": "^8.0.3",
     "@types/file-saver": "^2.0.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
@@ -55,6 +57,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ngx-i18nsupport": "^0.17.1",
     "pegjs": "^0.10.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",

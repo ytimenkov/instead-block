@@ -107,7 +107,7 @@
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular-builders/custom-webpack:extract-i18n",
           "options": {
             "browserTarget": "instead-blocks:build"
           }
@@ -151,6 +151,20 @@
           "configurations": {
             "production": {
               "devServerTarget": "instead-blocks:serve:production"
+            }
+          }
+        },
+        "xliffmerge": {
+          "builder": "@ngx-i18nsupport/tooling:xliffmerge",
+          "options": {
+            "xliffmergeOptions": {
+              "srcDir": "locale",
+              "genDir": "locale",
+              "beautifyOutput": true,
+              "defaultLanguage": "en",
+              "languages": [
+                "ru"
+              ]
             }
           }
         }

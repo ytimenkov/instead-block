@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2"
   xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
@@ -8,7 +8,7 @@
         <target>Информация об игре</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cab6d226c210b0b40b6e8425b7bb4306401552fe" datatype="html">
@@ -16,7 +16,7 @@
         <target>Сохранить в браузере</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="302872df727a9885e5fd76eacaa839c884eac794" datatype="html">
@@ -24,7 +24,7 @@
         <target>Сохранить в файл</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="83a87874b5ae2acc577bbbaf7ed76ca8cc7e9c7f" datatype="html">
@@ -32,7 +32,7 @@
         <target>Загрузить из файла</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="881e2e38e83b4c805905cbab3d12c7369a420174" datatype="html">
@@ -40,7 +40,7 @@
         <target>Перезапустить</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b0acfb4220d49bde8c7643803180e7b06b8017bc" datatype="html">
@@ -48,7 +48,7 @@
         <target>Показать текст на Lua</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fdf7cbdc140d0aab0f0b6c06065a0fd448ed6a2e" datatype="html">
@@ -99,13 +99,17 @@
           <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2409672154570643758" datatype="html">
+        <source>Display name</source>
+        <target state="translated">Альт. имя (disp)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="be5c752b58791dd799bc5d5482d4351e06f18673" datatype="html">
         <source>Ok</source>
         <target>Ок</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/code-preview/code-preview.component.html</context>
           <context context-type="linenumber">12</context>

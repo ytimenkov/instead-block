@@ -11,7 +11,7 @@ function defineFieldBlock(type: string, block: Block): Block {
     return block;
 }
 
-function generateFieldCode(type: string, block: Block, name: string = "TEXT") {
+function generateFieldCode(type: string, block: Block, name: string = "TEXT"): string {
     return `${type} = ${Lua.valueToCode(block, name, Lua.ORDER_NONE)}`;
 }
 
@@ -25,7 +25,7 @@ function defineListBlock(type: string, block: Block): Block {
 }
 
 defineBlock("instead_disp",
-    (block) => defineFieldBlock("Альт. имя (disp)", block)
+    (block) => defineFieldBlock($localize`Display name`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("disp", block)
@@ -113,7 +113,7 @@ defineBlock("instead_return_false",
         block.setPreviousStatement(true);
         block.setStyle("logic_blocks");
     },
-    (_block) => "return false\n"
+    (_) => "return false\n"
 );
 
 export const selfParameterName = "self";
@@ -125,7 +125,7 @@ defineBlock("instead_self",
         block.setOutput(true, ["InsteadObject", "InsteadRoom"]);
         block.setStyle("procedure_blocks");
     },
-    (_block) => [selfParameterName, Lua.ORDER_ATOMIC]
+    (_) => [selfParameterName, Lua.ORDER_ATOMIC]
 );
 
 export const whatParameterName = "what";
@@ -137,5 +137,5 @@ defineBlock("instead_what",
         block.setOutput(true, ["InsteadObject", "InsteadRoom"]);
         block.setStyle("procedure_blocks");
     },
-    (_block) => [whatParameterName, Lua.ORDER_ATOMIC]
+    (_) => [whatParameterName, Lua.ORDER_ATOMIC]
 );
