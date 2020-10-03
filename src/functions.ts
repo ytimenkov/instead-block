@@ -53,6 +53,7 @@ function defineObjectAction2(name: string, desc: string, functName: string, wher
             block.setNextStatement(true);
             block.setPreviousStatement(true);
             block.setStyle("actions_blocks");
+            block.setInputsInline(true);
         },
         (block) => {
             let where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
@@ -67,8 +68,8 @@ function defineObjectAction2(name: string, desc: string, functName: string, wher
     );
 }
 
-defineObjectAction2("instead_drop", $localize`drop: `, "drop", $localize`into`);
-defineObjectAction2("instead_remove", $localize`"remove: `, "remove", $localize`from`);
+defineObjectAction2("instead_drop", $localize`drop`, "drop", $localize`:where to drop|:into`);
+defineObjectAction2("instead_remove", $localize`remove`, "remove", $localize`:where to remove from|:from`);
 
 Blocks.instead_where = {
     init(this: Block): void {
