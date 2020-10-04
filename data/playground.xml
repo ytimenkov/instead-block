@@ -122,8 +122,7 @@
                                 <statement name="ELSE">
                                     <block type="instead_print" id="t=C?+N:Jm~XLIuA*1,?u">
                                         <field name="FUN">p</field>
-                                        <field name="TEXT">Похоже, тут довольно глубоко. Не хотелось бы сломать
-                                            что-нибудь при прыжке.</field>
+                                        <field name="TEXT">Похоже, тут довольно глубоко. Не хотелось бы сломать что-нибудь при прыжке.</field>
                                     </block>
                                 </statement>
                             </block>
@@ -287,8 +286,7 @@
                                                                 </value>
                                                                 <value name="B">
                                                                     <block type="instead_object_ref" id="6.9iw5oXMfpk+3Pf~g[b">
-                                                                        <field name="NAME">Cl12XZZ9iZ07|kH#Pmi1
-                                                                        </field>
+                                                                        <field name="NAME">Cl12XZZ9iZ07|kH#Pmi1</field>
                                                                     </block>
                                                                 </value>
                                                             </block>
@@ -302,8 +300,7 @@
                                                                 </value>
                                                                 <value name="WHERE">
                                                                     <block type="instead_object_ref" id="*u~.1Nw^GJn+-t60l3ht">
-                                                                        <field name="NAME">PN8CP{9:3!OA,r]*H8#!
-                                                                        </field>
+                                                                        <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
                                                                     </block>
                                                                 </value>
                                                             </block>
@@ -479,8 +476,7 @@
                                 <statement name="ELSE">
                                     <block type="instead_print" id="SuK9yHxA]aF3ejs*hqb+">
                                         <field name="FUN">p</field>
-                                        <field name="TEXT">Я подергал кольцо. Похоже, оно довольно прочно закреплено.
-                                        </field>
+                                        <field name="TEXT">Я подергал кольцо. Похоже, оно довольно прочно закреплено.</field>
                                     </block>
                                 </statement>
                             </block>
