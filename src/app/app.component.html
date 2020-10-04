@@ -6,6 +6,21 @@
         <span class="title">Instead Blocks</span>
       </a>
     </div>
+    <div class="header-nav">
+      <clr-dropdown>
+        <a class="nav-link nav-text" clrDropdownTrigger i18n>File</a>
+        <clr-dropdown-menu *clrIfOpen>
+          <a (click)="new()" clrDropdownItem i18n>New</a>
+          <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+          <a (click)="infoEditor.visible = true" clrDropdownItem i18n>Edit game metadata</a>
+          <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+          <a (click)="save()" clrDropdownItem i18n>Save in browser</a>
+          <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+          <a (click)="download()" clrDropdownItem i18n>Save to your computer</a>
+          <a (click)="upload()" clrDropdownItem i18n>Load from your computer</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
     <div class="header-actions">
       <clr-dropdown>
         <button class="nav-icon" clrDropdownTrigger>
@@ -15,20 +30,6 @@
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a href="../en" clrDropdownItem>English</a>
           <a href="../ru" clrDropdownItem>Русский</a>
-        </clr-dropdown-menu>
-      </clr-dropdown>
-      <clr-dropdown>
-        <button class="nav-icon" clrDropdownTrigger>
-          <clr-icon shape="cog"></clr-icon>
-          <clr-icon shape="caret down"></clr-icon>
-        </button>
-        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a (click)="infoEditor.visible = true" clrDropdownItem i18n>Edit game metadata</a>
-          <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
-          <a (click)="save()" clrDropdownItem i18n>Save in browser</a>
-          <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
-          <a (click)="download()" clrDropdownItem i18n>Save to your computer</a>
-          <a (click)="upload()" clrDropdownItem i18n>Load from your computer</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>

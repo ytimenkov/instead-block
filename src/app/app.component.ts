@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { ClrLoadingState } from "@clr/angular";
 import { Workspace } from "blockly/core";
-import { backupWorkspace, downloadProject, generateCode, uploadProject } from "src/files";
+import { backupWorkspace, downloadProject, generateCode, uploadProject, resetWorkspace } from "src/files";
 import { AppModuel as AppModel, GameMetaData } from "src/model";
 import { InsteadService } from "./instead.service";
 
@@ -49,5 +49,9 @@ export class AppComponent {
 
   upload(): void {
     uploadProject(this.model);
+  }
+
+  new(): void {
+    resetWorkspace(this.model);
   }
 }

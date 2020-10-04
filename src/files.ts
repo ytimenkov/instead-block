@@ -4,15 +4,18 @@ import * as JSZip from "jszip";
 import { GameMetaData, AppModuel } from "./model";
 import { InsteadObject, InsteadRoom } from "./objects";
 
-function resetWorkspace(workspace: Workspace): void {
+export function resetWorkspace(model: AppModuel): void {
     try {
         // Disable events because when reloading workspace
         // all events will be batched up objects removed
         // during clear() call.
         // This this cause removal of references for newly created objects.
+        // Default
+        model.insteadMeta = { name: "MyFirstGame", version: "0.0", author: "Unknown" };
+
         Events.disable();
-        workspace.clear();
-        workspace.clearUndo();
+        model.workspace.clear();
+        model.workspace.clearUndo();
         InsteadObject.clear();
         InsteadRoom.clear();
     } finally {
@@ -32,9 +35,7 @@ export const localStorageKey = "instead-data";
 export function loadWorkspace(xml: string, model: AppModuel): void {
     try {
         const dom = Xml.textToDom(xml);
-        resetWorkspace(model.workspace);
-        // Default
-        model.insteadMeta = { name: "Playground", version: "0.0", author: "Unknown" };
+        resetWorkspace(model);
         // tslint:disable-next-line: no-conditional-assignment
         for (let i = 0, xmlChild; (xmlChild = dom.childNodes[i]); i++) {
             if (xmlChild.nodeName === "instead") {
@@ -54,7 +55,7 @@ export function loadWorkspace(xml: string, model: AppModuel): void {
         const msg = "Failed to load workspace: " + error;
         console.log(msg);
         alert(msg);
-        resetWorkspace(model.workspace);
+        resetWorkspace(model);
     }
 }
 
