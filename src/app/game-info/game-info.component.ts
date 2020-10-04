@@ -1,17 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 import { GameMetaData } from "../../model";
 
 @Component({
-  selector: 'app-game-info',
-  templateUrl: './game-info.component.html',
-  styleUrls: ['./game-info.component.css']
+  selector: "app-game-info",
+  templateUrl: "./game-info.component.html",
+  styleUrls: ["./game-info.component.css"]
 })
 export class GameInfoComponent implements OnInit {
   visible = false;
 
   @Input()
-  data: GameMetaData = { author: "", name: "", version: "" };
+  data = new GameMetaData();
 
   constructor() { }
 

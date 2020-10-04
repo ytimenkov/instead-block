@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="48139a8f408fb79f24e82673e89e23c2ac314f23" datatype="html">
+        <source>File</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4efc5bac71b7d672d530cb3febefdd480a338146" datatype="html">
+        <source>Demos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="881e2e38e83b4c805905cbab3d12c7369a420174" datatype="html">
+        <source>Reload game</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0acfb4220d49bde8c7643803180e7b06b8017bc" datatype="html">
+        <source>Show code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d81f00c85d3b507f3e3d78bfc617a2c66e028391" datatype="html">
+        <source>New</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6821eb26238163741b2fd108110829be12911689" datatype="html">
+        <source>Edit game metadata</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cab6d226c210b0b40b6e8425b7bb4306401552fe" datatype="html">
+        <source>Save in browser</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="302872df727a9885e5fd76eacaa839c884eac794" datatype="html">
+        <source>Save to your computer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="83a87874b5ae2acc577bbbaf7ed76ca8cc7e9c7f" datatype="html">
+        <source>Load from your computer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ea9ab788b9c5852eeb2144e874ed40d7d75346f9" datatype="html">
+        <source>Playground(ru)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ffdc6cdbe60d1978dfcdb6d701dd22ad6d54213f" datatype="html">
+        <source>Code preview</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/code-preview/code-preview.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be5c752b58791dd799bc5d5482d4351e06f18673" datatype="html">
+        <source>Ok</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/code-preview/code-preview.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fdf7cbdc140d0aab0f0b6c06065a0fd448ed6a2e" datatype="html">
+        <source>Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0dca0e2ff74966dfbfa27aa43b6c40a0e2268278" datatype="html">
+        <source>Game title as seen in the Instead</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7293b61e9088c66421df2e367e0ccc00346cf9f" datatype="html">
+        <source>Author</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bdae81e87124ae5b3a58e71feddbf59a9474dee6" datatype="html">
+        <source>Who contributed to the game</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8fe73a4787b8068b2ba61f54ab7e0f9af2ea1fc9" datatype="html">
+        <source>Version</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="452843595ad5391dc68a87fce5af90da025a67f0" datatype="html">
+        <source>Game version</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/game-info/game-info.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2409672154570643758" datatype="html">
+        <source>Display name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3314187497610890696" datatype="html">
+        <source>Decoration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3383577196598359997" datatype="html">
+        <source>Inventory 🎒</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4575132119894838026" datatype="html">
+        <source>On Action 🔍</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1204381031700834258" datatype="html">
+        <source>On Pick up 📦</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5812502575937382679" datatype="html">
+        <source>Used with 🔗</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3798954516442427004" datatype="html">
+        <source>Use self on 🔨</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1975851772794940315" datatype="html">
+        <source>On Enter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="101081755807290004" datatype="html">
+        <source>On Exit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7862401357600970374" datatype="html">
+        <source>Objects</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+        <note priority="1" from="meaning">rooms objects</note>
+      </trans-unit>
+      <trans-unit id="4193807660062831912" datatype="html">
+        <source>Exits</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8714759723330245846" datatype="html">
+        <source>Cancel action</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6033869360950460242" datatype="html">
+        <source>self</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2746753616787332799" datatype="html">
+        <source>what</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/basic_blocks.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2066149374674544488" datatype="html">
+        <source>𝑓</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2928233532968928094" datatype="html">
+        <source>𝑓 (w)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2851907004211409" datatype="html">
+        <source>take</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8056364825023681713" datatype="html">
+        <source>disable</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6578734339769388749" datatype="html">
+        <source>enable</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4811398851434481275" datatype="html">
+        <source>drop</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4587865891503419725" datatype="html">
+        <source>into</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <note priority="1" from="meaning">where to drop</note>
+      </trans-unit>
+      <trans-unit id="2123171795960509943" datatype="html">
+        <source>remove</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2721650713252117589" datatype="html">
+        <source>from</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <note priority="1" from="meaning">where to remove from</note>
+      </trans-unit>
+      <trans-unit id="2396578225538912090" datatype="html">
+        <source>(where)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/functions.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <note priority="1" from="meaning">where function</note>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/objects.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3381412717703555378" datatype="html">
+        <source>Object</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/objects.ts</context>
+          <context context-type="linenumber">196</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="518297907399160251" datatype="html">
+        <source>Room</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/objects.ts</context>
+          <context context-type="linenumber">230</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4851954922618976087" datatype="html">
+        <source>Random number from</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/stdlib.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3508478842941324159" datatype="html">
+        <source>to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/stdlib.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <note priority="1" from="meaning">random number to</note>
+      </trans-unit>
+      <trans-unit id="5666524214928126071" datatype="html">
+        <source>Objects</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <note priority="1" from="meaning">toolbox category</note>
+      </trans-unit>
+      <trans-unit id="8413539238278840824" datatype="html">
+        <source>There is an object</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5701618810648052610" datatype="html">
+        <source>Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3793880475803393067" datatype="html">
+        <source>I have an item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8155442185209705426" datatype="html">
+        <source>Action on object</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2602805819186848389" datatype="html">
+        <source>You&apos;ve picked up an object</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6009495828518977773" datatype="html">
+        <source>You&apos;ve used &quot;what&quot; on &quot;self&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7897730374630699799" datatype="html">
+        <source>You&apos;ve used &quot;self&quot; on &quot;what&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6318077128670918892" datatype="html">
+        <source>Rooms</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5064505970010611749" datatype="html">
+        <source>You&apos;re in a big room</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="125111376198337295" datatype="html">
+        <source>title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3697827499683268999" datatype="html">
+        <source>Detailed room descrption</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="390429678833769895" datatype="html">
+        <source>You&apos;ve entered &quot;what&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5936125182214365706" datatype="html">
+        <source>You&apos;re about to go to &quot;what&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3193976279273491157" datatype="html">
+        <source>Actions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6162693758764653365" datatype="html">
+        <source>Text</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3656095834463573625" datatype="html">
+        <source>Action parameters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">159</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1628460947800854030" datatype="html">
+        <source>Logic</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3080099711511142058" datatype="html">
+        <source>Math</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">190</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -13,6 +13,12 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "ru": "locale/messages.ru.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
@@ -25,6 +31,10 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "baseHref": "/instead-block",
+            "localize": [
+              "en"
+            ],
             "aot": true,
             "assets": [
               "src/assets",
@@ -53,11 +63,12 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "localize": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -73,6 +84,11 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "ru": {
+              "localize": [
+                "ru"
+              ]
             }
           }
         },
@@ -84,11 +100,14 @@
           "configurations": {
             "production": {
               "browserTarget": "instead-blocks:build:production"
+            },
+            "ru": {
+              "browserTarget": "instead-blocks:build:ru"
             }
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular-builders/custom-webpack:extract-i18n",
           "options": {
             "browserTarget": "instead-blocks:build"
           }
@@ -132,6 +151,20 @@
           "configurations": {
             "production": {
               "devServerTarget": "instead-blocks:serve:production"
+            }
+          }
+        },
+        "xliffmerge": {
+          "builder": "@ngx-i18nsupport/tooling:xliffmerge",
+          "options": {
+            "xliffmergeOptions": {
+              "srcDir": "locale",
+              "genDir": "locale",
+              "beautifyOutput": true,
+              "defaultLanguage": "en",
+              "languages": [
+                "ru"
+              ]
             }
           }
         }

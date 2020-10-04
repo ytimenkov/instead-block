@@ -12,7 +12,7 @@ export class InsteadComponent implements OnInit {
   @HostBinding("class.object-using")
   useTarget?: string;
 
-  constructor(private insteadService: InsteadService, /*private sanitizer: DomSanitizer*/) { }
+  constructor(private insteadService: InsteadService) { }
 
   ngOnInit(): void {
   }
@@ -40,7 +40,7 @@ export class InsteadComponent implements OnInit {
   }
 
   get text$(): Observable<Elements[]> {
-    return this.insteadService.text; // .pipe(map(t => this.sanitizer.sanitize(t)));
+    return this.insteadService.text;
   }
 
   get title$(): Observable<Elements[]> {

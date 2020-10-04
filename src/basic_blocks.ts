@@ -11,7 +11,7 @@ function defineFieldBlock(type: string, block: Block): Block {
     return block;
 }
 
-function generateFieldCode(type: string, block: Block, name: string = "TEXT") {
+function generateFieldCode(type: string, block: Block, name: string = "TEXT"): string {
     return `${type} = ${Lua.valueToCode(block, name, Lua.ORDER_NONE)}`;
 }
 
@@ -25,14 +25,14 @@ function defineListBlock(type: string, block: Block): Block {
 }
 
 defineBlock("instead_disp",
-    (block) => defineFieldBlock("Альт. имя (disp)", block)
+    (block) => defineFieldBlock($localize`Display name`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("disp", block)
 );
 
 defineBlock("instead_decor",
-    (block) => defineFieldBlock("Декорации (decor)", block)
+    (block) => defineFieldBlock($localize`Decoration`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("decor", block)
@@ -41,14 +41,14 @@ defineBlock("instead_decor",
 
 // TODO: Fine-tune inv that it can be added only to objects, and not to a room.
 defineBlock("instead_inv",
-    (block) => defineFieldBlock("Инвентарь(inv) \u{1F392}", block)
+    (block) => defineFieldBlock($localize`Inventory \u{1F392}`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("inv", block)
 );
 
 defineBlock("instead_act",
-    (block) => defineFieldBlock("Действие(act) \u{1F50D}", block)
+    (block) => defineFieldBlock($localize`On Action \u{1F50D}`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("act", block)
@@ -56,7 +56,7 @@ defineBlock("instead_act",
 
 
 defineBlock("instead_tak",
-    (block) => defineFieldBlock("Взяли(tak) \u{1F4E6}", block)
+    (block) => defineFieldBlock($localize`On Pick up \u{1F4E6}`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("tak", block)
@@ -64,42 +64,42 @@ defineBlock("instead_tak",
 
 // TODO: Need to restrict that this function takes 2 arguments.
 defineBlock("instead_used",
-    (block) => defineFieldBlock("Использование(used) \u{1F517}", block)
+    (block) => defineFieldBlock($localize`Used with \u{1F517}`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("used", block)
 );
 
 defineBlock("instead_use",
-    (block) => defineFieldBlock("Использование(use) \u{1F528}", block)
+    (block) => defineFieldBlock($localize`Use self on \u{1F528}`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("use", block)
 );
 
 defineBlock("instead_onenter",
-    (block) => defineFieldBlock("При входе (onenter)", block)
+    (block) => defineFieldBlock($localize`On Enter`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("onenter", block)
 );
 
 defineBlock("instead_onexit",
-    (block) => defineFieldBlock("При выходе (onexit)", block)
+    (block) => defineFieldBlock($localize`On Exit`, block)
         .setStyle("properties_blocks"),
 
     (block) => generateFieldCode("onexit", block)
 );
 
 defineBlock("instead_obj",
-    (block) => defineListBlock("Объекты (obj)", block)
+    (block) => defineListBlock($localize`:rooms objects|:Objects`, block)
         .setStyle("rooms_blocks"),
 
     (block) => generateFieldCode("obj", block, "ITEMS")
 );
 
 defineBlock("instead_way",
-    (block) => defineListBlock("Выходы (way)", block)
+    (block) => defineListBlock($localize`Exits`, block)
         .setStyle("rooms_blocks"),
 
     (block) => generateFieldCode("way", block, "ITEMS")
@@ -109,11 +109,11 @@ defineBlock("instead_way",
 defineBlock("instead_return_false",
     (block) => {
         block.appendDummyInput()
-            .appendField("отменить действие");
+            .appendField($localize`Cancel action`);
         block.setPreviousStatement(true);
         block.setStyle("logic_blocks");
     },
-    (_block) => "return false\n"
+    (_) => "return false\n"
 );
 
 export const selfParameterName = "self";
@@ -121,11 +121,11 @@ export const selfParameterName = "self";
 defineBlock("instead_self",
     (block) => {
         block.appendDummyInput()
-            .appendField("себя");
+            .appendField($localize`self`);
         block.setOutput(true, ["InsteadObject", "InsteadRoom"]);
         block.setStyle("procedure_blocks");
     },
-    (_block) => [selfParameterName, Lua.ORDER_ATOMIC]
+    (_) => [selfParameterName, Lua.ORDER_ATOMIC]
 );
 
 export const whatParameterName = "what";
@@ -133,9 +133,9 @@ export const whatParameterName = "what";
 defineBlock("instead_what",
     (block) => {
         block.appendDummyInput()
-            .appendField("объект");
+            .appendField($localize`what`);
         block.setOutput(true, ["InsteadObject", "InsteadRoom"]);
         block.setStyle("procedure_blocks");
     },
-    (_block) => [whatParameterName, Lua.ORDER_ATOMIC]
+    (_) => [whatParameterName, Lua.ORDER_ATOMIC]
 );

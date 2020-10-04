@@ -1,15 +1,12 @@
-import { WorkspaceSvg } from "blockly";
+import { Workspace } from "blockly/core";
 
-export interface GameMetaData {
-    name: string;
-    version: string;
-    author: string;
-}
-
-export interface WorkspaceInstead extends WorkspaceSvg {
-    insteadMeta: GameMetaData;
+export class GameMetaData {
+    name = "";
+    version = "";
+    author = "";
 }
 
 export interface AppModuel {
-    workspace?: WorkspaceInstead;
+    workspace: Workspace;
+    insteadMeta: GameMetaData;
 }

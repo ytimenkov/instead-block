@@ -18,21 +18,8 @@ module.exports = {
     module: {
         rules: [
             { test: /\.(png|svg|jpg|gif)$/, use: ["file-loader"], },
-            { test: /.html$/, loader: "html-loader" },
             { test: /.lua$/, loader: "raw-loader" },
             { test: /.pegjs$/, loader: path.resolve(__dirname, "pegjs-loader.ts"), },
-            {
-                test: /.xml$/,
-                oneOf: [
-                    { resource: /playground.xml$/, loader: "file-loader" },
-                    {
-                        loader: "html-loader",
-                        options: {
-                            esModule: true,
-                        },
-                    },
-                ]
-            },
         ]
     },
 
