@@ -1,7 +1,8 @@
+import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ClrLoadingState } from "@clr/angular";
 import { Workspace } from "blockly/core";
-import { backupWorkspace, downloadProject, generateCode, uploadProject, resetWorkspace } from "src/files";
+import { backupWorkspace, downloadProject, generateCode, loadWorkspace, resetWorkspace, uploadProject } from "src/files";
 import { AppModuel as AppModel, GameMetaData } from "src/model";
 import { InsteadService } from "./instead.service";
 
@@ -19,7 +20,7 @@ export class AppComponent {
   };
   code = "";
 
-  constructor(private insteadService: InsteadService) { }
+  constructor(private insteadService: InsteadService, private http: HttpClient) { }
 
   refreshCode(): void {
     this.code = generateCode(this.model);
@@ -53,5 +54,13 @@ export class AppComponent {
 
   new(): void {
     resetWorkspace(this.model);
+  }
+
+  loadDemo(url: string): void {
+    // TODO: This is a candidate for a service...
+    this.http.get(url, { responseType: "text" })
+      .subscribe((data) => {
+        loadWorkspace(data, this.model);
+      });
   }
 }

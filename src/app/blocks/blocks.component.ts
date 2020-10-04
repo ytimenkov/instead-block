@@ -58,19 +58,6 @@ export class BlocksComponent implements OnInit {
     if (window.localStorage[localStorageKey]) {
       console.log("Loading saved workspace");
       loadWorkspace(window.localStorage[localStorageKey], this.model);
-    } else {
-      console.log("Loading default workspace");
-      const file = require("data/playground.xml").default;
-      const client = new XMLHttpRequest();
-      const model = this.model;
-      client.onreadystatechange = function(): void {
-        if (this.readyState === this.DONE && this.status === 200) {
-          loadWorkspace(this.responseText, model);
-        }
-      };
-      client.open("GET", file, true);
-      client.send();
     }
   }
-
 }

@@ -3,12 +3,28 @@
   xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="48139a8f408fb79f24e82673e89e23c2ac314f23" datatype="html">
+        <source>File</source>
+        <target state="translated">Файл</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4efc5bac71b7d672d530cb3febefdd480a338146" datatype="html">
+        <source>Demos</source>
+        <target state="translated">Демо</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6821eb26238163741b2fd108110829be12911689" datatype="html">
         <source>Edit game metadata</source>
         <target>Информация об игре</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cab6d226c210b0b40b6e8425b7bb4306401552fe" datatype="html">
@@ -16,7 +32,7 @@
         <target>Сохранить в браузере</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="302872df727a9885e5fd76eacaa839c884eac794" datatype="html">
@@ -24,7 +40,7 @@
         <target>Сохранить в файл</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="83a87874b5ae2acc577bbbaf7ed76ca8cc7e9c7f" datatype="html">
@@ -32,7 +48,15 @@
         <target>Загрузить из файла</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ea9ab788b9c5852eeb2144e874ed40d7d75346f9" datatype="html">
+        <source>Playground(ru)</source>
+        <target state="translated">Песочница</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="881e2e38e83b4c805905cbab3d12c7369a420174" datatype="html">
@@ -40,7 +64,7 @@
         <target>Перезапустить</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b0acfb4220d49bde8c7643803180e7b06b8017bc" datatype="html">
@@ -48,7 +72,15 @@
         <target>Показать текст на Lua</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d81f00c85d3b507f3e3d78bfc617a2c66e028391" datatype="html">
+        <source>New</source>
+        <target state="translated">Новый проект</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fdf7cbdc140d0aab0f0b6c06065a0fd448ed6a2e" datatype="html">

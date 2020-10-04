@@ -20,7 +20,6 @@ module.exports = {
             { test: /\.(png|svg|jpg|gif)$/, use: ["file-loader"], },
             { test: /.lua$/, loader: "raw-loader" },
             { test: /.pegjs$/, loader: path.resolve(__dirname, "pegjs-loader.ts"), },
-            { test: /.xml$/, loader: "file-loader" },
         ]
     },
 
