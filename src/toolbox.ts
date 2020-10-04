@@ -3,7 +3,7 @@ import { Theme } from "blockly/core";
 const separator = `<sep></sep>`;
 
 function objects(): string {
-    return `<category name="${$localize`Objects`}" categorystyle="objects_category">
+  return `<category name="${$localize`:toolbox category|:Objects`}" categorystyle="objects_category">
 <block type="instead_object">
   <value name="DSC">
     <shadow type="text">
@@ -68,7 +68,7 @@ ${separator}
 }
 
 function rooms(): string {
-    return `<category name="${$localize`Rooms`}" categorystyle="rooms_category">
+  return `<category name="${$localize`Rooms`}" categorystyle="rooms_category">
 <block type="instead_room">
   <value name="DSC">
     <shadow type="text">
@@ -125,7 +125,7 @@ ${separator}
 }
 
 function actions(): string {
-    return `<category name="${$localize`Actions`}" categorystyle="actions_category">
+  return `<category name="${$localize`Actions`}" categorystyle="actions_category">
 <label text="${$localize`Text`}"></label>
 <block type="instead_print"></block>
 <block type="text"></block>
@@ -166,7 +166,7 @@ function actions(): string {
 }
 
 function logic(): string {
-    return `<category name="${$localize`Logic`}" categorystyle="logic_category">
+  return `<category name="${$localize`Logic`}" categorystyle="logic_category">
 <block type="controls_if"></block>
 <block type="logic_compare"></block>
 <block type="logic_operation"></block>
@@ -187,7 +187,7 @@ function logic(): string {
 }
 
 function math(): string {
-    return `<category name="${$localize`Math`}" categorystyle="math_category">
+  return `<category name="${$localize`Math`}" categorystyle="math_category">
 <block type="math_number">
   <field name="NUM">42</field>
 </block>
@@ -275,47 +275,47 @@ function math(): string {
 }
 
 export function createToolBox(): string {
-    const toolbox = [
-        `<xml style="display: none">`,
-        objects(),
-        rooms(),
-        actions(),
-        logic(),
-        math(),
-        "</xml>"
-    ];
+  const toolbox = [
+    `<xml style="display: none">`,
+    objects(),
+    rooms(),
+    actions(),
+    logic(),
+    math(),
+    "</xml>"
+  ];
 
-    return toolbox.join("");
+  return toolbox.join("");
 }
 
 export function createInsteadTheme(): Theme {
-    return Theme.defineTheme("instead", {
-        base: "classic",
-        categoryStyles: {
-            rooms_category: {
-                colour: "120"
-            },
-            objects_category: {
-                colour: "60"
-            },
-            actions_category: {
-                colour: "120"
-            }
-        },
-        blockStyles: {
-            rooms_blocks: {
-                colourPrimary: "120"
-            },
-            objects_blocks: {
-                colourPrimary: "60"
-            },
-            actions_blocks: {
-                colourPrimary: "120"
-            },
-            properties_blocks: {
-                colourPrimary: "30"
-            }
-        }
-    });
+  return Theme.defineTheme("instead", {
+    base: "classic",
+    categoryStyles: {
+      rooms_category: {
+        colour: "120"
+      },
+      objects_category: {
+        colour: "60"
+      },
+      actions_category: {
+        colour: "120"
+      }
+    },
+    blockStyles: {
+      rooms_blocks: {
+        colourPrimary: "120"
+      },
+      objects_blocks: {
+        colourPrimary: "60"
+      },
+      actions_blocks: {
+        colourPrimary: "120"
+      },
+      properties_blocks: {
+        colourPrimary: "30"
+      }
+    }
+  });
 }
 

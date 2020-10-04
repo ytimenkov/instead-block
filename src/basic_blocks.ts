@@ -92,7 +92,7 @@ defineBlock("instead_onexit",
 );
 
 defineBlock("instead_obj",
-    (block) => defineListBlock($localize`Objects`, block)
+    (block) => defineListBlock($localize`:rooms objects|:Objects`, block)
         .setStyle("rooms_blocks"),
 
     (block) => generateFieldCode("obj", block, "ITEMS")

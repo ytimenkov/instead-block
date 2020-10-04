@@ -37,9 +37,9 @@ function defineObjectAction1(name: string, desc: string, functName: string): voi
     );
 }
 
-defineObjectAction1("instead_take", $localize`take: `, "take");
-defineObjectAction1("instead_disable", $localize`disable: `, "disable");
-defineObjectAction1("instead_enable", $localize`enable: `, "enable");
+defineObjectAction1("instead_take", $localize`take`, "take");
+defineObjectAction1("instead_disable", $localize`disable`, "disable");
+defineObjectAction1("instead_enable", $localize`enable`, "enable");
 
 function defineObjectAction2(name: string, desc: string, functName: string, whereText: string): void {
     defineBlock(name,

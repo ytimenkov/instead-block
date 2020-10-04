@@ -163,12 +163,13 @@
           <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7531602241051125940" datatype="html">
+      <trans-unit id="7862401357600970374" datatype="html">
         <source>Objects</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/basic_blocks.ts</context>
           <context context-type="linenumber">95</context>
         </context-group>
+        <note priority="1" from="meaning">rooms objects</note>
       </trans-unit>
       <trans-unit id="4193807660062831912" datatype="html">
         <source>Exits</source>
@@ -212,22 +213,22 @@
           <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4565882844883341437" datatype="html">
-        <source>take: </source>
+      <trans-unit id="2851907004211409" datatype="html">
+        <source>take</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/functions.ts</context>
           <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5643551190748177196" datatype="html">
-        <source>disable: </source>
+      <trans-unit id="8056364825023681713" datatype="html">
+        <source>disable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/functions.ts</context>
           <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5818587302001824834" datatype="html">
-        <source>enable: </source>
+      <trans-unit id="6578734339769388749" datatype="html">
+        <source>enable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/functions.ts</context>
           <context context-type="linenumber">42</context>
@@ -306,6 +307,14 @@
           <context context-type="linenumber">31</context>
         </context-group>
         <note priority="1" from="meaning">random number to</note>
+      </trans-unit>
+      <trans-unit id="5666524214928126071" datatype="html">
+        <source>Objects</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/toolbox.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <note priority="1" from="meaning">toolbox category</note>
       </trans-unit>
       <trans-unit id="8413539238278840824" datatype="html">
         <source>There is an object</source>
