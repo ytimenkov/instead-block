@@ -1,0 +1,706 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+    <block type="instead_object" id="Cl12XZZ9iZ07|kH#Pmi1" x="53" y="38">
+        <field name="NAME">Нож</field>
+        <value name="DSC">
+            <block type="text" id="_ZQM`?+JWKIlk]1;$ew@">
+                <field name="TEXT">^На полу лежит {складной нож}.</field>
+            </block>
+        </value>
+        <statement name="DEFINITION">
+            <block type="instead_inv" id="tJ9-u|ZYh17!2];dWY49">
+                <value name="TEXT">
+                    <block type="text" id=";]|(!6}kcw#_A~%uEbCv">
+                        <field name="TEXT">Хороший складной нож с двумя лезвиями и штопором</field>
+                    </block>
+                </value>
+                <next>
+                    <block type="instead_act" id="PSgFC_RuEFuRh;w)9-M^">
+                        <value name="TEXT">
+                            <shadow type="text" id="HzF6l={--rHtmzB:n1Fr">
+                                <field name="TEXT">действие на объект</field>
+                            </shadow>
+                            <block type="instead_method0" id="+2Q@K9!P:#%GgfLm:kk)">
+                                <statement name="DEFINITION">
+                                    <block type="instead_take" id="O3.EaTfRSD-MU$by*Ty~">
+                                        <value name="WHAT">
+                                            <shadow type="instead_self" id="X!SG$s+.m#3/!MxP$^(K"></shadow>
+                                        </value>
+                                        <next>
+                                            <block type="instead_print" id="+^OQOW;7i!u,M}Cf(.iE">
+                                                <field name="FUN">p</field>
+                                                <field name="TEXT">Я подобрал нож с пола.</field>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </statement>
+                            </block>
+                        </value>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+    <block type="instead_object" id=")j~sm{f[9A7#zt1xsn]i" x="55" y="224">
+        <field name="NAME">Дыра в полу</field>
+        <value name="DSC">
+            <shadow type="text" id="A+b0yET|~TyfS@Ww-2J^">
+                <field name="TEXT">Здесь лежит объект.</field>
+            </shadow>
+            <block type="instead_method0" id="~]`.p3+`)y;cw]]bLJ_W">
+                <statement name="DEFINITION">
+                    <block type="instead_print" id="xMzbzqHQG;e%J}9V]JzZ">
+                        <field name="FUN">pr</field>
+                        <field name="TEXT">В полу {дыра}</field>
+                        <next>
+                            <block type="controls_if" id="F+0LlZQ_:hyQntgHi?ZL">
+                                <value name="IF0">
+                                    <block type="instead_where" id="MydoXO;e-dv!oyh~TP8M">
+                                        <field name="COND">==</field>
+                                        <value name="WHAT">
+                                            <shadow type="instead_self" id="!l|yTjh7J~~M%zw5!/bM"></shadow>
+                                            <block type="instead_object_ref" id="3eAVU,C#H+N*62j,/(KN">
+                                                <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                            </block>
+                                        </value>
+                                        <value name="WHERE">
+                                            <block type="instead_object_ref" id="AWe0dr229fLuJCRO7]Zn">
+                                                <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                                <statement name="DO0">
+                                    <block type="instead_print" id="TBuJDyJK83m`1F$,gRlw">
+                                        <field name="FUN">pr</field>
+                                        <field name="TEXT">, в которую теперь можно спуститься</field>
+                                    </block>
+                                </statement>
+                                <next>
+                                    <block type="instead_print" id="3+=@%RF5]@=SX|L7qJB}">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">.</field>
+                                    </block>
+                                </next>
+                            </block>
+                        </next>
+                    </block>
+                </statement>
+            </block>
+        </value>
+        <statement name="DEFINITION">
+            <block type="instead_act" id="(G)uFoCbIr36D$E}7F9k">
+                <value name="TEXT">
+                    <shadow type="text" id="0wXWD^TY(Dalz.R)`)se">
+                        <field name="TEXT">действие на объект</field>
+                    </shadow>
+                    <block type="instead_method0" id="lb[27vfa]0SCIl=B6An]">
+                        <statement name="DEFINITION">
+                            <block type="controls_if" id="pfcJsr*7}e@qc@dQ5Gqu">
+                                <mutation else="1"></mutation>
+                                <value name="IF0">
+                                    <block type="instead_where" id="~BArBGvHok[lu7X54yA2">
+                                        <field name="COND">==</field>
+                                        <value name="WHAT">
+                                            <shadow type="instead_self"></shadow>
+                                            <block type="instead_object_ref" id="B-.BU1_lOOl`x@y)XI{y">
+                                                <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                            </block>
+                                        </value>
+                                        <value name="WHERE">
+                                            <block type="instead_object_ref" id=")Fp1z*.0yF?;+F?x;Oi:">
+                                                <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                                <statement name="DO0">
+                                    <block type="instead_print" id="avdO#,ZGqlw#ca5ob2;w">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">Веревка держится крепко. Можно спускаться.</field>
+                                    </block>
+                                </statement>
+                                <statement name="ELSE">
+                                    <block type="instead_print" id="t=C?+N:Jm~XLIuA*1,?u">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">Похоже, тут довольно глубоко. Не хотелось бы сломать что-нибудь при прыжке.</field>
+                                    </block>
+                                </statement>
+                            </block>
+                        </statement>
+                    </block>
+                </value>
+                <next>
+                    <block type="instead_used" id="OM!`eQ*$J}W?@yU#51t3">
+                        <value name="TEXT">
+                            <block type="instead_method1" id="4LAvKQs%SYl@IqfGtrsu">
+                                <statement name="DEFINITION">
+                                    <shadow type="instead_print" id="x+~C*SfGH:,C}N|2$yno">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">вы использовали "what"</field>
+                                    </shadow>
+                                    <block type="controls_if" id="qNt]VN8h_kq@{#k*ea.3">
+                                        <value name="IF0">
+                                            <block type="logic_compare" id="D[M;XZ)8S1faXLpFn0Q~">
+                                                <field name="OP">EQ</field>
+                                                <value name="A">
+                                                    <block type="instead_what" id="~9Oe9_Zz5nRd:Hu@N/Jy"></block>
+                                                </value>
+                                                <value name="B">
+                                                    <block type="instead_object_ref" id="aRzU:lzYTSY{|lfVlS6T">
+                                                        <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                        <statement name="DO0">
+                                            <block type="instead_print" id="Z=sL-{%^oIgM9S1P]l/i">
+                                                <field name="FUN">p</field>
+                                                <field name="TEXT">Мне нужно закрепить канат перед тем, как бросать его в дыру.</field>
+                                            </block>
+                                        </statement>
+                                    </block>
+                                </statement>
+                            </block>
+                        </value>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+    <block type="instead_object" id="HDiK}:@f~h!tbG5_BAo." x="66" y="740">
+        <field name="NAME">Веревка</field>
+        <value name="DSC">
+            <shadow type="text" id="qkZti=*5//,U+IKg/H58">
+                <field name="TEXT">Здесь лежит объект.</field>
+            </shadow>
+            <block type="instead_method0" id="?kU~$.^WB}VxTl-@$8$j">
+                <statement name="DEFINITION">
+                    <block type="controls_if" id="1i.BTw~XzFDRu*DRK+sx">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                            <block type="instead_where" id=")_j{p39jzg/`A!1gYT.X">
+                                <field name="COND">==</field>
+                                <value name="WHAT">
+                                    <shadow type="instead_self"></shadow>
+                                    <block type="instead_object_ref" id="D|-OyY5SWPvU,LxFmT-s">
+                                        <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                    </block>
+                                </value>
+                                <value name="WHERE">
+                                    <block type="instead_object_ref" id="R:RygX-E,HF1~H3Oqowy">
+                                        <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                    </block>
+                                </value>
+                            </block>
+                        </value>
+                        <statement name="DO0">
+                            <block type="instead_print" id="nfk%mE:zKTe.F?!q6S{w">
+                                <field name="FUN">p</field>
+                                <field name="TEXT">с привязанной к нему {веревкой}.</field>
+                            </block>
+                        </statement>
+                        <statement name="ELSE">
+                            <block type="instead_print" id="V5Pg9#k-3mn.dE7[?#Q6">
+                                <field name="FUN">p</field>
+                                <field name="TEXT">^На полу лежит {кусок веревки}.</field>
+                            </block>
+                        </statement>
+                    </block>
+                </statement>
+            </block>
+        </value>
+        <statement name="DEFINITION">
+            <block type="instead_inv" id="g|~ZA}seav1B9~Y(8D:R">
+                <value name="TEXT">
+                    <shadow type="text" id="DC%e8:$,3@N]M_TviR|6">
+                        <field name="TEXT">Кусок бельевой веревки длиной около десятка футов.</field>
+                    </shadow>
+                </value>
+                <next>
+                    <block type="instead_act" id="*Jw@lH=/Av{7],}5+wi7">
+                        <value name="TEXT">
+                            <shadow type="text">
+                                <field name="TEXT">действие на объект</field>
+                            </shadow>
+                            <block type="instead_method0" id="|E#ZGLpo9lI7G0]4zJYo">
+                                <statement name="DEFINITION">
+                                    <block type="controls_if" id="o|$4tT.HfefjE)}c:#1+">
+                                        <mutation else="1"></mutation>
+                                        <value name="IF0">
+                                            <block type="instead_where" id="vi}54Dm{qymje+f;Yy^{">
+                                                <field name="COND">==</field>
+                                                <value name="WHAT">
+                                                    <shadow type="instead_self"></shadow>
+                                                    <block type="instead_object_ref" id="doF@#`y14HH-2M2~]krt">
+                                                        <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                                    </block>
+                                                </value>
+                                                <value name="WHERE">
+                                                    <block type="instead_object_ref" id="`l6e_uZ@SS|J%R7}btwn">
+                                                        <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                        <statement name="DO0">
+                                            <block type="instead_print" id="}aSAE8RwYkWX1)F_!~RF">
+                                                <field name="FUN">p</field>
+                                                <field name="TEXT">Я отвязал веревку от кольца и забрал с собой.</field>
+                                            </block>
+                                        </statement>
+                                        <statement name="ELSE">
+                                            <block type="instead_print" id="9e#_KfzwLLFbm?XvGQ7;">
+                                                <field name="FUN">p</field>
+                                                <field name="TEXT">Я забрал веревку.</field>
+                                            </block>
+                                        </statement>
+                                        <next>
+                                            <block type="instead_take" id="LF?]Ch5^mek(SI!F|P0Q">
+                                                <value name="WHAT">
+                                                    <shadow type="instead_self" id="GK2u[y@3d:3:V+|v?_gA"></shadow>
+                                                </value>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </statement>
+                            </block>
+                        </value>
+                        <next>
+                            <block type="instead_used" id="|j|)^X0y~D#}K?6rG6P:">
+                                <value name="TEXT">
+                                    <block type="instead_method1" id="/R=v}PYKrh-4Ig@c9_`-">
+                                        <statement name="DEFINITION">
+                                            <shadow type="instead_print">
+                                                <field name="FUN">p</field>
+                                                <field name="TEXT">вы использовали "what"</field>
+                                            </shadow>
+                                            <block type="controls_if" id="hXt,[rGmq4q3SGk3)=HE">
+                                                <value name="IF0">
+                                                    <block type="logic_operation" id="=;ObUr[Q)2I{|F[:d|Bd">
+                                                        <field name="OP">AND</field>
+                                                        <value name="A">
+                                                            <block type="logic_compare" id="gH$axjxQ6fVfF#;8YP_6">
+                                                                <field name="OP">EQ</field>
+                                                                <value name="A">
+                                                                    <block type="instead_what" id="O2BU/fBa(]WBac0]xe1k"></block>
+                                                                </value>
+                                                                <value name="B">
+                                                                    <block type="instead_object_ref" id="6.9iw5oXMfpk+3Pf~g[b">
+                                                                        <field name="NAME">Cl12XZZ9iZ07|kH#Pmi1</field>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                        <value name="B">
+                                                            <block type="instead_where" id="9:gBxzsUA~t!D-hW#MB;">
+                                                                <field name="COND">==</field>
+                                                                <value name="WHAT">
+                                                                    <shadow type="instead_self"></shadow>
+                                                                    <block type="instead_self" id="R3HLiXki1ug^3(Ve4aaJ"></block>
+                                                                </value>
+                                                                <value name="WHERE">
+                                                                    <block type="instead_object_ref" id="*u~.1Nw^GJn+-t60l3ht">
+                                                                        <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                                                    </block>
+                                                                </value>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                    <block type="instead_print" id="ZD-W*cexZG~|c/%E[g.B">
+                                                        <field name="FUN">p</field>
+                                                        <field name="TEXT">Я отрезал веревку от кольца и забрал.
+                                                        </field>
+                                                        <next>
+                                                            <block type="instead_take" id="Ta(|8g1){rHt6oe/~:^5">
+                                                                <value name="WHAT">
+                                                                    <shadow type="instead_self" id="0TXZ=%zcBvJEl_ie]9n;"></shadow>
+                                                                </value>
+                                                            </block>
+                                                        </next>
+                                                    </block>
+                                                </statement>
+                                            </block>
+                                        </statement>
+                                    </block>
+                                </value>
+                            </block>
+                        </next>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+    <block type="instead_object" id="XDNXkVnlOZ^?TFO!mQ;O" x="69" y="1300">
+        <field name="NAME">Бельевая веревка</field>
+        <value name="DSC">
+            <shadow type="text" id="T3Mk3L!v{0m-igZH7~X-">
+                <field name="TEXT">Здесь висит {бельевая веревка}.</field>
+            </shadow>
+        </value>
+        <statement name="DEFINITION">
+            <block type="instead_act" id="|9kc~YZa)k~`p1!ykmz4">
+                <value name="TEXT">
+                    <shadow type="text" id="5l~V3cjVl]9|4eQ:bR^v">
+                        <field name="TEXT">Веревка довольно длинная и прочная.</field>
+                    </shadow>
+                </value>
+                <next>
+                    <block type="instead_used" id=".l?WATH*(z+I]FW?-}[J">
+                        <value name="TEXT">
+                            <block type="instead_method1" id="LC3bP/J?q|Z^EkH@?5%:">
+                                <statement name="DEFINITION">
+                                    <shadow type="instead_print">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">вы использовали "what"</field>
+                                    </shadow>
+                                    <block type="controls_if" id="suA`^j5b*`vf0a[O(Z^f">
+                                        <value name="IF0">
+                                            <block type="logic_compare" id="j%ZEfTz/gLOTl1LhCXkQ">
+                                                <field name="OP">EQ</field>
+                                                <value name="A">
+                                                    <block type="instead_what" id="nD@VekvGI,~uQ+_}H}wP"></block>
+                                                </value>
+                                                <value name="B">
+                                                    <block type="instead_object_ref" id="A=TE)}r2q|k];:51+~}F">
+                                                        <field name="NAME">Cl12XZZ9iZ07|kH#Pmi1</field>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                        <statement name="DO0">
+                                            <block type="instead_print" id="VKB.XKu|XzIE0x;CTBon">
+                                                <field name="FUN">p</field>
+                                                <field name="TEXT">Я срезал веревку и забрал.</field>
+                                                <next>
+                                                    <block type="instead_take" id="*5%]DOT6BjH$,E9^H6TM">
+                                                        <value name="WHAT">
+                                                            <shadow type="instead_self" id="y|hYctyFgqMTG::`B2}U">
+                                                            </shadow>
+                                                            <block type="instead_object_ref" id="/_;AY0@PUNMOuv3XBj2z">
+                                                                <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                                            </block>
+                                                        </value>
+                                                        <next>
+                                                            <block type="instead_disable" id="V;T:jh*qPTh`|A1n=oah">
+                                                                <value name="WHAT">
+                                                                    <shadow type="instead_self" id="$a0376}U+_BK4pG8:yC%"></shadow>
+                                                                </value>
+                                                            </block>
+                                                        </next>
+                                                    </block>
+                                                </next>
+                                            </block>
+                                        </statement>
+                                    </block>
+                                </statement>
+                            </block>
+                        </value>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+    <block type="instead_object" id="PN8CP{9:3!OA,r]*H8#!" x="37" y="1582">
+        <field name="NAME">Кольцо</field>
+        <value name="DSC">
+            <shadow type="text" id="VWqAK{AZ=?H9gR2FXT`9">
+                <field name="TEXT">Здесь лежит объект.</field>
+            </shadow>
+            <block type="instead_method0" id="=@y!$7HCW@RE-S|lV/=^">
+                <statement name="DEFINITION">
+                    <block type="instead_print" id="E8+0g~*hlI4Y_*Mmb~nu">
+                        <field name="FUN">pr</field>
+                        <field name="TEXT">Недалеко от нее в пол вделано металлическое {кольцо}</field>
+                        <next>
+                            <block type="controls_if" id="%We5OFE$/FzzXdV}?8B/">
+                                <value name="IF0">
+                                    <block type="instead_where" id=".59?!wj}/QPR8IC^[,Va">
+                                        <field name="COND">~=</field>
+                                        <value name="WHAT">
+                                            <shadow type="instead_self"></shadow>
+                                            <block type="instead_object_ref" id="$zmi/VcjxnV1us+Wy%!n">
+                                                <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                            </block>
+                                        </value>
+                                        <value name="WHERE">
+                                            <block type="instead_object_ref" id="v]vy8e5c}RHlyZDlt5rw">
+                                                <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                                <statement name="DO0">
+                                    <block type="instead_print" id="7A_Fczb`C^nDWkw!tksS">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">.</field>
+                                    </block>
+                                </statement>
+                            </block>
+                        </next>
+                    </block>
+                </statement>
+            </block>
+        </value>
+        <statement name="DEFINITION">
+            <block type="instead_act" id="(DsSE]$85As*H=}012S(">
+                <value name="TEXT">
+                    <shadow type="text" id="xs=f)W!Q@S);Mi~HTm7y">
+                        <field name="TEXT">действие на объект</field>
+                    </shadow>
+                    <block type="instead_method0" id="Rn.1|UW2kJ9Da!_vi47}">
+                        <statement name="DEFINITION">
+                            <block type="controls_if" id="amXpJ9x4(C.A4EaY9#@a">
+                                <mutation else="1"></mutation>
+                                <value name="IF0">
+                                    <block type="instead_where" id="4cYiD)0X(YjcSHv+$OYo">
+                                        <field name="COND">==</field>
+                                        <value name="WHAT">
+                                            <shadow type="instead_self"></shadow>
+                                            <block type="instead_object_ref" id="TVO!Wb50t#LrCI,Ai4cj">
+                                                <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                            </block>
+                                        </value>
+                                        <value name="WHERE">
+                                            <block type="instead_self" id="~ro%A-3h7npOt1qNn(GZ"></block>
+                                        </value>
+                                    </block>
+                                </value>
+                                <statement name="DO0">
+                                    <block type="instead_print" id="t};Phh=l`7j/Ljw[8I`p">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">Канат крепко привязан к кольцу.</field>
+                                    </block>
+                                </statement>
+                                <statement name="ELSE">
+                                    <block type="instead_print" id="SuK9yHxA]aF3ejs*hqb+">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">Я подергал кольцо. Похоже, оно довольно прочно закреплено.</field>
+                                    </block>
+                                </statement>
+                            </block>
+                        </statement>
+                    </block>
+                </value>
+                <next>
+                    <block type="instead_used" id="%s=OPSXd(NWgCgIg^kK-">
+                        <value name="TEXT">
+                            <block type="instead_method1" id="=e[{]}7NU%~pHF5Vr*6B">
+                                <statement name="DEFINITION">
+                                    <shadow type="instead_print" id="S,R,bhcM]V@*KwKOSb4_">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">вы использовали "what"</field>
+                                    </shadow>
+                                    <block type="controls_if" id="#UzYeyJdk:Ni1u?~;N7F">
+                                        <value name="IF0">
+                                            <block type="logic_compare" id="56[gUF)EiT^kJR9]({..">
+                                                <field name="OP">EQ</field>
+                                                <value name="A">
+                                                    <block type="instead_what" id="8i:bf@Kq?GjxH}HaNFdk"></block>
+                                                </value>
+                                                <value name="B">
+                                                    <block type="instead_object_ref" id="@79yB^JrUZzXvRa-ee/%">
+                                                        <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                        <statement name="DO0">
+                                            <block type="instead_print" id="D{ETNVemsK*,22P.rbya">
+                                                <field name="FUN">p</field>
+                                                <field name="TEXT">Я привязал канат к кольцу.</field>
+                                                <next>
+                                                    <block type="instead_drop" id="yc/^=OV(e5:BqYaMGN/W">
+                                                        <value name="WHAT">
+                                                            <shadow type="instead_self" id="woFo%u3~sU!9?UUf@W+w">
+                                                            </shadow>
+                                                            <block type="instead_object_ref" id="nQ2R6p0KUATa:nuN-|Xc">
+                                                                <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                                            </block>
+                                                        </value>
+                                                        <value name="WHERE">
+                                                            <block type="instead_object_ref" id="cR/Ow!2?VoxK$}Vu7Qi6">
+                                                                <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </next>
+                                            </block>
+                                        </statement>
+                                    </block>
+                                </statement>
+                            </block>
+                        </value>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+    <block type="instead_room" id="-2jWaJo*e7L-;IT0?p!p" x="36" y="2051">
+        <field name="NAME">main</field>
+        <value name="DSC">
+            <shadow type="text" id="ClDA(Y|kFQSomE?my@XZ">
+                <field name="TEXT"></field>
+            </shadow>
+        </value>
+        <statement name="DEFINITION">
+            <block type="instead_decor" id="w|@*_%I#cG,HQO4A41E`">
+                <value name="TEXT">
+                    <shadow type="text" id="o0;%Tg|RpV?nW{uxoD)y">
+                        <field name="TEXT">Детальное описание комнаты</field>
+                    </shadow>
+                    <block type="instead_method0" id="85g:;glXMj@;4/7YV*5b">
+                        <statement name="DEFINITION">
+                            <block type="instead_print" id="$o1|v7sL?Vsm=ypb{^SN">
+                                <field name="FUN">p</field>
+                                <field name="TEXT">Комната.</field>
+                                <next>
+                                    <block type="controls_if" id="/6:C]LZlIXHvFw=~=}xY">
+                                        <value name="IF0">
+                                            <block type="instead_where" id="LE;TNX_wql#WvvM2^F{K">
+                                                <field name="COND">==</field>
+                                                <value name="WHAT">
+                                                    <shadow type="instead_self" id="`UXo7aUVJF]=3EC|(iJq"></shadow>
+                                                    <block type="instead_object_ref" id="4c)p]UQ_CYf7fBlsOKew">
+                                                        <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                                    </block>
+                                                </value>
+                                                <value name="WHERE">
+                                                    <block type="instead_object_ref" id="?n(BtZ^*:]7EG?j[tad2">
+                                                        <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                        <statement name="DO0">
+                                            <block type="instead_print" id="hgxj?3{g6J|BKa;U9g,#">
+                                                <field name="FUN">p</field>
+                                                <field name="TEXT">К кольцу привязана веревка.</field>
+                                            </block>
+                                        </statement>
+                                    </block>
+                                </next>
+                            </block>
+                        </statement>
+                    </block>
+                </value>
+                <next>
+                    <block type="instead_disp" id="zG8AYpHlh!G%T@e#NRc;">
+                        <value name="TEXT">
+                            <shadow type="text" id="@azXv=7EChd+GmlgjBre">
+                                <field name="TEXT">Комната с дырой в полу</field>
+                            </shadow>
+                        </value>
+                        <next>
+                            <block type="instead_obj" id="4gd9M:ztx}uD$)4-|;_i">
+                                <value name="ITEMS">
+                                    <block type="lists_create_with" id="BS|]dJekncNmId$bIET2">
+                                        <mutation items="4"></mutation>
+                                        <value name="ADD0">
+                                            <block type="instead_object_ref" id="..owDOkGT8V~K1`E!.v=">
+                                                <field name="NAME">)j~sm{f[9A7#zt1xsn]i</field>
+                                            </block>
+                                        </value>
+                                        <value name="ADD1">
+                                            <block type="instead_object_ref" id="=]7ZzU+K,HhM$Dw[Q0*B">
+                                                <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                            </block>
+                                        </value>
+                                        <value name="ADD2">
+                                            <block type="instead_object_ref" id="rTI^m5!D4?Iz;J!hWR./">
+                                                <field name="NAME">XDNXkVnlOZ^?TFO!mQ;O</field>
+                                            </block>
+                                        </value>
+                                        <value name="ADD3">
+                                            <block type="instead_object_ref" id="_ko?VpW7n|Bqzeb9Z$h$">
+                                                <field name="NAME">Cl12XZZ9iZ07|kH#Pmi1</field>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                                <next>
+                                    <block type="instead_way" id="83we5+nb$|5mcFp|iUc!">
+                                        <value name="ITEMS">
+                                            <block type="lists_create_with" id="2JG1t5D)%!JE]r(j:AVV">
+                                                <mutation items="1"></mutation>
+                                                <value name="ADD0">
+                                                    <block type="instead_room_ref" id="CN;sm2,^CEp^iSdXePoM">
+                                                        <field name="NAME">7c-`=lAv/2fr=XOCE/0.</field>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </next>
+                            </block>
+                        </next>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+    <block type="instead_room" id="7c-`=lAv/2fr=XOCE/0." x="46" y="2407">
+        <field name="NAME">Подвал</field>
+        <value name="DSC">
+            <shadow type="text" id="A7nsu5;6fuLTzR$akHah">
+                <field name="TEXT">Я оказался в подвале. Задача успешно решена!</field>
+            </shadow>
+        </value>
+        <statement name="DEFINITION">
+            <block type="instead_onenter" id="aksr,|6gahKW{;zkO04o">
+                <value name="TEXT">
+                    <block type="instead_method1" id="zV^_@YQkO2abC6b6+}9W">
+                        <statement name="DEFINITION">
+                            <shadow type="instead_print" id="|rAcq:1caZML2p|?~I%N">
+                                <field name="FUN">p</field>
+                                <field name="TEXT">вошли в "what"</field>
+                            </shadow>
+                            <block type="controls_if" id="-$hvJl{,r.6J5)sPxrW-">
+                                <value name="IF0">
+                                    <block type="instead_where" id="48v=K^moOxO_L*aPLGJ^">
+                                        <field name="COND">~=</field>
+                                        <value name="WHAT">
+                                            <shadow type="instead_self"></shadow>
+                                            <block type="instead_object_ref" id="k@Rx:B:qWMJcG4@AkzL4">
+                                                <field name="NAME">HDiK}:@f~h!tbG5_BAo.</field>
+                                            </block>
+                                        </value>
+                                        <value name="WHERE">
+                                            <block type="instead_object_ref" id="_j/nWa~!teWHyQA=OK6%">
+                                                <field name="NAME">PN8CP{9:3!OA,r]*H8#!</field>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                                <statement name="DO0">
+                                    <block type="instead_print" id="ts3b5s7ljV6HnaMq2QOd">
+                                        <field name="FUN">p</field>
+                                        <field name="TEXT">Прыгать так? Ну уж нет.</field>
+                                        <next>
+                                            <block type="instead_return_false" id=")fl~p`ODtuT@X#6C|:YR"></block>
+                                        </next>
+                                    </block>
+                                </statement>
+                            </block>
+                        </statement>
+                    </block>
+                </value>
+                <next>
+                    <block type="instead_way" id="H{we41B)gH)8j/Jb?OLw">
+                        <value name="ITEMS">
+                            <block type="lists_create_with" id="dG0GfuC),OwDldK4@7s+">
+                                <mutation items="1"></mutation>
+                                <value name="ADD0">
+                                    <block type="instead_room_ref" id="E(pYY#0x0rn~q?6,MpG5">
+                                        <field name="NAME">-2jWaJo*e7L-;IT0?p!p</field>
+                                    </block>
+                                </value>
+                            </block>
+                        </value>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+</xml>
