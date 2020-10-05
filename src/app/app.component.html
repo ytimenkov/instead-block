@@ -30,8 +30,8 @@
     <div class="header-actions">
       <clr-dropdown>
         <button class="nav-icon" clrDropdownTrigger>
-          <clr-icon shape="language"></clr-icon>
-          <clr-icon shape="caret down"></clr-icon>
+          <cds-icon shape="language" size="md"></cds-icon>
+          <cds-icon shape="angle" direction="down" size="sm"></cds-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a href="../en" clrDropdownItem>English</a>
@@ -51,14 +51,14 @@
             <li>
               <button class="btn btn-link btn-icon" type="button" i18n-title title="Reload game" (click)="run()"
                 [clrLoading]="reloadingState">
-                <clr-icon *ngIf="code" shape="refresh"></clr-icon>
-                <clr-icon *ngIf="!code" shape="play"></clr-icon>
+                <cds-icon *ngIf="code" shape="refresh"></cds-icon>
+                <cds-icon *ngIf="!code" shape="play"></cds-icon>
               </button>
             </li>
             <li>
               <button class="btn btn-link btn-icon" type="button" i18n-title title="Show code"
                 (click)="refreshCode(); codePreview.visible = true">
-                <clr-icon shape="details"></clr-icon>
+                <cds-icon shape="details"></cds-icon>
               </button>
             </li>
           </ul>

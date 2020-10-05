@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { ClarityIcons, timesIcon } from "@clr/core/icon";
 
 @Component({
   selector: "app-code-preview",
@@ -11,7 +12,9 @@ export class CodePreviewComponent implements OnInit {
   @Input()
   code = "";
 
-  constructor() { }
+  constructor() {
+    ClarityIcons.addIcons(timesIcon);
+  }
 
   ngOnInit(): void {
   }

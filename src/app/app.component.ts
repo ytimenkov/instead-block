@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ClrLoadingState } from "@clr/angular";
+import { angleIcon, ClarityIcons, detailsIcon, languageIcon, playIcon, refreshIcon } from "@clr/core/icon";
 import { Workspace } from "blockly/core";
 import { backupWorkspace, downloadProject, generateCode, loadWorkspace, resetWorkspace, uploadProject } from "src/files";
 import { AppModuel as AppModel, GameMetaData } from "src/model";
@@ -20,7 +21,9 @@ export class AppComponent {
   };
   code = "";
 
-  constructor(private insteadService: InsteadService, private http: HttpClient) { }
+  constructor(private insteadService: InsteadService, private http: HttpClient) {
+    ClarityIcons.addIcons(languageIcon, angleIcon, refreshIcon, playIcon, detailsIcon);
+  }
 
   refreshCode(): void {
     this.code = generateCode(this.model);
