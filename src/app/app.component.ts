@@ -59,7 +59,8 @@ export class AppComponent {
     resetWorkspace(this.model);
   }
 
-  loadDemo(url: string): void {
+  loadDemo(name: string): void {
+    const url = `assets/demos/${name}.${$localize`:demo-language|:en`}.xml`;
     // TODO: This is a candidate for a service...
     this.http.get(url, { responseType: "text" })
       .subscribe((data) => {
