@@ -11,10 +11,11 @@
 <p class="text-center">
     <!-- <ng-container *ngTemplateOutlet="recursiveText; context:{ $implicit: inventory | async }"></ng-container> -->
     <ng-container *ngFor="let elem of inventory$ | async">
-        <a *ngIf="elem.type === 'a'" (click)="use($any(elem).target); $event.stopPropagation()"
-            href="javascript:void(0)">
+        <button class="btn btn-sm" *ngIf="elem.type === 'a'" (click)="use($any(elem).target); $event.stopPropagation()"
+            [class.btn-outline]="useTarget !== $any(elem).target"
+            [class.btn-danger-outline]="useTarget === $any(elem).target">
             {{$any(elem).children[0].text}}
-        </a>
+        </button>
     </ng-container>
 </p>
 

@@ -34,6 +34,7 @@ export class InsteadComponent implements OnInit {
   use(target?: string): void {
     if (this.useTarget && this.useTarget === target) {
       this.insteadService.cmd(target);
+      this.useTarget = undefined;
     } else {
       this.useTarget = target;
     }
