@@ -310,8 +310,7 @@
                                                 <statement name="DO0">
                                                     <block type="instead_print" id="ZD-W*cexZG~|c/%E[g.B">
                                                         <field name="FUN">p</field>
-                                                        <field name="TEXT">Я отрезал веревку от кольца и забрал.
-                                                        </field>
+                                                        <field name="TEXT">Я отрезал веревку от кольца и забрал.</field>
                                                         <next>
                                                             <block type="instead_take" id="Ta(|8g1){rHt6oe/~:^5">
                                                                 <value name="WHAT">
