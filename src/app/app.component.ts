@@ -1,15 +1,17 @@
 import { HttpClient } from "@angular/common/http";
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ClrLoadingState } from "@clr/angular";
-import { angleIcon, ClarityIcons, detailsIcon, languageIcon, playIcon, refreshIcon } from "@clr/core/icon";
+import { angleIcon, ClarityIcons, detailsIcon, languageIcon, playIcon, plusIcon, refreshIcon } from "@clr/core/icon";
 import { Workspace } from "blockly/core";
 import { backupWorkspace, downloadProject, generateCode, loadWorkspace, resetWorkspace, uploadProject } from "src/files";
 import { AppModuel as AppModel, GameMetaData } from "src/model";
 import { InsteadService } from "./instead.service";
+import { Item, Room, TargetTypes, WorkspaceService } from "./workspace/workspace.service";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
@@ -21,8 +23,8 @@ export class AppComponent {
   };
   code = "";
 
-  constructor(private insteadService: InsteadService, private http: HttpClient) {
-    ClarityIcons.addIcons(languageIcon, angleIcon, refreshIcon, playIcon, detailsIcon);
+  constructor(private insteadService: InsteadService, private http: HttpClient, private workspaceService: WorkspaceService) {
+    ClarityIcons.addIcons(languageIcon, angleIcon, refreshIcon, playIcon, detailsIcon, plusIcon);
   }
 
   refreshCode(): void {
@@ -66,5 +68,21 @@ export class AppComponent {
       .subscribe((data) => {
         loadWorkspace(data, this.model);
       });
+  }
+
+  addNewTarget(type: TargetTypes): void {
+    this.workspaceService.addNewTarget(type);
+  }
+
+  setActiveTarget(target: Room | Item): void {
+    this.workspaceService.activeTarget = target;
+  }
+
+  get items(): Item[] {
+    return this.workspaceService.items;
+  }
+
+  get rooms(): Room[] {
+    return this.workspaceService.rooms;
   }
 }

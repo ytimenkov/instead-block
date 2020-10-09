@@ -8,6 +8,7 @@ import "../../basic_blocks";
 import "../../functions";
 import "../../objects";
 import "../../stdlib";
+import { WorkspaceService } from "../workspace/workspace.service";
 
 
 @Component({
@@ -19,7 +20,9 @@ export class BlocksComponent implements OnInit {
   @Input()
   model?: AppModuel;
 
-  constructor(@Inject(LOCALE_ID) private locale: string) { }
+  constructor(
+    @Inject(LOCALE_ID) private locale: string,
+    private workspaceService: WorkspaceService) { }
 
   ngOnInit(): void {
     this.initWorkspace();
@@ -49,6 +52,8 @@ export class BlocksComponent implements OnInit {
       move: { scrollbars: true, wheel: true },
       zoom: { controls: true, },
     });
+
+    this.workspaceService.attach(this.model.workspace);
 
     // tslint:disable-next-line: no-any
     this.model.workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e); });

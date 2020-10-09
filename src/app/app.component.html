@@ -46,6 +46,7 @@
         <clr-dropdown>
           <a class="nav-link nav-text" clrDropdownTrigger i18n>Rooms</a>
           <clr-dropdown-menu *clrIfOpen>
+            <a *ngFor="let room of rooms" (click)="setActiveTarget(room)" clrDropdownItem>{{room.name}}</a>
           </clr-dropdown-menu>
         </clr-dropdown>
       </li>
@@ -53,6 +54,18 @@
         <clr-dropdown>
           <a class="nav-link nav-text" clrDropdownTrigger i18n>Items</a>
           <clr-dropdown-menu *clrIfOpen>
+            <a *ngFor="let item of items" (click)="setActiveTarget(item)" clrDropdownItem>{{item.name}}</a>
+          </clr-dropdown-menu>
+        </clr-dropdown>
+      </li>
+      <li class="nav-item">
+        <clr-dropdown>
+          <button class="nav-link nav-icon" clrDropdownTrigger>
+            <cds-icon shape="plus" size="md"></cds-icon>
+          </button>
+          <clr-dropdown-menu *clrIfOpen>
+            <a (click)="addNewTarget('room')" clrDropdownItem i18n>Room</a>
+            <a (click)="addNewTarget('item')" clrDropdownItem i18n>Item</a>
           </clr-dropdown-menu>
         </clr-dropdown>
       </li>
