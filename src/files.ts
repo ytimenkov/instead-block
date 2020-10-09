@@ -2,7 +2,7 @@ import { Events, Lua, Workspace, Xml } from "blockly/core";
 import { saveAs } from "file-saver";
 import * as JSZip from "jszip";
 import { GameMetaData, AppModuel } from "./model";
-import { InsteadObject, InsteadRoom } from "./objects";
+import { InsteadObject, InsteadRoom } from "./app/blocks/objects";
 
 export function resetWorkspace(model: AppModuel): void {
     try {

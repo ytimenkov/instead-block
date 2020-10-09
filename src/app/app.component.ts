@@ -5,7 +5,7 @@ import { angleIcon, ClarityIcons, detailsIcon, languageIcon, playIcon, plusIcon,
 import { Workspace } from "blockly/core";
 import { backupWorkspace, downloadProject, generateCode, loadWorkspace, resetWorkspace, uploadProject } from "src/files";
 import { AppModuel as AppModel, GameMetaData } from "src/model";
-import { InsteadService } from "./instead.service";
+import { InsteadService } from "./instead/instead.service";
 import { Item, Room, TargetTypes, WorkspaceService } from "./workspace/workspace.service";
 
 @Component({

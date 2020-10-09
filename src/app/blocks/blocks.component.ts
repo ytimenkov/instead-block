@@ -1,14 +1,14 @@
 import { Component, Inject, Input, LOCALE_ID, OnInit } from "@angular/core";
-import * as Blockly from "blockly/core";
+import { inject, setLocale } from "blockly/core";
 import { loadWorkspace, localStorageKey } from "src/files";
 import { AppModuel } from "src/model";
-import { InsteadObject, InsteadRoom } from "src/objects";
-import { createInsteadTheme, createToolBox } from "src/toolbox";
-import "../../basic_blocks";
-import "../../functions";
-import "../../objects";
-import "../../stdlib";
 import { WorkspaceService } from "../workspace/workspace.service";
+import "./primitives";
+import "./functions";
+import "./objects";
+import { InsteadObject, InsteadRoom } from "./objects";
+import "./stdlib";
+import { createInsteadTheme, createToolBox } from "./toolbox";
 
 
 @Component({
@@ -44,9 +44,9 @@ export class BlocksComponent implements OnInit {
       default:
         throw new Error(`Unknown locale: ${this.locale}`);
     }
-    Blockly.setLocale(messages);
+    setLocale(messages);
 
-    this.model.workspace = Blockly.inject("blocklyDiv", {
+    this.model.workspace = inject("blocklyDiv", {
       toolbox: createToolBox(),
       theme: createInsteadTheme(),
       move: { scrollbars: true, wheel: true },

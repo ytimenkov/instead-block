@@ -1,4 +1,4 @@
-import { selfParameterName, whatParameterName } from "./basic_blocks";
+import { selfParameterName, whatParameterName } from "./primitives";
 
 import { Lua, Blocks, Block, FieldDropdown, } from "blockly/core";
 import { defineBlock } from "./blocks";

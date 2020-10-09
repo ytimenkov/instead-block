@@ -35,7 +35,7 @@ export interface Text {
 
 export type Elements = Action | Bold | Italics | Center | Text;
 
-export class Instead {
+export class InsteadEngine {
 
     private files: { [key: string]: string; } = {
         "instead_init.lua": require("instead/instead_init.lua").default,

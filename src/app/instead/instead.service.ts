@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, Observer, Subject } from "rxjs";
 import { distinctUntilChanged, map, tap } from "rxjs/operators";
-import type { Elements, Instead } from "../instead";
+import type { Elements, InsteadEngine } from "./instead.engine";
 
 
 @Injectable({
@@ -10,7 +10,7 @@ import type { Elements, Instead } from "../instead";
 export class InsteadService {
 
   // Lazy-loaded Lua code.
-  private insteadEngine?: Instead;
+  private insteadEngine?: InsteadEngine;
 
   private textObserver = new Subject<string>();
   text = new BehaviorSubject<Elements[]>([]);
@@ -28,8 +28,8 @@ export class InsteadService {
 
   async run(code: string): Promise<void> {
     if (!this.insteadEngine) {
-      const instead = await import("../instead");
-      this.insteadEngine = new instead.Instead(this.textObserver, this.titleObserver,
+      const instead = await import("./instead.engine");
+      this.insteadEngine = new instead.InsteadEngine(this.textObserver, this.titleObserver,
         this.waysObserver, this.inventoryObserver);
       this.wireUpPipes(this.textObserver, this.text);
       this.wireUpPipes(this.titleObserver, this.title);
@@ -43,7 +43,7 @@ export class InsteadService {
     this.instead.ifaceCmd(command);
   }
 
-  private get instead(): Instead {
+  private get instead(): InsteadEngine {
     if (!this.insteadEngine) {
       throw new Error("Attempt to interact before initializing..");
     }
