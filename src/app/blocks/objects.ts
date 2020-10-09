@@ -246,8 +246,21 @@ defineBlock("room_header",
     (block) => {
         block.appendDummyInput()
             .appendField($localize`Room`)
-            .appendField(new FieldTextInput($localize`Room`), "NAME");
+            .appendField(new FieldTextInput(), "NAME");
         block.setStyle("rooms_blocks");
+        block.setEditable(false);
+        block.setDeletable(false);
+        block.setMovable(false);
+    },
+    (block) => ""
+);
+
+defineBlock("object_header",
+    (block) => {
+        block.appendDummyInput()
+            .appendField($localize`Item`)
+            .appendField(new FieldTextInput(), "NAME");
+        block.setStyle("objects_blocks");
         block.setEditable(false);
         block.setDeletable(false);
         block.setMovable(false);
