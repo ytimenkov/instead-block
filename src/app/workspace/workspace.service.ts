@@ -28,6 +28,9 @@ export class WorkspaceService {
     }
     this.activeTargetField = v;
     try {
+      // TODO: Maybe change this to event and handle
+      // changing in the component... However need to figure out how
+      // to sync changes back to the workspace.
       Events.disable();
       this.workspace.clear();
       this.workspace.clearUndo();
@@ -49,15 +52,15 @@ export class WorkspaceService {
     this.workspace = workspace;
   }
 
-  addNewTarget(type: TargetTypes): void {
+  addNewTarget(type: TargetTypes, name: string): void {
     switch (type) {
       case "room":
-        const newRoom = new Room("name");
+        const newRoom = new Room(name);
         this.rooms.push(newRoom);
         this.activeTarget = newRoom;
         break;
       case "item":
-        const newItem = new Item("name");
+        const newItem = new Item(name);
         this.items.push(newItem);
         this.activeTarget = newItem;
         break;

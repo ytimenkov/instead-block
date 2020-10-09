@@ -1,4 +1,4 @@
-import { utils } from "blockly/core";
+import { Xml } from "blockly/core";
 
 
 export class Room {
@@ -7,6 +7,7 @@ export class Room {
     blocks: Element;
 
     constructor(public name: string) {
-        this.blocks = document.createElementNS(utils.xml.NAME_SPACE, "xml");
+        const xml = `<xml><block type="room_header"><field name="NAME">${name}</field></block></xml>`;
+        this.blocks = Xml.textToDom(xml);
     }
 }

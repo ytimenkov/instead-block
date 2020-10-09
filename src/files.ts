@@ -24,9 +24,11 @@ export function resetWorkspace(model: AppModuel): void {
 }
 
 export function generateCode(model: AppModuel): string {
+    // const xml = Xml.workspaceToDom(model.workspace);
+    // return Xml.domToPrettyText(xml);
     const insteadMeta = model.insteadMeta;
     const code = `-- $Name: ${insteadMeta.name}$\n-- $Version: ${insteadMeta.version}$\n-- $Author: ${insteadMeta.author}$\n
-${Lua.workspaceToCode(model.workspace)}`;
+    ${Lua.workspaceToCode(model.workspace)}`;
     return code;
 }
 

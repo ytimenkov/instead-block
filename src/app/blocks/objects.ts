@@ -1,6 +1,7 @@
 import "./blocks";
 
 import { Lua, Blocks, Block, FieldTextInput, FieldDropdown, Workspace, Events } from "blockly/core";
+import { defineBlock } from "./blocks";
 
 function generateObjectCode(type: string, block: Block): string {
     const name = block.getFieldValue("NAME");
@@ -240,6 +241,19 @@ Blocks.instead_room_ref = {
     },
 };
 Lua.instead_room_ref = (block: Block) => generateReferenceCode(block, InsteadRoom);
+
+defineBlock("room_header",
+    (block) => {
+        block.appendDummyInput()
+            .appendField($localize`Room`)
+            .appendField(new FieldTextInput($localize`Room`), "NAME");
+        block.setStyle("rooms_blocks");
+        block.setEditable(false);
+        block.setDeletable(false);
+        block.setMovable(false);
+    },
+    (block) => ""
+);
 
 // TODO: Maybe have a separate object "Main room" where nam overridden into "main" and disp used instead.
 // Or maybe just provide it as a "default" workspace, since disp is useful for dynamic title.

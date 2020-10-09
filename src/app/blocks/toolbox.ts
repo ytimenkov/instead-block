@@ -11,6 +11,7 @@ function objects(): string {
     </shadow>
   </value>
 </block>
+<block type="prop_disp"></block>
 <block type="instead_disp">
   <value name="TEXT">
     <shadow type="text">

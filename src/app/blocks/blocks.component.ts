@@ -3,10 +3,11 @@ import { inject, setLocale } from "blockly/core";
 import { loadWorkspace, localStorageKey } from "src/files";
 import { AppModuel } from "src/model";
 import { WorkspaceService } from "../workspace/workspace.service";
-import "./primitives";
 import "./functions";
 import "./objects";
 import { InsteadObject, InsteadRoom } from "./objects";
+import "./primitives";
+import "./properties";
 import "./stdlib";
 import { createInsteadTheme, createToolBox } from "./toolbox";
 

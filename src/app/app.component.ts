@@ -71,7 +71,12 @@ export class AppComponent {
   }
 
   addNewTarget(type: TargetTypes): void {
-    this.workspaceService.addNewTarget(type);
+    // TODO: Maybe do better dialog...
+    // See also https://blockly-demo.appspot.com/static/demos/custom-dialogs/custom-dialog.js
+    const name = prompt($localize`Name`);
+    if (name) {
+      this.workspaceService.addNewTarget(type, name);
+    }
   }
 
   setActiveTarget(target: Room | Item): void {
