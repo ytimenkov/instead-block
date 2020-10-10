@@ -1,29 +1,42 @@
-import { Block, Blocks, Events, FieldImage, Lua, utils } from "blockly/core";
+import { Block, Blocks, BlockSvg, Events, Field, Lua, utils, Xml } from "blockly/core";
+import { switchIcon } from "@clr/core/icon";
 
-const plusImage =
-    "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC" +
-    "9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMT" +
-    "ggMTBoLTR2LTRjMC0xLjEwNC0uODk2LTItMi0ycy0yIC44OTYtMiAybC4wNzEgNGgtNC4wNz" +
-    "FjLTEuMTA0IDAtMiAuODk2LTIgMnMuODk2IDIgMiAybDQuMDcxLS4wNzEtLjA3MSA0LjA3MW" +
-    "MwIDEuMTA0Ljg5NiAyIDIgMnMyLS44OTYgMi0ydi00LjA3MWw0IC4wNzFjMS4xMDQgMCAyLS" +
-    "44OTYgMi0ycy0uODk2LTItMi0yeiIgZmlsbD0id2hpdGUiIC8+PC9zdmc+Cg==";
 
 type PropertyMode = "text" | "function";
 
-class FuncTextToggleField extends FieldImage {
+
+class FuncTextToggleField extends Field {
+    EDITABLE = false;
+
+    // tslint:disable-next-line: variable-name
+    isDirty_ = false;
+
     constructor(public mode: PropertyMode) {
-        super(plusImage, 15, 15, undefined, (field) => {
-            // TODO: Implement image toggle.
-            Events.setGroup(true);
-            const block = field.getSourceBlock() as Block & FuncTextToggleMixin;
-            if (this.mode === "text") {
-                block.setModeToFunction();
-            } else if (this.mode === "function") {
-                block.setModeToText();
-            }
-            Events.setGroup(false);
-        });
+        super(undefined, undefined, undefined);
+        this.size_ = new utils.Size(15, 15 + 1);
     }
+    initView(): void {
+        this.createBorderRect_();
+        this.borderRect_.setAttribute("fill", (this.sourceBlock_ as BlockSvg).style.colourPrimary);
+        const icon = Xml.textToDom(switchIcon[1]) as SVGElement;
+        icon.setAttribute("height", this.size_.height as unknown as string);
+        icon.setAttribute("width", this.size_.width as unknown as string);
+        this.fieldGroup_.style.cursor = "pointer";
+        this.fieldGroup_.appendChild(icon);
+    }
+
+    showEditor_(): void {
+        Events.setGroup(true);
+        const block = this.getSourceBlock() as FuncTextToggleMixin;
+        if (this.mode === "text") {
+            block.setModeToFunction();
+        } else if (this.mode === "function") {
+            block.setModeToText();
+        }
+        Events.setGroup(false);
+    }
+
+    updateSize_(): void { }
 }
 
 interface FuncTextToggleMixin extends Block {
