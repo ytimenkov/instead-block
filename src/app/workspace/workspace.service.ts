@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Events, Lua, Workspace, Xml } from "blockly/core";
+import { Block, Events, Lua, Workspace, Xml } from "blockly/core";
 import { Item } from "./item";
 import { Room } from "./room";
 
@@ -67,11 +67,21 @@ export class WorkspaceService {
     }
   }
 
-  private blocksToCode(blocks: Element): string {
+  private blocksToCode(blocks: Block[]): string {
+    return blocks.map(block => Lua.blockToCode(block)).
+      filter(code => code)
+      .map(code => `,\n${Lua.prefixLines(code as string, Lua.INDENT)}`)
+      .join("");
+  }
+
+  private objectToCode(type: string, name: string, blocks: Element): string {
     const headless = new Workspace();
     try {
       Xml.domToWorkspace(blocks, headless);
-      return /*Xml.domToPrettyText(blocks) + "\n" +*/ Lua.workspaceToCode(headless);
+      const topBlocks = headless.getTopBlocks(true);
+      return `${type} {
+${Lua.INDENT}nam = ${Lua.quote_(name)}${this.blocksToCode(topBlocks)}
+}`;
     } finally {
       headless.dispose();
     }
@@ -81,8 +91,8 @@ export class WorkspaceService {
     if (this.activeTargetField && this.workspace) {
       this.activeTargetField.blocks = Xml.workspaceToDom(this.workspace);
     }
-    const itemsCode = this.items.map(item => this.blocksToCode(item.blocks));
-    const roomsCode = this.rooms.map((room) => this.blocksToCode(room.blocks));
+    const itemsCode = this.items.map(item => this.objectToCode("obj", item.name, item.blocks));
+    const roomsCode = this.rooms.map(room => this.objectToCode("room", room.name, room.blocks));
     return itemsCode.join("\n") + roomsCode.join("\n");
   }
 
