@@ -64,6 +64,8 @@ export class BlocksComponent implements OnInit {
     if (window.localStorage[localStorageKey]) {
       console.log("Loading saved workspace");
       loadWorkspace(window.localStorage[localStorageKey], this.model);
+    } else {
+      this.workspaceService.addNewTarget("room", "main");
     }
   }
 }

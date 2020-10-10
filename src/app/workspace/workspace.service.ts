@@ -71,7 +71,7 @@ export class WorkspaceService {
     const headless = new Workspace();
     try {
       Xml.domToWorkspace(blocks, headless);
-      return Lua.workspaceToCode(headless);
+      return /*Xml.domToPrettyText(blocks) + "\n" +*/ Lua.workspaceToCode(headless);
     } finally {
       headless.dispose();
     }

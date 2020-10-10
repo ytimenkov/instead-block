@@ -2,6 +2,19 @@ import { Theme } from "blockly/core";
 
 const separator = `<sep></sep>`;
 
+function properties(): string {
+  return `<category name="${$localize`:toolbox category|:Properties`}" categorystyle="properties_category">
+<block type="prop_disp">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`Title`}</field>
+    </shadow>
+  </value>
+</block>
+</category>`;
+}
+
 function objects(): string {
   return `<category name="${$localize`:toolbox category|:Objects`}" categorystyle="objects_category">
 <block type="instead_object">
@@ -11,7 +24,6 @@ function objects(): string {
     </shadow>
   </value>
 </block>
-<block type="prop_disp"></block>
 <block type="instead_disp">
   <value name="TEXT">
     <shadow type="text">
@@ -278,6 +290,7 @@ function math(): string {
 export function createToolBox(): string {
   const toolbox = [
     `<xml style="display: none">`,
+    properties(),
     objects(),
     rooms(),
     actions(),
@@ -301,6 +314,9 @@ export function createInsteadTheme(): Theme {
       },
       actions_category: {
         colour: "120"
+      },
+      properties_category: {
+        colour: "30"
       }
     },
     blockStyles: {
