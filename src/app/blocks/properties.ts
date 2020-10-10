@@ -1,5 +1,6 @@
-import { Block, Blocks, BlockSvg, Events, Field, Lua, utils, Xml } from "blockly/core";
 import { switchIcon } from "@clr/core/icon";
+import { Block, Blocks, BlockSvg, Events, Field, Lua, utils, Xml } from "blockly/core";
+import { selfParameterName } from "./primitives";
 
 
 type PropertyMode = "text" | "function";
@@ -27,7 +28,7 @@ class FuncTextToggleField extends Field {
 
     showEditor_(): void {
         Events.setGroup(true);
-        const block = this.getSourceBlock() as FuncTextToggleMixin;
+        const block = this.getSourceBlock() as FuncTextToggleBlock;
         if (this.mode === "text") {
             block.setModeToFunction();
         } else if (this.mode === "function") {
@@ -39,7 +40,7 @@ class FuncTextToggleField extends Field {
     updateSize_(): void { }
 }
 
-interface FuncTextToggleMixin extends Block {
+interface FuncTextToggleBlock extends Block {
     setModeToText(): void;
     setModeToFunction(): void;
     getMode(): PropertyMode | undefined;
@@ -47,13 +48,13 @@ interface FuncTextToggleMixin extends Block {
 
 function createToggleMixin(propertyName: string): object {
     return {
-        init(this: FuncTextToggleMixin): void {
+        init(this: FuncTextToggleBlock): void {
             this.setPreviousStatement(false);
             this.setStyle("properties_blocks");
             this.setModeToText();
         },
 
-        domToMutation(this: FuncTextToggleMixin, element: Element): void {
+        domToMutation(this: FuncTextToggleBlock, element: Element): void {
             const mode = element.getAttribute("mode");
             if (mode === "text") {
                 this.setModeToText();
@@ -64,23 +65,17 @@ function createToggleMixin(propertyName: string): object {
             }
         },
 
-        mutationToDom(this: FuncTextToggleMixin): Element {
+        mutationToDom(this: FuncTextToggleBlock): Element {
             const container = utils.xml.createElement("mutation");
             container.setAttribute("mode", this.getMode() || "");
             return container;
         },
 
-        setModeToText(this: FuncTextToggleMixin): void {
+        setModeToText(this: FuncTextToggleBlock): void {
             if (this.getMode() === "text") {
                 return;
             }
-            const connection = this.nextConnection?.targetConnection;
-            if (connection) {
-                connection.getSourceBlock().unplug();
-                this.bumpNeighbours();
-            }
-            this.setNextStatement(false);
-            this.removeInput("DUMMY", true);
+            this.removeInput("FUNCTION", true);
             this.appendValueInput("TEXT")
                 .appendField(new FuncTextToggleField("text"), "MODE")
                 .appendField(propertyName)
@@ -88,18 +83,17 @@ function createToggleMixin(propertyName: string): object {
 
         },
 
-        setModeToFunction(this: FuncTextToggleMixin): void {
+        setModeToFunction(this: FuncTextToggleBlock): void {
             if (this.getMode() === "function") {
                 return;
             }
-            this.setNextStatement(true);
             this.removeInput("TEXT", true);
-            this.appendDummyInput("DUMMY")
+            this.appendStatementInput("FUNCTION")
                 .appendField(new FuncTextToggleField("function"), "MODE")
                 .appendField(propertyName);
         },
 
-        getMode(this: FuncTextToggleMixin): PropertyMode | undefined {
+        getMode(this: FuncTextToggleBlock): PropertyMode | undefined {
             const field = this.getField("MODE") as FuncTextToggleField | null;
             return field?.mode;
         }
@@ -107,6 +101,19 @@ function createToggleMixin(propertyName: string): object {
     };
 }
 
+function generatePropertyCode(type: string, block: FuncTextToggleBlock): string {
+    const text = Lua.valueToCode(block, "TEXT", Lua.ORDER_NONE);
+    if (text) {
+        return `${type} = ${text}`;
+    }
+    const func = Lua.statementToCode(block, "FUNCTION");
+    if (func) {
+        return `${type} = function(${selfParameterName})\n${func}end`;
+    }
+    return "";
+}
+
+
 Blocks.prop_disp = createToggleMixin($localize`Display name`);
-Lua.prop_disp = (_: Block & FuncTextToggleMixin) => "";
+Lua.prop_disp = (block: FuncTextToggleBlock) => generatePropertyCode("disp", block);
 

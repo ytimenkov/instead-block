@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Events, Workspace, Xml } from "blockly/core";
+import { Events, Lua, Workspace, Xml } from "blockly/core";
 import { Item } from "./item";
 import { Room } from "./room";
 
@@ -65,6 +65,25 @@ export class WorkspaceService {
         this.activeTarget = newItem;
         break;
     }
+  }
+
+  private blocksToCode(blocks: Element): string {
+    const headless = new Workspace();
+    try {
+      Xml.domToWorkspace(blocks, headless);
+      return Lua.workspaceToCode(headless);
+    } finally {
+      headless.dispose();
+    }
+  }
+
+  generateCode(): string {
+    if (this.activeTargetField && this.workspace) {
+      this.activeTargetField.blocks = Xml.workspaceToDom(this.workspace);
+    }
+    const itemsCode = this.items.map(item => this.blocksToCode(item.blocks));
+    const roomsCode = this.rooms.map((room) => this.blocksToCode(room.blocks));
+    return itemsCode.join("\n") + roomsCode.join("\n");
   }
 
 }

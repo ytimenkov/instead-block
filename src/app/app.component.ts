@@ -28,7 +28,8 @@ export class AppComponent {
   }
 
   refreshCode(): void {
-    this.code = generateCode(this.model);
+    // this.code = generateCode(this.model);
+    this.code = this.workspaceService.generateCode();
   }
 
   async run(): Promise<void> {
