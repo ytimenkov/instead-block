@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ClrLoadingState } from "@clr/angular";
 import { angleIcon, ClarityIcons, detailsIcon, languageIcon, playIcon, plusIcon, refreshIcon } from "@clr/core/icon";
 import { Workspace } from "blockly/core";
-import { backupWorkspace, downloadProject, generateCode, loadWorkspace, resetWorkspace, uploadProject } from "src/files";
+import { downloadProject, loadWorkspace, localStorageKey, resetWorkspace, uploadProject } from "src/files";
 import { AppModuel as AppModel, GameMetaData } from "src/model";
 import { InsteadService } from "./instead/instead.service";
 import { Item, Room, TargetTypes, WorkspaceService } from "./workspace/workspace.service";
@@ -30,6 +30,7 @@ export class AppComponent {
   refreshCode(): void {
     // this.code = generateCode(this.model);
     this.code = this.workspaceService.generateCode();
+    console.log(this.workspaceService.serialize());
   }
 
   async run(): Promise<void> {
@@ -47,7 +48,7 @@ export class AppComponent {
   }
 
   save(): void {
-    backupWorkspace(this.model);
+    window.localStorage.setItem(localStorageKey, this.workspaceService.serialize());
   }
 
   download(): void {

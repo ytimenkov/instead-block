@@ -23,7 +23,6 @@ export class WorkspaceService {
       throw new Error("Not attached to workspace");
     }
     if (this.activeTargetField) {
-      console.log(`Saving blocks`);
       this.activeTargetField.blocks = Xml.workspaceToDom(this.workspace);
     }
     this.activeTargetField = v;
@@ -35,7 +34,6 @@ export class WorkspaceService {
       this.workspace.clear();
       this.workspace.clearUndo();
       if (this.activeTargetField) {
-        console.log(`Restoring blocks`);
         Xml.domToWorkspace(this.activeTargetField.blocks, this.workspace);
       }
     }
@@ -53,25 +51,14 @@ export class WorkspaceService {
   }
 
   addNewTarget(type: TargetTypes, name: string): void {
-    switch (type) {
-      case "room":
-        const newRoom = new Room(name);
-        this.rooms.push(newRoom);
-        this.activeTarget = newRoom;
-        break;
-      case "item":
-        const newItem = new Item(name);
-        this.items.push(newItem);
-        this.activeTarget = newItem;
-        break;
-    }
+    this.activeTarget = this.addNewObject(type, name);
   }
 
   private blocksToCode(blocks: Block[]): string {
     return blocks.map(block => Lua.blockToCode(block)).
       filter(code => code)
-      .map(code => `,\n${Lua.prefixLines(code as string, Lua.INDENT)}`)
-      .join("");
+      .map(code => `${Lua.prefixLines(code as string, Lua.INDENT)}`)
+      .join(",\n");
   }
 
   private objectToCode(type: string, name: string, blocks: Element): string {
@@ -80,20 +67,70 @@ export class WorkspaceService {
       Xml.domToWorkspace(blocks, headless);
       const topBlocks = headless.getTopBlocks(true);
       return `${type} {
-${Lua.INDENT}nam = ${Lua.quote_(name)}${this.blocksToCode(topBlocks)}
+${this.blocksToCode(topBlocks)}
 }`;
     } finally {
       headless.dispose();
     }
   }
 
-  generateCode(): string {
+  private objectToXml(item: Room | Item): string {
+    let result = `<${item.type} name="${item.name}">`;
+    for (let i = 0; i !== item.blocks.children.length; ++i) {
+      result += Xml.domToText(item.blocks.children[i]);
+    }
+    result += `</${item.type}>`;
+    return result;
+  }
+
+  private syncActiveTarget(): void {
     if (this.activeTargetField && this.workspace) {
       this.activeTargetField.blocks = Xml.workspaceToDom(this.workspace);
     }
-    const itemsCode = this.items.map(item => this.objectToCode("obj", item.name, item.blocks));
-    const roomsCode = this.rooms.map(room => this.objectToCode("room", room.name, room.blocks));
-    return itemsCode.join("\n") + roomsCode.join("\n");
   }
 
+  generateCode(): string {
+    this.syncActiveTarget();
+    const itemsCode = this.items.map(item => this.objectToCode("obj", item.name, item.blocks));
+    const roomsCode = this.rooms.map(room => this.objectToCode("room", room.name, room.blocks));
+    return itemsCode.join("\n") + "\n" + roomsCode.join("\n");
+  }
+
+  serialize(): string {
+    this.syncActiveTarget();
+    return `<instead>${this.rooms.map(r => this.objectToXml(r)).join("")}${this.items.map(i => this.objectToXml(i)).join("")}</instead>`;
+  }
+
+  private addNewObject(type: string, name: string): Room | Item {
+    switch (type) {
+      case "room":
+        const newRoom = new Room(name);
+        this.rooms.push(newRoom);
+        return newRoom;
+      case "item":
+        const newItem = new Item(name);
+        this.items.push(newItem);
+        return newItem;
+      default:
+        throw new Error(`Unknown type: ${type}`);
+    }
+  }
+
+  deserialize(data: string): void {
+    this.items = [];
+    this.rooms = [];
+    this.activeTargetField = undefined;
+    const dom = Xml.textToDom(data);
+    const items = [...dom.children];
+    for (const item of items) {
+      const type = item.localName;
+      const name = item.getAttribute("name");
+      if (!name) {
+        throw new Error(`Element ${type} doesn't have a name`);
+      }
+      const newItem = this.addNewObject(type, name);
+      newItem.blocks = dom.removeChild(item);
+    }
+    this.activeTarget = this.rooms[0];
+  }
 }

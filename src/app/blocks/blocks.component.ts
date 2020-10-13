@@ -56,6 +56,9 @@ export class BlocksComponent implements OnInit {
 
     this.workspaceService.attach(this.model.workspace);
 
+    // TODO: Add filtering for duplicate and orphaned blocks:
+    // E.g.: workspace.addChangeListener(Blockly.Events.disableOrphans);
+
     // tslint:disable-next-line: no-any
     this.model.workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e); });
     // tslint:disable-next-line: no-any
@@ -63,7 +66,7 @@ export class BlocksComponent implements OnInit {
 
     if (window.localStorage[localStorageKey]) {
       console.log("Loading saved workspace");
-      loadWorkspace(window.localStorage[localStorageKey], this.model);
+      this.workspaceService.deserialize(window.localStorage[localStorageKey]);
     } else {
       this.workspaceService.addNewTarget("room", "main");
     }

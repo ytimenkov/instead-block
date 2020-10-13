@@ -22,7 +22,8 @@
         "paths": {},
         "lib": [
             "es2018",
-            "dom"
+            "DOM",
+            "DOM.Iterable"
         ]
     },
     "angularCompilerOptions": {

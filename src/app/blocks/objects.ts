@@ -252,7 +252,7 @@ defineBlock("room_header",
         block.setDeletable(false);
         block.setMovable(false);
     },
-    (block) => ""
+    (block) => `nam = ${Lua.quote_(block.getFieldValue("NAME"))}`
 );
 
 defineBlock("object_header",
@@ -265,7 +265,7 @@ defineBlock("object_header",
         block.setDeletable(false);
         block.setMovable(false);
     },
-    (block) => ""
+    (block) => `nam = ${Lua.quote_(block.getFieldValue("NAME"))}`
 );
 
 // TODO: Maybe have a separate object "Main room" where nam overridden into "main" and disp used instead.
