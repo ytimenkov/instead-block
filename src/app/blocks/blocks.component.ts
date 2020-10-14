@@ -48,7 +48,7 @@ export class BlocksComponent implements OnInit {
     setLocale(messages);
 
     this.model.workspace = inject("blocklyDiv", {
-      toolbox: createToolBox(),
+      toolbox: createToolBox(this.workspaceService),
       theme: createInsteadTheme(),
       move: { scrollbars: true, wheel: true },
       zoom: { controls: true, },

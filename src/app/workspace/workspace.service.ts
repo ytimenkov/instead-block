@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Block, Events, Lua, Workspace, Xml } from "blockly/core";
+import { Block, Events, Lua, Workspace, WorkspaceSvg, Xml } from "blockly/core";
+import { createToolBox } from "../blocks/toolbox";
 import { Item } from "./item";
 import { Room } from "./room";
 
@@ -36,6 +37,10 @@ export class WorkspaceService {
       if (this.activeTargetField) {
         Xml.domToWorkspace(this.activeTargetField.blocks, this.workspace);
       }
+      // TODO: And this
+      // TODO: New Blockly has also JSON toolboxes and can update only certain categories
+      // and not a whole toolbox.
+      (this.workspace as WorkspaceSvg).updateToolbox(createToolBox(this));
     }
     finally {
       Events.enable();

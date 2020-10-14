@@ -1,8 +1,9 @@
 import { Theme } from "blockly/core";
+import { TargetTypes, WorkspaceService } from "../workspace/workspace.service";
 
 const separator = `<sep></sep>`;
 
-function properties(): string {
+function properties(activeTarget?: TargetTypes): string {
   return `<category name="${$localize`:toolbox category|:Properties`}" categorystyle="properties_category">
 <block type="prop_disp">
   <mutation mode="text"></mutation>
@@ -12,6 +13,60 @@ function properties(): string {
     </shadow>
   </value>
 </block>
+${activeTarget === "item" ? `
+<block type="prop_inv">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`I have an item`}</field>
+    </shadow>
+  </value>
+</block>
+<block type="prop_act">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`Action on object`}</field>
+    </shadow>
+  </value>
+</block>
+<block type="prop_tak">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`You've picked up an object`}</field>
+    </shadow>
+  </value>
+</block>
+<block type="prop_used">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`You've used "what" on "self"`}</field>
+    </shadow>
+  </value>
+</block>
+<block type="prop_use">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`You've used "self" on "what"`}</field>
+    </shadow>
+  </value>
+</block>
+` : ""}
+${activeTarget === "room" ? `
+<block type="prop_decor">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`Detailed room descrption`}</field>
+    </shadow>
+  </value>
+</block>
+<block type="prop_onenter"></block>
+<block type="prop_onexit"></block>
+` : ""}
 </category>`;
 }
 
@@ -287,10 +342,10 @@ function math(): string {
 </category>`;
 }
 
-export function createToolBox(): string {
+export function createToolBox(workspace: WorkspaceService): string {
   const toolbox = [
     `<xml style="display: none">`,
-    properties(),
+    properties(workspace.activeTarget?.type),
     objects(),
     rooms(),
     actions(),
@@ -317,7 +372,7 @@ export function createInsteadTheme(): Theme {
       },
       properties_category: {
         colour: "30"
-      }
+      },
     },
     blockStyles: {
       rooms_blocks: {
@@ -331,6 +386,10 @@ export function createInsteadTheme(): Theme {
       },
       properties_blocks: {
         colourPrimary: "30"
+      },
+      events_blocks: {
+        colourPrimary: "60",
+        hat: "cap"
       }
     }
   });

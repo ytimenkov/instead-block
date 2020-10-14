@@ -1,5 +1,6 @@
 import { switchIcon } from "@clr/core/icon";
 import { Block, Blocks, BlockSvg, Events, Field, Lua, utils, Xml } from "blockly/core";
+import { defineBlock } from "./blocks";
 import { selfParameterName } from "./primitives";
 
 
@@ -46,12 +47,22 @@ interface FuncTextToggleBlock extends Block {
     getMode(): PropertyMode | undefined;
 }
 
-function createToggleMixin(propertyName: string): object {
+type FieldKind = "property" | "event";
+
+function createToggleMixin(text: string, kind: FieldKind): object {
     return {
         init(this: FuncTextToggleBlock): void {
             this.setPreviousStatement(false);
-            this.setStyle("properties_blocks");
-            this.setModeToText();
+            switch (kind) {
+                case "property":
+                    this.setStyle("properties_blocks");
+                    this.setModeToText();
+                    break;
+                case "event":
+                    this.setStyle("events_blocks");
+                    this.setModeToFunction();
+                    break;
+            }
         },
 
         domToMutation(this: FuncTextToggleBlock, element: Element): void {
@@ -78,7 +89,7 @@ function createToggleMixin(propertyName: string): object {
             this.removeInput("FUNCTION", true);
             this.appendValueInput("TEXT")
                 .appendField(new FuncTextToggleField("text"), "MODE")
-                .appendField(propertyName)
+                .appendField(text)
                 .setCheck(["String"]);
 
         },
@@ -90,7 +101,7 @@ function createToggleMixin(propertyName: string): object {
             this.removeInput("TEXT", true);
             this.appendStatementInput("FUNCTION")
                 .appendField(new FuncTextToggleField("function"), "MODE")
-                .appendField(propertyName);
+                .appendField(text);
         },
 
         getMode(this: FuncTextToggleBlock): PropertyMode | undefined {
@@ -113,7 +124,33 @@ function generatePropertyCode(type: string, block: FuncTextToggleBlock): string 
     return "";
 }
 
+function defineProperty(text: string, propertyName: string, kind: FieldKind): void {
+    Blocks[`prop_${propertyName}`] = createToggleMixin(text, kind);
+    Lua[`prop_${propertyName}`] = (block: FuncTextToggleBlock) => generatePropertyCode(propertyName, block);
+}
 
-Blocks.prop_disp = createToggleMixin($localize`Display name`);
-Lua.prop_disp = (block: FuncTextToggleBlock) => generatePropertyCode("disp", block);
+function defineFunctionProperty(text: string, propertyName: string, extraArgs: string): void {
+    defineBlock(`prop_${propertyName}`,
+        (block) => {
+            block.setStyle("events_blocks");
+            block.appendStatementInput("FUNCTION")
+                .appendField(text);
 
+        },
+        (block) => `${propertyName} = function(${selfParameterName}${extraArgs})\n${Lua.statementToCode(block, "FUNCTION")}end`
+    );
+}
+
+defineProperty($localize`Display name`, "disp", "property");
+defineProperty($localize`Inventory \u{1F392}`, "inv", "property");
+defineProperty($localize`Decoration`, "decor", "property");
+
+defineProperty($localize`On Action \u{1F50D}`, "act", "event");
+defineProperty($localize`On Pick up \u{1F4E6}`, "tak", "event");
+
+// TOOD: Those functions accept 2 parameters, maybe do something realted to validation.
+defineProperty($localize`Used with \u{1F517}`, "used", "event");
+defineProperty($localize`Use self on \u{1F528}`, "use", "event");
+
+defineFunctionProperty($localize`On Enter`, "onenter", ", w");
+defineFunctionProperty($localize`On Exit`, "onexit", ", w");
