@@ -1,9 +1,10 @@
 import { Component, Inject, Input, LOCALE_ID, OnInit } from "@angular/core";
 import { inject, setLocale } from "blockly/core";
-import { loadWorkspace, localStorageKey } from "src/files";
+import { localStorageKey } from "src/files";
 import { AppModuel } from "src/model";
 import { WorkspaceService } from "../workspace/workspace.service";
 import "./functions";
+import "./lists";
 import "./objects";
 import { InsteadObject, InsteadRoom } from "./objects";
 import "./primitives";

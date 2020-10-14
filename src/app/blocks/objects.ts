@@ -62,7 +62,7 @@ function generateReferenceCode(block: Block, objectsContainer: InsteadObjectBase
     for (let pb = block.parentBlock_; pb; pb = pb.parentBlock_) {
         // If object is inside list render it as a string so it will be resolved
         // by the engine.
-        if (pb.type === "lists_create_with") {
+        if (pb.type === "lists_create_with" || "itemsCount" in pb) {
             useLookup = false;
         }
     }
@@ -267,6 +267,3 @@ defineBlock("object_header",
     },
     (block) => `nam = ${Lua.quote_(block.getFieldValue("NAME"))}`
 );
-
-// TODO: Maybe have a separate object "Main room" where nam overridden into "main" and disp used instead.
-// Or maybe just provide it as a "default" workspace, since disp is useful for dynamic title.

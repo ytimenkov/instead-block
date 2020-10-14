@@ -35,6 +35,7 @@ class FuncTextToggleField extends Field {
         } else if (this.mode === "function") {
             block.setModeToText();
         }
+        // TODO: Example in blockly fired "mutation" event...
         Events.setGroup(false);
     }
 
@@ -52,7 +53,6 @@ type FieldKind = "property" | "event";
 function createToggleMixin(text: string, kind: FieldKind): object {
     return {
         init(this: FuncTextToggleBlock): void {
-            this.setPreviousStatement(false);
             switch (kind) {
                 case "property":
                     this.setStyle("properties_blocks");

@@ -66,6 +66,8 @@ ${activeTarget === "room" ? `
 </block>
 <block type="prop_onenter"></block>
 <block type="prop_onexit"></block>
+<block type="prop_obj"></block>
+<block type="prop_way"></block>
 ` : ""}
 </category>`;
 }
