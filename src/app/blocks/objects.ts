@@ -227,6 +227,7 @@ Blocks.instead_room = {
 };
 Lua.instead_room = (block: Block) => generateObjectCode("room", block);
 
+// TODO: Add dynamic population of field and make it non-serializable.
 defineBlock("room_header",
     (block) => {
         block.appendDummyInput()

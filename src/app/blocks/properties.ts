@@ -142,6 +142,7 @@ function defineFunctionProperty(text: string, propertyName: string, extraArgs: s
 }
 
 defineProperty($localize`Display name`, "disp", "property");
+defineProperty($localize`Description`, "dsc", "property");
 defineProperty($localize`Inventory \u{1F392}`, "inv", "property");
 defineProperty($localize`Decoration`, "decor", "property");
 

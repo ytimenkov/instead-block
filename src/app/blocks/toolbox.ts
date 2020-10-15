@@ -13,6 +13,14 @@ function properties(activeTarget?: TargetTypes): string {
     </shadow>
   </value>
 </block>
+<block type="prop_dsc">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`Detailed descripiton`}</field>
+    </shadow>
+  </value>
+</block>
 ${activeTarget === "item" ? `
 <block type="prop_inv">
   <mutation mode="text"></mutation>

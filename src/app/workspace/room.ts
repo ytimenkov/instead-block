@@ -7,7 +7,7 @@ export class Room {
     blocks: Element;
 
     constructor(public name: string) {
-        const xml = `<xml><block type="room_header"><field name="NAME">${name}</field></block></xml>`;
+        const xml = `<xml><block type="room_header" x="0" y="-50"><field name="NAME">${name}</field></block></xml>`;
         this.blocks = Xml.textToDom(xml);
     }
 }
