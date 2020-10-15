@@ -122,9 +122,10 @@ function createPlusMinusMixin(text: string, check: string[]): object {
 }
 
 function generateListCode(propertyName: string, block: PlusMinusBlock): string {
-    const elements = Array(block.itemsCount).map((s, i) =>
-        Lua.valueToCode(block, `ADD${i}`, Lua.ORDER_NONE) || "None"
-    );
+    const elements = [];
+    for (let index = 0; index < block.itemsCount; index++) {
+        elements.push(Lua.valueToCode(block, `ADD${index}`, Lua.ORDER_NONE) || "None");
+    }
 
     return `${propertyName} = {${elements.join(", ")}}`;
 }

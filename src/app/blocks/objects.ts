@@ -1,7 +1,7 @@
-import "./blocks";
-
-import { Lua, Blocks, Block, FieldTextInput, FieldDropdown, Workspace, Events } from "blockly/core";
+import { Block, Blocks, Events, FieldDropdown, FieldTextInput, Lua, Workspace } from "blockly/core";
+import { WorkspaceService } from "../workspace/workspace.service";
 import { defineBlock } from "./blocks";
+
 
 function generateObjectCode(type: string, block: Block): string {
     const name = block.getFieldValue("NAME");
@@ -57,7 +57,7 @@ function addReferenceFields(block: Block, objectsContainer: InsteadObjectBase, o
     return block;
 }
 
-function generateReferenceCode(block: Block, objectsContainer: InsteadObjectBase): (string | number)[] {
+function generateReferenceCode(block: Block): (string | number)[] {
     let useLookup = true;
     for (let pb = block.parentBlock_; pb; pb = pb.parentBlock_) {
         // If object is inside list render it as a string so it will be resolved
@@ -70,7 +70,7 @@ function generateReferenceCode(block: Block, objectsContainer: InsteadObjectBase
     if (useLookup) {
         code = "_";
     }
-    code += Lua.quote_(objectsContainer.getInsteadObjectName(block.getFieldValue("NAME")));
+    code += Lua.quote_(block.getFieldValue("NAME"));
     return [code, Lua.ORDER_ATOMIC];
 }
 
@@ -216,13 +216,6 @@ class ObjectReferenceDropDown extends FieldDropdown {
     }
 }
 
-Blocks.instead_object_ref = {
-    init(this: Block): void {
-        addReferenceFields(this, InsteadObject, "InsteadObject")
-            .setStyle("objects_blocks");
-    },
-};
-Lua.instead_object_ref = (block: Block) => generateReferenceCode(block, InsteadObject);
 
 export const InsteadRoom = new InsteadObjectBase("instead_room");
 
@@ -233,14 +226,6 @@ Blocks.instead_room = {
     }
 };
 Lua.instead_room = (block: Block) => generateObjectCode("room", block);
-
-Blocks.instead_room_ref = {
-    init(this: Block): void {
-        addReferenceFields(this, InsteadRoom, "InsteadRoom")
-            .setStyle("rooms_blocks");
-    },
-};
-Lua.instead_room_ref = (block: Block) => generateReferenceCode(block, InsteadRoom);
 
 defineBlock("room_header",
     (block) => {
@@ -267,3 +252,32 @@ defineBlock("object_header",
     },
     (block) => `nam = ${Lua.quote_(block.getFieldValue("NAME"))}`
 );
+
+export function attachReferenceBlocks(service: WorkspaceService): void {
+    Blocks.instead_object_ref = {
+        init(this: Block): void {
+            this.appendDummyInput()
+                .appendField(new FieldDropdown(
+                    () => service.items.map(i => [i.name, i.name])
+                ), "NAME");
+            this.setOutput(true, ["InsteadObject"]);
+
+            this.setStyle("objects_blocks");
+        },
+    };
+
+    Blocks.instead_room_ref = {
+        init(this: Block): void {
+            this.appendDummyInput()
+                .appendField(new FieldDropdown(
+                    () => service.rooms.map(i => [i.name, i.name])
+                ), "NAME");
+            this.setOutput(true, ["InsteadRoom"]);
+
+            this.setStyle("rooms_blocks");
+        },
+    };
+}
+
+Lua.instead_object_ref = (block: Block) => generateReferenceCode(block);
+Lua.instead_room_ref = (block: Block) => generateReferenceCode(block);

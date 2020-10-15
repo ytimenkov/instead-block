@@ -6,7 +6,7 @@ import { WorkspaceService } from "../workspace/workspace.service";
 import "./functions";
 import "./lists";
 import "./objects";
-import { InsteadObject, InsteadRoom } from "./objects";
+import { attachReferenceBlocks, InsteadObject, InsteadRoom } from "./objects";
 import "./primitives";
 import "./properties";
 import "./stdlib";
@@ -47,6 +47,8 @@ export class BlocksComponent implements OnInit {
         throw new Error(`Unknown locale: ${this.locale}`);
     }
     setLocale(messages);
+
+    attachReferenceBlocks(this.workspaceService);
 
     this.model.workspace = inject("blocklyDiv", {
       toolbox: createToolBox(this.workspaceService),
