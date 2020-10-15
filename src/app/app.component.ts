@@ -68,7 +68,8 @@ export class AppComponent {
     // TODO: This is a candidate for a service...
     this.http.get(url, { responseType: "text" })
       .subscribe((data) => {
-        loadWorkspace(data, this.model);
+        // loadWorkspace(data, this.model);
+        this.workspaceService.deserialize(data);
       });
   }
 

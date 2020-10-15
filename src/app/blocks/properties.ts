@@ -1,7 +1,7 @@
 import { switchIcon } from "@clr/core/icon";
 import { Block, Blocks, BlockSvg, Events, Field, Lua, utils, Xml } from "blockly/core";
 import { defineBlock } from "./blocks";
-import { selfParameterName } from "./primitives";
+import { selfParameterName, whatParameterName } from "./primitives";
 
 
 type PropertyMode = "text" | "function";
@@ -112,21 +112,21 @@ function createToggleMixin(text: string, kind: FieldKind): object {
     };
 }
 
-function generatePropertyCode(type: string, block: FuncTextToggleBlock): string {
+function generatePropertyCode(type: string, block: FuncTextToggleBlock, extraArgs: string): string {
     const text = Lua.valueToCode(block, "TEXT", Lua.ORDER_NONE);
     if (text) {
         return `${type} = ${text}`;
     }
     const func = Lua.statementToCode(block, "FUNCTION");
     if (func) {
-        return `${type} = function(${selfParameterName})\n${func}end`;
+        return `${type} = function(${selfParameterName}${extraArgs})\n${func}end`;
     }
     return "";
 }
 
-function defineProperty(text: string, propertyName: string, kind: FieldKind): void {
+function defineProperty(text: string, propertyName: string, kind: FieldKind, extraArgs: string = ""): void {
     Blocks[`prop_${propertyName}`] = createToggleMixin(text, kind);
-    Lua[`prop_${propertyName}`] = (block: FuncTextToggleBlock) => generatePropertyCode(propertyName, block);
+    Lua[`prop_${propertyName}`] = (block: FuncTextToggleBlock) => generatePropertyCode(propertyName, block, extraArgs);
 }
 
 function defineFunctionProperty(text: string, propertyName: string, extraArgs: string): void {
@@ -149,9 +149,9 @@ defineProperty($localize`Decoration`, "decor", "property");
 defineProperty($localize`On Action \u{1F50D}`, "act", "event");
 defineProperty($localize`On Pick up \u{1F4E6}`, "tak", "event");
 
-// TOOD: Those functions accept 2 parameters, maybe do something realted to validation.
-defineProperty($localize`Used with \u{1F517}`, "used", "event");
-defineProperty($localize`Use self on \u{1F528}`, "use", "event");
+// TOOD: Add extra validation that what parameter can be used only in functions which have 2 arguments
+defineProperty($localize`Used with \u{1F517}`, "used", "event", `, ${whatParameterName}`);
+defineProperty($localize`Use self on \u{1F528}`, "use", "event", `, ${whatParameterName}`);
 
-defineFunctionProperty($localize`On Enter`, "onenter", ", w");
-defineFunctionProperty($localize`On Exit`, "onexit", ", w");
+defineFunctionProperty($localize`On Enter`, "onenter", `, ${whatParameterName}`);
+defineFunctionProperty($localize`On Exit`, "onexit", `, ${whatParameterName}`);
