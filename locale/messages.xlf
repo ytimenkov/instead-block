@@ -480,6 +480,29 @@
           <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8685613395997707567" datatype="html">
+        <source>My first game</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">168</context>
+        </context-group>
+        <note priority="1" from="meaning">game name</note>
+      </trans-unit>
+      <trans-unit id="9128550453338321907" datatype="html">
+        <source>Unknown</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+        <note priority="1" from="meaning">game author</note>
+      </trans-unit>
+      <trans-unit id="8095074007262330667" datatype="html">
+        <source>Welcome to Instead</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">178</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

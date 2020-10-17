@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.2"
-  xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="239096045786237285" datatype="html">
@@ -530,6 +529,32 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/toolbox.ts</context>
           <context context-type="linenumber">159</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8685613395997707567" datatype="html">
+        <source>My first game</source>
+        <target state="translated">Моя первая игра</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">168</context>
+        </context-group>
+        <note priority="1" from="meaning">game name</note>
+      </trans-unit>
+      <trans-unit id="9128550453338321907" datatype="html">
+        <source>Unknown</source>
+        <target state="translated">Кто-то</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+        <note priority="1" from="meaning">game author</note>
+      </trans-unit>
+      <trans-unit id="8095074007262330667" datatype="html">
+        <source>Welcome to Instead</source>
+        <target state="translated">Добро пожаловать в Instead</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="be5c752b58791dd799bc5d5482d4351e06f18673" datatype="html">

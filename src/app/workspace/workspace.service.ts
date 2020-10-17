@@ -164,7 +164,9 @@ ${this.items.map(i => this.objectToXml(i)).join("")}
 
   resetToNew(): void {
     this.deserialize(
-      `<instead xmlns="https://developers.google.com/blockly/xml" name="MyFirstGame" version="0.0" author="Unknown">
+      `<instead xmlns="https://developers.google.com/blockly/xml" version="0.0"
+  name="${$localize`:game name|:My first game`}"
+  author="${$localize`:game author|:Unknown`}">
 <room name="main">
 <block type="room_header" deletable="false" movable="false" editable="false" x="0" y="-50">
   <field name="NAME">main</field>
@@ -173,7 +175,7 @@ ${this.items.map(i => this.objectToXml(i)).join("")}
 <mutation mode="text"></mutation>
 <value name="TEXT">
     <shadow type="text">
-        <field name="TEXT">Welcome to Instead</field>
+        <field name="TEXT">${$localize`Welcome to Instead`}</field>
     </shadow>
 </value>
 </block>
