@@ -1,17 +1,16 @@
-import { Component, Inject, Input, LOCALE_ID, OnInit } from "@angular/core";
-import { inject, setLocale } from "blockly/core";
-import { localStorageKey } from "src/files";
-import { AppModuel } from "src/model";
+import { Component, Inject, LOCALE_ID, OnInit } from "@angular/core";
+import { inject, setLocale, Workspace } from "blockly/core";
 import { WorkspaceService } from "../workspace/workspace.service";
 import "./functions";
 import "./lists";
 import "./objects";
-import { attachReferenceBlocks, InsteadObject, InsteadRoom } from "./objects";
+import { attachReferenceBlocks } from "./objects";
 import "./primitives";
 import "./properties";
 import "./stdlib";
 import { createInsteadTheme, createToolBox } from "./toolbox";
 
+export const localStorageKey = "instead-data";
 
 @Component({
   selector: "app-blocks",
@@ -19,8 +18,8 @@ import { createInsteadTheme, createToolBox } from "./toolbox";
   styleUrls: ["./blocks.component.css"]
 })
 export class BlocksComponent implements OnInit {
-  @Input()
-  model?: AppModuel;
+
+  workspace?: Workspace;
 
   constructor(
     @Inject(LOCALE_ID) private locale: string,
@@ -31,10 +30,6 @@ export class BlocksComponent implements OnInit {
   }
 
   private async initWorkspace(): Promise<void> {
-    if (!this.model) {
-      return;
-    }
-
     let messages: { [key: string]: string; };
     switch (this.locale) {
       case "en":
@@ -50,28 +45,34 @@ export class BlocksComponent implements OnInit {
 
     attachReferenceBlocks(this.workspaceService);
 
-    this.model.workspace = inject("blocklyDiv", {
+    this.workspace = inject("blocklyDiv", {
       toolbox: createToolBox(this.workspaceService),
       theme: createInsteadTheme(),
       move: { scrollbars: true, wheel: true },
       zoom: { controls: true, },
     });
 
-    this.workspaceService.attach(this.model.workspace);
+    this.workspaceService.attach(this.workspace);
 
     // TODO: Add filtering for duplicate and orphaned blocks:
     // E.g.: workspace.addChangeListener(Blockly.Events.disableOrphans);
 
-    // tslint:disable-next-line: no-any
-    this.model.workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e); });
-    // tslint:disable-next-line: no-any
-    this.model.workspace.addChangeListener((e: any) => { InsteadRoom.objectLifecycleListener(e); });
 
-    if (window.localStorage[localStorageKey]) {
-      console.log("Loading saved workspace");
-      this.workspaceService.deserialize(window.localStorage[localStorageKey]);
-    } else {
-      this.workspaceService.addNewTarget("room", "main");
+    if (!this.restoreProject()) {
+      this.workspaceService.resetToNew();
     }
+  }
+
+  backupProject(): void {
+    window.localStorage.setItem(localStorageKey, this.workspaceService.serialize());
+  }
+
+  restoreProject(): boolean {
+    if (window.localStorage[localStorageKey]) {
+      this.workspaceService.deserialize(window.localStorage[localStorageKey]);
+      return true;
+    }
+    return false;
+
   }
 }

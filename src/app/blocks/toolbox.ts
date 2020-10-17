@@ -82,123 +82,15 @@ ${activeTarget === "room" ? `
 
 function objects(): string {
   return `<category name="${$localize`:toolbox category|:Objects`}" categorystyle="objects_category">
-<block type="instead_object">
-  <value name="DSC">
-    <shadow type="text">
-      <field name="TEXT">${$localize`There is an object`}</field>
-    </shadow>
-  </value>
-</block>
-<block type="instead_disp">
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">${$localize`Title`}</field>
-    </shadow>
-  </value>
-</block>
-<block type="instead_inv">
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">${$localize`I have an item`}</field>
-    </shadow>
-  </value>
-</block>
-<block type="instead_act">
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">${$localize`Action on object`}</field>
-    </shadow>
-  </value>
-</block>
-<block type="instead_tak">
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">${$localize`You've picked up an object`}</field>
-    </shadow>
-  </value>
-</block>
-<block type="instead_used">
-  <value name="TEXT">
-    <block type="instead_method1">
-      <statement name="DEFINITION">
-        <shadow type="instead_print">
-          <field name="TEXT">${$localize`You've used "what" on "self"`}</field>
-        </shadow>
-      </statement>
-    </block>
-  </value>
-</block>
-<block type="instead_use">
-  <value name="TEXT">
-    <block type="instead_method1">
-      <statement name="DEFINITION">
-        <shadow type="instead_print">
-          <field name="TEXT">${$localize`You've used "self" on "what"`}</field>
-        </shadow>
-      </statement>
-    </block>
-  </value>
-</block>
-${separator}
-<block type="instead_method0"></block>
-<block type="instead_method1"></block>
+<!-- TODO: Make a dymanic category with all the objects -->
+<block type="instead_object_ref"></block>
 </category>`;
 }
 
 function rooms(): string {
   return `<category name="${$localize`Rooms`}" categorystyle="rooms_category">
-<block type="instead_room">
-  <value name="DSC">
-    <shadow type="text">
-      <field name="TEXT">${$localize`You're in a big room`}</field>
-    </shadow>
-  </value>
-  <statement name="DEFINITION">
-    <block type="instead_obj"></block>
-  </statement>
-</block>
-<block type="instead_disp">
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">${$localize`title`}</field>
-    </shadow>
-  </value>
-</block>
-<block type="instead_decor">
-  <value name="TEXT">
-    <shadow type="text">
-      <field name="TEXT">${$localize`Detailed room descrption`}</field>
-    </shadow>
-  </value>
-</block>
-<block type="instead_obj"></block>
-<block type="instead_way"></block>
-<block type="instead_onenter">
-  <value name="TEXT">
-    <block type="instead_method1">
-      <statement name="DEFINITION">
-        <shadow type="instead_print">
-          <field name="TEXT">${$localize`You've entered "what"`}</field>
-        </shadow>
-      </statement>
-    </block>
-  </value>
-</block>
-<block type="instead_onexit">
-  <value name="TEXT">
-    <block type="instead_method1">
-      <statement name="DEFINITION">
-        <shadow type="instead_print">
-          <field name="TEXT">${$localize`You're about to go to "what"`}</field>
-        </shadow>
-      </statement>
-    </block>
-  </value>
-</block>
-${separator}
-<block type="instead_method0"></block>
-<block type="instead_method1"></block>
-<block type="lists_create_with"></block>
+<!-- TODO: Make a dymanic category with all the objects -->
+<block type="instead_room_ref"></block>
 </category>`;
 }
 
@@ -237,9 +129,6 @@ function actions(): string {
 <label text="${$localize`Action parameters`}"></label>
 <block type="instead_self"></block>
 <block type="instead_what"></block>
-<!-- TODO: Make a dymanic category with all the objects -->
-<block type="instead_object_ref"></block>
-<block type="instead_room_ref"></block>
 </category>`;
 }
 
@@ -258,9 +147,6 @@ function logic(): string {
 <block type="instead_return_false"></block>
 <block type="instead_self"></block>
 <block type="instead_what"></block>
-<!-- TODO: Make a dymanic category with all the objects -->
-<block type="instead_object_ref"></block>
-<block type="instead_room_ref"></block>
 </category>`;
 }
 

@@ -1,27 +1,5 @@
-import { selfParameterName, whatParameterName } from "./primitives";
-
-import { Lua, Blocks, Block, FieldDropdown, } from "blockly/core";
+import { Block, Blocks, FieldDropdown, Lua } from "blockly/core";
 import { defineBlock } from "./blocks";
-
-function defineMethod(name: string, text: string, funcArgs: string): void {
-    defineBlock(name,
-        (block) => {
-            block.appendDummyInput()
-                .appendField(text);
-            block.appendStatementInput("DEFINITION");
-            block.setOutput(true, ["String"]);
-            block.setStyle("procedure_blocks");
-        },
-        (block) => {
-            const body = Lua.statementToCode(block, "DEFINITION");
-            const code = `function(${funcArgs})\n${body}end`;
-            return [code, Lua.ORDER_HIGH];
-        }
-    );
-}
-
-defineMethod("instead_method0", $localize`\u{1D453}`, selfParameterName);
-defineMethod("instead_method1", $localize`\u{1D453} (w)`, `${selfParameterName}, ${whatParameterName}`);
 
 function defineObjectAction1(name: string, desc: string, functName: string): void {
     defineBlock(name,

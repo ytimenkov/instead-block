@@ -1,4 +1,4 @@
-<instead xmlns="https://developers.google.com/blockly/xml">
+<instead xmlns="https://developers.google.com/blockly/xml" name="Playground" author="technix" version="1.0">
     <item name="Knife">
         <block type="object_header" id="ZT.%4uEt~.^qwY6C^@7M" deletable="false" movable="false" editable="false" x="0" y="-50">
             <field name="NAME">Knife</field>

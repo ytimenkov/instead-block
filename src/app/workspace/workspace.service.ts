@@ -8,12 +8,20 @@ export { Room, Item };
 
 export type TargetTypes = "room" | "item";
 
+export class GameMetaData {
+  name = "";
+  version = "";
+  author = "";
+}
+
 @Injectable({
   providedIn: "root"
 })
 export class WorkspaceService {
   rooms: Room[] = [];
   items: Item[] = [];
+
+  metadata = new GameMetaData();
 
   private activeTargetField?: Room | Item;
   public get activeTarget(): Room | Item | undefined {
@@ -98,12 +106,22 @@ ${this.blocksToCode(topBlocks)}
     this.syncActiveTarget();
     const itemsCode = this.items.map(item => this.objectToCode("obj", item.name, item.blocks));
     const roomsCode = this.rooms.map(room => this.objectToCode("room", room.name, room.blocks));
-    return itemsCode.join("\n") + "\n" + roomsCode.join("\n");
+
+    return `-- $Name: ${this.metadata.name}$
+-- $Version: ${this.metadata.version}$
+-- $Author: ${this.metadata.author}$
+
+${itemsCode.join("\n")}
+${roomsCode.join("\n")}
+`;
   }
 
   serialize(): string {
     this.syncActiveTarget();
-    return `<instead>${this.rooms.map(r => this.objectToXml(r)).join("")}${this.items.map(i => this.objectToXml(i)).join("")}</instead>`;
+    return `<instead name="${this.metadata.name}" version="${this.metadata.version}" author="${this.metadata.author}">
+${this.rooms.map(r => this.objectToXml(r)).join("")}
+${this.items.map(i => this.objectToXml(i)).join("")}
+</instead>`;
   }
 
   private addNewObject(type: string, name: string): Room | Item {
@@ -126,6 +144,11 @@ ${this.blocksToCode(topBlocks)}
     this.rooms = [];
     this.activeTargetField = undefined;
     const dom = Xml.textToDom(data);
+    this.metadata = {
+      name: dom.attributes.getNamedItem("name")?.textContent || "",
+      version: dom.attributes.getNamedItem("version")?.textContent || "",
+      author: dom.attributes.getNamedItem("author")?.textContent || "",
+    };
     const items = [...dom.children];
     for (const item of items) {
       const type = item.localName;
@@ -137,5 +160,24 @@ ${this.blocksToCode(topBlocks)}
       newItem.blocks = dom.removeChild(item);
     }
     this.activeTarget = this.rooms[0];
+  }
+
+  resetToNew(): void {
+    this.deserialize(
+      `<instead xmlns="https://developers.google.com/blockly/xml" name="MyFirstGame" version="0.0" author="Unknown">
+<room name="main">
+<block type="room_header" deletable="false" movable="false" editable="false" x="0" y="-50">
+  <field name="NAME">main</field>
+</block>
+<block type="prop_disp" x="0" y="0">
+<mutation mode="text"></mutation>
+<value name="TEXT">
+    <shadow type="text">
+        <field name="TEXT">Welcome to Instead</field>
+    </shadow>
+</value>
+</block>
+</room>
+</instead>`);
   }
 }

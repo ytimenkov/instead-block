@@ -2,11 +2,9 @@ import { HttpClient } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ClrLoadingState } from "@clr/angular";
 import { angleIcon, ClarityIcons, detailsIcon, languageIcon, playIcon, plusIcon, refreshIcon } from "@clr/core/icon";
-import { Workspace } from "blockly/core";
-import { downloadProject, loadWorkspace, localStorageKey, resetWorkspace, uploadProject } from "src/files";
-import { AppModuel as AppModel, GameMetaData } from "src/model";
+import { downloadProject, uploadProject } from "src/files";
 import { InsteadService } from "./instead/instead.service";
-import { Item, Room, TargetTypes, WorkspaceService } from "./workspace/workspace.service";
+import { GameMetaData, Item, Room, TargetTypes, WorkspaceService } from "./workspace/workspace.service";
 
 @Component({
   selector: "app-root",
@@ -17,10 +15,6 @@ import { Item, Room, TargetTypes, WorkspaceService } from "./workspace/workspace
 export class AppComponent {
   reloadingState = ClrLoadingState.DEFAULT;
 
-  model: AppModel = {
-    workspace: (undefined as unknown) as Workspace,
-    insteadMeta: new GameMetaData()
-  };
   code = "";
 
   constructor(private insteadService: InsteadService, private http: HttpClient, private workspaceService: WorkspaceService) {
@@ -28,9 +22,8 @@ export class AppComponent {
   }
 
   refreshCode(): void {
-    // this.code = generateCode(this.model);
     this.code = this.workspaceService.generateCode();
-    console.log(this.workspaceService.serialize());
+    // console.log(this.workspaceService.serialize());
   }
 
   async run(): Promise<void> {
@@ -47,20 +40,16 @@ export class AppComponent {
     }
   }
 
-  save(): void {
-    window.localStorage.setItem(localStorageKey, this.workspaceService.serialize());
-  }
-
   download(): void {
-    downloadProject(this.model);
+    downloadProject(this.workspaceService);
   }
 
   upload(): void {
-    uploadProject(this.model);
+    uploadProject(this.workspaceService);
   }
 
   new(): void {
-    resetWorkspace(this.model);
+    this.workspaceService.resetToNew();
   }
 
   loadDemo(name: string): void {
@@ -92,5 +81,9 @@ export class AppComponent {
 
   get rooms(): Room[] {
     return this.workspaceService.rooms;
+  }
+
+  get metadata(): GameMetaData {
+    return this.workspaceService.metadata;
   }
 }

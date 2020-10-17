@@ -14,7 +14,7 @@
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
           <a (click)="infoEditor.visible = true" clrDropdownItem i18n>Edit game metadata</a>
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
-          <a (click)="save()" clrDropdownItem i18n>Save in browser</a>
+          <a (click)="blocksWorkspace.backupProject()" clrDropdownItem i18n>Save in browser</a>
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
           <a (click)="download()" clrDropdownItem i18n>Save to your computer</a>
           <a (click)="upload()" clrDropdownItem i18n>Load from your computer</a>
@@ -76,7 +76,7 @@
     <div class="content-area" style="padding: 0">
       <div class="clr-row clr-no-gutters">
         <div class="clr-col-lg-6">
-          <app-blocks [model]="model"></app-blocks>
+          <app-blocks #blocksWorkspace></app-blocks>
         </div>
         <div class="clr-col-lg-6">
           <!-- TODO: Maybe move them to aside section of subnav-->
@@ -100,6 +100,6 @@
       </div>
     </div>
   </div>
-  <app-game-info #infoEditor [data]="model.insteadMeta"></app-game-info>
+  <app-game-info #infoEditor [data]="metadata"></app-game-info>
   <app-code-preview #codePreview [code]="code"></app-code-preview>
 </div>
