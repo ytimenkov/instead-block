@@ -119,10 +119,6 @@
         <block type="prop_used" id="4LAvKQs%SYl@IqfGtrsu" x="0" y="371">
             <mutation mode="function"></mutation>
             <statement name="FUNCTION">
-                <shadow type="instead_print" id="x+~C*SfGH:,C}N|2$yno">
-                    <field name="FUN">p</field>
-                    <field name="TEXT">вы использовали "what"</field>
-                </shadow>
                 <block type="controls_if" id="qNt]VN8h_kq@{#k*ea.3">
                     <value name="IF0">
                         <block type="logic_compare" id="D[M;XZ)8S1faXLpFn0Q~">
