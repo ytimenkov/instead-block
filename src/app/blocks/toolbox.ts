@@ -126,9 +126,11 @@ function actions(): string {
     <shadow type="instead_self"></shadow>
   </value>
 </block>
-<label text="${$localize`Action parameters`}"></label>
+<label text="${$localize`Arguments`}"></label>
 <block type="instead_self"></block>
 <block type="instead_what"></block>
+<block type="instead_object_ref"></block>
+<block type="instead_room_ref"></block>
 </category>`;
 }
 
@@ -145,8 +147,11 @@ function logic(): string {
   </value>
 </block>
 <block type="instead_return_false"></block>
+<label text="${$localize`Arguments`}"></label>
 <block type="instead_self"></block>
 <block type="instead_what"></block>
+<block type="instead_object_ref"></block>
+<block type="instead_room_ref"></block>
 </category>`;
 }
 
@@ -242,8 +247,9 @@ export function createToolBox(workspace: WorkspaceService): string {
   const toolbox = [
     `<xml style="display: none">`,
     properties(workspace.activeTarget?.type),
-    objects(),
-    rooms(),
+    // Not very useful now unless they're a dynamic category
+    // objects(),
+    // rooms(),
     actions(),
     logic(),
     math(),

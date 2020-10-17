@@ -51,7 +51,7 @@ export function attachReferenceBlocks(service: WorkspaceService): void {
         init(this: Block): void {
             this.appendDummyInput()
                 .appendField(new FieldDropdown(
-                    () => service.items.map(i => [i.name, i.name])
+                    () => service.items.length && service.items.map(i => [i.name, i.name]) || [["item", "item"]]
                 ), "NAME");
             this.setOutput(true, ["InsteadObject"]);
 
@@ -63,7 +63,7 @@ export function attachReferenceBlocks(service: WorkspaceService): void {
         init(this: Block): void {
             this.appendDummyInput()
                 .appendField(new FieldDropdown(
-                    () => service.rooms.map(i => [i.name, i.name])
+                    () => service.rooms.length && service.rooms.map(i => [i.name, i.name]) || ["room"]
                 ), "NAME");
             this.setOutput(true, ["InsteadRoom"]);
 
