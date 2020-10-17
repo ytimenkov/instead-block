@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-
-import { GameMetaData } from "../../model";
+import { GameMetaData } from "../workspace/workspace.service";
 
 @Component({
   selector: "app-game-info",

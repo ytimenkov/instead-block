@@ -1,5 +1,5 @@
 <div class="main-container">
-  <header class="header header-6">
+  <header class="header header-1">
     <div class="branding">
       <a class="nav-link">
         <span class="clr-icon instead-logo"></span>
@@ -14,7 +14,7 @@
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
           <a (click)="infoEditor.visible = true" clrDropdownItem i18n>Edit game metadata</a>
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
-          <a (click)="save()" clrDropdownItem i18n>Save in browser</a>
+          <a (click)="blocksWorkspace.backupProject()" clrDropdownItem i18n>Save in browser</a>
           <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
           <a (click)="download()" clrDropdownItem i18n>Save to your computer</a>
           <a (click)="upload()" clrDropdownItem i18n>Load from your computer</a>
@@ -40,13 +40,46 @@
       </clr-dropdown>
     </div>
   </header>
+  <nav class="subnav">
+    <ul class="nav">
+      <li class="nav-item">
+        <clr-dropdown>
+          <a class="nav-link nav-text" clrDropdownTrigger i18n>Rooms</a>
+          <clr-dropdown-menu *clrIfOpen>
+            <a *ngFor="let room of rooms" (click)="setActiveTarget(room)" clrDropdownItem>{{room.name}}</a>
+          </clr-dropdown-menu>
+        </clr-dropdown>
+      </li>
+      <li class="nav-item">
+        <clr-dropdown>
+          <a class="nav-link nav-text" clrDropdownTrigger i18n>Items</a>
+          <clr-dropdown-menu *clrIfOpen>
+            <a *ngFor="let item of items" (click)="setActiveTarget(item)" clrDropdownItem>{{item.name}}</a>
+          </clr-dropdown-menu>
+        </clr-dropdown>
+      </li>
+      <li class="nav-item">
+        <clr-dropdown>
+          <button class="nav-link nav-icon" clrDropdownTrigger>
+            <cds-icon shape="plus" size="md"></cds-icon>
+          </button>
+          <clr-dropdown-menu *clrIfOpen>
+            <a (click)="addNewTarget('room')" clrDropdownItem i18n>Room</a>
+            <a (click)="addNewTarget('item')" clrDropdownItem i18n>Item</a>
+          </clr-dropdown-menu>
+        </clr-dropdown>
+      </li>
+    </ul>
+  </nav>
   <div class="content-container">
+    <!-- TODO: Replace with SASS overriding clr-content-area-padding-*-->
     <div class="content-area" style="padding: 0">
-      <div class="clr-row">
+      <div class="clr-row clr-no-gutters">
         <div class="clr-col-lg-6">
-          <app-blocks [model]="model"></app-blocks>
+          <app-blocks #blocksWorkspace></app-blocks>
         </div>
         <div class="clr-col-lg-6">
+          <!-- TODO: Maybe move them to aside section of subnav-->
           <ul class="nav">
             <li>
               <button class="btn btn-link btn-icon" type="button" i18n-title title="Reload game" (click)="run()"
@@ -67,6 +100,6 @@
       </div>
     </div>
   </div>
-  <app-game-info #infoEditor [data]="model.insteadMeta"></app-game-info>
+  <app-game-info #infoEditor [data]="metadata"></app-game-info>
   <app-code-preview #codePreview [code]="code"></app-code-preview>
 </div>

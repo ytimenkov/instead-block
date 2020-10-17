@@ -1,126 +1,96 @@
 import { Theme } from "blockly/core";
+import { TargetTypes, WorkspaceService } from "../workspace/workspace.service";
 
 const separator = `<sep></sep>`;
 
-function objects(): string {
-  return `<category name="${$localize`:toolbox category|:Objects`}" categorystyle="objects_category">
-<block type="instead_object">
-  <value name="DSC">
-    <shadow type="text">
-      <field name="TEXT">${$localize`There is an object`}</field>
-    </shadow>
-  </value>
-</block>
-<block type="instead_disp">
+function properties(activeTarget?: TargetTypes): string {
+  return `<category name="${$localize`:toolbox category|:Properties`}" categorystyle="properties_category">
+<block type="prop_disp">
+  <mutation mode="text"></mutation>
   <value name="TEXT">
     <shadow type="text">
       <field name="TEXT">${$localize`Title`}</field>
     </shadow>
   </value>
 </block>
-<block type="instead_inv">
+<block type="prop_dsc">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`Detailed descripiton`}</field>
+    </shadow>
+  </value>
+</block>
+${activeTarget === "item" ? `
+<block type="prop_inv">
+  <mutation mode="text"></mutation>
   <value name="TEXT">
     <shadow type="text">
       <field name="TEXT">${$localize`I have an item`}</field>
     </shadow>
   </value>
 </block>
-<block type="instead_act">
+<block type="prop_act">
+  <mutation mode="text"></mutation>
   <value name="TEXT">
     <shadow type="text">
       <field name="TEXT">${$localize`Action on object`}</field>
     </shadow>
   </value>
 </block>
-<block type="instead_tak">
+<block type="prop_tak">
+  <mutation mode="text"></mutation>
   <value name="TEXT">
     <shadow type="text">
       <field name="TEXT">${$localize`You've picked up an object`}</field>
     </shadow>
   </value>
 </block>
-<block type="instead_used">
-  <value name="TEXT">
-    <block type="instead_method1">
-      <statement name="DEFINITION">
-        <shadow type="instead_print">
-          <field name="TEXT">${$localize`You've used "what" on "self"`}</field>
-        </shadow>
-      </statement>
-    </block>
-  </value>
-</block>
-<block type="instead_use">
-  <value name="TEXT">
-    <block type="instead_method1">
-      <statement name="DEFINITION">
-        <shadow type="instead_print">
-          <field name="TEXT">${$localize`You've used "self" on "what"`}</field>
-        </shadow>
-      </statement>
-    </block>
-  </value>
-</block>
-${separator}
-<block type="instead_method0"></block>
-<block type="instead_method1"></block>
-</category>`;
-}
-
-function rooms(): string {
-  return `<category name="${$localize`Rooms`}" categorystyle="rooms_category">
-<block type="instead_room">
-  <value name="DSC">
-    <shadow type="text">
-      <field name="TEXT">${$localize`You're in a big room`}</field>
-    </shadow>
-  </value>
-  <statement name="DEFINITION">
-    <block type="instead_obj"></block>
-  </statement>
-</block>
-<block type="instead_disp">
+<block type="prop_used">
+  <mutation mode="text"></mutation>
   <value name="TEXT">
     <shadow type="text">
-      <field name="TEXT">${$localize`title`}</field>
+      <field name="TEXT">${$localize`You've used "what" on "self"`}</field>
     </shadow>
   </value>
 </block>
-<block type="instead_decor">
+<block type="prop_use">
+  <mutation mode="text"></mutation>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">${$localize`You've used "self" on "what"`}</field>
+    </shadow>
+  </value>
+</block>
+` : ""}
+${activeTarget === "room" ? `
+<block type="prop_decor">
+  <mutation mode="text"></mutation>
   <value name="TEXT">
     <shadow type="text">
       <field name="TEXT">${$localize`Detailed room descrption`}</field>
     </shadow>
   </value>
 </block>
-<block type="instead_obj"></block>
-<block type="instead_way"></block>
-<block type="instead_onenter">
-  <value name="TEXT">
-    <block type="instead_method1">
-      <statement name="DEFINITION">
-        <shadow type="instead_print">
-          <field name="TEXT">${$localize`You've entered "what"`}</field>
-        </shadow>
-      </statement>
-    </block>
-  </value>
-</block>
-<block type="instead_onexit">
-  <value name="TEXT">
-    <block type="instead_method1">
-      <statement name="DEFINITION">
-        <shadow type="instead_print">
-          <field name="TEXT">${$localize`You're about to go to "what"`}</field>
-        </shadow>
-      </statement>
-    </block>
-  </value>
-</block>
-${separator}
-<block type="instead_method0"></block>
-<block type="instead_method1"></block>
-<block type="lists_create_with"></block>
+<block type="prop_onenter"></block>
+<block type="prop_onexit"></block>
+<block type="prop_obj"></block>
+<block type="prop_way"></block>
+` : ""}
+</category>`;
+}
+
+function objects(): string {
+  return `<category name="${$localize`:toolbox category|:Objects`}" categorystyle="objects_category">
+<!-- TODO: Make a dymanic category with all the objects -->
+<block type="instead_object_ref"></block>
+</category>`;
+}
+
+function rooms(): string {
+  return `<category name="${$localize`Rooms`}" categorystyle="rooms_category">
+<!-- TODO: Make a dymanic category with all the objects -->
+<block type="instead_room_ref"></block>
 </category>`;
 }
 
@@ -156,10 +126,9 @@ function actions(): string {
     <shadow type="instead_self"></shadow>
   </value>
 </block>
-<label text="${$localize`Action parameters`}"></label>
+<label text="${$localize`Arguments`}"></label>
 <block type="instead_self"></block>
 <block type="instead_what"></block>
-<!-- TODO: Make a dymanic category with all the objects -->
 <block type="instead_object_ref"></block>
 <block type="instead_room_ref"></block>
 </category>`;
@@ -178,9 +147,9 @@ function logic(): string {
   </value>
 </block>
 <block type="instead_return_false"></block>
+<label text="${$localize`Arguments`}"></label>
 <block type="instead_self"></block>
 <block type="instead_what"></block>
-<!-- TODO: Make a dymanic category with all the objects -->
 <block type="instead_object_ref"></block>
 <block type="instead_room_ref"></block>
 </category>`;
@@ -274,11 +243,13 @@ function math(): string {
 </category>`;
 }
 
-export function createToolBox(): string {
+export function createToolBox(workspace: WorkspaceService): string {
   const toolbox = [
     `<xml style="display: none">`,
-    objects(),
-    rooms(),
+    properties(workspace.activeTarget?.type),
+    // Not very useful now unless they're a dynamic category
+    // objects(),
+    // rooms(),
     actions(),
     logic(),
     math(),
@@ -300,7 +271,10 @@ export function createInsteadTheme(): Theme {
       },
       actions_category: {
         colour: "120"
-      }
+      },
+      properties_category: {
+        colour: "30"
+      },
     },
     blockStyles: {
       rooms_blocks: {
@@ -314,6 +288,10 @@ export function createInsteadTheme(): Theme {
       },
       properties_blocks: {
         colourPrimary: "30"
+      },
+      events_blocks: {
+        colourPrimary: "60",
+        hat: "cap"
       }
     }
   });

@@ -1,4 +1,6 @@
 #blocklyDiv {
-    /* Header height */
-    height: calc(100vh - 60px - 24px);
+    /* Header height 
+    TODO: - $clr-header-height - $clr-subnav-height
+    */
+    height: calc(100vh - 3rem - 1.8rem);
 }

@@ -1,32 +1,28 @@
 import { HttpClient } from "@angular/common/http";
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ClrLoadingState } from "@clr/angular";
-import { angleIcon, ClarityIcons, detailsIcon, languageIcon, playIcon, refreshIcon } from "@clr/core/icon";
-import { Workspace } from "blockly/core";
-import { backupWorkspace, downloadProject, generateCode, loadWorkspace, resetWorkspace, uploadProject } from "src/files";
-import { AppModuel as AppModel, GameMetaData } from "src/model";
-import { InsteadService } from "./instead.service";
+import { angleIcon, ClarityIcons, detailsIcon, languageIcon, playIcon, plusIcon, refreshIcon } from "@clr/core/icon";
+import { InsteadService } from "./instead/instead.service";
+import { GameMetaData, Item, Room, TargetTypes, WorkspaceService } from "./workspace/workspace.service";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
   reloadingState = ClrLoadingState.DEFAULT;
 
-  model: AppModel = {
-    workspace: (undefined as unknown) as Workspace,
-    insteadMeta: new GameMetaData()
-  };
   code = "";
 
-  constructor(private insteadService: InsteadService, private http: HttpClient) {
-    ClarityIcons.addIcons(languageIcon, angleIcon, refreshIcon, playIcon, detailsIcon);
+  constructor(private insteadService: InsteadService, private http: HttpClient, private workspaceService: WorkspaceService) {
+    ClarityIcons.addIcons(languageIcon, angleIcon, refreshIcon, playIcon, detailsIcon, plusIcon);
   }
 
   refreshCode(): void {
-    this.code = generateCode(this.model);
+    this.code = this.workspaceService.generateCode();
+    // console.log(this.workspaceService.serialize());
   }
 
   async run(): Promise<void> {
@@ -43,20 +39,18 @@ export class AppComponent {
     }
   }
 
-  save(): void {
-    backupWorkspace(this.model);
+  async download(): Promise<void> {
+    const files = await import("../files");
+    await files.downloadProject(this.workspaceService);
   }
 
-  download(): void {
-    downloadProject(this.model);
-  }
-
-  upload(): void {
-    uploadProject(this.model);
+  async upload(): Promise<void> {
+    const files = await import("../files");
+    await files.uploadProject(this.workspaceService);
   }
 
   new(): void {
-    resetWorkspace(this.model);
+    this.workspaceService.resetToNew();
   }
 
   loadDemo(name: string): void {
@@ -64,7 +58,33 @@ export class AppComponent {
     // TODO: This is a candidate for a service...
     this.http.get(url, { responseType: "text" })
       .subscribe((data) => {
-        loadWorkspace(data, this.model);
+        // loadWorkspace(data, this.model);
+        this.workspaceService.deserialize(data);
       });
+  }
+
+  addNewTarget(type: TargetTypes): void {
+    // TODO: Maybe do better dialog...
+    // See also https://blockly-demo.appspot.com/static/demos/custom-dialogs/custom-dialog.js
+    const name = prompt($localize`Name`);
+    if (name) {
+      this.workspaceService.addNewTarget(type, name);
+    }
+  }
+
+  setActiveTarget(target: Room | Item): void {
+    this.workspaceService.activeTarget = target;
+  }
+
+  get items(): Item[] {
+    return this.workspaceService.items;
+  }
+
+  get rooms(): Room[] {
+    return this.workspaceService.rooms;
+  }
+
+  get metadata(): GameMetaData {
+    return this.workspaceService.metadata;
   }
 }

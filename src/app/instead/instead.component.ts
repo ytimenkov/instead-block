@@ -1,10 +1,11 @@
-import { Component, HostBinding, HostListener, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { Elements } from "src/instead";
-import { InsteadService } from "../instead.service";
+import type { Elements } from "./instead.engine";
+import { InsteadService } from "./instead.service";
 
 @Component({
   selector: "app-instead",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./instead.component.html",
   styleUrls: ["./instead.component.css"]
 })

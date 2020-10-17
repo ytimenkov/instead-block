@@ -1,14 +1,16 @@
-import { Component, Inject, Input, LOCALE_ID, OnInit } from "@angular/core";
-import * as Blockly from "blockly/core";
-import { loadWorkspace, localStorageKey } from "src/files";
-import { AppModuel } from "src/model";
-import { InsteadObject, InsteadRoom } from "src/objects";
-import { createInsteadTheme, createToolBox } from "src/toolbox";
-import "../../basic_blocks";
-import "../../functions";
-import "../../objects";
-import "../../stdlib";
+import { Component, Inject, LOCALE_ID, OnInit } from "@angular/core";
+import { inject, setLocale, Workspace } from "blockly/core";
+import { WorkspaceService } from "../workspace/workspace.service";
+import "./functions";
+import "./lists";
+import "./objects";
+import { attachReferenceBlocks } from "./objects";
+import "./primitives";
+import "./properties";
+import "./stdlib";
+import { createInsteadTheme, createToolBox } from "./toolbox";
 
+export const localStorageKey = "instead-data";
 
 @Component({
   selector: "app-blocks",
@@ -16,20 +18,18 @@ import "../../stdlib";
   styleUrls: ["./blocks.component.css"]
 })
 export class BlocksComponent implements OnInit {
-  @Input()
-  model?: AppModuel;
 
-  constructor(@Inject(LOCALE_ID) private locale: string) { }
+  workspace?: Workspace;
+
+  constructor(
+    @Inject(LOCALE_ID) private locale: string,
+    private workspaceService: WorkspaceService) { }
 
   ngOnInit(): void {
     this.initWorkspace();
   }
 
   private async initWorkspace(): Promise<void> {
-    if (!this.model) {
-      return;
-    }
-
     let messages: { [key: string]: string; };
     switch (this.locale) {
       case "en":
@@ -41,23 +41,38 @@ export class BlocksComponent implements OnInit {
       default:
         throw new Error(`Unknown locale: ${this.locale}`);
     }
-    Blockly.setLocale(messages);
+    setLocale(messages);
 
-    this.model.workspace = Blockly.inject("blocklyDiv", {
-      toolbox: createToolBox(),
+    attachReferenceBlocks(this.workspaceService);
+
+    this.workspace = inject("blocklyDiv", {
+      toolbox: createToolBox(this.workspaceService),
       theme: createInsteadTheme(),
       move: { scrollbars: true, wheel: true },
       zoom: { controls: true, },
     });
 
-    // tslint:disable-next-line: no-any
-    this.model.workspace.addChangeListener((e: any) => { InsteadObject.objectLifecycleListener(e); });
-    // tslint:disable-next-line: no-any
-    this.model.workspace.addChangeListener((e: any) => { InsteadRoom.objectLifecycleListener(e); });
+    this.workspaceService.attach(this.workspace);
 
-    if (window.localStorage[localStorageKey]) {
-      console.log("Loading saved workspace");
-      loadWorkspace(window.localStorage[localStorageKey], this.model);
+    // TODO: Add filtering for duplicate and orphaned blocks:
+    // E.g.: workspace.addChangeListener(Blockly.Events.disableOrphans);
+
+
+    if (!this.restoreProject()) {
+      this.workspaceService.resetToNew();
     }
+  }
+
+  backupProject(): void {
+    window.localStorage.setItem(localStorageKey, this.workspaceService.serialize());
+  }
+
+  restoreProject(): boolean {
+    if (window.localStorage[localStorageKey]) {
+      this.workspaceService.deserialize(window.localStorage[localStorageKey]);
+      return true;
+    }
+    return false;
+
   }
 }
