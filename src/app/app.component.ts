@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ClrLoadingState } from "@clr/angular";
 import { angleIcon, ClarityIcons, detailsIcon, languageIcon, playIcon, plusIcon, refreshIcon } from "@clr/core/icon";
-import { downloadProject, uploadProject } from "src/files";
 import { InsteadService } from "./instead/instead.service";
 import { GameMetaData, Item, Room, TargetTypes, WorkspaceService } from "./workspace/workspace.service";
 
@@ -40,12 +39,14 @@ export class AppComponent {
     }
   }
 
-  download(): void {
-    downloadProject(this.workspaceService);
+  async download(): Promise<void> {
+    const files = await import("../files");
+    await files.downloadProject(this.workspaceService);
   }
 
-  upload(): void {
-    uploadProject(this.workspaceService);
+  async upload(): Promise<void> {
+    const files = await import("../files");
+    await files.uploadProject(this.workspaceService);
   }
 
   new(): void {
