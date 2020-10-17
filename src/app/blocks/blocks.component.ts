@@ -1,13 +1,11 @@
 import { Component, Inject, LOCALE_ID, OnInit } from "@angular/core";
 import { inject, setLocale, Workspace } from "blockly/core";
 import { WorkspaceService } from "../workspace/workspace.service";
-import "./functions";
-import "./lists";
-import "./objects";
+import { defineFunctionBlocks } from "./functions";
 import { attachReferenceBlocks } from "./objects";
-import "./primitives";
-import "./properties";
-import "./stdlib";
+import { definePrimitivesBlocks } from "./primitives";
+import { attachPropertiesBlocks } from "./properties";
+import { defineStdLibBlocks } from "./stdlib";
 import { createInsteadTheme, createToolBox } from "./toolbox";
 
 export const localStorageKey = "instead-data";
@@ -44,6 +42,10 @@ export class BlocksComponent implements OnInit {
     setLocale(messages);
 
     attachReferenceBlocks(this.workspaceService);
+    attachPropertiesBlocks();
+    defineStdLibBlocks();
+    defineFunctionBlocks();
+    definePrimitivesBlocks();
 
     this.workspace = inject("blocklyDiv", {
       toolbox: createToolBox(this.workspaceService),

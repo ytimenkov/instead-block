@@ -15,10 +15,6 @@ function defineObjectAction1(name: string, desc: string, functName: string): voi
     );
 }
 
-defineObjectAction1("instead_take", $localize`take`, "take");
-defineObjectAction1("instead_disable", $localize`disable`, "disable");
-defineObjectAction1("instead_enable", $localize`enable`, "enable");
-
 function defineObjectAction2(name: string, desc: string, functName: string, whereText: string): void {
     defineBlock(name,
         (block) => {
@@ -46,30 +42,36 @@ function defineObjectAction2(name: string, desc: string, functName: string, wher
     );
 }
 
-defineObjectAction2("instead_drop", $localize`drop`, "drop", $localize`:where to drop|:into`);
-defineObjectAction2("instead_remove", $localize`remove`, "remove", $localize`:where to remove from|:from`);
+export function defineFunctionBlocks(): void {
+    defineObjectAction1("instead_take", $localize`take`, "take");
+    defineObjectAction1("instead_disable", $localize`disable`, "disable");
+    defineObjectAction1("instead_enable", $localize`enable`, "enable");
 
-Blocks.instead_where = {
-    init(this: Block): void {
-        this.appendValueInput("WHAT")
-            .appendField($localize`:where function|:(where)`)
-            .setCheck("InsteadObject");
-        this.appendDummyInput()
-            .appendField(new FieldDropdown([
-                ["\u{2208}", "=="],
-                ["\u{2209}", "~="]
-            ]), "COND");
-        this.appendValueInput("WHERE")
-            .setCheck(["InsteadRoom", "InsteadObject"]);
-        this.setOutput(true, ["Boolean"]);
-        this.setInputsInline(true);
-        this.setStyle("logic_blocks");
-    }
-};
+    defineObjectAction2("instead_drop", $localize`drop`, "drop", $localize`:where to drop|:into`);
+    defineObjectAction2("instead_remove", $localize`remove`, "remove", $localize`:where to remove from|:from`);
 
-Lua.instead_where = (block: Block) => {
-    const cond = block.getFieldValue("COND");
-    const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
-    const where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
-    return ["where(" + what + ") " + cond + " " + where, Lua.ORDER_ATOMIC];
-};
+    Blocks.instead_where = {
+        init(this: Block): void {
+            this.appendValueInput("WHAT")
+                .appendField($localize`:where function|:(where)`)
+                .setCheck("InsteadObject");
+            this.appendDummyInput()
+                .appendField(new FieldDropdown([
+                    ["\u{2208}", "=="],
+                    ["\u{2209}", "~="]
+                ]), "COND");
+            this.appendValueInput("WHERE")
+                .setCheck(["InsteadRoom", "InsteadObject"]);
+            this.setOutput(true, ["Boolean"]);
+            this.setInputsInline(true);
+            this.setStyle("logic_blocks");
+        }
+    };
+
+    Lua.instead_where = (block: Block) => {
+        const cond = block.getFieldValue("COND");
+        const what = Lua.valueToCode(block, "WHAT", Lua.ORDER_NONE);
+        const where = Lua.valueToCode(block, "WHERE", Lua.ORDER_NONE);
+        return ["where(" + what + ") " + cond + " " + where, Lua.ORDER_ATOMIC];
+    };
+}

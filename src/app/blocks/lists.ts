@@ -130,10 +130,7 @@ function generateListCode(propertyName: string, block: PlusMinusBlock): string {
     return `${propertyName} = {${elements.join(", ")}}`;
 }
 
-function defineListProperty(text: string, propertyName: string, check: string[]): void {
+export function defineListProperty(text: string, propertyName: string, check: string[]): void {
     Blocks[`prop_${propertyName}`] = createPlusMinusMixin(text, check);
     Lua[`prop_${propertyName}`] = (block: PlusMinusBlock) => generateListCode(propertyName, block);
 }
-
-defineListProperty($localize`:rooms objects|:Objects`, "obj", ["InsteadObject"]);
-defineListProperty($localize`:rooms objects|:Exits`, "way", ["InsteadRoom"]);

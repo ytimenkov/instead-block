@@ -9,3 +9,6 @@ node_modules/
 /dist
 /tmp
 /out-tsc
+
+# A symlink for testing prod
+/instead-block

@@ -35,17 +35,6 @@ function generateHeaderCode(block: Block): string {
     return `nam = ${Lua.quote_(block.getFieldValue("NAME"))}`;
 }
 
-// TODO: Add dynamic population of field and make it non-serializable.
-defineBlock("room_header",
-    block => generateHeaderBlock(block, $localize`Room`).setStyle("rooms_blocks"),
-    block => generateHeaderCode(block)
-);
-
-defineBlock("object_header",
-    block => generateHeaderBlock(block, $localize`Item`).setStyle("objects_blocks"),
-    block => generateHeaderCode(block)
-);
-
 export function attachReferenceBlocks(service: WorkspaceService): void {
     Blocks.instead_object_ref = {
         init(this: Block): void {
@@ -70,7 +59,18 @@ export function attachReferenceBlocks(service: WorkspaceService): void {
             this.setStyle("rooms_blocks");
         },
     };
-}
 
-Lua.instead_object_ref = (block: Block) => generateReferenceCode(block);
-Lua.instead_room_ref = (block: Block) => generateReferenceCode(block);
+    Lua.instead_object_ref = (block: Block) => generateReferenceCode(block);
+    Lua.instead_room_ref = (block: Block) => generateReferenceCode(block);
+
+    // TODO: Add dynamic population of field and make it non-serializable.
+    defineBlock("room_header",
+        block => generateHeaderBlock(block, $localize`Room`).setStyle("rooms_blocks"),
+        block => generateHeaderCode(block)
+    );
+
+    defineBlock("object_header",
+        block => generateHeaderBlock(block, $localize`Item`).setStyle("objects_blocks"),
+        block => generateHeaderCode(block)
+    );
+}

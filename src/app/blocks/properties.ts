@@ -1,6 +1,7 @@
 import { switchIcon } from "@clr/core/icon";
 import { Block, Blocks, BlockSvg, Events, Field, Lua, utils, Xml } from "blockly/core";
 import { defineBlock } from "./blocks";
+import { defineListProperty } from "./lists";
 import { selfParameterName, whatParameterName } from "./primitives";
 
 
@@ -141,17 +142,22 @@ function defineFunctionProperty(text: string, propertyName: string, extraArgs: s
     );
 }
 
-defineProperty($localize`Display name`, "disp", "property");
-defineProperty($localize`Description`, "dsc", "property");
-defineProperty($localize`Inventory \u{1F392}`, "inv", "property");
-defineProperty($localize`Decoration`, "decor", "property");
+export function attachPropertiesBlocks(): void {
+    defineProperty($localize`Display name`, "disp", "property");
+    defineProperty($localize`Description`, "dsc", "property");
+    defineProperty($localize`Inventory \u{1F392}`, "inv", "property");
+    defineProperty($localize`Decoration`, "decor", "property");
 
-defineProperty($localize`On Action \u{1F50D}`, "act", "event");
-defineProperty($localize`On Pick up \u{1F4E6}`, "tak", "event");
+    defineProperty($localize`On Action \u{1F50D}`, "act", "event");
+    defineProperty($localize`On Pick up \u{1F4E6}`, "tak", "event");
 
-// TOOD: Add extra validation that what parameter can be used only in functions which have 2 arguments
-defineProperty($localize`Used with \u{1F517}`, "used", "event", `, ${whatParameterName}`);
-defineProperty($localize`Use self on \u{1F528}`, "use", "event", `, ${whatParameterName}`);
+    // TOOD: Add extra validation that what parameter can be used only in functions which have 2 arguments
+    defineProperty($localize`Used with \u{1F517}`, "used", "event", `, ${whatParameterName}`);
+    defineProperty($localize`Use self on \u{1F528}`, "use", "event", `, ${whatParameterName}`);
 
-defineFunctionProperty($localize`On Enter`, "onenter", `, ${whatParameterName}`);
-defineFunctionProperty($localize`On Exit`, "onexit", `, ${whatParameterName}`);
+    defineFunctionProperty($localize`On Enter`, "onenter", `, ${whatParameterName}`);
+    defineFunctionProperty($localize`On Exit`, "onexit", `, ${whatParameterName}`);
+
+    defineListProperty($localize`:rooms objects|:Objects`, "obj", ["InsteadObject"]);
+    defineListProperty($localize`:rooms objects|:Exits`, "way", ["InsteadRoom"]);
+}
