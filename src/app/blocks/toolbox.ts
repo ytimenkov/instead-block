@@ -83,7 +83,7 @@ ${activeTarget === "room" ? `
 function objects(): string {
   return `<category name="${$localize`:toolbox category|:Objects`}" categorystyle="objects_category">
 <!-- TODO: Make a dymanic category with all the objects -->
-<block type="instead_object_ref"></block>
+<block type="instead_item_ref"></block>
 </category>`;
 }
 
@@ -129,7 +129,7 @@ function actions(): string {
 <label text="${$localize`Arguments`}"></label>
 <block type="instead_self"></block>
 <block type="instead_what"></block>
-<block type="instead_object_ref"></block>
+<block type="instead_item_ref"></block>
 <block type="instead_room_ref"></block>
 </category>`;
 }
@@ -150,7 +150,7 @@ function logic(): string {
 <label text="${$localize`Arguments`}"></label>
 <block type="instead_self"></block>
 <block type="instead_what"></block>
-<block type="instead_object_ref"></block>
+<block type="instead_item_ref"></block>
 <block type="instead_room_ref"></block>
 </category>`;
 }

@@ -21,6 +21,8 @@ export class WorkspaceService {
   rooms: Room[] = [];
   items: Item[] = [];
 
+  extraNames: string[][] = [];
+
   metadata = new GameMetaData();
 
   private activeTargetField?: Room | Item;
@@ -64,7 +66,65 @@ export class WorkspaceService {
   }
 
   addNewTarget(type: TargetTypes, name: string): void {
+    if (this.nameInUse(type, name)) {
+      alert($localize`The name is in use`);
+      return;
+    }
     this.activeTarget = this.addNewObject(type, name);
+  }
+
+  renameActiveTarget(): void {
+    if (!this.activeTarget) {
+      return;
+    }
+    if (this.activeTarget.name === "main") {
+      return;
+    }
+    // TODO: Maybe it's not a good idea to create prompts right here
+    // and delegate it to somee other service or component...
+    const newName = prompt($localize`Name`, this.activeTarget.name);
+    if (!newName) {
+      return;
+    }
+
+    if (this.nameInUse(this.activeTarget.type, newName)) {
+      alert($localize`The name is in use`);
+      return;
+    }
+
+    this.extraNames = [[newName, newName]];
+    for (const block of this.forEachReference(this.activeTarget.type, this.activeTarget.name, true)) {
+      block.setFieldValue(newName, "NAME");
+    }
+    this.activeTarget.name = newName;
+    const header = this.workspace?.getBlocksByType(`${this.activeTarget.type}_header`, false)[0];
+    header?.setFieldValue(newName, "NAME");
+    this.extraNames = [];
+  }
+
+  deleteActiveTarget(): void {
+    if (!this.activeTarget) {
+      return;
+    }
+    if (this.activeTarget.name === "main") {
+      alert($localize`Main room can't be removed`);
+      return;
+    }
+    for (const _ of this.forEachReference(this.activeTarget.type, this.activeTarget.name, true)) {
+      // TODO: Alternatively we can delete orphans...
+      alert($localize`Can't remove object because it's used`);
+      return;
+    }
+
+    switch (this.activeTarget.type) {
+      case "item":
+        this.items = this.items.filter(i => i !== this.activeTargetField);
+        break;
+      case "room":
+        this.rooms = this.rooms.filter(r => r !== this.activeTargetField);
+        break;
+    }
+    this.activeTarget = this.rooms[0];
   }
 
   private blocksToCode(blocks: Block[]): string {
@@ -74,7 +134,7 @@ export class WorkspaceService {
       .join(",\n");
   }
 
-  private objectToCode(type: string, name: string, blocks: Element): string {
+  private objectToCode(type: string, blocks: Element): string {
     const headless = new Workspace();
     try {
       Xml.domToWorkspace(blocks, headless);
@@ -104,8 +164,8 @@ ${this.blocksToCode(topBlocks)}
 
   generateCode(): string {
     this.syncActiveTarget();
-    const itemsCode = this.items.map(item => this.objectToCode("obj", item.name, item.blocks));
-    const roomsCode = this.rooms.map(room => this.objectToCode("room", room.name, room.blocks));
+    const itemsCode = this.items.map(item => this.objectToCode("obj", item.blocks));
+    const roomsCode = this.rooms.map(room => this.objectToCode("room", room.blocks));
 
     return `-- $Name: ${this.metadata.name}$
 -- $Version: ${this.metadata.version}$
@@ -181,5 +241,45 @@ ${this.items.map(i => this.objectToXml(i)).join("")}
 </block>
 </room>
 </instead>`);
+  }
+
+  private * yieldReferences(type: TargetTypes, object: Room | Item, name: string, update: boolean): Generator<Block, void> {
+    const headless = new Workspace();
+    try {
+      Xml.domToWorkspace(object.blocks, headless);
+      const allRefs = headless.getBlocksByType(`instead_${type}_ref`, false);
+      for (const block of allRefs) {
+        if (block.getFieldValue("NAME") === name) {
+          yield block;
+          if (update) {
+            object.blocks = Xml.workspaceToDom(headless);
+          }
+        }
+      }
+    } finally {
+      headless.dispose();
+    }
+  }
+
+  private * forEachReference(type: TargetTypes, name: string, update: boolean): Generator<Block, void> {
+    for (const item of this.items) {
+      yield* this.yieldReferences(type, item, name, update);
+    }
+    for (const room of this.rooms) {
+      yield* this.yieldReferences(type, room, name, update);
+    }
+  }
+
+  private nameInUse(type: TargetTypes, name: string): boolean {
+    let array: (Room | Item)[];
+    switch (type) {
+      case "item":
+        array = this.items;
+        break;
+      case "room":
+        array = this.rooms;
+        break;
+    }
+    return array.find(e => e.name === name) !== undefined;
   }
 }

@@ -1,5 +1,5 @@
 import { Block, Blocks, FieldDropdown, FieldTextInput, Lua } from "blockly/core";
-import { WorkspaceService } from "../workspace/workspace.service";
+import { TargetTypes, WorkspaceService } from "../workspace/workspace.service";
 import { defineBlock } from "./blocks";
 
 
@@ -35,12 +35,38 @@ function generateHeaderCode(block: Block): string {
     return `nam = ${Lua.quote_(block.getFieldValue("NAME"))}`;
 }
 
+export interface ContextMenuItem {
+    text: string;
+    enabled: boolean;
+    callback: () => void;
+}
+
+export interface ContextMenuBlock {
+    customContextMenu(menu: ContextMenuItem[]): void;
+}
+
+function populateObjectMenu(menu: ContextMenuItem[], workspaceService: WorkspaceService): void {
+    menu.push(
+        {
+            text: $localize`:Header menu|:Rename`,
+            enabled: true,
+            callback: () => workspaceService.renameActiveTarget()
+        },
+        {
+            text: $localize`:Header menu|:Delete`,
+            enabled: true,
+            callback: () => workspaceService.deleteActiveTarget(),
+        });
+}
+
 export function attachReferenceBlocks(service: WorkspaceService): void {
-    Blocks.instead_object_ref = {
+    Blocks.instead_item_ref = {
         init(this: Block): void {
             this.appendDummyInput()
                 .appendField(new FieldDropdown(
-                    () => service.items.length && service.items.map(i => [i.name, i.name]) || [["item", "item"]]
+                    () => service.items.length
+                        && service.items.map(i => [i.name, i.name]).concat(service.extraNames)
+                        || [["item", "item"]]
                 ), "NAME");
             this.setOutput(true, ["InsteadObject"]);
 
@@ -52,7 +78,9 @@ export function attachReferenceBlocks(service: WorkspaceService): void {
         init(this: Block): void {
             this.appendDummyInput()
                 .appendField(new FieldDropdown(
-                    () => service.rooms.length && service.rooms.map(i => [i.name, i.name]) || ["room"]
+                    () => service.rooms.length
+                        && service.rooms.map(i => [i.name, i.name]).concat(service.extraNames)
+                        || [["room"], ["room"]]
                 ), "NAME");
             this.setOutput(true, ["InsteadRoom"]);
 
@@ -60,17 +88,19 @@ export function attachReferenceBlocks(service: WorkspaceService): void {
         },
     };
 
-    Lua.instead_object_ref = (block: Block) => generateReferenceCode(block);
+    Lua.instead_item_ref = (block: Block) => generateReferenceCode(block);
     Lua.instead_room_ref = (block: Block) => generateReferenceCode(block);
 
     // TODO: Add dynamic population of field and make it non-serializable.
-    defineBlock("room_header",
+    const roomHeaderBlock = defineBlock<ContextMenuBlock>("room_header",
         block => generateHeaderBlock(block, $localize`Room`).setStyle("rooms_blocks"),
         block => generateHeaderCode(block)
     );
+    roomHeaderBlock.customContextMenu = menu => populateObjectMenu(menu, service);
 
-    defineBlock("object_header",
+    const objectHeaderBlock = defineBlock<ContextMenuBlock>("item_header",
         block => generateHeaderBlock(block, $localize`Item`).setStyle("objects_blocks"),
         block => generateHeaderCode(block)
     );
+    objectHeaderBlock.customContextMenu = menu => populateObjectMenu(menu, service);
 }

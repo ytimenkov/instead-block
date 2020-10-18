@@ -175,35 +175,35 @@
         <source>take</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8056364825023681713" datatype="html">
         <source>disable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6578734339769388749" datatype="html">
         <source>enable</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4811398851434481275" datatype="html">
         <source>drop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4587865891503419725" datatype="html">
         <source>into</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <note priority="1" from="meaning">where to drop</note>
       </trans-unit>
@@ -211,14 +211,14 @@
         <source>remove</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2721650713252117589" datatype="html">
         <source>from</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <note priority="1" from="meaning">where to remove from</note>
       </trans-unit>
@@ -226,143 +226,159 @@
         <source>(where)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <note priority="1" from="meaning">where function</note>
       </trans-unit>
-      <trans-unit id="7862401357600970374" datatype="html">
-        <source>Objects</source>
+      <trans-unit id="2175191484210738941" datatype="html">
+        <source>Rename</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/blocks/lists.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="sourcefile">src/app/blocks/objects.ts</context>
+          <context context-type="linenumber">51</context>
         </context-group>
-        <note priority="1" from="meaning">rooms objects</note>
+        <note priority="1" from="meaning">Header menu</note>
       </trans-unit>
-      <trans-unit id="1186812195624382318" datatype="html">
-        <source>Exits</source>
+      <trans-unit id="4137102027143810450" datatype="html">
+        <source>Delete</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/blocks/lists.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="sourcefile">src/app/blocks/objects.ts</context>
+          <context context-type="linenumber">56</context>
         </context-group>
-        <note priority="1" from="meaning">rooms objects</note>
+        <note priority="1" from="meaning">Header menu</note>
       </trans-unit>
       <trans-unit id="518297907399160251" datatype="html">
         <source>Room</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/objects.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8075168556531069883" datatype="html">
         <source>Item</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/objects.ts</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8714759723330245846" datatype="html">
         <source>Cancel action</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/primitives.ts</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6033869360950460242" datatype="html">
         <source>self</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/primitives.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2746753616787332799" datatype="html">
         <source>what</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/primitives.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2409672154570643758" datatype="html">
         <source>Display name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">
         <source>Description</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3383577196598359997" datatype="html">
         <source>Inventory 🎒</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3314187497610890696" datatype="html">
         <source>Decoration</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4575132119894838026" datatype="html">
         <source>On Action 🔍</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1204381031700834258" datatype="html">
         <source>On Pick up 📦</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5812502575937382679" datatype="html">
         <source>Used with 🔗</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">155</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3798954516442427004" datatype="html">
         <source>Use self on 🔨</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">154</context>
+          <context context-type="linenumber">156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1975851772794940315" datatype="html">
         <source>On Enter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="101081755807290004" datatype="html">
         <source>On Exit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">159</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="7862401357600970374" datatype="html">
+        <source>Objects</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/blocks/properties.ts</context>
+          <context context-type="linenumber">161</context>
+        </context-group>
+        <note priority="1" from="meaning">rooms objects</note>
+      </trans-unit>
+      <trans-unit id="1186812195624382318" datatype="html">
+        <source>Exits</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/blocks/properties.ts</context>
+          <context context-type="linenumber">162</context>
+        </context-group>
+        <note priority="1" from="meaning">rooms objects</note>
       </trans-unit>
       <trans-unit id="4851954922618976087" datatype="html">
         <source>Random number from</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/stdlib.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3508478842941324159" datatype="html">
         <source>to</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/stdlib.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <note priority="1" from="meaning">random number to</note>
       </trans-unit>
@@ -480,11 +496,32 @@
           <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4052155893857397834" datatype="html">
+        <source>The name is in use</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3944823172770796835" datatype="html">
+        <source>Main room can&apos;t be removed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3818016676004279551" datatype="html">
+        <source>Can&apos;t remove object because it&apos;s used</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8685613395997707567" datatype="html">
         <source>My first game</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">228</context>
         </context-group>
         <note priority="1" from="meaning">game name</note>
       </trans-unit>
@@ -492,7 +529,7 @@
         <source>Unknown</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">229</context>
         </context-group>
         <note priority="1" from="meaning">game author</note>
       </trans-unit>
@@ -500,7 +537,7 @@
         <source>Welcome to Instead</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="linenumber">238</context>
         </context-group>
       </trans-unit>
     </body>

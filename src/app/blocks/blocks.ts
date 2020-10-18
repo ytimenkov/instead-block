@@ -19,16 +19,16 @@ declare module "blockly/core" {
     export let Lua: InsteadGenerator;
 }
 
-export function defineBlock(
+export function defineBlock<T = object>(
     name: string,
     initFunc: (block: Blockly.Block) => void,
-    generateFunc: (block: Blockly.Block) => string | (string | number)[]): void {
+    generateFunc: (block: Blockly.Block) => string | (string | number)[]): T {
 
-    Blockly.Blocks[name] = {
+    Blockly.Lua[name] = generateFunc;
+
+    return Blockly.Blocks[name] = {
         init(this: Blockly.Block): void {
             initFunc(this);
         }
-    };
-
-    Blockly.Lua[name] = generateFunc;
+    } as unknown as T;
 }

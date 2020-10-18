@@ -184,7 +184,7 @@
         <target state="translated">Альт. имя (disp)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3314187497610890696" datatype="html">
@@ -192,7 +192,7 @@
         <target state="translated">Декорации (decor)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3383577196598359997" datatype="html">
@@ -200,7 +200,7 @@
         <target state="translated">Инвентарь(inv) 🎒</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4575132119894838026" datatype="html">
@@ -208,7 +208,7 @@
         <target state="translated">Действие(act) 🔍</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1204381031700834258" datatype="html">
@@ -216,7 +216,7 @@
         <target state="translated">Взяли(tak) 📦</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5812502575937382679" datatype="html">
@@ -224,7 +224,7 @@
         <target state="translated">Использование(used) 🔗</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">155</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3798954516442427004" datatype="html">
@@ -232,7 +232,7 @@
         <target state="translated">Использование(use) 🔨</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">154</context>
+          <context context-type="linenumber">156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1975851772794940315" datatype="html">
@@ -240,7 +240,7 @@
         <target state="translated">При входе (onenter)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="101081755807290004" datatype="html">
@@ -248,7 +248,7 @@
         <target state="translated">При выходе (onexit)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7862401357600970374" datatype="html">
@@ -256,25 +256,25 @@
         <target state="translated">Предметы (obj)</target>
         <note priority="1" from="meaning">rooms objects</note>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/blocks/lists.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="sourcefile">src/app/blocks/properties.ts</context>
+          <context context-type="linenumber">161</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1186812195624382318" datatype="html">
         <source>Exits</source>
         <target state="translated">Выходы</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/blocks/lists.ts</context>
-          <context context-type="linenumber">139</context>
-        </context-group>
         <note priority="1" from="meaning">rooms objects</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/blocks/properties.ts</context>
+          <context context-type="linenumber">162</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="8714759723330245846" datatype="html">
         <source>Cancel action</source>
         <target state="translated">отменить действие</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/primitives.ts</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6033869360950460242" datatype="html">
@@ -282,7 +282,7 @@
         <target state="translated">себя</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/primitives.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2746753616787332799" datatype="html">
@@ -290,7 +290,7 @@
         <target state="translated">объект</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/primitives.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2851907004211409" datatype="html">
@@ -298,7 +298,7 @@
         <target state="translated">взять(take)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8056364825023681713" datatype="html">
@@ -306,7 +306,7 @@
         <target state="translated">выключить(disable)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6578734339769388749" datatype="html">
@@ -314,7 +314,7 @@
         <target state="translated">включить(enable)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4811398851434481275" datatype="html">
@@ -322,7 +322,7 @@
         <target state="translated">выбросить(drop)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4587865891503419725" datatype="html">
@@ -331,7 +331,7 @@
         <note priority="1" from="meaning">where to drop</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2123171795960509943" datatype="html">
@@ -339,7 +339,7 @@
         <target state="translated">убрать(remove)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2721650713252117589" datatype="html">
@@ -348,7 +348,7 @@
         <note priority="1" from="meaning">where to remove from</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2396578225538912090" datatype="html">
@@ -357,15 +357,33 @@
         <note priority="1" from="meaning">where function</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/functions.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="2175191484210738941" datatype="html">
+        <source>Rename</source>
+        <target state="translated">Переименовать</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/blocks/objects.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <note priority="1" from="meaning">Header menu</note>
+      </trans-unit>
+      <trans-unit id="4137102027143810450" datatype="html">
+        <source>Delete</source>
+        <target state="translated">Удалить</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/blocks/objects.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <note priority="1" from="meaning">Header menu</note>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">
         <source>Description</source>
         <target state="translated">Описание(dsc):</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/properties.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="518297907399160251" datatype="html">
@@ -373,7 +391,7 @@
         <target state="translated">Комната</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/objects.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8075168556531069883" datatype="html">
@@ -381,7 +399,7 @@
         <target state="translated">Предмет</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/objects.ts</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4851954922618976087" datatype="html">
@@ -389,7 +407,7 @@
         <target state="translated">случайное число от</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/stdlib.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3508478842941324159" datatype="html">
@@ -398,7 +416,7 @@
         <note priority="1" from="meaning">random number to</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/blocks/stdlib.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8047042295853655365" datatype="html">
@@ -531,30 +549,54 @@
           <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4052155893857397834" datatype="html">
+        <source>The name is in use</source>
+        <target state="translated">Имя уже используется</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3944823172770796835" datatype="html">
+        <source>Main room can't be removed</source>
+        <target state="translated">Нельзя удалять эту комнату</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3818016676004279551" datatype="html">
+        <source>Can't remove object because it's used</source>
+        <target state="translated">Объект удалить нельзя, так как на него есть ссылки</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8685613395997707567" datatype="html">
         <source>My first game</source>
         <target state="translated">Моя первая игра</target>
+        <note priority="1" from="meaning">game name</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">228</context>
         </context-group>
-        <note priority="1" from="meaning">game name</note>
       </trans-unit>
       <trans-unit id="9128550453338321907" datatype="html">
         <source>Unknown</source>
         <target state="translated">Кто-то</target>
+        <note priority="1" from="meaning">game author</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">229</context>
         </context-group>
-        <note priority="1" from="meaning">game author</note>
       </trans-unit>
       <trans-unit id="8095074007262330667" datatype="html">
         <source>Welcome to Instead</source>
         <target state="translated">Добро пожаловать в Instead</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/workspace/workspace.service.ts</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="linenumber">238</context>
         </context-group>
       </trans-unit>
       <trans-unit id="be5c752b58791dd799bc5d5482d4351e06f18673" datatype="html">

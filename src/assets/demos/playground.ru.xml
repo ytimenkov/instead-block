@@ -1,6 +1,6 @@
 <instead xmlns="https://developers.google.com/blockly/xml" name="Playground" author="technix" version="1.0">
     <item name="Нож">
-        <block type="object_header" id="ZT.%4uEt~.^qwY6C^@7M" deletable="false" movable="false" editable="false" x="0" y="-50">
+        <block type="item_header" id="ZT.%4uEt~.^qwY6C^@7M" deletable="false" movable="false" editable="false" x="0" y="-50">
             <field name="NAME">Нож</field>
         </block>
         <block type="prop_dsc" id="72SGHF8/:@eHQWcn#6#|" x="0" y="0">
@@ -37,7 +37,7 @@
         </block>
     </item>
     <item name="Дыра в полу">
-        <block type="object_header" id="ZT.%4uEt~.^qwY4C^@7M" deletable="false" movable="false" editable="false" x="0" y="-50">
+        <block type="item_header" id="ZT.%4uEt~.^qwY4C^@7M" deletable="false" movable="false" editable="false" x="0" y="-50">
             <field name="NAME">Дыра в полу</field>
         </block>
         <block type="prop_dsc" id="A+b0yET|~TyfS@Ww-2J^" x="0" y="0">
@@ -52,12 +52,12 @@
                                 <block type="instead_where" id="MydoXO;e-dv!oyh~TP8M">
                                     <field name="COND">==</field>
                                     <value name="WHAT">
-                                        <block type="instead_object_ref" id="3eAVU,C#H+N*62j,/(KN">
+                                        <block type="instead_item_ref" id="3eAVU,C#H+N*62j,/(KN">
                                             <field name="NAME">Веревка</field>
                                         </block>
                                     </value>
                                     <value name="WHERE">
-                                        <block type="instead_object_ref" id="AWe0dr229fLuJCRO7]Zn">
+                                        <block type="instead_item_ref" id="AWe0dr229fLuJCRO7]Zn">
                                             <field name="NAME">Кольцо</field>
                                         </block>
                                     </value>
@@ -90,12 +90,12 @@
                             <field name="COND">==</field>
                             <value name="WHAT">
                                 <shadow type="instead_self"></shadow>
-                                <block type="instead_object_ref" id="B-.BU1_lOOl`x@y)XI{y">
+                                <block type="instead_item_ref" id="B-.BU1_lOOl`x@y)XI{y">
                                     <field name="NAME">Веревка</field>
                                 </block>
                             </value>
                             <value name="WHERE">
-                                <block type="instead_object_ref" id=")Fp1z*.0yF?;+F?x;Oi:">
+                                <block type="instead_item_ref" id=")Fp1z*.0yF?;+F?x;Oi:">
                                     <field name="NAME">Кольцо</field>
                                 </block>
                             </value>
@@ -128,7 +128,7 @@
                                 <block type="instead_what" id="~9Oe9_Zz5nRd:Hu@N/Jy"></block>
                             </value>
                             <value name="B">
-                                <block type="instead_object_ref" id="aRzU:lzYTSY{|lfVlS6T">
+                                <block type="instead_item_ref" id="aRzU:lzYTSY{|lfVlS6T">
                                     <field name="NAME">Веревка</field>
                                 </block>
                             </value>
@@ -145,7 +145,7 @@
         </block>
     </item>
     <item name="Веревка">
-        <block type="object_header" id="HDiK}:@f~h!tbG5_BAo." deletable="false" movable="false" editable="false" x="0" y="-50">
+        <block type="item_header" id="HDiK}:@f~h!tbG5_BAo." deletable="false" movable="false" editable="false" x="0" y="-50">
             <field name="NAME">Веревка</field>
         </block>
         <block type="prop_dsc" id="?kU~$.^WB}VxTl-@$8$j" x="0" y="0">
@@ -158,12 +158,12 @@
                             <field name="COND">==</field>
                             <value name="WHAT">
                                 <shadow type="instead_self"></shadow>
-                                <block type="instead_object_ref" id="D|-OyY5SWPvU,LxFmT-s">
+                                <block type="instead_item_ref" id="D|-OyY5SWPvU,LxFmT-s">
                                     <field name="NAME">Веревка</field>
                                 </block>
                             </value>
                             <value name="WHERE">
-                                <block type="instead_object_ref" id="R:RygX-E,HF1~H3Oqowy">
+                                <block type="instead_item_ref" id="R:RygX-E,HF1~H3Oqowy">
                                     <field name="NAME">Кольцо</field>
                                 </block>
                             </value>
@@ -202,12 +202,12 @@
                             <field name="COND">==</field>
                             <value name="WHAT">
                                 <shadow type="instead_self"></shadow>
-                                <block type="instead_object_ref" id="doF@#`y14HH-2M2~]krt">
+                                <block type="instead_item_ref" id="doF@#`y14HH-2M2~]krt">
                                     <field name="NAME">Веревка</field>
                                 </block>
                             </value>
                             <value name="WHERE">
-                                <block type="instead_object_ref" id="`l6e_uZ@SS|J%R7}btwn">
+                                <block type="instead_item_ref" id="`l6e_uZ@SS|J%R7}btwn">
                                     <field name="NAME">Кольцо</field>
                                 </block>
                             </value>
@@ -249,7 +249,7 @@
                                         <block type="instead_what" id="O2BU/fBa(]WBac0]xe1k"></block>
                                     </value>
                                     <value name="B">
-                                        <block type="instead_object_ref" id="6.9iw5oXMfpk+3Pf~g[b">
+                                        <block type="instead_item_ref" id="6.9iw5oXMfpk+3Pf~g[b">
                                             <field name="NAME">Нож</field>
                                         </block>
                                     </value>
@@ -262,7 +262,7 @@
                                         <block type="instead_self" id="R3HLiXki1ug^3(Ve4aaJ"></block>
                                     </value>
                                     <value name="WHERE">
-                                        <block type="instead_object_ref" id="*u~.1Nw^GJn+-t60l3ht">
+                                        <block type="instead_item_ref" id="*u~.1Nw^GJn+-t60l3ht">
                                             <field name="NAME">Кольцо</field>
                                         </block>
                                     </value>
@@ -288,7 +288,7 @@
         </block>
     </item>
     <item name="Бельевая веревка">
-        <block type="object_header" id="XDNXkVnlOZ^?TFO!mQ;O" deletable="false" movable="false" editable="false" x="0" y="-50">
+        <block type="item_header" id="XDNXkVnlOZ^?TFO!mQ;O" deletable="false" movable="false" editable="false" x="0" y="-50">
             <field name="NAME">Бельевая веревка</field>
         </block>
         <block type="prop_dsc" id="T3Mk3L!v{0m-igZH7~X-" x="0" y="0">
@@ -318,7 +318,7 @@
                                 <block type="instead_what" id="nD@VekvGI,~uQ+_}H}wP"></block>
                             </value>
                             <value name="B">
-                                <block type="instead_object_ref" id="A=TE)}r2q|k];:51+~}F">
+                                <block type="instead_item_ref" id="A=TE)}r2q|k];:51+~}F">
                                     <field name="NAME">Нож</field>
                                 </block>
                             </value>
@@ -333,7 +333,7 @@
                                     <value name="WHAT">
                                         <shadow type="instead_self" id="y|hYctyFgqMTG::`B2}U">
                                         </shadow>
-                                        <block type="instead_object_ref" id="/_;AY0@PUNMOuv3XBj2z">
+                                        <block type="instead_item_ref" id="/_;AY0@PUNMOuv3XBj2z">
                                             <field name="NAME">Веревка</field>
                                         </block>
                                     </value>
@@ -353,7 +353,7 @@
         </block>
     </item>
     <item name="Кольцо">
-        <block type="object_header" id="PN8CP{9:3!OA,r]*H8#!" deletable="false" movable="false" editable="false" x="0" y="-50">
+        <block type="item_header" id="PN8CP{9:3!OA,r]*H8#!" deletable="false" movable="false" editable="false" x="0" y="-50">
             <field name="NAME">Кольцо</field>
         </block>
         <block type="prop_dsc" id="=@y!$7HCW@RE-S|lV/=^" x="0" y="0">
@@ -369,12 +369,12 @@
                                     <field name="COND">~=</field>
                                     <value name="WHAT">
                                         <shadow type="instead_self"></shadow>
-                                        <block type="instead_object_ref" id="$zmi/VcjxnV1us+Wy%!n">
+                                        <block type="instead_item_ref" id="$zmi/VcjxnV1us+Wy%!n">
                                             <field name="NAME">Веревка</field>
                                         </block>
                                     </value>
                                     <value name="WHERE">
-                                        <block type="instead_object_ref" id="v]vy8e5c}RHlyZDlt5rw">
+                                        <block type="instead_item_ref" id="v]vy8e5c}RHlyZDlt5rw">
                                             <field name="NAME">Кольцо</field>
                                         </block>
                                     </value>
@@ -401,7 +401,7 @@
                             <field name="COND">==</field>
                             <value name="WHAT">
                                 <shadow type="instead_self"></shadow>
-                                <block type="instead_object_ref" id="TVO!Wb50t#LrCI,Ai4cj">
+                                <block type="instead_item_ref" id="TVO!Wb50t#LrCI,Ai4cj">
                                     <field name="NAME">Веревка</field>
                                 </block>
                             </value>
@@ -436,7 +436,7 @@
                                 <block type="instead_what" id="8i:bf@Kq?GjxH}HaNFdk"></block>
                             </value>
                             <value name="B">
-                                <block type="instead_object_ref" id="@79yB^JrUZzXvRa-ee/%">
+                                <block type="instead_item_ref" id="@79yB^JrUZzXvRa-ee/%">
                                     <field name="NAME">Веревка</field>
                                 </block>
                             </value>
@@ -451,12 +451,12 @@
                                     <value name="WHAT">
                                         <shadow type="instead_self" id="woFo%u3~sU!9?UUf@W+w">
                                         </shadow>
-                                        <block type="instead_object_ref" id="nQ2R6p0KUATa:nuN-|Xc">
+                                        <block type="instead_item_ref" id="nQ2R6p0KUATa:nuN-|Xc">
                                             <field name="NAME">Веревка</field>
                                         </block>
                                     </value>
                                     <value name="WHERE">
-                                        <block type="instead_object_ref" id="cR/Ow!2?VoxK$}Vu7Qi6">
+                                        <block type="instead_item_ref" id="cR/Ow!2?VoxK$}Vu7Qi6">
                                             <field name="NAME">Кольцо</field>
                                         </block>
                                     </value>
@@ -493,12 +493,12 @@
                                 <block type="instead_where" id="LE;TNX_wql#WvvM2^F{K">
                                     <field name="COND">==</field>
                                     <value name="WHAT">
-                                        <block type="instead_object_ref" id="4c)p]UQ_CYf7fBlsOKew">
+                                        <block type="instead_item_ref" id="4c)p]UQ_CYf7fBlsOKew">
                                             <field name="NAME">Веревка</field>
                                         </block>
                                     </value>
                                     <value name="WHERE">
-                                        <block type="instead_object_ref" id="?n(BtZ^*:]7EG?j[tad2">
+                                        <block type="instead_item_ref" id="?n(BtZ^*:]7EG?j[tad2">
                                             <field name="NAME">Кольцо</field>
                                         </block>
                                     </value>
@@ -518,22 +518,22 @@
         <block type="prop_obj" id="4gd9M:ztx}uD$)4-|;_i" x="0" y="208">
             <mutation itemsCount="4"></mutation>
             <value name="ADD0">
-                <block type="instead_object_ref" id="..owDOkGT8V~K1`E!.v=">
+                <block type="instead_item_ref" id="..owDOkGT8V~K1`E!.v=">
                     <field name="NAME">Дыра в полу</field>
                 </block>
             </value>
             <value name="ADD1">
-                <block type="instead_object_ref" id="=]7ZzU+K,HhM$Dw[Q0*B">
+                <block type="instead_item_ref" id="=]7ZzU+K,HhM$Dw[Q0*B">
                     <field name="NAME">Кольцо</field>
                 </block>
             </value>
             <value name="ADD2">
-                <block type="instead_object_ref" id="rTI^m5!D4?Iz;J!hWR./">
+                <block type="instead_item_ref" id="rTI^m5!D4?Iz;J!hWR./">
                     <field name="NAME">Бельевая веревка</field>
                 </block>
             </value>
             <value name="ADD3">
-                <block type="instead_object_ref" id="_ko?VpW7n|Bqzeb9Z$h$">
+                <block type="instead_item_ref" id="_ko?VpW7n|Bqzeb9Z$h$">
                     <field name="NAME">Нож</field>
                 </block>
             </value>
@@ -568,12 +568,12 @@
                             <field name="COND">~=</field>
                             <value name="WHAT">
                                 <shadow type="instead_self"></shadow>
-                                <block type="instead_object_ref" id="k@Rx:B:qWMJcG4@AkzL4">
+                                <block type="instead_item_ref" id="k@Rx:B:qWMJcG4@AkzL4">
                                     <field name="NAME">Веревка</field>
                                 </block>
                             </value>
                             <value name="WHERE">
-                                <block type="instead_object_ref" id="_j/nWa~!teWHyQA=OK6%">
+                                <block type="instead_item_ref" id="_j/nWa~!teWHyQA=OK6%">
                                     <field name="NAME">Кольцо</field>
                                 </block>
                             </value>
